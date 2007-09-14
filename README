@@ -1,0 +1,34 @@
+sudo cpan Module::Install
+
+# We need Template::Declare 0.27 which is not on CPAN yet,
+# please checkout the latest source from its SVN repos:
+#    http://svn.jifty.org/svn/jifty.org/Template-Declare
+# Sorry for the inconvenience.
+perl Makefile.PL
+make
+
+# setup the components
+bin/xulapp setup
+
+# register the (debuggin) chrome to ~/.mozilla/firefox/*/extensions.ini
+bin/xulapp unregister
+bin/xulapp register
+
+# unregister the (debuggin) chrome from ~/.mozilla/firefox/*/extensions.ini
+bin/xulapp unregister
+
+# launch a ff window loading searchall.xul :
+bin/xulapp debug searchall.xul
+
+# launch a ff window loading searchall-debug.xul :
+bin/xulapp debug searchall-debug.xul
+
+# generate tmp/searchall.xpi :
+bin/xulapp bundle
+
+# generate ./searchall.xpi :
+bin/xulapp bundle .
+
+# Note that bin/xulapp uses the info in lib/*/App.pm
+# (i.e. lib/SearchAll/App.pm in this project)
+

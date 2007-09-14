@@ -1,0 +1,158 @@
+=head1 NAME
+
+ROADMAP - The "SearchAll" Firefox extension project roadmap
+
+=head1 DESCRIPTION
+
+This document describes the current status and development plans of
+the "SearchAll" Firefox extension project.
+
+=head1 OBJECTIVES
+
+"SearchAll" is a client-side site-by-site searching tools designed
+as a Firefox extension.
+
+As a side effect, we'll also develop a
+general-purpose XUL application framework based on L<Template::Declare>,
+L<jquery.js>, and L<Object::Declare>.
+
+=head2 Project Overview
+
+=over
+
+=item *
+
+Phase 1 - "Raw" view
+
+This is the current phase.
+
+=item *
+
+Phase 2 - Architecture refactoring
+
+=item *
+
+Phase 3 - "Formatted" view
+
+=item *
+
+Phase 4 - "Merged" view
+
+=back
+
+=head1 Phase 1: 'Raw' view
+
+The goal for this phase is to display the raw HTML pages
+in 3 subwindows (C<< <iframe> >> or C<< <browser> >>) aligned in the same
+line for the search engine sites being searched and
+compared (i.e. yahoo.cn, baidu.cn, and google.cn).
+
+=head2 Dependencies
+
+=over
+
+=item *
+
+Use the C<onload> event for browser.contentWindow.
+
+=item *
+
+Use C<nsIWebProgressListener> for progressbar.
+
+=item *
+
+Solve the next-page problem in C<browser> and C<iframe>.
+
+=back
+
+=head2 Status
+
+Underway.
+
+=head1 Phase 2: Architecture refactoring
+
+The goal for this phase is to refactor the whole architecture.
+The plan is to develop a C<XUL::App::Schema> module which will
+be used in Makefile.PL and generate our own Makefile fragment.
+
+=head2 Dependencies
+
+=over
+
+=item *
+
+Implement a good SearchAll::Test and SearchAll::Logger.
+
+=back
+
+=head1 Phase 3: 'Formatted' view
+
+The goal for this phase is to add a new view (as a tab) called 'Formatted'.
+In this tab, we will display the search results
+returned from those various search engine sites in a uniformed
+format instead of those sites' own HTML.
+
+The list for each site is still displayed in a separate subwindow.
+
+=head2 Dependencies
+
+=head2 Status
+
+Not started.
+
+=head1 Phase 4: 'Merged' view
+
+The goal for this phase is to merge search results from various
+sites in a single list and displayed in our own format.
+
+=head2 Status
+
+Not started.
+
+=head1 RANDOM THOUGHTS
+
+Below is a list of random thoughts appeared in the process of
+development. They're not directly related to the objective of
+this very project but they'll be benefitial in general.
+
+=head2 DOM lib for SpiderMonkey
+
+Develop a HTML/XUL/XML DOM library for the SpiderMonkey engine
+using Perl. One potential way is
+
+   HTML/XUL/XML source => Perl's HTML::TreeBuilder/XML::DOM
+                       => JS code to build the DOM architecture
+                       => SpiderMonkey.pm
+
+=head3 Potential applications
+
+=over
+
+=item *
+
+HTML/XUL/XML source postprocessor using JS (for instance, we can
+use jquery.js here).
+
+=item *
+
+Test our JS code which manipulates DOMs.
+
+=item *
+
+Test our HTML/XUL/XML source's sanity. (It's particularly useful if
+the HTML/XUL/XML stuff is got from a generator like L<Template::Declare>.)
+
+=back
+
+=head2 JavaScript language extention
+
+A compiler which accepts a superset of JS and emits a fast
+and portable subset. It's like something that jianingy++ mentioned before.
+
+=head2 C<XUL::App>
+
+A complete XUL application framework named C<XUL::App>. Unlike L<Jifty>,
+it'll be mostly compiling-oriented so the runtime cost will be minimal.
+
+=back
+

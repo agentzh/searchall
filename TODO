@@ -1,0 +1,54 @@
+Sep 3
+* Use jquery.js's OO style to refactor searchall.js    [done]
+* Register browser.contentWindow's (or contentDocument's) onload event handler to make searchall's unit tests working    [canceled]
+* Add support for baidu.cn and yahoo.cn    [done]
+* Talk to highway for an XPCOM wrapper builder for ordinary C++ classes  [done]
+* Port Perl's Benchmark::Timer over to JS  [done]
+* Use timer.js to benchmark the loading time of the 3 iframes  [done]
+
+Sep 4
+* Make the embedded tester support multiple .js test scripts  [done]
+* Add test-progress.js to test the Progress class in  progress.js  [done]
+* Display (sorted) timer.js's benchmark results in status bar (statusbar.js)  [done]
+* Make the progressmeter work (progressbar.js)  [done]
+* Make the drop-down URI menulist work fully (searchall.js, onchange => homePage)  [done]
+
+Sep 5
+* Make url-list menulists automatically hide duplicated URLs in the popup list.  [done]
+* Add custom hooks to search sites' buttons so that the position of the foucs and inputs does no longer matter. [done]
+* When the url changes, it should automatically do the searching if #search-box is not empty  [pending]
+* Use checkboxes to toggle iframes.  [done]
+
+Sep 6
+* Package the whole stuff as .xpi and make a realase.  [done]
+* Test the resulting .xpi file in both Linux and Win32.  [done]
+
+Sep 7
+* Add RDF/rdf-em support to Template::Declare.  [done]
+
+Sep 10
+* Rewrite browserOverlay.xul using Template::Declare.  [done]
+* Start the 'xulapp' branch.  [done]
+* Implement XUL::App::Schema using Object::Declare.  [done]
+* Implement `bin/xulapp debug foo.xul`.  [done]
+* Send mail to SpiderMonkey.pm's author for ideas on a DOM lib.  [done]
+
+Sep 11
+* Implement `bin/xulapp register`.  [done]
+* Implement `bin/xulapp unregister`.  [done]
+* Implement `bin/xulapp setup`.  [done]
+* Implement `bin/xulapp bundle` for .xpi packaging.  [done]
+* Refactor SearchAll using XUL::App.  [done]
+* Merged the 'xulapp' branch back to trunk/.  [done]
+* Send mail to HTML::DOM's author for ideas on a DOM lib.  [done]
+
+Sep 12
+* Fix the checkbox toggling bug.
+* Eliminate potential errors in page loading timers.
+* Add support for automatic extension updating.
+* Make the font size of the inner HTML pages smaller (per laser's request).
+* Add a splash window before the main window shows up (splash.js and splash.xul).
+* Add test-timer.js to test the Timer class in timer.js.
+* Add persist to XUL components.
+* Implement features as in http://qcon.infoq.com/sanfrancisco/tracks/show_track.jsp?trackOID=70 using SVG.
+

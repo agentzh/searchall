@@ -1,0 +1,33 @@
+.engine-box {
+    min-width: 15em;
+    padding: 0 2em 0 2em;
+}
+
+#engine-bar {
+    padding: 0.3em;
+}
+
+#search-box {
+    max-width: 35em;
+    min-width: 5em;
+}
+
+#statusbar-display {
+    -moz-padding-start: 0px;
+}
+
+#status-progress {
+    display: none;
+}
+
+#results {
+    padding-top: 0.5em;
+}
+
+/* XXX put the following into test.css */
+#test {
+    background-color: white;
+    padding-left: 1em;
+    padding-top: 0.5em;
+}
+

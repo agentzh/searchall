@@ -1,0 +1,245 @@
+#!/usr/bin/env perl
+
+use lib 'lib';
+use strict;
+use warnings;
+#use Smart::Comments;
+#use Smart::Comments '####';
+use Cwd ();
+use File::Spec;
+use File::Slurp;
+use Text::Diff;
+
+use XUL::App;
+my ($file) = glob "lib/*/App.pm";
+require $file;
+if ($@) {
+    die "Can't load $file: $!";
+}
+
+my $operation = lc(shift);
+if (!$operation) {
+    die "No operation specified. See -h\n";
+}
+
+if ($operation =~ /debug|bundle/i) {
+    shell("rm -rf tmp");
+    die "Cannot remove tmp/" if -d 'tmp';
+}
+
+mkdir 'tmp';
+mkdir 'tmp/content';
+
+my $id = $XUL::App::ID;
+my $app_name;
+if ($operation eq 'debug') {
+    $XUL::App::APP_NAME .= '_debug';
+}
+$app_name = $XUL::App::APP_NAME;
+
+(my $package = $file) =~ s/.*lib\/|\.pm$//g;
+$package =~ s/\//::/g;
+#warn $package;
+#warn $XUL::App::APP_NAME;
+
+### files: $package->FILES
+my @overlay;
+my $files = $package->FILES;
+while (my ($file, $obj) = each %$files) {
+    #warn "$file => $obj";
+    if ($obj->can('overlays') &&
+            (my $target = $obj->overlays)) {
+        #die $file;
+        push @overlay, [$file => $target];
+    }
+}
+
+#### @overlay
+
+#$XUL::App::ID = $XUL::App::ID;
+my $op_table;
+$op_table = {
+    register => sub {
+        for my $meta_dir (glob "~/.mozilla/firefox/*/extensions") {
+            register_ext($meta_dir, "tmp/");
+        }
+    },
+
+    unregister => sub {
+        for my $meta_dir (glob "~/.mozilla/firefox/*/extensions") {
+            unregister_ext($meta_dir, "tmp/");
+        }
+    },
+
+    setup => sub {
+        gen_manifest($app_name);
+        shell("cp js/*.js tmp/content/");
+        shell("cp css/*.css tmp/content/");
+        shell("cp -r js/thirdparty/* tmp/content/");
+        while (my ($file, $obj) = each %$files) {
+            #warn "$file => $obj";
+            $obj->go($file);
+        }
+        $op_table->{register}->();
+    },
+
+    debug => sub {
+        my $file = shift;
+        $op_table->{setup}->();
+        if (!-f "tmp/content/$file") {
+            die "ERROR: Can't find $file under tmp/content/.\n";
+        }
+        my $cmd = "MOZ_NO_REMOTE=1 && firefox -jsconsole -P dev2 -chrome chrome://$app_name/content/$file";
+        #warn "$cmd\n";
+        shell($cmd);
+    },
+
+    bundle => sub {
+        my $out_dir = shift || 'tmp';
+        $op_table->{setup}->();
+        my $xpi_dir = 'tmp/xpi';
+        my $jar_dir = 'tmp/jar';
+	shell("rm tmp/*.xpi tmp/*.jar");
+	shell("rm -rf $xpi_dir");
+	shell("mkdir -p $xpi_dir/chrome");
+	shell("rm -rf $jar_dir");
+	shell("mkdir -p $jar_dir/content");
+	shell("cp tmp/install.rdf $xpi_dir");
+	#cp contents.rdf searchall-jar/content/searchall/
+	shell("cp tmp/chrome.manifest $xpi_dir");
+	shell("cp -rf tmp/content/* $jar_dir/content/");
+	shell("cd $jar_dir && zip -q -r ../$app_name.jar *");
+	shell("mv tmp/$app_name.jar $xpi_dir/chrome/");
+	shell("cd $xpi_dir && zip -q -r ../$app_name.xpi *");
+        shell("cp tmp/$app_name.xpi $out_dir");
+    },
+};
+
+if (my $code = $op_table->{$operation}) {
+    $code->(@ARGV);
+}
+
+sub gen_manifest {
+    warn "Writing tmp/chrome.manifest\n";
+    my $content_dir = File::Spec->rel2abs( 'tmp/content' );
+    my $s;
+    if ($operation eq 'bundle') {
+        #die "HERE!";
+        $s .= "content $app_name jar:chrome/$app_name.jar!/content/ xpcnativewrappers=no\n";
+    } else {
+        $s .= "content $app_name file://$content_dir/\n",
+    }
+    for my $item (@overlay) {
+        $s .= "overlay $item->[1] chrome://$XUL::App::APP_NAME/content/$item->[0]\n";
+    }
+    write_file(
+        "tmp/chrome.manifest",
+        # XXX more work needed here for overlays...
+        #"overlay $target_xul $my_xul\n",
+        $s
+    );
+}
+
+sub register_ext {
+    my ($meta_dir, $chrome_dir) = @_;
+    #my $meta_path = "$meta_dir/$opts->{id}";
+    #warn "creating $meta_path\n";
+    #mkdir $meta_path;
+    my $manifest = File::Spec->rel2abs($chrome_dir);
+    my $metafile = Cwd::realpath("$meta_dir/../extensions.ini");
+    open my $in, $metafile or
+        die "Can't open $metafile for reading: $!";
+    my $state = 'init';
+    my ($buf, $c);
+    $c = 0;
+    my $write_back = 1;
+    while (<$in>) {
+        ### state: $state
+        if ($state eq 'init' and /^\s*\[ExtensionDirs\]\s*$/i) {
+            $state = 'begin';
+        } elsif ($state eq 'begin') {
+            if (/^\s*\[\w+\]\s*$/) {
+                $c++;
+                $buf .= "Extension$c="
+                    . $manifest
+                    . "\n";
+                $state = 'end';
+            } elsif (/^\s*Extension(\d+)\s*=\s*(.*)$/i) {
+                if ($2 eq $manifest) {
+                    warn "Great! $manifest already registered.\n";
+                    $write_back = 0;
+                    last;
+                }
+                $c = $1;
+            }
+        }
+    } continue {
+        $buf .= $_;
+    }
+    #print $buf;
+    #$buf .= "AAA\n";
+    close $in;
+    if ($write_back) {
+        shell("cp $metafile $metafile.bak");
+        warn "Writing $metafile\n";
+        #my $orig = read_file($metafile);
+        #warn "Diff: ", diff \$orig, \$buf;
+        write_file($metafile, $buf);
+    }
+    #shell($cmd);
+}
+
+# XXX untested...
+sub unregister_ext {
+    my ($meta_dir, $chrome_dir) = @_;
+    #my $meta_path = "$meta_dir/$opts->{id}";
+    #warn "creating $meta_path\n";
+    #mkdir $meta_path;
+    my $manifest = File::Spec->rel2abs($chrome_dir);
+    my $metafile = File::Spec->canonpath("$meta_dir/../extensions.ini");
+    open my $in, $metafile or
+        die "Can't open $metafile for reading: $!";
+    my $state = 'init';
+    my ($buf, $c);
+    $c = 0;
+    my $found = 0;
+    while (<$in>) {
+        ### state: $state
+        if ($state eq 'init' and /^\s*\[ExtensionDirs\]\s*$/i) {
+            $state = 'begin';
+        } elsif ($state eq 'begin') {
+            if (!$found and /^\s*Extension(\d+)\s*=\s*\Q$manifest\E$/i) {
+                warn "Removing entry pointed to $manifest\n";
+                $c = $1;
+                $found = 1;
+                next;
+            }
+            if (/^\s*\[\w+\]\s*$/) {
+                $state = 'end';
+            } elsif ($found) {
+                if (s/^(\s*Extension)(\d+)(\s*=)/$1$c$3/) {
+                    $c++;
+                }
+            }
+        }
+        $buf .= $_;
+    }
+    close $in;
+    if ($found) {
+        warn "Writing $metafile.bak\n";
+        shell("cp $metafile $metafile.bak");
+
+        #my $orig = read_file($metafile);
+        #warn "Diff: ", diff \$orig, \$buf;
+        warn "Writing $metafile\n";
+        write_file($metafile, $buf);
+    } else {
+        warn "No registration found.\n";
+    }
+}
+
+sub shell {
+    warn join(" ", @_), "\n";
+    system @_;
+}
+
