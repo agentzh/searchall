@@ -37,7 +37,6 @@ $("#search-button").click( function () {
     browser0.doSearch(query);
     browser1.doSearch(query);
     browser2.doSearch(query);
-
 } );
 
 // auto-submit if the user presses the Enter key

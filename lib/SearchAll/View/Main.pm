@@ -6,8 +6,8 @@ use base 'SearchAll::View::Base';
 use Template::Declare::Tags 'XUL';
 
 my @URLs = qw(
-    www.yisou.com
     www.google.cn
+    www.yisou.com
     www.baidu.cn
     www.yahoo.cn
     so.sohu.com

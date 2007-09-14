@@ -64,7 +64,7 @@ sub go {
     my $last_tag_pat = qr{ </ [^>]+ > \s* $}xs;
     for my $file (@jsfiles) {
         check_js_file($file);
-        $xml =~ s{$last_tag_pat}{<script src="$file" />\n$&};
+        $xml =~ s{$last_tag_pat}{<script src="$file" type="application/javascript;version=1.7"/>\n$&};
     }
     my $first_tag_pat = qr{ .* <\? [^>]+ \?> }xs;
     for my $file (reverse @cssfiles) {

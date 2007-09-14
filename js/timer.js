@@ -3,16 +3,19 @@ var Timer = function () {
 };
 
 Timer.fn = Timer.prototype = {
+    now: function (c) {
+        return new Date().getTime();
+    },
     start: function (tag) {
         //alert("starting: " + tag);
         if (!this.tags[tag])
             this.tags[tag] = [];
-        var pair = [new Date().getTime()];
+        var pair = [this.now()];
         this.tags[tag].unshift(pair);
     },
     stop: function (tag, params) {
         //alert("stopping: " + tag);
-        var end_time = new Date().getTime();
+        var end_time = this.now();
         var list = this.tags[tag];
         if (!list) return;
         var pair = list[0];

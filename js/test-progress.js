@@ -28,6 +28,22 @@ function test_progress () {
     obj.setDone('baidu.cn', 10);
     like(obj.percent().toString(), /^1/, 'we got 100%!');
 
+    // some OT tests:
+    let c = 0;
+    is(typeof document, '');
+    for (let m in document) {
+        if (c++ > 10) break;
+        let s = document[m];
+        is(m + " " + typeof s, '', 'member');
+        //is(typeof s, '', 'type');
+    }
+    //is(document.title = 'hello', 'hello', 'OKAY!');
+    is(document.URL = 'hello', 'hello', 'OKAY!');
+    is(document.URL, 'hello', 'yay!');
+    is(browser1.button()[0].toString(), '');
+    is($("p", browser1.document())[0].tagName, 'P', 'big P');
+    //document.write("hello, world!\n");
+
     summary();
 }
 

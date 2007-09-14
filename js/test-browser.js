@@ -7,9 +7,9 @@ JSAN.use('datadumper');
 function test_browser () {
     plan({tests: 16});
 
-    var browser = $("#browser-1")[0];
-    is(browser.nodeName, 'browser', 'browser-1 found');
-    is(browser.id, 'browser-1', "browser-1's id okay");
+    var browser = $("#browser-0")[0];
+    is(browser.nodeName, 'browser', 'browser-0 found');
+    is(browser.id, 'browser-0', "browser-0's id okay");
 
     // reset the context:
     browser.homePage = 'http://www.google.cn';

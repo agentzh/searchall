@@ -74,7 +74,7 @@ var myListener = {
             //if ((flag & STATE_DONE) == STATE_DONE)
             if (!Replies[hostname]) Replies[hostname] = 0;
             num = ++Replies[hostname];
-            if (num == 2 && myTimer.isTiming(hostname)) {
+            if (num == 1 && myTimer.isTiming(hostname)) {
                 // we start timing in Browser.doSearch
                 myTimer.stop(hostname, { force: true });
                 var elapsed = myTimer.lastResult(hostname);
