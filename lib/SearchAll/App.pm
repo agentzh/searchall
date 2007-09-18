@@ -45,7 +45,7 @@ use XUL::App schema {
             developers are ['Agent Zhang (章亦春)'],
             homepageURL is 'http://cn.yahoo.com',
             # XXX should disable it for the final release
-            updateURL is 'http://10.62.136.17/repos/loki/agentz/searchall/branches/xulapp/searchall.xpi';
+            #updateURL is 'http://10.62.136.17/repos/loki/agentz/searchall/branches/xulapp/searchall.xpi';
 };
 
 1;
