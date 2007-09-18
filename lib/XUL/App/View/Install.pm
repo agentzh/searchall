@@ -48,8 +48,10 @@ template main => sub {
                     }
                 }
             }
-            em::homepageURL { $xpifile->homepageURL }
-            em::updateURL { $xpifile->updateURL }
+            em::homepageURL { $xpifile->homepageURL };
+            if ($xpifile->updateURL) {
+                em::updateURL { $xpifile->updateURL }
+            }
         }
     }
 };
