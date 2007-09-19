@@ -91,7 +91,7 @@ template show_dom => sub {
         attr { flex => 1 }
         listbox {
             attr {
-                width => 100,
+                width => 150,
                 id => 'dom-list',
             }
         }

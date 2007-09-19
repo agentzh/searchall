@@ -42,10 +42,14 @@ Sep 11
 * Merged the 'xulapp' branch back to trunk/.  [done]
 * Send mail to HTML::DOM's author for ideas on a DOM lib.  [done]
 
-Sep 12
+Sep 19
+* Add support for automatic extension updating.  [deferred]
+* Add listbox to the Logs tabpannel.  [done]
+* Use the 'tree' command line utility's format for my dumpDOM function.  [done]
+
+Later...
 * Fix the checkbox toggling bug.
 * Eliminate potential errors in page loading timers.
-* Add support for automatic extension updating.
 * Make the font size of the inner HTML pages smaller (per laser's request).
 * Add a splash window before the main window shows up (splash.js and splash.xul).
 * Add test-timer.js to test the Timer class in timer.js.

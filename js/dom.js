@@ -70,10 +70,8 @@ function showDOM (dom, label) {
         new_label = label + "-" + i;
     }
     label = new_label;
-    var item = document.createElement("listitem");
-    item.setAttribute('label', label);
     var dom_list = $('#dom-list')[0];
-    dom_list.appendChild(item);
+    dom_list.appendItem(label, label);
     var str = dumpDOM(dom);
     domTable[label] = str;
     textbox.value = str;
