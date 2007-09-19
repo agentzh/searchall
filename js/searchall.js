@@ -155,7 +155,7 @@ function handleCheckbox (i) {
 
 }
 
-function gen_fmt_view (i, hostname, doc) {
+function gen_fmt_view (index, hostname, doc) {
     setTimeout(function () {
         var list;
         if (hostname == 'www.baidu.cn') {
@@ -176,16 +176,19 @@ function gen_fmt_view (i, hostname, doc) {
         var html = '';
         for (var i = 0; i < list.length; i++) {
             Debug.log(hostname + ": " + $(list[i]).text());
+            var snippet = $(list[i]).html();
+            snippet = snippet.replace(/<\s*\/?\s*font[^>]*>/gi, '');
             html += $(list[i]).html() + "<hr />\n";
         }
+        //alert(html);
 
-        var fmt_view = $("#fmt-view-" + i)[0];
+        var fmt_view = $("#fmt-view-" + index)[0];
         if (!fmt_view) return;
         fmt_view
             .contentDocument
             .getElementById("content")
             .innerHTML += html;
-        }, 300);
+        }, 100);
 }
 
 $(window).ready( function () {
