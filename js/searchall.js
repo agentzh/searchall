@@ -162,22 +162,25 @@ function handleCheckbox (i) {
 function gen_fmt_view (index, hostname, doc) {
     setTimeout(function () {
         var list;
+        var html = '';
         if (hostname == 'www.baidu.cn') {
             list = $("tbody>tr>td.f", doc); // body
-        }
-        if (hostname == 'www.google.cn') {
+        } else if (hostname == 'www.google.cn') {
             //list = $("div.g>h2.r", doc); // title + url
             list = $("div.g[h2]", doc);
 
-        }
-        if (hostname == 'www.yisou.com') {
+        } else if (hostname == 'www.yisou.com') {
             //list = $("div.g>h2.r", doc); // title + url
             list = $("div.web>ol>li", doc);
-
+        } else {
+            list = [];
+            html = "<p /><p /><p /><p /><p />\n" +
+                "<center>Sorry, " + hostname +
+                " is not currently supported in the " +
+                "Formatted View :(</center>\n";
         }
 
         Debug.log(hostname + ": " + list.length);
-        var html = '';
         for (var i = 0; i < list.length; i++) {
             Debug.log(hostname + ": " + $(list[i]).text());
             var snippet = $(list[i]).html();
