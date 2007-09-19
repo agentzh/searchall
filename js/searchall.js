@@ -156,11 +156,32 @@ function handleCheckbox (i) {
 }
 
 function gen_fmt_view (i, hostname, doc) {
-            $("#fmt-view-" + i)[0]
-                .contentDocument
-                .getElementById("content")
-                .innerHTML +=
-                '<h3><a href="http://' + hostname + '" target="_blank">' + i + ' ' + hostname + ' </a></h3>';
+    setTimeout(function () {
+        var list;
+        if (hostname == 'www.baidu.cn') {
+            list = $("tbody>tr>td.f", doc); // body
+        }
+        if (hostname == 'www.google.cn') {
+            //list = $("div.g>h2.r", doc); // title + url
+            list = $("div.g[h2]", doc);
+
+        }
+        if (hostname == 'www.yisou.com') {
+            //list = $("div.g>h2.r", doc); // title + url
+            list = $("div.web>ol>li", doc);
+
+        }
+
+        Debug.log(hostname + ": " + list.length);
+        for (var i = 0; i < list.length; i++)
+            Debug.log(hostname + ": " + $(list[i]).text());
+
+        $("#fmt-view-" + i)[0]
+            .contentDocument
+            .getElementById("content")
+            .innerHTML +=
+            '<h3><a href="http://' + hostname + '" target="_blank">' + i + ' ' + hostname + ' </a></h3>';
+        }, 300);
 }
 
 $(window).ready( function () {
