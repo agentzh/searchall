@@ -22,6 +22,8 @@ $(window).unload( function () {
 } );
 */
 
+var host2ind = {};
+
 //alert($("#search-box").focus());
 $("#search-button").click( function () {
     //browser.url = 'about:blank';
@@ -34,8 +36,13 @@ $("#search-button").click( function () {
     progressmeters.show();
     //JJJ(progressmeters[0]);
     progressmeters[0].value = 0;
+    host2ind[browser0.hostname()] = 0;
     browser0.doSearch(query);
+
+    host2ind[browser1.hostname()] = 1;
     browser1.doSearch(query);
+
+    host2ind[browser2.hostname()] = 2;
     browser2.doSearch(query);
 } );
 
@@ -146,6 +153,14 @@ function handleCheckbox (i) {
         true
     );
 
+}
+
+function gen_fmt_view (i, hostname, doc) {
+            $("#fmt-view-" + i)[0]
+                .contentDocument
+                .getElementById("content")
+                .innerHTML +=
+                '<h3><a href="http://' + hostname + '" target="_blank">' + i + ' ' + hostname + ' </a></h3>';
 }
 
 $(window).ready( function () {

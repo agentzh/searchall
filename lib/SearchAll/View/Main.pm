@@ -111,6 +111,23 @@ template url_list => sub {
 };
 
 template results => sub {
+    tabbox {
+        attr { selectedIndex => 0, flex => 1 }
+        tabs {
+            tab { attr { label => 'Raw View' } }
+            tab { attr { label => 'Formatted View' } }
+            #tab { attr { label => 'Merged View' } }
+        }
+        tabpanels {
+            attr { flex => 1 }
+            tabpanel { show('raw_view'); }
+            tabpanel { show('fmt_view'); }
+            #tabpanel { show('merged_view'); }
+        }
+    }
+};
+
+template raw_view => sub {
     groupbox {
         attr { id => 'results', flex => 1, orient => 'horizontal' };
         for (0..2) {
@@ -132,6 +149,33 @@ template results => sub {
                     id => "browser-$_",
                     type => 'content-primary',
                     homepage => $url,
+                }
+            }
+        }
+    }
+};
+
+template fmt_view => sub {
+    groupbox {
+        attr { id => 'results', flex => 1, orient => 'horizontal' };
+        for (0..2) {
+            if ($_ > 0) {
+                splitter {
+                    attr {
+                        #resizeafter => 'grow'
+                        collapse => 'before',
+                        id => 'splitter-' . ($_-1),
+                        #state => 'collapsed',
+                    }
+                };
+            };
+            browser {
+                attr {
+                    src => 'listing.html',
+                    flex => 1,
+                    id => "fmt-view-$_",
+                    #type => 'content-primary',
+                    homepage => 'chrome://$XUL::App::APP_NAME/content/listing.html',
                 }
             }
         }

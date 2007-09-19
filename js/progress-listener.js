@@ -70,10 +70,24 @@ var myListener = {
             $("#search-box").focus();
         }
         if (flag & WPL.STATE_STOP) {
-            const hostname = progress.DOMWindow.window.location.hostname;
+            var hostname = progress.DOMWindow.window.location.hostname;
+            var doc = progress.DOMWindow.document;
+            var ind = host2ind[hostname];
             //if ((flag & STATE_DONE) == STATE_DONE)
             if (!Replies[hostname]) Replies[hostname] = 0;
             num = ++Replies[hostname];
+            if (ind == undefined) {
+                if (num == 4) {
+                    var progressmeter = $("#status-progress");
+                    progressmeter[0].value = 100;
+                    setTimeout( function () {
+                        progressmeter.hide();
+                    }, 100 );
+                }
+                return;
+            }
+
+
             if (num == 1 && myTimer.isTiming(hostname)) {
                 // we start timing in Browser.doSearch
                 myTimer.stop(hostname, { force: true });
@@ -89,6 +103,8 @@ var myListener = {
             if (num == 4) {
                 var val = 100 * myProgress.percent();
                 var progressmeter = $("#status-progress");
+                //alert(ind);
+                gen_fmt_view(ind, hostname, doc);
                 progressmeter[0].value = val;
                 if (val >= 100) {
                     setTimeout( function () {
