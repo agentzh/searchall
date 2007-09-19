@@ -54,11 +54,30 @@ function dumpDOM (node, indent, is_last) {
     return str;
 }
 
-function showDOM (dom) {
+var domTable = {};
+
+function showDOM (dom, label) {
     var textbox = $("#dom")[0];
     if (!textbox) return;
-    
-    textbox.value += "////////////////////////////////\n";
-    textbox.value += dumpDOM(dom);
+    if (!label) {
+        var time = new Date().getTime();
+        label = time;
+    }
+    var item = document.createElement("listitem");
+    item.setAttribute('label', label);
+    var dom_list = $('#dom-list')[0];
+    dom_list.appendChild(item);
+    var str = dumpDOM(dom);
+    domTable[label] = str;
+    textbox.value = str;
 }
+
+$("#dom-list").select(function () {
+    //alert(this);
+    var textbox = $("#dom")[0];
+    label = this.selectedItem.label;
+    //alert(label);
+    textbox.value = domTable[label];
+});
+
 

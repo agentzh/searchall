@@ -176,7 +176,9 @@ function gen_fmt_view (i, hostname, doc) {
         for (var i = 0; i < list.length; i++)
             Debug.log(hostname + ": " + $(list[i]).text());
 
-        $("#fmt-view-" + i)[0]
+        var fmt_view = $("#fmt-view-" + i)[0];
+        if (!fmt_view) return;
+        fmt_view
             .contentDocument
             .getElementById("content")
             .innerHTML +=

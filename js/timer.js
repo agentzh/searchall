@@ -4,7 +4,7 @@ var Timer = function () {
 
 Timer.fn = Timer.prototype = {
     now: function (c) {
-        return new Date().getTime();
+        return Date.now();
     },
     start: function (tag) {
         //alert("starting: " + tag);

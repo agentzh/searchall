@@ -95,13 +95,21 @@ template show_dom => sub {
                 id => 'dom-list',
             }
         }
+        splitter {
+            attr {
+                #resizeafter => 'grow'
+                collapse => 'before',
+                id => 'dom-splitter-' . ($_-1),
+                #state => 'collapsed',
+            }
+        }
         textbox {
             attr {
                 id => 'dom',
                 multiline => 'true',
                 style => 'background-color: white; padding-left: 1em; padding-top: 0.5em;',
                 readonly => 'true',
-                flex => 5,
+                flex => 1,
             }
         }
     }
