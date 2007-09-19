@@ -176,6 +176,12 @@ function gen_fmt_view (index, hostname, doc) {
             list = $("div.g[h2]", doc);
         } else if (hostname == 'so.sohu.com') {
             list = $("div#content>div", doc);
+        } else if (hostname == 'search.cpan.org') {
+            list = $("body>p[small]", doc);
+        } else if (hostname == 'www.yahoo.cn') {
+            list = $(".yst-web>ul>li[h3]", doc);
+        } else if (hostname == 'search.yahoo.com') {
+            list = $("div#yschweb>ol>li", doc);
         } else {
             list = [];
             html = "<p /><p /><p /><p /><p />\n" +
