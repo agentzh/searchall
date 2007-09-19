@@ -173,16 +173,18 @@ function gen_fmt_view (i, hostname, doc) {
         }
 
         Debug.log(hostname + ": " + list.length);
-        for (var i = 0; i < list.length; i++)
+        var html = '';
+        for (var i = 0; i < list.length; i++) {
             Debug.log(hostname + ": " + $(list[i]).text());
+            html += $(list[i]).html() + "<hr />\n";
+        }
 
         var fmt_view = $("#fmt-view-" + i)[0];
         if (!fmt_view) return;
         fmt_view
             .contentDocument
             .getElementById("content")
-            .innerHTML +=
-            '<h3><a href="http://' + hostname + '" target="_blank">' + i + ' ' + hostname + ' </a></h3>';
+            .innerHTML += html;
         }, 300);
 }
 
