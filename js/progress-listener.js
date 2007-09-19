@@ -104,7 +104,6 @@ var myListener = {
                 var val = 100 * myProgress.percent();
                 var progressmeter = $("#status-progress");
                 //alert(ind);
-                gen_fmt_view(ind, hostname, doc);
                 progressmeter[0].value = val;
                 if (val >= 100) {
                     setTimeout( function () {
@@ -123,6 +122,7 @@ var myListener = {
                 info(hostname + " loaded.");
                 var doc = progress.DOMWindow.document;
                 showDOM(doc, hostname);
+                gen_fmt_view(ind, hostname, doc);
                 for (var i = 0; i < browsers.length; i++) {
                     if (browsers[i].document() == doc) {
                         //alert("browser " + i + " found!");
