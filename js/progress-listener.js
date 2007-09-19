@@ -122,7 +122,7 @@ var myListener = {
                 //alert(hostname);
                 info(hostname + " loaded.");
                 var doc = progress.DOMWindow.document;
-                showDOM(doc);
+                showDOM(doc, hostname);
                 for (var i = 0; i < browsers.length; i++) {
                     if (browsers[i].document() == doc) {
                         //alert("browser " + i + " found!");

@@ -63,6 +63,13 @@ function showDOM (dom, label) {
         var time = new Date().getTime();
         label = time;
     }
+    var new_label = label;
+    var i = 1;
+    while (domTable[new_label]) {
+        i++;
+        new_label = label + "-" + i;
+    }
+    label = new_label;
     var item = document.createElement("listitem");
     item.setAttribute('label', label);
     var dom_list = $('#dom-list')[0];
