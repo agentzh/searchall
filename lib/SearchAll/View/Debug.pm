@@ -87,13 +87,22 @@ template test_pannel => sub {
 };
 
 template show_dom => sub {
-    textbox {
-        attr {
-            id => 'dom',
-            multiline => 'true',
-            style => 'background-color: white; padding-left: 1em; padding-top: 0.5em;',
-            readonly => 'true',
-            flex => 1,
+    hbox {
+        attr { flex => 1 }
+        listbox {
+            attr {
+                width => 100,
+                id => 'dom-list',
+            }
+        }
+        textbox {
+            attr {
+                id => 'dom',
+                multiline => 'true',
+                style => 'background-color: white; padding-left: 1em; padding-top: 0.5em;',
+                readonly => 'true',
+                flex => 5,
+            }
         }
     }
 };

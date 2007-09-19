@@ -1,23 +1,28 @@
-function dumpDOM () {
-    if (arguments.length == 0)
-        return "";
-    var node = arguments[0];
-    var indent = arguments[1] || '';
-    if (!node) { // || typeof node.hasAttribute == 'undefined') {
-        return node;
+function dumpDOM (node, indent, is_last) {
+    var indent = indent || '';
+    var prefix;
+    if (is_last) {
+        prefix = indent.replace(/\|\s+$/, '`-- ');
+        indent = indent.replace(/\|\s+$/, '    ');
+    } else {
+        prefix = indent.replace(/\s+$/, '-- ');
     }
+
+    if (!node)
+        return "";
+
     if (node.nodeType == Node.TEXT_NODE) {
         var val = node.nodeValue
             .replace(/^\s+|\s+$/g, '')
             .replace(/[\n\r]+/g, '')
             .replace(/\s\s+/g, ' ');
         if (val.length > 15)
-            val = val.substr(0, 15) + "...";
+            val = val.substr(0, 35) + "...";
         if (val == '') return '';
-        return indent + '"' +  val + "\"\n";
+        return prefix + '"' +  val + "\"\n";
     }
 
-    var str = indent + node.nodeName.toLowerCase();
+    var str = prefix + node.nodeName.toLowerCase();
     var attrs = [];
     if (node.nodeType == Node.ELEMENT_NODE) {
         if (node.hasAttribute('id'))
@@ -41,7 +46,10 @@ function dumpDOM () {
     var children = node.childNodes;
     for (var i = 0; i < children.length; i++) {
         var child = children[i];
-        str += dumpDOM(child, indent + "  ");
+        if (i == children.length - 1)
+            str += dumpDOM(child, indent + "|    ", 1);
+        else
+            str += dumpDOM(child, indent + "|    ", 0);
     }
     return str;
 }
@@ -49,6 +57,7 @@ function dumpDOM () {
 function showDOM (dom) {
     var textbox = $("#dom")[0];
     if (!textbox) return;
+    
     textbox.value += "////////////////////////////////\n";
     textbox.value += dumpDOM(dom);
 }
