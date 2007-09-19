@@ -172,6 +172,10 @@ function gen_fmt_view (index, hostname, doc) {
         } else if (hostname == 'www.yisou.com') {
             //list = $("div.g>h2.r", doc); // title + url
             list = $("div.web>ol>li", doc);
+        } else if (hostname == 'www.google.com') {
+            list = $("div.g[h2]", doc);
+        } else if (hostname == 'so.sohu.com') {
+            list = $("div#content>div", doc);
         } else {
             list = [];
             html = "<p /><p /><p /><p /><p />\n" +
