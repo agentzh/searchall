@@ -56,3 +56,9 @@ Later...
 * Add persist to XUL components.
 * Implement features as in http://qcon.infoq.com/sanfrancisco/tracks/show_track.jsp?trackOID=70 using SVG.
 
+XUL::App's TODO:
+* Add support for the --profile option, like this:
+    $ xulapp debug --profile dev3 foo.xul
+ It will also create a profile if it doesn't exist.
+ It will also checks prefs.js to see whether the necessary variables have been set or not. If not, it will set those config vars automatically.
+
