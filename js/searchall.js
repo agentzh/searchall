@@ -112,6 +112,7 @@ function prepareUriList (i) {
 
 function set_splitter_1 (dir) {
     $("#splitter-1")[0].setAttribute('collapse', dir);
+    $("#fmt-splitter-1")[0].setAttribute('collapse', dir);
 }
 
 function handleCheckbox (i) {
@@ -129,6 +130,7 @@ function handleCheckbox (i) {
                     id = 1;
                     //set_splitter_1('before');
                     $("#splitter-1")[0].setAttribute('state', 'none');
+                    $("#fmt-splitter-1")[0].setAttribute('state', 'none');
                     return;
                 } else {
                     //$("#splitter-" + i)[0].setAttribute('collapse', 'after');
@@ -137,6 +139,7 @@ function handleCheckbox (i) {
 
                 }
                 $("#splitter-" + id)[0].setAttribute('state', 'none');
+                $("#fmt-splitter-" + id)[0].setAttribute('state', 'none');
             } else {
                 if (i == 2) {
                     id = 1;
@@ -148,6 +151,7 @@ function handleCheckbox (i) {
                 this.nextSibling.disabled = true;
                 //$("#browser-" + i).hide();
                 $("#splitter-" + id)[0].setAttribute('state', 'collapsed');
+                $("#fmt-splitter-" + id)[0].setAttribute('state', 'collapsed');
             }
         },
         true
@@ -187,7 +191,7 @@ function gen_fmt_view (index, hostname, doc) {
         fmt_view
             .contentDocument
             .getElementById("content")
-            .innerHTML += html;
+            .innerHTML = html;
         }, 100);
 }
 

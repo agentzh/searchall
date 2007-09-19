@@ -164,7 +164,7 @@ template fmt_view => sub {
                     attr {
                         #resizeafter => 'grow'
                         collapse => 'before',
-                        id => 'splitter-' . ($_-1),
+                        id => 'fmt-splitter-' . ($_-1),
                         #state => 'collapsed',
                     }
                 };
