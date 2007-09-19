@@ -84,6 +84,18 @@ var myListener = {
                         progressmeter.hide();
                     }, 100 );
                 }
+                for (var i = 0; i < browsers.length; i++) {
+                    if (browsers[i].document() == doc) {
+                        //alert("browser " + i + " found!");
+                        //alert("HERE: " + i);
+                        var id = i;
+                        browsers[i].button().click(
+                            function () {
+                                return handleSearchButton(id);
+                            }
+                        );
+                    }
+                }
                 return;
             }
 
