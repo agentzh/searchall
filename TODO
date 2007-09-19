@@ -48,6 +48,7 @@ Sep 19
 * Use the 'tree' command line utility's format for my dumpDOM function.  [done]
 
 Later...
+* Use the getter/setter feature to reimplement our own JS classes.
 * Fix the checkbox toggling bug.
 * Eliminate potential errors in page loading timers.
 * Make the font size of the inner HTML pages smaller (per laser's request).
