@@ -112,7 +112,11 @@ template url_list => sub {
 
 template results => sub {
     tabbox {
-        attr { selectedIndex => 0, flex => 1 }
+        attr {
+            id => 'results',
+            selectedIndex => 0,
+            flex => 1
+        }
         tabs {
             tab { attr { label => 'Raw View' } }
             tab { attr { label => 'Formatted View' } }

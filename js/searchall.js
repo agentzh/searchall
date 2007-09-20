@@ -123,6 +123,11 @@ function handleCheckbox (i) {
             //alert("checked: " + this.checked);
             if (this.checked) {
                 this.nextSibling.disabled = false;
+                for (var j = 0; j < 3; j++) {
+                    if (j == i) continue;
+                    $("#enable-view-" + j)[0].disabled = false;
+                }
+
                 //$("#browser-" + i).show();
                 if (i == 2) {
                     //alert("hi!");
@@ -147,6 +152,10 @@ function handleCheckbox (i) {
                 }
 
             } else { // not checked
+                for (var j = 0; j < 3; j++) {
+                    if (j == i) continue;
+                    $("#enable-view-" + j)[0].disabled = true;
+                }
                 if (i == 2) {
                     id = 1;
                     set_splitter_1('after');
