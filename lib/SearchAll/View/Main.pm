@@ -93,6 +93,7 @@ template url_list => sub {
             id => "url-list-" . $index,
             class => 'url-list',
             editable => 'true',
+            persist => 'disabled selectedIndex',
             #oncommand => 'alert("Yeah yeah yeah!");',
             #onpopupshowing => "alert('popping up! ' + this);",
         };
@@ -118,21 +119,23 @@ template url_list => sub {
 template results => sub {
     tabbox {
         attr {
-            id => 'results',
-            selectedIndex => 0,
-            persist => 'selectedIndex',
+            id => 'view-tabbox',
             flex => 1,
         }
         tabs {
+            attr {
+                id => 'view-tabs',
+                oncommand => 'selectedTabIndex = this.selectedIndex; prefs.setIntPref("selectedTabIndex", this.selectedIndex); /*alert(selectedTabIndex)*/',
+            }
             tab {
                 attr {
-                    id => 'raw-view-tab',
+                    id => 'view-tab-0',
                     label => 'Raw View',
                 }
             }
             tab {
                 attr {
-                    id => 'fmt-view-tab',
+                    id => 'view-tab-1',
                     label => 'Formatted View',
                 }
             }
@@ -152,7 +155,7 @@ template results => sub {
 
 template raw_view => sub {
     groupbox {
-        attr { id => 'results', flex => 1, orient => 'horizontal' };
+        attr { flex => 1, orient => 'horizontal' };
         for (0..2) {
             if ($_ > 0) {
                 splitter {
@@ -181,7 +184,7 @@ template raw_view => sub {
 
 template fmt_view => sub {
     groupbox {
-        attr { id => 'results', flex => 1, orient => 'horizontal' };
+        attr { flex => 1, orient => 'horizontal' };
         browser {
             attr {
                 src => 'fmt_view.html',

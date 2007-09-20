@@ -25,7 +25,7 @@ use XUL::App schema {
             requires qw(
                 jquery.js JSAN.js
                 datadumper.js Debug.js
-                timer.js dom.js JSON.js
+                timer.js dom.js JSON.js prefs.js
                 progress.js
                 browser.js progress-listener.js
             );
