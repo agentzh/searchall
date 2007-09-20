@@ -152,6 +152,7 @@ function handleCheckbox (i) {
                 }
 
             } else { // not checked
+                this.setAttribute('checked', false);
                 for (var j = 0; j < 3; j++) {
                     if (j == i) continue;
                     $("#enable-view-" + j)[0].disabled = true;
@@ -241,9 +242,14 @@ function gen_fmt_view (index, hostname, doc) {
                 );
                 rows = $(".row", fmt_view_doc);
             }
-            $(".col-" + index, rows[i])[0].innerHTML = snippet;
+            var cell = $(".col-" + index, rows[i])[0];
+            cell.innerHTML = snippet;
         }
-        showDOM(fmt_view_doc, "DOM");
+        if (! $("#enable-view-" + index)[0].checked) {
+            $(".col-" + index, fmt_view_doc).hide();
+        }
+
+        //showDOM(fmt_view_doc, "DOM");
         //alert(html);
 
         //alert(index);
@@ -278,5 +284,11 @@ $(window).ready( function () {
     //browser1.browser.contentDocument.blur();
     //browser2.browser.contentDocument.blur();
     $("#search-box").focus();
+
+    /*
+    for (var i = 0; i < 2; i++) {
+        $("#splitter-" + i)[0].disabled = true;
+    }
+    */
 } );
 

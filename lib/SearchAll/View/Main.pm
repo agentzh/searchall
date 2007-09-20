@@ -26,6 +26,7 @@ template main => sub {
             #'xmlns:html' => $::HTML_NAME_SPACE,
             width => 800,
             height => 600,
+            persist => "width height",
         }
 
 	show 'searchall';
@@ -76,6 +77,7 @@ template engine_bar => sub {
                     id => 'enable-view-' . $_ ,
                     class => 'enable-view',
                     checked => 'true',
+                    persist => 'disabled checked',
                 }
             };
             show('url_list', $_);
@@ -95,14 +97,17 @@ template url_list => sub {
             #onpopupshowing => "alert('popping up! ' + this);",
         };
         menupopup {
+            my $j = 0;
             for my $url (@URLs) {
                 menuitem {
                     attr {
+                        id => "url-$index-" . $j++,
                         class => 'url',
                         label => $url,
                         selected =>
                             $url eq $URLs[$index] ?
-                                'true' : 'false';
+                                'true' : 'false',
+                        persist => 'selected',
                     }
                 }
             }
@@ -115,15 +120,29 @@ template results => sub {
         attr {
             id => 'results',
             selectedIndex => 0,
-            flex => 1
+            persist => 'selectedIndex',
+            flex => 1,
         }
         tabs {
-            tab { attr { label => 'Raw View' } }
-            tab { attr { label => 'Formatted View' } }
+            tab {
+                attr {
+                    id => 'raw-view-tab',
+                    label => 'Raw View',
+                }
+            }
+            tab {
+                attr {
+                    id => 'fmt-view-tab',
+                    label => 'Formatted View',
+                }
+            }
             #tab { attr { label => 'Merged View' } }
         }
         tabpanels {
-            attr { flex => 1 }
+            attr {
+                id => 'view-panels',
+                flex => 1,
+            }
             tabpanel { show('raw_view'); }
             tabpanel { show('fmt_view'); }
             #tabpanel { show('merged_view'); }
@@ -142,6 +161,7 @@ template raw_view => sub {
                         collapse => 'before',
                         id => 'splitter-' . ($_-1),
                         #state => 'collapsed',
+                        persist => 'collapse state',
                     }
                 };
             };
