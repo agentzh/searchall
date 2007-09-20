@@ -26,7 +26,7 @@ template main => sub {
             #'xmlns:html' => $::HTML_NAME_SPACE,
             width => 800,
             height => 600,
-            persist => "screenX screenY width height",
+            persist => "sizemode screenX screenY width height",
         }
 
 	show 'searchall';
