@@ -36,7 +36,7 @@ use XUL::App schema {
         xpifile 'searchall.xpi' =>
             id is 'searchall@yahoo.cn',
             name is 'SearchAll',
-            version is '0.0.5',
+            version is '0.0.6',
             targets {
                 Firefox => ['1.5' => '3.0a5'],
                 Mozilla => ['1.0' => '1.8'],

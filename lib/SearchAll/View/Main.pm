@@ -158,25 +158,13 @@ template raw_view => sub {
 template fmt_view => sub {
     groupbox {
         attr { id => 'results', flex => 1, orient => 'horizontal' };
-        for (0..2) {
-            if ($_ > 0) {
-                splitter {
-                    attr {
-                        #resizeafter => 'grow'
-                        collapse => 'before',
-                        id => 'fmt-splitter-' . ($_-1),
-                        #state => 'collapsed',
-                    }
-                };
-            };
-            browser {
-                attr {
-                    src => 'listing.html',
-                    flex => 1,
-                    id => "fmt-view-$_",
-                    #type => 'content-primary',
-                    homepage => 'chrome://$XUL::App::APP_NAME/content/listing.html',
-                }
+        browser {
+            attr {
+                src => 'fmt_view.html',
+                flex => 1,
+                id => "fmt-view",
+                #type => 'content-primary',
+                homepage => 'chrome://$XUL::App::APP_NAME/content/listing.html',
             }
         }
     }
