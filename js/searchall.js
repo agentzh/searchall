@@ -189,6 +189,12 @@ function gen_fmt_view (index, hostname, doc) {
                 "Formatted View :(</center>\n";
         }
 
+        var fmt_view_doc = $("#fmt-view")[0].contentDocument;
+        if (!fmt_view_doc) {
+            Debug.log("WARNING: fmt_view_doc not found.");
+            return;
+        }
+
         Debug.log(hostname + ": " + list.length);
         for (var i = 0; i < list.length; i++) {
             //Debug.log(hostname + ": " + $(list[i]).text());
@@ -203,26 +209,33 @@ function gen_fmt_view (index, hostname, doc) {
                 .replace(/<\/?tbody[^>]*>/ig, '')
                 .replace(/<\/?tr[^>]*>/ig, '')
                 .replace(/<\/?td[^>]*>/ig, '')
-            Debug.log(hostname + snippet);
-            html += snippet + "<hr />\n";
+            //Debug.log(hostname + snippet);
+
+            var rows = $(".row", fmt_view_doc);
+            if (rows[i] == undefined) {
+                Debug.log("appending row " + i + " for " + hostname);
+                rows.parent().append(
+                    '<tr class="row">' +
+                        '<td class="col-0" />' +
+                        '<td class="col-1" />' +
+                        '<td class="col-2" />' +
+                    '</tr>'
+                );
+                rows = $(".row", fmt_view_doc);
+            }
+            $(".col-" + index, rows[i])[0].innerHTML = snippet;
         }
+        showDOM(fmt_view_doc, "DOM");
         //alert(html);
 
         //alert(index);
-        var fmt_view_doc = $("#fmt-view")[0].contentDocument;
-        if (!fmt_view_doc) {
-            Debug.log("WARNING: fmt_view_doc not found.");
-            return;
-        }
+        //var fmt_view_col = $(".col-" + index, fmt_view_doc)[0];
+        //if (!fmt_view_col) {
+            //Debug.log("WARNING: fmt_view_col " + index + " not found.");
+            //return;
+        //}
 
-        var fmt_view_col = $("#view-" + index, fmt_view_doc)[0];
-        if (!fmt_view_col) {
-            Debug.log("WARNING: fmt_view_col " + index + " not found.");
-            return;
-        }
-
-        fmt_view_col.innerHTML = html;
-        //showDOM(fmt_view_doc, "DOM");
+        //fmt_view_col.innerHTML = html;
         //Debug.log(fmt_view_doc.innerHTML);
     }, 100);
 }
