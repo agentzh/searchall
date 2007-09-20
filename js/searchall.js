@@ -110,24 +110,53 @@ function prepareUriList (i) {
     );
 }
 
+function set_splitter_1 (dir) {
+    $("#splitter-1")[0].setAttribute('collapse', dir);
+}
+
 function handleCheckbox (i) {
     $("#enable-view-" + i)[0].addEventListener(
         'command',
         function () {
-            info("checkbox " + i);
+            var id = i;
+            info("checkbox " + id);
             //alert("checked: " + this.checked);
             if (this.checked) {
                 this.nextSibling.disabled = false;
-                $("#browser-" + i).show();
+                //$("#browser-" + i).show();
+                if (i == 2) {
+                    //alert("hi!");
+                    id = 1;
+                    //set_splitter_1('before');
+                    $("#splitter-1")[0].setAttribute('state', 'none');
+                    var fmt_view_doc = $("#fmt-view")[0].contentDocument;
+                    if (fmt_view_doc) {
+                        $(".col-" + i, fmt_view_doc).show();
+                    }
+                    return;
+                } else {
+                    //$("#splitter-" + i)[0].setAttribute('collapse', 'after');
+                    //alert("Hey!");
+                   // $("#splitter-" + i)[0].setAttribute('collapse', 'before');
+
+                }
+                $("#splitter-" + id)[0].setAttribute('state', 'none');
                 var fmt_view_doc = $("#fmt-view")[0].contentDocument;
                 if (fmt_view_doc) {
                     $(".col-" + i, fmt_view_doc).show();
                 }
 
             } else { // not checked
+                if (i == 2) {
+                    id = 1;
+                    set_splitter_1('after');
+                } else {
+                    set_splitter_1('before');
+                }
+
                 this.nextSibling.disabled = true;
-                $("#browser-" + i).hide();
                 //$("#browser-" + i).hide();
+                $("#splitter-" + id)[0].setAttribute('state', 'collapsed');
                 var fmt_view_doc = $("#fmt-view")[0].contentDocument;
                 if (fmt_view_doc) {
                     $(".col-" + i, fmt_view_doc).hide();
