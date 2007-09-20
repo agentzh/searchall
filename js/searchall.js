@@ -232,7 +232,7 @@ function gen_fmt_view (index, hostname, doc) {
             var rows = $(".row", fmt_view_doc);
             if (rows[i] == undefined) {
                 Debug.log("appending row " + i + " for " + hostname);
-                rows.parent().append(
+                $(rows[0]).parent().append(
                     '<tr class="row">' +
                         '<td class="col-0" />' +
                         '<td class="col-1" />' +
