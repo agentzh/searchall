@@ -24,6 +24,13 @@
     padding-top: 0.1em;
 }
 
+.browser {
+    padding: 0.2em;
+    border-style: groove;
+    border-color: grey;
+    border-width: 1px;
+}
+
 /* XXX put the following into test.css */
 #test {
     background-color: white;

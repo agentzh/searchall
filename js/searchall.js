@@ -110,48 +110,28 @@ function prepareUriList (i) {
     );
 }
 
-function set_splitter_1 (dir) {
-    $("#splitter-1")[0].setAttribute('collapse', dir);
-    $("#fmt-splitter-1")[0].setAttribute('collapse', dir);
-}
-
 function handleCheckbox (i) {
     $("#enable-view-" + i)[0].addEventListener(
         'command',
         function () {
-            var id = i;
-            info("checkbox " + id);
+            info("checkbox " + i);
             //alert("checked: " + this.checked);
             if (this.checked) {
                 this.nextSibling.disabled = false;
-                //$("#browser-" + i).show();
-                if (i == 2) {
-                    //alert("hi!");
-                    id = 1;
-                    //set_splitter_1('before');
-                    $("#splitter-1")[0].setAttribute('state', 'none');
-                    $("#fmt-splitter-1")[0].setAttribute('state', 'none');
-                    return;
-                } else {
-                    //$("#splitter-" + i)[0].setAttribute('collapse', 'after');
-                    //alert("Hey!");
-                   // $("#splitter-" + i)[0].setAttribute('collapse', 'before');
-
-                }
-                $("#splitter-" + id)[0].setAttribute('state', 'none');
-                $("#fmt-splitter-" + id)[0].setAttribute('state', 'none');
-            } else {
-                if (i == 2) {
-                    id = 1;
-                    set_splitter_1('after');
-                } else {
-                    set_splitter_1('before');
+                $("#browser-" + i).show();
+                var fmt_view_doc = $("#fmt-view")[0].contentDocument;
+                if (fmt_view_doc) {
+                    $(".col-" + i, fmt_view_doc).show();
                 }
 
+            } else { // not checked
                 this.nextSibling.disabled = true;
+                $("#browser-" + i).hide();
                 //$("#browser-" + i).hide();
-                $("#splitter-" + id)[0].setAttribute('state', 'collapsed');
-                $("#fmt-splitter-" + id)[0].setAttribute('state', 'collapsed');
+                var fmt_view_doc = $("#fmt-view")[0].contentDocument;
+                if (fmt_view_doc) {
+                    $(".col-" + i, fmt_view_doc).hide();
+                }
             }
         },
         true

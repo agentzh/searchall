@@ -128,25 +128,16 @@ template results => sub {
 };
 
 template raw_view => sub {
-    groupbox {
+    hbox {
         attr { id => 'results', flex => 1, orient => 'horizontal' };
         for (0..2) {
-            if ($_ > 0) {
-                splitter {
-                    attr {
-                        #resizeafter => 'grow'
-                        collapse => 'before',
-                        id => 'splitter-' . ($_-1),
-                        #state => 'collapsed',
-                    }
-                };
-            };
             my $url = 'http://' . $URLs[$_];
             browser {
                 attr {
                     src => $url,
                     flex => 1,
                     id => "browser-$_",
+                    class => 'browser',
                     type => 'content-primary',
                     homepage => $url,
                 }
