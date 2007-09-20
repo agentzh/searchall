@@ -1,0 +1,43 @@
+body {
+  font: .9em/1.5em "微软雅黑", "宋体", consolas, verdana, arial, sans-serif;
+  background-color: #FFF;
+  color: black;
+}
+
+div { word-wrap: break-word }
+
+table { table-layout:fixed;}
+
+td div{ overflow:auto; word-break : break-all;}
+
+td {
+    border: 2px solid #ccc;width:33%;
+    vertical-align: top;
+    padding: 0.6em;
+}
+
+ul{
+  list-style-type: square;
+}
+
+a {
+  color: #0055BB;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #663399;
+}
+
+/* specify link and visited so the 'hover' style doesn't apply to
+   other links, like those which are just NAME anchors. */
+a:link:hover {
+  text-decoration: underline;
+  color: #8B0000; /* dark red */
+}
+a:visited:hover {
+  text-decoration: underline;
+  color: #8B0000; /* dark red */
+}
+
+
