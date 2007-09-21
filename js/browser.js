@@ -9,8 +9,10 @@ Browser.fn = Browser.prototype = {
             browser = $(a)[0];
         else
             browser = a;
-        if (!browser)
+        if (!browser) {
             error("browser not found");
+            return;
+        }
         this.browser = browser;
         this.id = browser.getAttribute('id');
         //this.browser = $("#browser-1");
@@ -40,8 +42,8 @@ Browser.fn = Browser.prototype = {
         var nodes = $("input[@type=submit]", this.form());
         if (nodes.length == 0)
             nodes = $("button", this.form());
-        if (nodes.length == 0)
-            error("button not found!");
+        //if (nodes.length == 0)
+            //error("button not found!");
         return nodes;
     },
     goHome: function (newHome) {

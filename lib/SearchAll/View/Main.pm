@@ -93,7 +93,7 @@ template url_list => sub {
             id => "url-list-" . $index,
             class => 'url-list',
             editable => 'true',
-            persist => 'disabled selectedIndex',
+            persist => 'disabled lastSelected',
             #oncommand => 'alert("Yeah yeah yeah!");',
             #onpopupshowing => "alert('popping up! ' + this);",
         };
@@ -108,7 +108,7 @@ template url_list => sub {
                         selected =>
                             $url eq $URLs[$index] ?
                                 'true' : 'false',
-                        persist => 'selected',
+                        #persist => 'selected',
                     }
                 }
             }
@@ -125,7 +125,7 @@ template results => sub {
         tabs {
             attr {
                 id => 'view-tabs',
-                oncommand => 'selectedTabIndex = this.selectedIndex; prefs.setIntPref("selectedTabIndex", this.selectedIndex); /*alert(selectedTabIndex)*/',
+                persist => 'lastSelected',
             }
             tab {
                 attr {

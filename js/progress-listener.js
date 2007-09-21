@@ -70,7 +70,12 @@ var myListener = {
             $("#search-box").focus();
         }
         if (flag & WPL.STATE_STOP) {
-            var hostname = progress.DOMWindow.window.location.hostname;
+            var hostname;
+            try {
+                hostname = progress.DOMWindow.window.location.hostname;
+            } catch (e) {
+                hostname = '';
+            }
             var doc = progress.DOMWindow.document;
             var ind = host2ind[hostname];
             //if ((flag & STATE_DONE) == STATE_DONE)

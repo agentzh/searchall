@@ -66,6 +66,7 @@ $("#search-box").keydown( function (e) {
 function prepareUriList (i) {
     var uriLists = $("#url-list-" + i);
     uriLists.change( function (e) {
+        // XXX add user-entered URL to the URL list
         var fmt_view_doc = $("#fmt-view")[0].contentDocument;
         if (fmt_view_doc) {
             $(".col-" + i, fmt_view_doc).empty();
@@ -76,6 +77,7 @@ function prepareUriList (i) {
     uriLists[0].addEventListener(
         'command',
         function (e) {
+            this.setAttribute('lastSelected', this.selectedIndex);
             var home = this.value.replace(/^http:\/\//, '');
             //this.label = this.value = home;
 
@@ -196,7 +198,6 @@ function handleCheckbox (i) {
 function gen_fmt_view (index, hostname, doc) {
     setTimeout(function () {
         var list;
-        var html = '';
         if (hostname == 'www.baidu.cn') {
             list = $("tbody>tr>td.f", doc); // body
         } else if (hostname == 'www.google.cn') {
@@ -216,11 +217,11 @@ function gen_fmt_view (index, hostname, doc) {
         } else if (hostname == 'search.yahoo.com') {
             list = $("div#yschweb>ol>li", doc);
         } else {
-            list = [];
-            html = "<p /><p /><p /><p /><p />\n" +
+            msg = "<p /><p /><p /><p /><p />\n" +
                 "<center>Sorry, " + hostname +
                 " is not currently supported in the " +
                 "Formatted View :(</center>\n";
+            list = [msg];
         }
 
         var fmt_view_doc = $("#fmt-view")[0].contentDocument;
@@ -232,7 +233,14 @@ function gen_fmt_view (index, hostname, doc) {
         Debug.log(hostname + ": " + list.length);
         for (var i = 0; i < list.length; i++) {
             //Debug.log(hostname + ": " + $(list[i]).text());
-            var snippet = $(list[i]).html();
+            var elem = list[i];
+            var snippet;
+            if (typeof elem == 'string') {
+                alert(elem);
+                snippet = elem;
+            } else {
+                snippet = $(elem).html();
+            }
             snippet = snippet
                 .replace(/<(\/?)wbr>/ig, '')
                 .replace(/<(\/?)nobr>/ig, '')

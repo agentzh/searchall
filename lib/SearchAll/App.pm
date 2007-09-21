@@ -7,7 +7,7 @@ use XUL::App::Schema;
 use XUL::App schema {
         xulfile 'searchall.xul' =>
             generated from 'SearchAll::View::Main',
-            includes qw( searchall.js searchall.css );
+            includes qw( searchall.js persist.js searchall.css );
 
         xulfile 'browser-overlay.xul' =>
             generated from 'SearchAll::View::Overlay',
@@ -16,7 +16,7 @@ use XUL::App schema {
         xulfile 'searchall-debug.xul' =>
             generated from 'SearchAll::View::Debug',
             includes qw(
-                searchall.js
+                searchall.js persist.js 
                 Test/More.js Test/Builder.js
                 test.js searchall.css
             );
@@ -25,7 +25,7 @@ use XUL::App schema {
             requires qw(
                 jquery.js JSAN.js
                 datadumper.js Debug.js
-                timer.js dom.js JSON.js prefs.js
+                timer.js dom.js JSON.js
                 progress.js
                 browser.js progress-listener.js
             );
