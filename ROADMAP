@@ -24,19 +24,29 @@ L<jquery.js>, and L<Object::Declare>.
 
 Phase 1 - "Raw" view
 
-This is the current phase.
+This phase is finished.
 
 =item *
 
 Phase 2 - Architecture refactoring
 
+This phase is finished.
+
 =item *
 
 Phase 3 - "Formatted" view
 
+This phase is finished.
+
 =item *
 
 Phase 4 - "Merged" view
+
+This is the current phase.
+
+Phase 5 - "XX" view
+
+Not started
 
 =back
 
@@ -67,7 +77,7 @@ Solve the next-page problem in C<browser> and C<iframe>.
 
 =head2 Status
 
-Underway.
+Done.
 
 =head1 Phase 2: Architecture refactoring
 
@@ -85,6 +95,10 @@ Implement a good SearchAll::Test and SearchAll::Logger.
 
 =back
 
+=head2 Status
+
+Done.
+
 =head1 Phase 3: 'Formatted' view
 
 The goal for this phase is to add a new view (as a tab) called 'Formatted'.
@@ -98,7 +112,7 @@ The list for each site is still displayed in a separate subwindow.
 
 =head2 Status
 
-Not started.
+Done.
 
 =head1 Phase 4: 'Merged' view
 
