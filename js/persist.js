@@ -13,6 +13,7 @@ $(document).ready( function () {
             selectedTabIndex = this.selectedIndex;
             this.setAttribute("lastSelected", this.selectedIndex);
             //alert(selectedTabIndex);
+            $("#search-box").focus();
         },
         false
     );
