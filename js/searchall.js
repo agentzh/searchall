@@ -66,6 +66,11 @@ $("#search-box").keydown( function (e) {
 function prepareUriList (i) {
     var uriLists = $("#url-list-" + i);
     uriLists.change( function (e) {
+        var fmt_view_doc = $("#fmt-view")[0].contentDocument;
+        if (fmt_view_doc) {
+            $(".col-" + i, fmt_view_doc).empty();
+        }
+
         browsers[i].goHome(this.value);
     } );
     uriLists[0].addEventListener(
@@ -77,7 +82,7 @@ function prepareUriList (i) {
             // clear the fmt view's corresponding col
             var fmt_view_doc = $("#fmt-view")[0].contentDocument;
             if (fmt_view_doc) {
-                $(".col-" + i, fmt_view_doc).clear();
+                $(".col-" + i, fmt_view_doc).empty();
             }
 
             browsers[i].goHome(home);
