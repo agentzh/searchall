@@ -236,7 +236,7 @@ function gen_fmt_view (index, hostname, doc) {
                 .replace(/<\/?tr[^>]*>/ig, '')
                 .replace(/<\/?td[^>]*>/ig, '')
             //Debug.log(hostname + snippet);
-
+            //snippet = snippet.replace(/[\w.?=&\/]{45,45}/g, "$1<wbr/>");
             var rows = $(".row", fmt_view_doc);
             if (rows[i] == undefined) {
                 Debug.log("appending row " + i + " for " + hostname);
