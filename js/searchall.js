@@ -70,6 +70,13 @@ function prepareUriList (i) {
         function (e) {
             var home = this.value.replace(/^http:\/\//, '');
             //this.label = this.value = home;
+
+            // clear the fmt view's corresponding col
+            var fmt_view_doc = $("#fmt-view")[0].contentDocument;
+            if (fmt_view_doc) {
+                $(".col-" + i, fmt_view_doc).clear();
+            }
+
             browsers[i].goHome(home);
         },
         true
