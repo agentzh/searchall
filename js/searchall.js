@@ -27,6 +27,8 @@ var host2ind = {};
 //alert($("#search-box").focus());
 $("#search-button").click( function () {
     //browser.url = 'about:blank';
+    $("#fmt-view")[0].reload();
+
     var query = $("#search-box").val();
 
     //timer = timer || new Timer();
@@ -35,6 +37,7 @@ $("#search-button").click( function () {
     myProgress.reset(3);
     progressmeters.show();
     //JJJ(progressmeters[0]);
+
     progressmeters[0].value = 0;
     host2ind[browser0.hostname()] = 0;
     browser0.doSearch(query);
@@ -239,8 +242,11 @@ function gen_fmt_view (index, hostname, doc) {
             //snippet = snippet.replace(/[\w.?=&\/]{45,45}/g, "$1<wbr/>");
             var rows = $(".row", fmt_view_doc);
             if (rows[i] == undefined) {
+                var tbodies = $("#content>tbody", fmt_view_doc);
+                //alert(tbodies[0]);
                 Debug.log("appending row " + i + " for " + hostname);
-                $(rows[0]).parent().append(
+                //alert($(rows[0]).parent()[0].tagName);
+                $(tbodies[0]).parent().append(
                     '<tr class="row">' +
                         '<td class="col-0" />' +
                         '<td class="col-1" />' +
