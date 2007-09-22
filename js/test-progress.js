@@ -29,6 +29,7 @@ function test_progress () {
     like(obj.percent().toString(), /^1/, 'we got 100%!');
 
     // some OT tests:
+    /*
     let c = 0;
     is(typeof document, '');
     for (let m in document) {
@@ -43,6 +44,7 @@ function test_progress () {
     is(browser1.button()[0].toString(), '');
     is($("p", browser1.document())[0].tagName, 'P', 'big P');
     //document.write("hello, world!\n");
+    */
 
     summary();
 }

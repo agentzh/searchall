@@ -63,7 +63,7 @@ Later...
 * Eliminate potential errors in page loading timers.
 * Add a splash window before the main window shows up (splash.js and splash.xul).
 * Add test-timer.js to test the Timer class in timer.js.
-* Implement features as in http://qcon.infoq.com/sanfrancisco/tracks/show_track.jsp?trackOID=70 using SVG.
+* Implement features as in http://www.langreiter.com/exec/yahoo-vs-google.html?q=Perl using SVG.
 
 XUL::App's TODO:
 * Add support for the --profile option, like this:
