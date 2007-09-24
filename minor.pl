@@ -1,4 +1,10 @@
 #!/usr/bin/env perl
+# Usage:
+#  $ ./miner.pl 'http://so.sohu.com/web?query=Perl' 5
+#  $ ./miner.pl 'http://www.baidu.com/s?wd=Perl' 5 gbk
+#  $ ./miner.pl 'http://search.yahoo.com/search?p=Perl' 5
+#  $ ./miner.pl 'http://www.yahoo.cn/s?p=Perl' 5
+
 
 use strict;
 use warnings;
