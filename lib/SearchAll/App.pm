@@ -44,6 +44,7 @@ use XUL::App schema {
             creator is 'The Yahoo! China EEEE team',
             developers are ['Agent Zhang (章亦春)'],
             homepageURL is 'http://cn.yahoo.com',
+            iconURL is 'chrome://searchall/content/logo.png';
             # XXX should disable it for the final release
             #updateURL is 'http://10.62.136.17/repos/loki/agentz/searchall/branches/xulapp/searchall.xpi';
 };

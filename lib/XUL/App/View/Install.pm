@@ -52,6 +52,10 @@ template main => sub {
             if ($xpifile->updateURL) {
                 em::updateURL { $xpifile->updateURL }
             }
+            if ($xpifile->iconURL) {
+                em::iconURL { $xpifile->iconURL }
+            }
+
         }
     }
 };

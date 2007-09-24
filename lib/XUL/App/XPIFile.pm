@@ -9,7 +9,7 @@ use base 'Class::Accessor::Fast';
 __PACKAGE__->mk_accessors(qw{
     id name version targets
     creator contributors developers
-    homepageURL updateURL
+    homepageURL updateURL iconURL
 });
 
 sub new {
