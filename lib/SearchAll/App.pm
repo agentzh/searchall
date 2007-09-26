@@ -26,7 +26,7 @@ use XUL::App schema {
                 jquery.js JSAN.js
                 datadumper.js Debug.js
                 timer.js dom.js JSON.js
-                progress.js fmt-view.js
+                progress.js miner.js fmt-view.js
                 browser.js progress-listener.js
             );
 

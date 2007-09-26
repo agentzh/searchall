@@ -1,4 +1,6 @@
-var patterns = {
+var ForceMining = 1;
+
+var Patterns = {
     'www.baidu.cn'    : "tbody>tr>td.f",
     'www.google.cn'   : "div.g[h2]",
     'www.google.com'  : "div.g[h2]",
@@ -12,12 +14,28 @@ var patterns = {
 function gen_fmt_view (index, hostname, doc) {
     setTimeout(function () {
         var list;
-        pattern = patterns[hostname];
-        if (pattern) {
+        var pattern = Patterns[hostname];
+        if (!ForceMining && pattern) {
             list = $(pattern, doc);
         } else {
             list = [];
+            var count = 5;
+            while (count >= 2) {
+                var patterns = mine_pattern(doc, count, hostname);
+                if (patterns.length > 0) {
+                    pattern = patterns[0];
+                    //pattern = pattern.replace(/.*>([^>]+>[^>]+>[^>]+)$/, "$1");
+
+                    //alert(hostname + ": pattern: " + pattern);
+                    list = $(pattern, doc);
+                    Patterns[hostname] = pattern;
+                    break;
+                } else {
+                    count--;
+                }
+            }
         }
+        //alert("list len: " + list.length);
 
         /*
             msg = "<p /><p /><p /><p /><p />\n" +
@@ -37,6 +55,8 @@ function gen_fmt_view (index, hostname, doc) {
         for (var i = 0; i < list.length; i++) {
             //Debug.log(hostname + ": " + $(list[i]).text());
             var elem = list[i];
+            //if ($(elem).find("a").length == 0) continue;
+            //if ($(elem).find("form").length > 0) continue;
             var snippet;
             if (typeof elem == 'string') {
                 alert(elem);
@@ -76,6 +96,9 @@ function gen_fmt_view (index, hostname, doc) {
         }
         if (! $("#enable-view-" + index)[0].checked) {
             $(".col-" + index, fmt_view_doc).hide();
+        }
+        if (!list.length) {
+            $(".col-" + index, fmt_view_doc).empty();
         }
 
         //showDOM(fmt_view_doc, "DOM");

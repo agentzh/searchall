@@ -85,7 +85,7 @@ sub mine_pattern {
             next;
         }
         $sample{$seq} .= "[$prefix$locator - $seq] " . $elem->as_text . "\n\n";
-        my $category = first { contains($_, $seq) } @categories;
+        my $category = first { $_->[0] && $_->[0] eq $seq } @categories;
         if (!$category) {
             # create a new category:
             push @categories, [$seq];
@@ -112,11 +112,6 @@ sub mine_pattern {
     }
     return unless @hits;
     #warn $prefix . $locator;
-}
-
-sub contains {
-    my ($list, $elem) = @_;
-    return first { $_ eq $elem } @$list;
 }
 
 sub compute_seq {

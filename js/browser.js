@@ -27,21 +27,22 @@ Browser.fn = Browser.prototype = {
         return $(p, c);
     },
     form: function () {
-        var forms = this.find("form[input:text]");
-        if (forms.length == 0)
-            error("No form found!");
-        return forms;
+        var forms = this.find('form[input:text]');
+        this._form = forms[forms.length-1];
+        return this._form;
     },
     textbox: function () {
-        var nodes = $("input[@type=text]", this.form());
+        this.form();
+        var nodes = $("input[@type=text]", this._form);
         if (nodes.length == 0)
             error("textbox not found!");
         return nodes;
     },
     button: function () {
-        var nodes = $("input[@type=submit]", this.form());
+        this.form();
+        var nodes = $("input[@type=submit]", this._form);
         if (nodes.length == 0)
-            nodes = $("button", this.form());
+            nodes = $("button", this._form);
         //if (nodes.length == 0)
             //error("button not found!");
         return nodes;
