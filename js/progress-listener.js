@@ -140,6 +140,7 @@ var myListener = {
                 info(hostname + " loaded.");
                 var doc = progress.DOMWindow.document;
                 showDOM(doc, hostname);
+                Done[ind] = true;
                 gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
                 for (var i = 0; i < browsers.length; i++) {
                     if (browsers[i].document() == doc) {

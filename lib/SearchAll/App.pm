@@ -28,6 +28,7 @@ use XUL::App schema {
                 timer.js dom.js JSON.js
                 progress.js miner.js fmt-view.js
                 browser.js progress-listener.js
+                event-util.js
                 prev-next.js
             );
 
@@ -37,7 +38,7 @@ use XUL::App schema {
         xpifile 'searchall.xpi' =>
             id is 'searchall@yahoo.cn',
             name is 'SearchAll',
-            version is '0.0.10',
+            version is '0.0.11',
             targets {
                 Firefox => ['2.0' => '3.0a5'],
                 Mozilla => ['1.5' => '1.8'],
