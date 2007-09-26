@@ -22,11 +22,14 @@ $(document).ready( function () {
     for (var i = 0; i < 3; i++) {
         selectedURLIndex = $("#url-list-" + i)
             .attr('lastSelected');
+
         if (selectedURLIndex != undefined) {
             var url_list = $("#url-list-" + i)[0];
             url_list.selectedIndex = selectedURLIndex;
+            set_home(i, url_list.value);
+        } else {
+            set_home(i);
         }
-        set_home(i, url_list.value);
     }
 } );
 

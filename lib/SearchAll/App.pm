@@ -38,8 +38,8 @@ use XUL::App schema {
             name is 'SearchAll',
             version is '0.0.9',
             targets {
-                Firefox => ['1.5' => '3.0a5'],
-                Mozilla => ['1.0' => '1.8'],
+                Firefox => ['2.0' => '3.0a5'],
+                Mozilla => ['1.5' => '1.8'],
             },
             creator is 'The Yahoo! China EEEE team',
             developers are ['Agent Zhang (章亦春)'],
