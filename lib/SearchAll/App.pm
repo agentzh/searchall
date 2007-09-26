@@ -28,6 +28,7 @@ use XUL::App schema {
                 timer.js dom.js JSON.js
                 progress.js miner.js fmt-view.js
                 browser.js progress-listener.js
+                prev-next.js
             );
 
         jsfile 'test.js' =>

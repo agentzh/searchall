@@ -8,7 +8,7 @@
 }
 
 #search-box {
-    max-width: 35em;
+    max-width: 25em;
     min-width: 5em;
 }
 
@@ -34,6 +34,10 @@
 .icon-button {
      font-size: 10px;
      border : 1px solid #eee;
+}
+
+tab {
+    padding: 5px 1em 5px 1em;
 }
 
 /* XXX put the following into test.css */

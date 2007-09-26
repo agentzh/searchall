@@ -74,10 +74,10 @@ $op_table = {
     setup => sub {
         gen_manifest($app_name);
         shell("cp js/*.js tmp/content/");
-        shell("cp icon/*.png tmp/content/");
-        shell("cp icon/*.gif tmp/content/");
-        shell("cp icon/*.jpg tmp/content/");
-        shell("cp icon/*.jpeg tmp/content/");
+        shell("cp icons/*.png tmp/content/");
+        shell("cp icons/*.gif tmp/content/");
+        shell("cp icons/*.jpg tmp/content/");
+        shell("cp icons/*.jpeg tmp/content/");
         shell("cp js/*.html tmp/content/");
         shell("cp css/*.css tmp/content/");
         shell("cp -r js/thirdparty/* tmp/content/");
@@ -106,6 +106,8 @@ $op_table = {
         my $jar_dir = 'tmp/jar';
 	shell("rm tmp/*.xpi tmp/*.jar");
 	shell("rm -rf $xpi_dir");
+	shell("mkdir -p $xpi_dir/chrome/icons/default");
+	shell("cp icons/default/* $xpi_dir/chrome/icons/default/");
 	shell("mkdir -p $xpi_dir/chrome");
 	shell("rm -rf $jar_dir");
 	shell("mkdir -p $jar_dir/content");

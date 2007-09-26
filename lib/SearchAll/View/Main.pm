@@ -20,7 +20,7 @@ template main => sub {
     show 'header';
     window {
         attr {
-            id => "search-all-win",
+            id => "searchall",
             title => "SearchAll",
             xmlns => $::XUL_NAME_SPACE,
             #'xmlns:html' => $::HTML_NAME_SPACE,
@@ -44,9 +44,9 @@ template searchall => sub {
 };
 
 template search_bar => sub {
-    stack {
+    box {
         hbox {
-            attr { pack => 'center' }
+            attr { pack => 'center', flex => 1 }
             textbox {
                 attr {
                     id => 'search-box',
@@ -57,7 +57,8 @@ template search_bar => sub {
             button {
                 attr {
                     id => 'search-button',
-                    label => 'Search',
+                    label => ' Search',
+                    image => 'application_lightning.png',
                 }
             }
         }
@@ -138,13 +139,15 @@ template results => sub {
             tab {
                 attr {
                     id => 'view-tab-0',
-                    label => 'Raw View',
+                    label => ' Original',
+                    image => 'application_tile_horizontal.png',
                 }
             }
             tab {
                 attr {
                     id => 'view-tab-1',
-                    label => 'Formatted View',
+                    label => ' Formatted',
+                    image => 'application_view_columns.png',
                 }
             }
             #tab { attr { label => 'Merged View' } }
