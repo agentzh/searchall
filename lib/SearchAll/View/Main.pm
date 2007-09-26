@@ -44,20 +44,28 @@ template searchall => sub {
 };
 
 template search_bar => sub {
-    hbox {
-        attr { pack => 'center' }
-        textbox {
-            attr {
-                id => 'search-box',
-                flex => 1,
-                #maxlength => 256,
+    stack {
+        hbox {
+            attr { pack => 'center' }
+            textbox {
+                attr {
+                    id => 'search-box',
+                    flex => 1,
+                    #maxlength => 256,
+                }
+            }
+            button {
+                attr {
+                    id => 'search-button',
+                    label => 'Search',
+                }
             }
         }
-        button {
-            attr {
-                id => 'search-button',
-                label => 'Search',
-            }
+        hbox {
+            attr { style => 'padding-right: 1em;' }
+            spacer { attr { flex => 1 } }
+            button { attr { id => 'prev-button', class => 'icon-button', image => 'arrow_left.png' } }
+            button { attr { id => 'next-button', class => 'icon-button', image => 'arrow_right.png' } }
         }
     }
 };

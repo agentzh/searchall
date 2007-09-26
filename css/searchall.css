@@ -31,6 +31,11 @@
     border-width: 1px;
 }
 
+.icon-button {
+     font-size: 10px;
+     border : 1px solid #eee;
+}
+
 /* XXX put the following into test.css */
 #test {
     background-color: white;
