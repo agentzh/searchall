@@ -51,7 +51,7 @@ function mine_node (node, count, prefix) {
     }
     //alert("elems: " + elems.length);
     //if (Hostname == 'www.yisou.com')
-        info(Hostname + ": Categories:\n" + Dumper(categories));
+        //info(Hostname + ": Categories:\n" + Dumper(categories));
     var retvals = [];
     for (var i = 0; i < elems.length; i++) {
         var elem = elems[i];
@@ -73,7 +73,7 @@ function mine_node (node, count, prefix) {
         var pattern = genPattern(matched_elems[seq]);
         retvals.push(pattern);
         info(Hostname + ": pattern:\n" + pattern);
-        info(Hostname + ": sample:\n" + Dumper(samples[seq]));
+        //info(Hostname + ": sample:\n" + Dumper(samples[seq]));
 
     }
     return retvals;
