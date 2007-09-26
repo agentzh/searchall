@@ -73,7 +73,7 @@ function mine_node (node, count, prefix) {
         var pattern = genPattern(matched_elems[seq]);
         retvals.push(pattern);
         info(Hostname + ": pattern:\n" + pattern);
-        info(Hostname + ": sample:\n" + Dumper(samples[seq]));
+        //info(Hostname + ": sample:\n" + Dumper(samples[seq]));
 
     }
     return retvals;

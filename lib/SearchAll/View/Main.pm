@@ -171,7 +171,7 @@ template raw_view => sub {
             my $url = 'http://' . $URLs[$_];
             browser {
                 attr {
-                    src => $url,
+                    src => 'about:blank',
                     flex => 1,
                     id => "browser-$_",
                     type => 'content-primary',

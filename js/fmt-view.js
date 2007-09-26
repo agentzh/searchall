@@ -1,5 +1,3 @@
-var ForceMining = 1;
-
 var Patterns = {
     'www.baidu.cn'    : "tbody>tr>td.f",
     'www.google.cn'   : "div.g[h2]",
@@ -11,11 +9,11 @@ var Patterns = {
     'search.yahoo.com': "div#yschweb>ol>li"
 };
 
-function gen_fmt_view (index, hostname, doc) {
+function gen_fmt_view (index, hostname, doc, forceMining) {
     setTimeout(function () {
         var list;
         var pattern = Patterns[hostname];
-        if (!ForceMining && pattern) {
+        if (!forceMining && pattern) {
             list = $(pattern, doc);
         } else {
             list = [];

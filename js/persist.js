@@ -25,8 +25,15 @@ $(document).ready( function () {
         if (selectedURLIndex != undefined) {
             var url_list = $("#url-list-" + i)[0];
             url_list.selectedIndex = selectedURLIndex;
-            browsers[i].goHome(url_list.value);
         }
+        set_home(i, url_list.value);
     }
 } );
+
+function set_home (i, home) {
+    setTimeout(function () { 
+        browsers[i].goHome(home);
+        $("#search-box").focus();
+    }, 500);
+}
 
