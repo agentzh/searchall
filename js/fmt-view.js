@@ -72,6 +72,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
                 .replace(/<\/?tbody[^>]*>/ig, '')
                 .replace(/<\/?tr[^>]*>/ig, '')
                 .replace(/<\/?td[^>]*>/ig, '')
+                .replace(/<a /ig, '<a target="_blank" ');
             //Debug.log(hostname + snippet);
             //snippet = snippet.replace(/[\w.?=&\/]{45,45}/g, "$1<wbr/>");
             var rows = $(".row", fmt_view_doc);

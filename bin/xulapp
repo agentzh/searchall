@@ -59,6 +59,11 @@ while (my ($file, $obj) = each %$files) {
 #$XUL::App::ID = $XUL::App::ID;
 my $op_table;
 $op_table = {
+    overlay => sub {
+        $op_table->{setup}->();
+        shell("firefox -P dev2");
+    },
+
     register => sub {
         for my $meta_dir (glob "~/.mozilla/firefox/*/extensions") {
             register_ext($meta_dir, "tmp/");

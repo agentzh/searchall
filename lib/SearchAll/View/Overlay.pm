@@ -58,12 +58,13 @@ template main => sub {
                 attr { id => "searchall-toolbar" }
                 textbox {
                     attr {
-                        id => "searchall-toolbar-searchbox"
+                        id => "searchall-searchbox"
                     }
                 }
                 button {
                     attr {
-                        image => "chrome://$XUL::App::APP_NAME/content/logo.png"
+                        #image => "chrome://$XUL::App::APP_NAME/content/logo.png"
+                        label => 'SearchAll',
                     }
                 }
             }
