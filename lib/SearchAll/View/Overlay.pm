@@ -51,6 +51,34 @@ template main => sub {
                 }
             }
         }
+
+        toolbox {
+            attr { id => "navigator-toolbox" }
+            toolbar {
+                attr { id => "findfile_toolbar" }
+                label {
+                    attr {
+                        control => "findfile_filename",
+                        value => "Search for files named:",
+                    }
+                }
+                textbox {
+                    attr { id => "findfile_filename" }
+                }
+                label {
+                    attr {
+                        control => "findfile_dir",
+                        value => "Directory:",
+                    }
+                }
+                textbox {
+                    attr {  id => "findfile_dir" }
+                }
+                button {
+                    attr { label => "Browse..." }
+                }
+            }
+        }
     }
 };
 

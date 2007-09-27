@@ -11,7 +11,7 @@ my @URLs = qw(
     www.baidu.cn
     www.yahoo.cn
     so.sohu.com
-    www.google.com
+    www.google.com/en
     search.yahoo.com
     search.cpan.org
 );
