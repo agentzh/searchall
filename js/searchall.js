@@ -72,7 +72,8 @@ function prepareUriList (i) {
             $(".col-" + i, fmt_view_doc).empty();
         }
 
-        browsers[i].goHome(this.value);
+        AutoSearch[i] = true;
+        set_home(i, this.value);
     } );
     uriLists[0].addEventListener(
         'command',
@@ -87,7 +88,8 @@ function prepareUriList (i) {
                 $(".col-" + i, fmt_view_doc).empty();
             }
 
-            browsers[i].goHome(home);
+            AutoSearch[i] = true;
+            set_home(i, home);
         },
         true
     );
