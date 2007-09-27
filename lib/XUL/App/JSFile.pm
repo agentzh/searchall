@@ -12,7 +12,7 @@ sub new {
     my $proto = shift;
     my $self = $proto->SUPER::new(@_);
     my $list = $self->prereqs;
-    if (!ref $list) { $self->requires([$list]) }
+    if (!ref $list) { $self->prereqs([$list]) }
     return $self;
 }
 

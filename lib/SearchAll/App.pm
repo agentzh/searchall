@@ -7,10 +7,11 @@ use XUL::App::Schema;
 use XUL::App schema {
         xulfile 'searchall.xul' =>
             generated from 'SearchAll::View::Main',
-            includes qw( searchall.js persist.js searchall.css );
+            includes qw( searchall.js searchall.css );
 
         xulfile 'browser-overlay.xul' =>
             generated from 'SearchAll::View::Overlay',
+            includes qw( toolbar.js ),
             overlays 'chrome://browser/content/browser.xul';
 
         xulfile 'searchall-debug.xul' =>
@@ -27,10 +28,14 @@ use XUL::App schema {
                 datadumper.js Debug.js
                 timer.js dom.js JSON.js
                 progress.js miner.js fmt-view.js
+                persist.js
                 browser.js progress-listener.js
                 event-util.js
                 prev-next.js
             );
+
+        jsfile 'toolbar.js' =>
+            requires qw( jquery.js );
 
         jsfile 'test.js' =>
             requires qw( test-browser.js test-progress.js );

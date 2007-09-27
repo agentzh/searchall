@@ -63,12 +63,18 @@ sub go {
     }
     my $last_tag_pat = qr{ </ [^>]+ > \s* $}xs;
     for my $file (@jsfiles) {
-        check_js_file($file);
+        if ($file !~ /^\w+:\/\//) {
+            check_js_file($file);
+            $file = "chrome://$XUL::App::APP_NAME/content/$file";
+        }
         $xml =~ s{$last_tag_pat}{<script src="$file" type="application/javascript;version=1.7"/>\n$&};
     }
     my $first_tag_pat = qr{ .* <\? [^>]+ \?> }xs;
     for my $file (reverse @cssfiles) {
-        check_css_file($file);
+        if ($file !~ /^\w+:\/\//) {
+            check_css_file($file);
+            $file = "chrome://$XUL::App::APP_NAME/content/$file";
+        }
         $xml =~ s{$first_tag_pat}{$&\n<?xml-stylesheet href="$file" type="text/css"?>};
     }
     my $path = "tmp/content/$file";
@@ -90,6 +96,7 @@ sub find_all_prereqs {
     return () unless $obj;
     my $prereqs = $obj->prereqs;
     ## $prereqs
+    if ($prereqs and !ref $prereqs) { $prereqs = [$prereqs]; }
     if ($prereqs and @$prereqs) {
         return map {
             find_all_prereqs($_, $visited), $_

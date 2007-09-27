@@ -36,8 +36,22 @@ our @EXPORT = qw(
 );
 
 sub overlays ($) { overlays is @_; }
-sub includes (@) { includes are @_; }
-sub requires (@) { requires are @_; }
+sub includes (@) {
+    if (@_ == 1) {
+        includes is $_[0];
+    } else {
+        includes are @_;
+    }
+}
+
+sub requires (@) {
+    if (@_ == 1) {
+        requires is $_[0];
+    } else {
+        requires are @_;
+    }
+}
+
 sub targets ($) { targets are @_; }
 
 sub schema (&) {

@@ -10,6 +10,17 @@ use File::Spec;
 use File::Slurp;
 use Text::Diff;
 
+my $operation;
+BEGIN {
+    $operation = lc(shift);
+    if (!$operation) {
+        die "No operation specified. See -h\n";
+    }
+    if ($operation =~ /overlay|debug/) {
+        $XUL::App::APP_NAME .= '_debug';
+    }
+}
+
 use XUL::App;
 my ($file) = glob "lib/*/App.pm";
 require $file;
@@ -17,12 +28,12 @@ if ($@) {
     die "Can't load $file: $!";
 }
 
-my $operation = lc(shift);
-if (!$operation) {
-    die "No operation specified. See -h\n";
+if ($operation =~ /overlay|debug/) {
+    $XUL::App::APP_NAME .= '_debug';
 }
 
-if ($operation =~ /debug|bundle/i) {
+
+if ($operation =~ /debug|bundle|overlay/i) {
     shell("rm -rf tmp");
     die "Cannot remove tmp/" if -d 'tmp';
 }
@@ -32,15 +43,12 @@ mkdir 'tmp/content';
 
 my $id = $XUL::App::ID;
 my $app_name;
-if ($operation eq 'debug') {
-    $XUL::App::APP_NAME .= '_debug';
-}
 $app_name = $XUL::App::APP_NAME;
 
 (my $package = $file) =~ s/.*lib\/|\.pm$//g;
 $package =~ s/\//::/g;
 #warn $package;
-#warn $XUL::App::APP_NAME;
+warn $XUL::App::APP_NAME;
 
 ### files: $package->FILES
 my @overlay;

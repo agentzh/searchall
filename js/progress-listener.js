@@ -1,9 +1,5 @@
 const WPL = Components.interfaces.nsIWebProgressListener;
 
-var myTimer = new Timer();
-var Replies = {};
-var myProgress = new Progress(3);
-
 function registerMyListener (browser) {
     browser.addProgressListener(myListener, WPL.NOTIFY_STATE_DOCUMENT);
 }
@@ -60,6 +56,14 @@ var myListener = {
         throw Components.results.NS_NOINTERFACE;
     },
     onStateChange: function (progress, request, flag, status) {
+    /*
+        var myself = 'chrome://searchall/content/searchall.xul';
+        if (top.location != myself) {
+            alert("window.location: " + window.location);
+            alert("window.parent.location: " + window.opener.location);
+            //top.location = top.parent;
+        }
+    */
         //alert("hi");
         if (flag & WPL.STATE_START) {
         //aRequest.QueryInterface(Components.interfaces.nsIChannel);
@@ -74,7 +78,9 @@ var myListener = {
             try {
                 hostname = progress.DOMWindow.window.location.hostname;
             } catch (e) {
-                hostname = '';
+                //error(e);
+                //alert(progress.DOMWindow.window.parent.getAttribute(homePage));
+                //hostname = '';
             }
             var doc = progress.DOMWindow.document;
             var ind = host2ind[hostname];
@@ -82,6 +88,7 @@ var myListener = {
             if (!Replies[hostname]) Replies[hostname] = 0;
             num = ++Replies[hostname];
             if (ind == undefined) {
+                //alert("ind undefined!");
                 if (num == 4) {
                     var progressmeter = $("#status-progress");
                     progressmeter[0].value = 100;
@@ -104,7 +111,6 @@ var myListener = {
                 $("#search-box").focus();
                 return;
             }
-
 
             if (num == 1 && myTimer.isTiming(hostname)) {
                 // we start timing in Browser.doSearch
@@ -137,6 +143,18 @@ var myListener = {
             // Ensure we get the focus...
             if (flag & WPL.STATE_IS_WINDOW) {
                 //alert(hostname);
+                if (AutoSearch-- > 0) {
+                    //alert("Clicking...");
+                    //host2ind[hostname] = ind;
+                    var query = $("#search-box").val();
+                    ind = host2ind[hostname];
+                    info("Clicking " + ind + " for host " + hostname);
+                    browsers[ind].doSearch(query);
+                    $("#search-button")[0].click();
+                    //$("#search-box").focus();
+                    return;
+                }
+
                 info(hostname + " loaded.");
                 var doc = progress.DOMWindow.document;
                 showDOM(doc, hostname);

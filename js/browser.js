@@ -73,7 +73,17 @@ Browser.fn = Browser.prototype = {
         this.textbox().val(query);
         this.textbox().blur();
         myTimer.start(this.hostname());
+        //delete top.location;
+        top.watch("location", watchAssignment);
+        top.location.watch("href", watchAssignment);
         this.button().click();
     },
 };
+
+function watchAssignment (id, oldval, newval) {
+    //alert("o." + id + " changed from "
+        //+ oldval + " to " + newval);
+    throw("abc");
+    return false;
+}
 
