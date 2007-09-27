@@ -55,27 +55,16 @@ template main => sub {
         toolbox {
             attr { id => "navigator-toolbox" }
             toolbar {
-                attr { id => "findfile_toolbar" }
-                label {
-                    attr {
-                        control => "findfile_filename",
-                        value => "Search for files named:",
-                    }
-                }
+                attr { id => "searchall-toolbar" }
                 textbox {
-                    attr { id => "findfile_filename" }
-                }
-                label {
                     attr {
-                        control => "findfile_dir",
-                        value => "Directory:",
+                        id => "searchall-toolbar-searchbox"
                     }
-                }
-                textbox {
-                    attr {  id => "findfile_dir" }
                 }
                 button {
-                    attr { label => "Browse..." }
+                    attr {
+                        image => "chrome://$XUL::App::APP_NAME/content/logo.png"
+                    }
                 }
             }
         }
