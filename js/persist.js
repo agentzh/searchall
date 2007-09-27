@@ -3,9 +3,10 @@ var selectedURLIndex, selectedTabIndex;
 var myTimer = new Timer();
 var Replies = {};
 var myProgress = new Progress(3);
+var prefs;
 
 $(document).ready( function () {
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+    prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
     prefs = prefs.getBranch("extensions.searchall.");
     var query;
     // we have to use getComplexValue to read UTF-8 strings:
@@ -21,7 +22,10 @@ $(document).ready( function () {
         AutoSearch = [true, true, true];
     }
 
-    selectedTabIndex = $("#view-tabs").attr("lastSelected");
+    try {
+        selectedTabIndex = prefs.getIntPref('tab.lastSelected');
+        //$("#view-tabs").attr("lastSelected");
+    } catch (e) { error(e); }
     if (selectedTabIndex == undefined) {
         selectedTabIndex = 0;
     }
@@ -32,7 +36,12 @@ $(document).ready( function () {
         'command',
         function () {
             selectedTabIndex = this.selectedIndex;
-            this.setAttribute("lastSelected", this.selectedIndex);
+            //this.setAttribute("lastSelected", this.selectedIndex);
+            try {
+                prefs.setIntPref('tab.lastSelected', this.selectedIndex);
+            } catch (e) {
+                error(e);
+            }
             //alert(selectedTabIndex);
             $("#search-box").focus();
         },
@@ -46,9 +55,9 @@ $(document).ready( function () {
     //$("#view-tab-" + selectedTab)[0].selected = true;
     //alert($("#url-list-0").attr('lastSelected'));
     for (var i = 0; i < 3; i++) {
-        selectedURLIndex = $("#url-list-" + i)
-            .attr('lastSelected');
-
+        try {
+            selectedURLIndex = prefs.getIntPref('url.lastSelected.' + i);
+        } catch (e) { error(e); }
         if (selectedURLIndex != undefined) {
             var url_list = $("#url-list-" + i)[0];
             url_list.selectedIndex = selectedURLIndex;

@@ -78,7 +78,9 @@ function prepareUriList (i) {
     uriLists[0].addEventListener(
         'command',
         function (e) {
-            this.setAttribute('lastSelected', this.selectedIndex);
+            try {
+                prefs.setIntPref('url.lastSelected.' + i, this.selectedIndex);
+            } catch (e) { error(e); }
             var home = this.value.replace(/^http:\/\//, '');
             //this.label = this.value = home;
 
