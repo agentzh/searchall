@@ -49,6 +49,7 @@ template main => sub {
                 textbox {
                     attr {
                         id => "searchall-searchbox",
+                        onkeydown => "handleKeydown(event, this);",
                     }
                 }
                 button {
@@ -78,17 +79,18 @@ template main => sub {
                         }, 3500 );
                     }
                 }
-                \$("#searchall-searchbox").keydown( function (e) {
+                function handleKeydown (e, obj) {
+                    //alert("Hey!");
                     if (e.keyCode == 13) {
-                        alert("Found enter key!");
-                        toSearchAll(this.value);
+                        //alert("Found enter key!");
+                        toSearchAll(obj.value);
                         return false;
                     } else {
                         //info("Got key: " + e.keyCode);
                     }
                     //alert(e.keyCode + " pressed!");
-                    //return false;
-                } );
+                    return true;
+                }
             }
         }
     }
