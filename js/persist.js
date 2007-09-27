@@ -1,4 +1,4 @@
-var AutoSearch = 0;
+var AutoSearch = [];
 var selectedURLIndex, selectedTabIndex;
 var myTimer = new Timer();
 var Replies = {};
@@ -18,7 +18,7 @@ $(document).ready( function () {
         //alert("Found query: " + query);
         $("#search-box")[0].value = query;
         prefs.setCharPref('query', '');
-        AutoSearch = 3;
+        AutoSearch = [true, true, true];
     }
 
     selectedTabIndex = $("#view-tabs").attr("lastSelected");

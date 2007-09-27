@@ -7,9 +7,9 @@ use Template::Declare::Tags 'XUL';
 
 my @URLs = qw(
     www.google.cn
-    www.yisou.com
-    www.baidu.cn
     www.yahoo.cn
+    www.baidu.cn
+    www.yisou.com
     so.sohu.com
     www.google.com/en
     search.yahoo.com

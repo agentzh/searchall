@@ -143,14 +143,15 @@ var myListener = {
             // Ensure we get the focus...
             if (flag & WPL.STATE_IS_WINDOW) {
                 //alert(hostname);
-                if (AutoSearch-- > 0) {
+                if (AutoSearch[ind]) {
+                    AutoSearch[ind] = false;
                     //alert("Clicking...");
                     //host2ind[hostname] = ind;
                     var query = $("#search-box").val();
                     ind = host2ind[hostname];
                     info("Clicking " + ind + " for host " + hostname);
                     browsers[ind].doSearch(query);
-                    $("#search-button")[0].click();
+                    //$("#search-button")[0].click();
                     //$("#search-box").focus();
                     return;
                 }
