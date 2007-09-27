@@ -32,7 +32,6 @@ template main => sub {
                     id => "tb-searchall-open",
                     image => "chrome://$XUL::App::APP_NAME/content/logo.png",
                     oncommand => "toSearchAll()",
-                    onclick => "toSearchAll()",
                     label => "SearchAll",
                     orient => 'vertical',
                     tooltiptext => "SearchAll",
