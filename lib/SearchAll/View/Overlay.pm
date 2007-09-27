@@ -19,7 +19,7 @@ template main => sub {
                 function toSearchAll () {
                     toOpenWindowByType(
                         'agentzh:searchall',
-                        'chrome://$XUL::App::APP_NAME/content/searchall.xul'
+                        "chrome://$XUL::App::APP_NAME/content/searchall.xul"
                     );
                 }
             }
@@ -30,9 +30,11 @@ template main => sub {
             toolbarbutton {
                 attr {
                     id => "tb-searchall-open",
+                    image => "chrome://$XUL::App::APP_NAME/content/logo.png",
                     oncommand => "toSearchAll()",
-                    class => "toolbarbutton-1",
+                    onclick => "toSearchAll()",
                     label => "SearchAll",
+                    orient => 'vertical',
                     tooltiptext => "SearchAll",
                 }
             }
