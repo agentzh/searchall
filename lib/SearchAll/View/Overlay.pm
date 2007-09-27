@@ -75,7 +75,7 @@ template main => sub {
                     if (query != '') {
                         setTimeout( function () {
                             \$("#search-box", win.document)[0].value = query;
-                            \$("#search-button", win.document).click();
+                            \$("#search-button", win.document)[0].click();
                         }, 3500 );
                     }
                 }
