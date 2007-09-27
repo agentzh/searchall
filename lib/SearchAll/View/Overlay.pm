@@ -63,7 +63,7 @@ template main => sub {
                 }
                 button {
                     attr {
-                        #image => "chrome://$XUL::App::APP_NAME/content/logo.png"
+                        image => "chrome://$XUL::App::APP_NAME/content/logo-small.png",
                         label => 'SearchAll',
                     }
                 }
