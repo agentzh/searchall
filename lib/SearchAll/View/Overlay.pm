@@ -14,17 +14,7 @@ template main => sub {
             id => "SearchallBrowserToolbar",
             xmlns => $::XUL_NAME_SPACE,
         }
-        script {
-            qq{
-                function toSearchAll () {
-                    toOpenWindowByType(
-                        'agentzh:searchall',
-                        "chrome://$XUL::App::APP_NAME/content/searchall.xul"
-                    );
-                }
-            }
-        }
-
+        script { attr { src => "chrome://$XUL::App::APP_NAME/content/jquery.js" } }
         toolbarpalette {
             attr { id => "BrowserToolbarPalette" }
             toolbarbutton {
@@ -58,15 +48,47 @@ template main => sub {
                 attr { id => "searchall-toolbar" }
                 textbox {
                     attr {
-                        id => "searchall-searchbox"
+                        id => "searchall-searchbox",
                     }
                 }
                 button {
                     attr {
+                        id => 'searchall-button',
                         image => "chrome://$XUL::App::APP_NAME/content/logo-small.png",
                         label => 'SearchAll',
+                        style => 'font-size: 15px;',
+                        oncommand => "toSearchAll(document.getElementById('searchall-searchbox').value);",
                     }
                 }
+            }
+        }
+
+        script {
+            qq{
+                function toSearchAll (query) {
+                    if (query == undefined)
+                        query = "";
+                    var uri = "chrome://$XUL::App::APP_NAME/content/searchall.xul";
+                    var winopts = "chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar";
+                    var win = window.open(uri, "_blank", winopts);
+                    if (query != '') {
+                        setTimeout( function () {
+                            \$("#search-box", win.document)[0].value = query;
+                            \$("#search-button", win.document).click();
+                        }, 3500 );
+                    }
+                }
+                \$("#searchall-searchbox").keydown( function (e) {
+                    if (e.keyCode == 13) {
+                        alert("Found enter key!");
+                        toSearchAll(this.value);
+                        return false;
+                    } else {
+                        //info("Got key: " + e.keyCode);
+                    }
+                    //alert(e.keyCode + " pressed!");
+                    //return false;
+                } );
             }
         }
     }

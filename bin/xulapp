@@ -61,7 +61,7 @@ my $op_table;
 $op_table = {
     overlay => sub {
         $op_table->{setup}->();
-        shell("firefox -P dev2");
+        shell("firefox -jsconsole -P dev2");
     },
 
     register => sub {
