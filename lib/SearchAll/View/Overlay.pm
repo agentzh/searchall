@@ -40,6 +40,7 @@ template main => sub {
                     id => "tb-searchall-box",
                     align => "center",
                     persist => "width",
+                    onclick => 'this.firstChild.focus()',
                 }
                 # ...
                 textbox {

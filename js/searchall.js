@@ -72,7 +72,10 @@ function prepareUriList (i) {
             $(".col-" + i, fmt_view_doc).empty();
         }
 
-        AutoSearch[i] = true;
+        var query = $("#search-box").val();
+        //alert(query);
+        if (query)
+            AutoSearch[i] = true;
         set_home(i, this.value);
     } );
     uriLists[0].addEventListener(
@@ -90,7 +93,10 @@ function prepareUriList (i) {
                 $(".col-" + i, fmt_view_doc).empty();
             }
 
-            AutoSearch[i] = true;
+            var query = $("#search-box").val();
+            //alert(query);
+            if (query)
+                AutoSearch[i] = true;
             set_home(i, home);
         },
         true

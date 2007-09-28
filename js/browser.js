@@ -28,7 +28,7 @@ Browser.fn = Browser.prototype = {
     },
     form: function () {
         var forms = this.find('form[input:text]');
-        this._form = forms[forms.length-1];
+        this._form = forms[0];
         return this._form;
     },
     textbox: function () {
@@ -76,7 +76,7 @@ Browser.fn = Browser.prototype = {
         //delete top.location;
         top.watch("location", watchAssignment);
         top.location.watch("href", watchAssignment);
-        this.button().click();
+        this.button()[0].click();
     },
 };
 

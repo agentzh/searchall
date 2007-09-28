@@ -67,6 +67,20 @@ $(document).ready( function () {
             set_home(i);
         }
     }
+
+
+    var listener = function (evt) {
+        //alert("Received from web page: " +
+            //evt.target.getAttribute("query"));
+        var query = evt.target.getAttribute('query');
+        if (query != undefined && query != '') {
+            $("#search-box")[0].value = query;
+            $("#search-button")[0].click();
+        }
+    };
+    document.addEventListener("SearchAllEvent", listener, false, true);
+
+
 } );
 
 function set_home (i, home) {
