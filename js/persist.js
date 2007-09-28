@@ -37,8 +37,9 @@ $(document).ready( function () {
         function () {
             selectedTabIndex = this.selectedIndex;
             //this.setAttribute("lastSelected", this.selectedIndex);
+            info("Setting tab.lastSelected to " + selectedTabIndex);
             try {
-                prefs.setIntPref('tab.lastSelected', this.selectedIndex);
+                prefs.setIntPref('tab.lastSelected', selectedTabIndex);
             } catch (e) {
                 error(e);
             }

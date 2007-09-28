@@ -18,14 +18,44 @@ template main => sub {
         }
         toolbarpalette {
             attr { id => "BrowserToolbarPalette" }
-            toolbarbutton {
+            toolbaritem {
                 attr {
-                    id => "tb-searchall-open",
-                    image => "chrome://$XUL::App::APP_NAME/content/logo.png",
-                    oncommand => "toSearchAll('$URI')",
-                    label => "SearchAll",
-                    orient => 'vertical',
-                    tooltiptext => "SearchAll",
+                    id => "tb-searchall-new",
+                    align => "center",
+                    persist => "width",
+                    crop => 'end',
+                }
+                toolbarbutton {
+                    attr {
+                        id => "tb-searchall-button",
+                        image => "chrome://$XUL::App::APP_NAME/content/logo-small.png",
+                        oncommand => "toOpenWindowByType('searchall:win', '$URI')",
+                        #label => "SearchAll",
+                        tooltiptext => "SearchAll",
+                    }
+                }
+            }
+            toolbaritem {
+                attr {
+                    id => "tb-searchall-box",
+                    align => "center",
+                    persist => "width",
+                }
+                # ...
+                textbox {
+                    attr {
+                        id => "searchall-searchbox",
+                        onkeydown => "handleKeydown('$URI', event, this);",
+                    }
+                }
+                button {
+                    attr {
+                        id => 'searchall-button',
+                        image => "chrome://$XUL::App::APP_NAME/content/logo-small.png",
+                        label => 'SearchAll',
+                        style => 'font-size: 15px;',
+                        oncommand => "toSearchAll('$URI', document.getElementById('searchall-searchbox').value, event);",
+                    }
                 }
             }
         }
@@ -44,23 +74,18 @@ template main => sub {
         }
 
         toolbox {
-            attr { id => "navigator-toolbox" }
+            attr { id => "navigator-toolbox", crop => 'end' }
             toolbar {
-                attr { id => "searchall-toolbar" }
-                textbox {
-                    attr {
-                        id => "searchall-searchbox",
-                        onkeydown => "handleKeydown('$URI', event, this);",
-                    }
-                }
-                button {
-                    attr {
-                        id => 'searchall-button',
-                        image => "chrome://$XUL::App::APP_NAME/content/logo-small.png",
-                        label => 'SearchAll',
-                        style => 'font-size: 15px;',
-                        oncommand => "toSearchAll('$URI', document.getElementById('searchall-searchbox').value, event);",
-                    }
+                attr {
+                    id => "searchall-toolbar",
+                    iconsize => 'small',
+                    #customindex => 1,
+                    defaultset => 'tb-searchall-new,tb-searchall-box',
+                    customizable => 'true',
+                    context => 'toolbar-context-menu',
+                    toolbarname => 'SearchAll Toolbar',
+                    crop => 'end',
+                    persist => 'collapsed mode currentset',
                 }
             }
         }
