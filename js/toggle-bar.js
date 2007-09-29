@@ -12,9 +12,10 @@ function onMouseOver (e) {
     //info("prev-button: " + $("#prev-button")[0].boxObject.x);
     if (isToolbarHidden) {
         onToolbarArea = (
-            e.clientY < toolbarHeight/3*2 &&
-            e.clientX > navigator.boxObject.x + 5 &&
-            e.clientX < document.getElementById('prev-button').boxObject.x - 5);
+            e.clientY < toolbarHeight/3*2
+            //&& e.clientX > navigator.boxObject.x + 5
+            //&& e.clientX < document.getElementById('prev-button').boxObject.x - 5
+            );
     } else {
         onToolbarArea = (e.clientY < toolbarHeight);
     }
@@ -77,6 +78,7 @@ $(document).ready(function () {
         );
 
         $("#panel").mouseover(onMouseOver);
+        $("#search-bar").hide();
     }
 });
 
