@@ -8,7 +8,7 @@ use Template::Declare::Tags 'XUL';
 # This is the overlay that adds a "SearchAll"
 # button to the toolbar palette.
 
-our $URI = "chrome://$XUL::App::APP_NAME/content/searchall.xul";
+our $URI = "chrome://$XUL::App::APP_NAME/content/searchall-page.xul";
 
 template main => sub {
     overlay {

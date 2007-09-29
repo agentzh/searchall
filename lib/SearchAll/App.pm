@@ -9,6 +9,10 @@ use XUL::App schema {
             generated from 'SearchAll::View::Main',
             includes qw( searchall.js searchall.css );
 
+        xulfile 'searchall-page.xul' =>
+            generated from 'SearchAll::View::Page',
+            includes qw( searchall.js searchall.css );
+
         xulfile 'browser-overlay.xul' =>
             generated from 'SearchAll::View::Overlay',
             includes qw( toolbar.js ),
@@ -31,7 +35,7 @@ use XUL::App schema {
                 persist.js
                 browser.js progress-listener.js
                 event-util.js
-                prev-next.js
+                prev-next.js toggle-bar.js
             );
 
         jsfile 'toolbar.js' =>

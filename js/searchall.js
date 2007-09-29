@@ -54,7 +54,7 @@ $("#search-button").click( function () {
 $("#search-box").keydown( function (e) {
     if (e.keyCode == 13) {
         //alert("Found enter key!");
-        $("#search-button").click();
+        $("#search-button")[0].click();
         return false;
     } else {
         //info("Got key: " + e.keyCode);
@@ -205,6 +205,8 @@ function handleCheckbox (i) {
 
 }
 
+var Toggle = false;
+
 $(window).ready( function () {
     for (var i = 0; i < 3; i++) {
         handleCheckbox(i);
@@ -231,5 +233,7 @@ $(window).ready( function () {
         $("#splitter-" + i)[0].disabled = true;
     }
     */
+
+    //animate();
 } );
 

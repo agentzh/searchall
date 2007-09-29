@@ -36,39 +36,14 @@ template main => sub {
 
 template searchall => sub {
     vbox {
-        attr { flex => 1 };
-        show 'engine_bar';
-        show 'search_bar';
+        attr { id => 'panel', flex => 1 };
+        vbox {
+            attr { id => 'my-bar' };
+            show 'engine_bar';
+            show 'search_bar';
+        };
         show 'results';
     };
-};
-
-template search_bar => sub {
-    box {
-        hbox {
-            attr { pack => 'center', flex => 1 }
-            textbox {
-                attr {
-                    id => 'search-box',
-                    flex => 1,
-                    #maxlength => 256,
-                }
-            }
-            button {
-                attr {
-                    id => 'search-button',
-                    label => ' Search',
-                    image => 'application_lightning.png',
-                }
-            }
-        }
-        hbox {
-            attr { style => 'padding-right: 1em;' }
-            spacer { attr { flex => 1 } }
-            button { attr { id => 'prev-button', class => 'icon-button', image => 'arrow_left.png' } }
-            button { attr { id => 'next-button', class => 'icon-button', image => 'arrow_right.png' } }
-        }
-    }
 };
 
 template engine_bar => sub {
@@ -94,6 +69,39 @@ template engine_bar => sub {
         spacer { attr { flex => 1 } }
     }
 };
+
+template search_bar => sub {
+    box {
+        hbox {
+            attr {
+                id => 'search-bar',
+                pack => 'center',
+                flex => 1
+            }
+            textbox {
+                attr {
+                    id => 'search-box',
+                    flex => 1,
+                    #maxlength => 256,
+                }
+            }
+            button {
+                attr {
+                    id => 'search-button',
+                    label => ' Search',
+                    image => 'application_lightning.png',
+                }
+            }
+        }
+        hbox {
+            attr { style => 'padding-right: 1em;' }
+            spacer { attr { flex => 1 } }
+            button { attr { id => 'prev-button', class => 'icon-button', image => 'arrow_left.png' } }
+            button { attr { id => 'next-button', class => 'icon-button', image => 'arrow_right.png' } }
+        }
+    }
+};
+
 
 template url_list => sub {
     my ($self, $index) = @_;

@@ -1,0 +1,75 @@
+var toolbar = null;
+var onToolbarArea = false;
+var toolbarHeight = 0;
+var toolbarDelay = 300;
+var toolbarTimer = null;
+var isToolbarHidden = false;
+
+function onMouseOver (e) {
+    if (isToolbarHidden) {
+        onToolbarArea = (e.clientY < toolbarHeight && e.clientX > 300);
+    } else {
+        onToolbarArea = (e.clientY < toolbarHeight + 30);
+    }
+    //if (onToolbarAear) alert("Yes!");
+    if (isToolbarHidden == onToolbarArea) {
+        //alert(e.clientY);
+        //info("onMouseOver!");
+        //info("isToolbarHidden: " + isToolbarHidden);
+        if (toolbarTimer)
+            window.clearTimeout(toolbarTimer);
+
+        toolbarTimer = window.setTimeout(
+            function () { onMouseMoveOnCanvasCallback(e); },
+            toolbarDelay
+        );
+    }
+    //alert("Yes!");
+}
+
+function onMouseMoveOnCanvasCallback (e) {
+    //alert("clientX: " + e.clientX);
+    info("callback!");
+    info("isToolbarHidden: " + isToolbarHidden);
+    info("onToolbarArea: " + onToolbarArea);
+    if (isToolbarHidden == onToolbarArea)
+        showHideToolbar();
+}
+
+function showHideToolbar () {
+    //info("showHideToolbar with " + isToolbarHidden);
+    if (isToolbarHidden) {
+        //alert("showing...");
+        toolbar.setAttribute(
+            'style',
+            'margin-top:' + 0 + 'px; margin-bottom:0px;'
+        );
+
+        //$("#my-bar").show();
+    } else {
+        //alert("hiding...");
+        toolbar.setAttribute(
+            'style',
+            'margin-top:' + (0-toolbarHeight) + 'px; margin-bottom:0px;'
+        );
+
+        //$("#my-bar").hide();
+    }
+    isToolbarHidden = ! isToolbarHidden;
+}
+
+$(document).ready(function () {
+    //$("#my-bar").hide();
+    if ($("page").length) {
+        toolbar = $("#my-bar")[0];
+        toolbarHeight   = toolbar.boxObject.height;
+        isToolbarHidden = true;
+        toolbar.setAttribute(
+            'style',
+            'margin-top:' + (0-toolbarHeight) + 'px; margin-bottom:0px;'
+        );
+
+        $("#panel").mouseover(onMouseOver);
+    }
+});
+
