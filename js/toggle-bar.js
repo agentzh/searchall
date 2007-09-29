@@ -1,15 +1,22 @@
 var toolbar = null;
 var onToolbarArea = false;
 var toolbarHeight = 0;
-var toolbarDelay = 300;
+var toolbarDelay = 200;
 var toolbarTimer = null;
 var isToolbarHidden = false;
 
 function onMouseOver (e) {
+    //info("e.screenX: " + e.screenX);
+    var navigator = document.getElementById("navigator");
+    //info("navigator.x: " + navigator.boxObject.x);
+    //info("prev-button: " + $("#prev-button")[0].boxObject.x);
     if (isToolbarHidden) {
-        onToolbarArea = (e.clientY < toolbarHeight && e.clientX > 300);
+        onToolbarArea = (
+            e.clientY < toolbarHeight/2 &&
+            e.clientX > navigator.boxObject.x + 5 &&
+            e.clientX < document.getElementById('prev-button').boxObject.x - 5);
     } else {
-        onToolbarArea = (e.clientY < toolbarHeight + 30);
+        onToolbarArea = (e.clientY < toolbarHeight);
     }
     //if (onToolbarAear) alert("Yes!");
     if (isToolbarHidden == onToolbarArea) {

@@ -41,8 +41,12 @@ template searchall => sub {
             attr { id => 'my-bar' };
             show 'engine_bar';
             show 'search_bar';
-        };
-        show 'results';
+        }
+        stack {
+            attr { flex => 1 };
+            show 'results';
+            show 'navigator';
+        }
     };
 };
 
@@ -71,33 +75,25 @@ template engine_bar => sub {
 };
 
 template search_bar => sub {
-    box {
-        hbox {
+    hbox {
+        attr {
+            id => 'search-bar',
+            pack => 'center',
+            flex => 1
+        }
+        textbox {
             attr {
-                id => 'search-bar',
-                pack => 'center',
-                flex => 1
-            }
-            textbox {
-                attr {
-                    id => 'search-box',
-                    flex => 1,
-                    #maxlength => 256,
-                }
-            }
-            button {
-                attr {
-                    id => 'search-button',
-                    label => ' Search',
-                    image => 'application_lightning.png',
-                }
+                id => 'search-box',
+                flex => 1,
+                #maxlength => 256,
             }
         }
-        hbox {
-            attr { style => 'padding-right: 1em;' }
-            spacer { attr { flex => 1 } }
-            button { attr { id => 'prev-button', class => 'icon-button', image => 'arrow_left.png' } }
-            button { attr { id => 'next-button', class => 'icon-button', image => 'arrow_right.png' } }
+        button {
+            attr {
+                id => 'search-button',
+                label => ' Search',
+                image => 'application_lightning.png',
+            }
         }
     }
 };
@@ -169,6 +165,15 @@ template results => sub {
             tabpanel { show('fmt_view'); }
             #tabpanel { show('merged_view'); }
         }
+    }
+
+};
+
+template navigator => sub {
+    hbox {
+        attr { id => 'navigator', align => 'start', pack => 'end' }
+        button { attr { id => 'prev-button', class => 'icon-button', image => 'arrow_left.png' } }
+        button { attr { id => 'next-button', class => 'icon-button', image => 'arrow_right.png' } }
     }
 };
 
