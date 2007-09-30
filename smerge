@@ -1,0 +1,4 @@
+#!/bin/sh
+
+svk smerge -I -l //mirror/searchall //mirror/tw/searchall
+
