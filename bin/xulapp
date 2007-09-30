@@ -99,12 +99,12 @@ $op_table = {
 
     register => sub {
         $op_table->{findprofile}->();
-        register_ext("$profile_dir/extensions", "tmp/");
+        register_ext($profile_dir, "tmp/");
     },
 
     unregister => sub {
         $op_table->{findprofile}->();
-        unregister_ext("$profile_dir/extensions", "tmp/");
+        unregister_ext($profile_dir, "tmp/");
     },
 
     setup => sub {
@@ -183,17 +183,48 @@ sub gen_manifest {
     );
 }
 
+sub set_prefs {
+    my $prefs = shift;
+    my $old_content = read_file($prefs);
+    my $content = $old_content;
+    set_pref_var(\$content, 'nglayout.debug.disable_xul_cache', 'true');
+    set_pref_var(\$content, 'javascript.options.showInConsole', 'true');
+    set_pref_var(\$content, 'javascript.options.strict', 'true');
+    set_pref_var(\$content, 'browser.dom.window.dump.enabled', 'true');
+    set_pref_var(\$content, 'browser.sessionstore.resume_from_crash', 'false');
+    if ($content ne $old_content) {
+        warn "Writing $prefs\n";
+        shell("cp $prefs $prefs.bak");
+        write_file($prefs, $content);
+    }
+}
+
+sub set_pref_var {
+    my ($rcontent, $var, $value) = @_;
+    warn "Checking if Firefox config var $var is $value\n";
+    if ($$rcontent !~ s/\buser_pref\("\Q$var\E",\s*[^)]+\);/user_pref("$var", $value);/gm) {
+        chomp($$rcontent);
+        $$rcontent .= qq{\nuser_pref("$var", $value);\n};
+    }
+}
+
 sub register_ext {
     my ($meta_dir, $chrome_dir) = @_;
     #my $meta_path = "$meta_dir/$opts->{id}";
     #warn "creating $meta_path\n";
     #mkdir $meta_path;
     my $manifest = File::Spec->rel2abs($chrome_dir);
-    my $metafile = "$meta_dir/../extensions.ini";
+    my $metafile = "$meta_dir/extensions.ini";
     while (!-f $metafile) {
         warn "$metafile not found. starting Firefox. please close it after it starts\n";
         shell("firefox -P $profile");
     }
+    my $prefs = "$meta_dir/prefs.js";
+    while (!-f $prefs) {
+        warn "$prefs not found. starting Firefox. please close it after it starts\n";
+        shell("firefox -P $profile");
+    }
+    set_prefs($prefs);
     $metafile = Cwd::realpath($metafile);
     open my $in, $metafile or
         die "Can't open $metafile for reading: $!";
@@ -244,7 +275,7 @@ sub unregister_ext {
     #warn "creating $meta_path\n";
     #mkdir $meta_path;
     my $manifest = File::Spec->rel2abs($chrome_dir);
-    my $metafile = File::Spec->canonpath("$meta_dir/../extensions.ini");
+    my $metafile = File::Spec->canonpath("$meta_dir/extensions.ini");
     open my $in, $metafile or
         die "Can't open $metafile for reading: $!";
     my $state = 'init';
