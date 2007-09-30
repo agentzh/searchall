@@ -9,6 +9,7 @@ use Template::Declare::Tags 'XUL';
 # button to the toolbar palette.
 
 our $URI = "chrome://$XUL::App::APP_NAME/content/searchall-page.xul";
+our $URI2 = "chrome://$XUL::App::APP_NAME/content/searchall.xul";
 
 template main => sub {
     overlay {
@@ -29,7 +30,7 @@ template main => sub {
                     attr {
                         id => "tb-searchall-button",
                         image => "chrome://$XUL::App::APP_NAME/content/logo-small.png",
-                        oncommand => "toOpenWindowByType('searchall:win', '$URI')",
+                        oncommand => "toOpenWindowByType('searchall:win', '$URI2')",
                         #label => "SearchAll",
                         tooltiptext => "SearchAll",
                     }
@@ -66,7 +67,7 @@ template main => sub {
             menuitem {
                 attr {
                     id => "tb-searchall-menu",
-                    oncommand => "toSearchAll('$URI', '', event)",
+                    oncommand => "toOpenWindowByType('searchall:win', '$URI2')",
                     insertafter => "javascriptConsole,devToolsSeparator",
                     label => "SearchAll",
                     accesskey => "",

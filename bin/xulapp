@@ -121,7 +121,9 @@ $op_table = {
             #warn "$file => $obj";
             $obj->go($file);
         }
-        $op_table->{register}->();
+        if ($operation ne 'bundle') {
+            $op_table->{register}->();
+        }
     },
 
     debug => sub {
