@@ -12,9 +12,9 @@ function onMouseOver (e) {
     //info("prev-button: " + $("#prev-button")[0].boxObject.x);
     if (isToolbarHidden) {
         onToolbarArea = (
-            e.clientY < toolbarHeight/3*2
-            //&& e.clientX > navigator.boxObject.x + 5
-            //&& e.clientX < document.getElementById('prev-button').boxObject.x - 5
+            e.clientY <= toolbarHeight
+            && e.clientX > navigator.boxObject.x + 5
+            && e.clientX < document.getElementById('prev-button').boxObject.x - 5
             );
     } else {
         onToolbarArea = (e.clientY < toolbarHeight);
@@ -70,7 +70,7 @@ $(document).ready(function () {
     //$("#my-bar").hide();
     if ($("page").length) {
         toolbar = $("#my-bar")[0];
-        toolbarHeight   = toolbar.boxObject.height;
+        toolbarHeight   = $("#engine-bar")[0].boxObject.height;
         isToolbarHidden = true;
         toolbar.setAttribute(
             'style',

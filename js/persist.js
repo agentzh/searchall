@@ -27,7 +27,10 @@ $(document).ready( function () {
         //$("#view-tabs").attr("lastSelected");
     } catch (e) { error(e); }
     if (selectedTabIndex == undefined) {
-        selectedTabIndex = 0;
+        if ($("page").length == 0)
+            selectedTabIndex = 0;
+        else
+            selectedTabIndex = 1;
     }
     Debug.log("Selecting tab " + selectedTabIndex + "...");
     //alert("I got this: " + $("#view-tabbox")[0].selectedIndex);
