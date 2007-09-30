@@ -21,7 +21,7 @@ use XUL::App schema {
         xulfile 'searchall-debug.xul' =>
             generated from 'SearchAll::View::Debug',
             includes qw(
-                searchall.js persist.js 
+                searchall.js persist.js
                 Test/More.js Test/Builder.js
                 test.js searchall.css
             );
@@ -47,7 +47,7 @@ use XUL::App schema {
         xpifile 'searchall.xpi' =>
             id is 'searchall@yahoo.cn',
             name is 'SearchAll',
-            version is '0.1.3',
+            version is '0.1.4',
             targets {
                 Firefox => ['2.0' => '3.0a5'],
                 Mozilla => ['1.5' => '1.8'],
