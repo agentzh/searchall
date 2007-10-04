@@ -54,7 +54,7 @@ template main => sub {
                 button {
                     attr {
                         id => 'searchall-button',
-                        image => "chrome://$XUL::App::APP_NAME/content/logo-small.png",
+                        image => "chrome://$XUL::App::APP_NAME/content/application_lightning.png",
                         label => ' SearchAll',
                         oncommand => "toSearchAll('$URI', document.getElementById('searchall-searchbox').value, event);",
                     }
