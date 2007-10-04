@@ -12,6 +12,7 @@ our $URI = "chrome://$XUL::App::APP_NAME/content/searchall-page.xul";
 our $URI2 = "chrome://$XUL::App::APP_NAME/content/searchall.xul";
 
 template main => sub {
+    show 'header';
     overlay {
         attr {
             id => "SearchallBrowserToolbar",
