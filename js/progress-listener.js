@@ -142,6 +142,7 @@ var myListener = {
                 }
 
                 //alert(hostname);
+                // XXX code duplication...
                 myTimer.stop(hostname, { force: true });
                 var elapsed = myTimer.lastResult(hostname);
                 if (elapsed != undefined) {
