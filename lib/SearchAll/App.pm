@@ -15,7 +15,7 @@ use XUL::App schema {
 
         xulfile 'browser-overlay.xul' =>
             generated from 'SearchAll::View::Overlay',
-            includes qw( toolbar.js ),
+            includes qw( toolbar.js overlay.css ),
             overlays 'chrome://browser/content/browser.xul';
 
         xulfile 'searchall-debug.xul' =>

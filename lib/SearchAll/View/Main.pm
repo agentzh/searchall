@@ -211,7 +211,7 @@ template fmt_view => sub {
         attr { flex => 1, orient => 'horizontal' };
         browser {
             attr {
-                src => 'fmt_view.html',
+                src => 'fmt-view.html',
                 flex => 1,
                 id => "fmt-view",
                 #type => 'content-primary',
