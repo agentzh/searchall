@@ -109,7 +109,6 @@ function prepareUriList (i) {
                 }
             }
 
-
             var query = $("#search-box").val();
             //alert(query);
             if (query)
