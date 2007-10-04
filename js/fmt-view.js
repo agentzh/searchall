@@ -112,7 +112,6 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
 
         //fmt_view_col.innerHTML = html;
         //Debug.log(fmt_view_doc.innerHTML);
-        fmt_view_doc.location.hash = '#__top';
     }, 100);
 }
 

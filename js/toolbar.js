@@ -3,35 +3,20 @@ function toSearchAll (uri, query, event) {
         query = "";
     //alert("query: " + query);
     //alert("URI: " + uri);
+    var winopts = "chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar";
     //var win = window.open(uri, "_blank", winopts);
-    var doc = gBrowser.contentDocument;
-    if (doc.location == uri) {
-        //alert("Hit shortcut! " + query);
-        if (query != '') {
-            // XXX need to use event to pass data...
-            //$("#search-box", doc)[0].value = query;
-            var element = doc.createElement("MyExtensionDataElement");
-            element.setAttribute("query", query);
-            doc.documentElement.appendChild(element);
-            var evt = doc.createEvent("Events");
-            evt.initEvent("SearchAllEvent", true, false);
-            element.dispatchEvent(evt);
-        }
-    } else {
-        if (query != '') {
-            var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
-            prefs = prefs.getBranch("extensions.searchall.");
+    openUILink(uri, event, false, true);
+    if (query != '') {
+        var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+        prefs = prefs.getBranch("extensions.searchall.");
 
-            // we have to use setComplexValue to write UTF-8 strings:
-            try {
-                var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-                str.data = query;
-                prefs.setComplexValue('query', Components.interfaces.nsISupportsString, str);
-            } catch (e) {}
-            //prefs.setCharPref('query', query);
-        }
-
-        openUILink(uri, event, false, true);
+        // we have to use setComplexValue to write UTF-8 strings:
+        try {
+            var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+            str.data = query;
+            prefs.setComplexValue('query', Components.interfaces.nsISupportsString, str);
+        } catch (e) {}
+        //prefs.setCharPref('query', query);
     }
 }
 
@@ -48,12 +33,3 @@ function handleKeydown (uri, e, obj) {
     return true;
 }
 
-/*
-var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIWebNavigation)
-                   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-                   .rootTreeItem
-                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIDOMWindow) 
-
-*/

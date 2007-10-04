@@ -54,7 +54,7 @@ $("#search-button").click( function () {
 $("#search-box").keydown( function (e) {
     if (e.keyCode == 13) {
         //alert("Found enter key!");
-        $("#search-button")[0].click();
+        $("#search-button").click();
         return false;
     } else {
         //info("Got key: " + e.keyCode);
@@ -72,10 +72,7 @@ function prepareUriList (i) {
             $(".col-" + i, fmt_view_doc).empty();
         }
 
-        var query = $("#search-box").val();
-        //alert(query);
-        if (query)
-            AutoSearch[i] = true;
+        AutoSearch[i] = true;
         set_home(i, this.value);
     } );
     uriLists[0].addEventListener(
@@ -93,10 +90,7 @@ function prepareUriList (i) {
                 $(".col-" + i, fmt_view_doc).empty();
             }
 
-            var query = $("#search-box").val();
-            //alert(query);
-            if (query)
-                AutoSearch[i] = true;
+            AutoSearch[i] = true;
             set_home(i, home);
         },
         true
@@ -205,8 +199,6 @@ function handleCheckbox (i) {
 
 }
 
-var Toggle = false;
-
 $(window).ready( function () {
     for (var i = 0; i < 3; i++) {
         handleCheckbox(i);
@@ -233,7 +225,5 @@ $(window).ready( function () {
         $("#splitter-" + i)[0].disabled = true;
     }
     */
-
-    //animate();
 } );
 

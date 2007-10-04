@@ -37,10 +37,6 @@ template main => sub {
             for (@{ $xpifile->developers }) {
                 em::developer { $_ }
             }
-            for (@{ $xpifile->contributors }) {
-                em::contributor { $_ }
-            }
-
             my $targets = $xpifile->targets;
             while (my ($app, $ver_range) = each %$targets) {
                 outs_raw("\n\n  <!-- $app, version $ver_range->[0] - $ver_range->[1] -->");

@@ -11,20 +11,17 @@ make
 bin/xulapp setup
 
 # register the (debuggin) chrome to ~/.mozilla/firefox/*/extensions.ini
-bin/xulapp register --profile dev
+bin/xulapp unregister
+bin/xulapp register
 
 # unregister the (debuggin) chrome from ~/.mozilla/firefox/*/extensions.ini
-bin/xulapp unregister  --profile dev
+bin/xulapp unregister
 
 # launch a ff window loading searchall.xul :
-bin/xulapp debug searchall.xul --profile dev
+bin/xulapp debug searchall.xul
 
 # launch a ff window loading searchall-debug.xul :
-bin/xulapp debug searchall-debug.xul --profile dev
-
-
-# lauch a ff window to test the overlay:
-bin/xulapp overlay --profile dev
+bin/xulapp debug searchall-debug.xul
 
 # generate tmp/searchall.xpi :
 bin/xulapp bundle
@@ -32,8 +29,6 @@ bin/xulapp bundle
 # generate ./searchall.xpi :
 bin/xulapp bundle .
 
-# The --profile opton used above can be abbriviated as -p
-#
 # Note that bin/xulapp uses the info in lib/*/App.pm
 # (i.e. lib/SearchAll/App.pm in this project)
 
