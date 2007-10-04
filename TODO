@@ -58,6 +58,7 @@ Sep 21
 Later...
 * Add "Next" and "Previous" buttons.  [done]
 * Add a splash window before the main window shows up (splash.js and splash.xul).  [canceled]
+* Move the local repos from yuting++'s loki/agentz/ to hack/.  [done]
 
 * Eliminate potential errors in page loading timers.
 * Fix the checkbox + splitter toggling bug.
