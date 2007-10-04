@@ -56,18 +56,19 @@ Sep 21
 * Add persist to XUL components.  [done]
 
 Later...
+* Add "Next" and "Previous" buttons.  [done]
+* Add a splash window before the main window shows up (splash.js and splash.xul).  [canceled]
+
+* Eliminate potential errors in page loading timers.
 * Fix the checkbox + splitter toggling bug.
 * Add the Merged View to merge the search results from different sites.
-* Add "Next" and "Previous" buttons.
 * Use the getter/setter feature to reimplement our own JS classes.
-* Eliminate potential errors in page loading timers.
-* Add a splash window before the main window shows up (splash.js and splash.xul).
 * Add test-timer.js to test the Timer class in timer.js.
-* Implement features as in http://www.langreiter.com/exec/yahoo-vs-google.html?q=Perl using TVG.
+* Implement features as in http://www.langreiter.com/exec/yahoo-vs-google.html?q=Perl using SVG.
 
 XUL::App's TODO:
 * Add support for the --profile option, like this:
-    $ xulapp debug --profile dev3 foo.xul
- It will also create a profile if it doesn't exist.
- It will also checks prefs.js to see whether the necessary variables have been set or not. If not, it will set those config vars automatically.
+    $ xulapp debug --profile dev3 foo.xul              [done]
+ It will also create a profile if it doesn't exist.    [done]
+ It will also checks prefs.js to see whether the necessary variables have been set or not. If not, it will set those config vars automatically.  [done]
 

@@ -124,7 +124,13 @@ var myListener = {
                         gen_status_msg(myProgress.tasks);
                 }
             }
-            if (num == 4) {
+            //alert("Hi (0)");
+            //info("blurring contentWindow...");
+            //for (var i = 0; i < 3; i++)
+                //browsers[i].browser.contentWindow.blur();
+            //info("focusing search box... (2)");
+            // Ensure we get the focus...
+            if (flag & WPL.STATE_IS_WINDOW) {
                 var val = 100 * myProgress.percent();
                 var progressmeter = $("#status-progress");
                 //alert(ind);
@@ -134,15 +140,19 @@ var myListener = {
                         progressmeter.hide();
                     }, 100 );
                 }
-            }
-            //alert("Hi (0)");
-            //info("blurring contentWindow...");
-            //for (var i = 0; i < 3; i++)
-                //browsers[i].browser.contentWindow.blur();
-            //info("focusing search box... (2)");
-            // Ensure we get the focus...
-            if (flag & WPL.STATE_IS_WINDOW) {
+
                 //alert(hostname);
+                // XXX code duplication...
+                myTimer.stop(hostname, { force: true });
+                var elapsed = myTimer.lastResult(hostname);
+                if (elapsed != undefined) {
+                    var msg = hostname + "(" + num + "): " + elapsed + " ms"
+                    info(msg);
+                    myProgress.setDone(hostname, elapsed);
+                    $("#statusbar-display")[0].label =
+                        gen_status_msg(myProgress.tasks);
+                }
+
                 if (AutoSearch[ind]) {
                     AutoSearch[ind] = false;
                     //alert("Clicking...");
@@ -158,9 +168,11 @@ var myListener = {
 
                 info(hostname + " loaded.");
                 var doc = progress.DOMWindow.document;
-                showDOM(doc, hostname);
                 Done[ind] = true;
-                gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
+                if ($("#search-box").val() != '') {
+                    showDOM(doc, hostname);
+                    gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
+                }
                 for (var i = 0; i < browsers.length; i++) {
                     if (browsers[i].document() == doc) {
                         //alert("browser " + i + " found!");

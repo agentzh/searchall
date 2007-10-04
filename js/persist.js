@@ -27,7 +27,10 @@ $(document).ready( function () {
         //$("#view-tabs").attr("lastSelected");
     } catch (e) { error(e); }
     if (selectedTabIndex == undefined) {
-        selectedTabIndex = 0;
+        if ($("page").length == 0)
+            selectedTabIndex = 0;
+        else
+            selectedTabIndex = 1;
     }
     Debug.log("Selecting tab " + selectedTabIndex + "...");
     //alert("I got this: " + $("#view-tabbox")[0].selectedIndex);
@@ -67,6 +70,20 @@ $(document).ready( function () {
             set_home(i);
         }
     }
+
+
+    var listener = function (evt) {
+        //alert("Received from web page: " +
+            //evt.target.getAttribute("query"));
+        var query = evt.target.getAttribute('query');
+        if (query != undefined && query != '') {
+            $("#search-box")[0].value = query;
+            $("#search-button")[0].click();
+        }
+    };
+    document.addEventListener("SearchAllEvent", listener, false, true);
+
+
 } );
 
 function set_home (i, home) {
