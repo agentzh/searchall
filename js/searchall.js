@@ -27,7 +27,15 @@ var host2ind = {};
 //alert($("#search-box").focus());
 $("#search-button").click( function () {
     //browser.url = 'about:blank';
-    $("#fmt-view")[0].reload();
+    //$("#fmt-view")[0];
+    var browser = $("#fmt-view")[0];
+    if (!browser) return;
+    var fmt_view_doc = browser.contentDocument;
+    if (!fmt_view_doc) {
+        Debug.log("WARNING: fmt_view_doc not found.");
+    } else {
+        $("table#content>tbody", fmt_view_doc).innerHTML = '';
+    }
 
     var query = $("#search-box").val();
 
@@ -70,6 +78,7 @@ function prepareUriList (i) {
         var fmt_view_doc = $("#fmt-view")[0].contentDocument;
         if (fmt_view_doc) {
             $(".col-" + i, fmt_view_doc).empty();
+            $($(".col-" + i, fmt_view_doc)[0]).html("Loading...");
         }
 
         var query = $("#search-box").val();

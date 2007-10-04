@@ -131,26 +131,39 @@ var myListener = {
             //info("focusing search box... (2)");
             // Ensure we get the focus...
             if (flag & WPL.STATE_IS_WINDOW) {
-                var val = 100 * myProgress.percent();
-                var progressmeter = $("#status-progress");
-                //alert(ind);
-                progressmeter[0].value = val;
-                if (val >= 100) {
-                    setTimeout( function () {
-                        progressmeter.hide();
-                    }, 100 );
+                try {
+                    var val = 100 * myProgress.percent();
+                    var progressmeter = $("#status-progress");
+                    //alert(ind);
+                    progressmeter[0].value = val;
+                    if (val >= 100) {
+                        setTimeout( function () {
+                            progressmeter.hide();
+                        }, 100 );
+                    }
+
+                    //alert(hostname);
+                    // XXX code duplication...
+                    myTimer.stop(hostname, { force: true });
+                    var elapsed = myTimer.lastResult(hostname);
+                    if (elapsed != undefined) {
+                        var msg = hostname + "(" + num + "): " + elapsed + " ms"
+                        info(msg);
+                        myProgress.setDone(hostname, elapsed);
+                        $("#statusbar-display")[0].label =
+                            gen_status_msg(myProgress.tasks);
+                    }
+                } catch (e) {
+                    info(e);
                 }
 
-                //alert(hostname);
-                // XXX code duplication...
-                myTimer.stop(hostname, { force: true });
-                var elapsed = myTimer.lastResult(hostname);
-                if (elapsed != undefined) {
-                    var msg = hostname + "(" + num + "): " + elapsed + " ms"
-                    info(msg);
-                    myProgress.setDone(hostname, elapsed);
-                    $("#statusbar-display")[0].label =
-                        gen_status_msg(myProgress.tasks);
+                try {
+                    var browser = $("#fmt-view")[0];
+                    if (!browser) return;
+                    var fmt_view_doc = browser.contentDocument;
+                    $("span#loading", fmt_view_doc).hide();
+                } catch (e) {
+                    info(e);
                 }
 
                 if (AutoSearch[ind]) {

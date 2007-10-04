@@ -43,11 +43,15 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             list = [msg];
         */
 
-        var fmt_view_doc = $("#fmt-view")[0].contentDocument;
+        var browser = $("#fmt-view")[0];
+        if (!browser) return;
+        var fmt_view_doc = browser.contentDocument;
         if (!fmt_view_doc) {
             Debug.log("WARNING: fmt_view_doc not found.");
             return;
         }
+        $("h1#default", fmt_view_doc).hide();
+        $("span#loading", fmt_view_doc).hide();
 
         Debug.log(hostname + ": " + list.length);
         for (var i = 0; i < list.length; i++) {
@@ -81,13 +85,23 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
                 //alert(tbodies[0]);
                 Debug.log("appending row " + i + " for " + hostname);
                 //alert($(rows[0]).parent()[0].tagName);
-                $(tbodies[0]).parent().append(
+                var row_html;
+                if (i == 0) {
+                    row_html =
+                    '<tr class="row">' +
+                        '<td class="col-0"><img src="loading.gif" /></td>' +
+                        '<td class="col-1"><img src="loading.gif" /></td>' +
+                        '<td class="col-2"><img src="loading.gif" /></td>' +
+                    '</tr>';
+                } else {
+                    row_html =
                     '<tr class="row">' +
                         '<td class="col-0" />' +
                         '<td class="col-1" />' +
                         '<td class="col-2" />' +
-                    '</tr>'
-                );
+                    '</tr>';
+                }
+                $(tbodies[0]).parent().append(row_html);
                 rows = $(".row", fmt_view_doc);
             }
             var cell = $(".col-" + index, rows[i])[0];
@@ -98,6 +112,8 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         }
         if (!list.length) {
             $(".col-" + index, fmt_view_doc).empty();
+            //alert("Hey, here!");
+            $($(".col-" + index, fmt_view_doc)[0]).html("Sorry, no results found :(");
         }
 
         //showDOM(fmt_view_doc, "DOM");
@@ -112,6 +128,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
 
         //fmt_view_col.innerHTML = html;
         //Debug.log(fmt_view_doc.innerHTML);
+        if (!fmt_view_doc.location) { return; }
         fmt_view_doc.location.hash = '#__top';
     }, 100);
 }

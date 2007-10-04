@@ -36,6 +36,17 @@ function gotoNext (i) {
         return;
     }
 
+    try {
+        var browser = $("#fmt-view")[0];
+        if (browser) {
+            var fmt_view_doc = browser.contentDocument;
+            //alert("Setting loading.gif...");
+            $("table#content>tbody", fmt_view_doc).innerHTML = '';
+            $(".col-" + i, fmt_view_doc).empty();
+            $($(".col-" + i, fmt_view_doc)[0]).html('<img src="loading.gif" />');
+        }
+    } catch (e) { info(e); }
+
     setTimeout (function () {
         if (! Done[i]) {
             gen_fmt_view(i, browsers[i].hostname(), doc, false/* don't force mining */);
@@ -63,6 +74,16 @@ function gotoPrev (i) {
         error(e);
         return;
     }
+
+    try {
+        var browser = $("#fmt-view")[0];
+        if (browser) {
+            var fmt_view_doc = browser.contentDocument;
+            //alert("Setting loading.gif...");
+            $(".col-" + i, fmt_view_doc).empty();
+            $($(".col-" + i, fmt_view_doc)[0]).html('<img src="loading.gif" />');
+        }
+    } catch (e) { info(e); }
 
     setTimeout (function () {
         if (! Done[i]) {
