@@ -41,9 +41,13 @@ function gotoNext (i) {
         if (browser) {
             var fmt_view_doc = browser.contentDocument;
             //alert("Setting loading.gif...");
-            $("table#content>tbody", fmt_view_doc).innerHTML = '';
-            $(".col-" + i, fmt_view_doc).empty();
-            $($(".col-" + i, fmt_view_doc)[0]).html('<img src="loading.gif" />');
+            if (fmt_view_doc)  {
+                var cols = $(".col-" + i, fmt_view_doc);
+                if (cols.length) {
+                    cols.empty();
+                    $(cols[0]).html('<img src="loading.gif" />');
+                }
+            }
         }
     } catch (e) { info(e); }
 

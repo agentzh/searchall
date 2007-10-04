@@ -113,7 +113,10 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         if (!list.length) {
             $(".col-" + index, fmt_view_doc).empty();
             //alert("Hey, here!");
-            $($(".col-" + index, fmt_view_doc)[0]).html("Sorry, no results found :(");
+            var cols = $(".col-" + index, fmt_view_doc);
+            if (cols.length) {
+                $(cols[0]).html("Sorry, no results found :(");
+            }
         }
 
         //showDOM(fmt_view_doc, "DOM");

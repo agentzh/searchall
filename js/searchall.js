@@ -34,7 +34,7 @@ $("#search-button").click( function () {
     if (!fmt_view_doc) {
         Debug.log("WARNING: fmt_view_doc not found.");
     } else {
-        $("table#content>tbody", fmt_view_doc).innerHTML = '';
+        $("table#content>tbody", fmt_view_doc)[0].innerHTML = '';
     }
 
     var query = $("#search-box").val();
@@ -77,8 +77,11 @@ function prepareUriList (i) {
         // XXX add user-entered URL to the URL list
         var fmt_view_doc = $("#fmt-view")[0].contentDocument;
         if (fmt_view_doc) {
-            $(".col-" + i, fmt_view_doc).empty();
-            $($(".col-" + i, fmt_view_doc)[0]).html("Loading...");
+            var cols = $(".col-" + i, fmt_view_doc);
+            if (cols.length) {
+                cols.empty();
+                $(cols[0]).html('<img src="loading.gif" />');
+            }
         }
 
         var query = $("#search-box").val();
@@ -99,8 +102,13 @@ function prepareUriList (i) {
             // clear the fmt view's corresponding col
             var fmt_view_doc = $("#fmt-view")[0].contentDocument;
             if (fmt_view_doc) {
-                $(".col-" + i, fmt_view_doc).empty();
+                var cols = $(".col-" + i, fmt_view_doc);
+                if (cols.length) {
+                    cols.empty();
+                    $(cols[0]).html('<img src="loading.gif" />');
+                }
             }
+
 
             var query = $("#search-box").val();
             //alert(query);
@@ -129,7 +137,9 @@ function prepareUriList (i) {
             //showDOM(this.firstChild.firstChild);
             //info("Found URLs: " + $("#url-list-" + i + " > menupopup > .url").length);
             //$(".url").show();
-            $("#url-list-" + i + " > menupopup > .url").show();
+            try {
+                $("#url-list-" + i + ">menupopup>.url").show();
+            } catch (e) { error(e); }
             var popup = this.firstChild;
             //showDOM(popup);
             var items = popup.childNodes;
