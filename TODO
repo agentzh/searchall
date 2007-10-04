@@ -59,10 +59,10 @@ Later...
 * Add "Next" and "Previous" buttons.  [done]
 * Add a splash window before the main window shows up (splash.js and splash.xul).  [canceled]
 
+* Eliminate potential errors in page loading timers.
 * Fix the checkbox + splitter toggling bug.
 * Add the Merged View to merge the search results from different sites.
 * Use the getter/setter feature to reimplement our own JS classes.
-* Eliminate potential errors in page loading timers.
 * Add test-timer.js to test the Timer class in timer.js.
 * Implement features as in http://www.langreiter.com/exec/yahoo-vs-google.html?q=Perl using SVG.
 
