@@ -10,7 +10,7 @@ my @URLs = qw(
     www.yahoo.cn
     www.baidu.cn
     www.yisou.com
-    so.sohu.com
+    www.sogou.com
     www.google.com/en
     search.yahoo.com
     search.cpan.org

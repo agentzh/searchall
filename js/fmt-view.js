@@ -4,10 +4,16 @@ var Patterns = {
     'www.google.com'  : "div.g[h2]",
     'www.yisou.com'   : "div.web>ol>li",
     'so.sohu.com'     : "div#content>div",
+     //'www.sogou.com'     : "div#content>div",
     'search.cpan.org' : "body>p[small]",
     'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
     'search.yahoo.com': "div#yschweb>ol>li"
 };
+
+function isEmpty (html) {
+    var res = html.replace(/<[^>]+>|\s+/g, '');
+    return /^$/.test(res);
+}
 
 function gen_fmt_view (index, hostname, doc, forceMining) {
     setTimeout(function () {
@@ -54,6 +60,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         $("span#loading", fmt_view_doc).hide();
 
         Debug.log(hostname + ": " + list.length);
+        var snippets = [];
         for (var i = 0; i < list.length; i++) {
             //Debug.log(hostname + ": " + $(list[i]).text());
             var elem = list[i];
@@ -61,7 +68,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             //if ($(elem).find("form").length > 0) continue;
             var snippet;
             if (typeof elem == 'string') {
-                alert(elem);
+                //alert(elem);
                 snippet = elem;
             } else {
                 snippet = $(elem).html();
@@ -79,6 +86,15 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
                 .replace(/<a /ig, '<a target="_blank" ');
             //Debug.log(hostname + snippet);
             //snippet = snippet.replace(/[\w.?=&\/]{45,45}/g, "$1<wbr/>");
+            if (isEmpty(snippet)) {
+                //alert("It's empty!");
+                continue;
+            }
+            snippets.push(snippet);
+        }
+
+        for (var i = 0; i < snippets.length; i++) {
+            var snippet = snippets[i];
             var rows = $(".row", fmt_view_doc);
             if (rows[i] == undefined) {
                 var tbodies = $("#content>tbody", fmt_view_doc);
