@@ -83,7 +83,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             if (rows[i] == undefined) {
                 var tbodies = $("#content>tbody", fmt_view_doc);
                 //alert(tbodies[0]);
-                Debug.log("appending row " + i + " for " + hostname);
+                //Debug.log("appending row " + i + " for " + hostname);
                 //alert($(rows[0]).parent()[0].tagName);
                 var row_html;
                 if (i == 0) {

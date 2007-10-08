@@ -46,9 +46,9 @@ function onMouseOver (e) {
 
 function onMouseMoveOnCanvasCallback (e) {
     //alert("clientX: " + e.clientX);
-    info("callback!");
-    info("isToolbarHidden: " + isToolbarHidden);
-    info("onToolbarArea: " + onToolbarArea);
+    //info("callback!");
+    //info("isToolbarHidden: " + isToolbarHidden);
+    //info("onToolbarArea: " + onToolbarArea);
     if (isToolbarHidden == onToolbarArea)
         showHideToolbar();
 }
