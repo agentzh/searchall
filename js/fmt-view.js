@@ -18,12 +18,12 @@ function isEmpty (html) {
 
 function gen_fmt_view (index, hostname, doc, forceMining) {
     setTimeout(function () {
-        var list;
+        var list = [];
         var pattern = Patterns[hostname];
         if (!forceMining && pattern) {
             list = $(pattern, doc);
-        } else {
-            list = [];
+        }
+        if (list.length == 0) {
             var count = 5;
             while (count >= 2) {
                 var patterns = mine_pattern(doc, count, hostname);
