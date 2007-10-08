@@ -56,7 +56,7 @@ template engine_bar => sub {
 	    id => 'engine-bar',
             pack => 'center',
             align => 'center',
-            #flex => 1,
+            flex => 1,
         };
         for (0..2) {
             spacer { attr { flex => 1 } };
@@ -68,7 +68,7 @@ template engine_bar => sub {
                     persist => 'disabled checked',
                 }
             };
-            show('url_list', $_);
+            show 'url_list', $_;
         }
         spacer { attr { flex => 1 } }
     }
@@ -134,6 +134,7 @@ template results => sub {
         attr {
             id => 'view-tabbox',
             flex => 1,
+            #align => 'center',
         }
         tabs {
             attr {
@@ -214,7 +215,7 @@ template fmt_view => sub {
                 src => 'fmt-view.html',
                 flex => 1,
                 id => "fmt-view",
-                #type => 'content-primary',
+                type => 'content-primary',
                 homepage => 'chrome://$XUL::App::APP_NAME/content/listing.html',
             }
         }

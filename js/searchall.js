@@ -229,6 +229,8 @@ $(window).ready( function () {
     for (var i = 0; i < 3; i++) {
         handleCheckbox(i);
     }
+    var margin = document.getElementById('prev-button').boxObject.x;
+    $("#navigator").css('margin-left', margin + 'px');
 
     registerMyListener(browser0.browser);
     registerMyListener(browser1.browser);

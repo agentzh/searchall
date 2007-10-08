@@ -4,17 +4,26 @@ var toolbarHeight = 0;
 var toolbarDelay = 200;
 var toolbarTimer = null;
 var isToolbarHidden = false;
+var firstTab, lastTab, prevButton;
 
 function onMouseOver (e) {
     //info("e.screenX: " + e.screenX);
     var navigator = document.getElementById("navigator");
     //info("navigator.x: " + navigator.boxObject.x);
     //info("prev-button: " + $("#prev-button")[0].boxObject.x);
+    var tabsLeft = firstTab.boxObject.x;
+    var tabsRight = lastTab.boxObject.x + lastTab.boxObject.width;
+    var prevButtonLeft = prevButton.boxObject.x;
+    //info("tabsLeft: " + tabsLeft);
+    //info("tabsRight: " + tabsRight);
+    //info("prevButtonLeft: " + prevButtonLeft);
+    //info("toolbarHeight: " + toolbarHeight);
     if (isToolbarHidden) {
         onToolbarArea = (
             e.clientY <= toolbarHeight
-            && e.clientX > navigator.boxObject.x + 5
-            && e.clientX < document.getElementById('prev-button').boxObject.x - 5
+            && (e.clientX < tabsLeft ||
+                e.clientX > tabsRight)
+            && e.clientX < prevButtonLeft - 5
             );
     } else {
         onToolbarArea = (e.clientY < toolbarHeight);
@@ -79,6 +88,9 @@ $(document).ready(function () {
 
         $("#panel").mouseover(onMouseOver);
         $("#search-bar").hide();
+        firstTab = $("#view-tab-0")[0];
+        lastTab = $("#view-tabs")[0].lastChild;
+        prevButton = document.getElementById('prev-button');
     }
 });
 
