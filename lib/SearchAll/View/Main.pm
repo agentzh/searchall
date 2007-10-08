@@ -175,8 +175,8 @@ template results => sub {
 template navigator => sub {
     hbox {
         attr { id => 'navigator', align => 'start', pack => 'end' }
-        button { attr { id => 'prev-button', class => 'icon-button', image => 'arrow_left.png' } }
-        button { attr { id => 'next-button', class => 'icon-button', image => 'arrow_right.png' } }
+        button { attr { id => 'prev-button', class => 'nav-button', label => '<<Prev' } }
+        button { attr { id => 'next-button', class => 'nav-button', label => 'Next>>' } }
     }
 };
 

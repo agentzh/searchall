@@ -20,6 +20,11 @@
     display: none;
 }
 
+.nav-button {
+    font: "微软雅黑", "宋体", consolas, verdana, arial, sans-serif;
+    font-size: 14px;
+}
+
 #results {
     padding-top: 0.1em;
 }
