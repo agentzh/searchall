@@ -7,6 +7,7 @@ var Patterns = {
     'www.sogou.com'   : "div#content>div",
     'search.cpan.org' : "body>p[small]",
     'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
+    'so.163.com'      : 'body>div>div.r',
     'search.yahoo.com': "div#yschweb>ol>li"
 };
 
@@ -37,6 +38,10 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
                 } else {
                     count--;
                 }
+            }
+            if (!pattern) {
+                info("Failed to mine for " + host);
+                return;
             }
         }
         //alert("list len: " + list.length);
@@ -126,11 +131,12 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         if (! $("#enable-view-" + index)[0].checked) {
             $(".col-" + index, fmt_view_doc).hide();
         }
-        if (!list.length) {
-            $(".col-" + index, fmt_view_doc).empty();
+        if (snippets.length == 0) {
             //alert("Hey, here!");
             var cols = $(".col-" + index, fmt_view_doc);
             if (cols.length) {
+                //alert("Empty doc: " + doc.contentType);
+                cols.empty();
                 $(cols[0]).html("Sorry, no results found :(");
             }
         }

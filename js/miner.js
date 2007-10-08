@@ -53,15 +53,6 @@ function mine_node (node, count, prefix) {
     //if (Hostname == 'www.yisou.com')
         //info(Hostname + ": Categories:\n" + Dumper(categories));
     var retvals = [];
-    for (var i = 0; i < elems.length; i++) {
-        var elem = elems[i];
-        //alert(i + ": " + elem);
-        //alert(i + ": " + elem.nodeType);
-        var more = retvals.concat(mine_node(elem, count, prefix + locator + ">"));
-        //if (more.length > 0)
-            //alert("Found more!");
-        retvals = retvals.concat(more);
-    }
 
     var hits = categories.filter(function (e) {
         return e.length >= count;
@@ -75,6 +66,16 @@ function mine_node (node, count, prefix) {
         info(Hostname + ": pattern:\n" + pattern);
         //info(Hostname + ": sample:\n" + Dumper(samples[seq]));
 
+    } else {
+        for (var i = 0; i < elems.length; i++) {
+            var elem = elems[i];
+            //alert(i + ": " + elem);
+            //alert(i + ": " + elem.nodeType);
+            var more = retvals.concat(mine_node(elem, count, prefix + locator + ">"));
+            //if (more.length > 0)
+                //alert("Found more!");
+            retvals = retvals.concat(more);
+        }
     }
     return retvals;
 }
