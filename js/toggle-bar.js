@@ -88,8 +88,9 @@ $(document).ready(function () {
 
         $("#panel").mouseover(onMouseOver);
         $("#search-bar").hide();
-        firstTab = $("#view-tab-0")[0];
-        lastTab = $("#view-tabs")[0].lastChild;
+        var tabs = $("#view-tabs")[0];
+        firstTab = tabs.firstChild;
+        lastTab  = tabs.lastChild;
         prevButton = document.getElementById('prev-button');
     }
 });
