@@ -42,12 +42,13 @@ template main => sub {
                     id => "tb-searchall-box",
                     align => "center",
                     persist => "width",
-                    onclick => 'this.firstChild.focus()',
+                    onmousedown => 'this.firstChild.focus()',
                 }
                 # ...
                 textbox {
                     attr {
                         id => "searchall-searchbox",
+                        clickSelectsAll => 'true',
                         onkeydown => "handleKeydown('$URI', event, this);",
                     }
                 }
