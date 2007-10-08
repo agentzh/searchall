@@ -8,7 +8,8 @@ var Patterns = {
     'search.cpan.org' : "body>p[small]",
     'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
     'so.163.com'      : 'body>div>div.r',
-    'search.yahoo.com': "div#yschweb>ol>li"
+    'search.yahoo.com': "div#yschweb>ol>li",
+    'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div"
 };
 
 function isEmpty (html) {
@@ -22,8 +23,9 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         var pattern = Patterns[hostname];
         if (!forceMining && pattern) {
             list = $(pattern, doc);
-        }
-        if (list.length == 0) {
+        } else {
+            //if (list.length == 0) {
+            //alert("Start to mine!");
             var count = 5;
             while (count >= 2) {
                 var patterns = mine_pattern(doc, count, hostname);
@@ -31,7 +33,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
                     pattern = patterns[0];
                     //pattern = pattern.replace(/.*>([^>]+>[^>]+>[^>]+)$/, "$1");
 
-                    //alert(hostname + ": pattern: " + pattern);
+                    info("Selected: " + hostname + ": pattern: " + pattern);
                     list = $(pattern, doc);
                     Patterns[hostname] = pattern;
                     break;
@@ -40,7 +42,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
                 }
             }
             if (!pattern) {
-                info("Failed to mine for " + host);
+                info("Failed to mine for " + hostname);
                 return;
             }
         }
