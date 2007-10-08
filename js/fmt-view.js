@@ -4,7 +4,7 @@ var Patterns = {
     'www.google.com'  : "div.g[h2]",
     'www.yisou.com'   : "div.web>ol>li",
     'so.sohu.com'     : "div#content>div",
-     //'www.sogou.com'     : "div#content>div",
+    'www.sogou.com'   : "div#content>div",
     'search.cpan.org' : "body>p[small]",
     'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
     'search.yahoo.com': "div#yschweb>ol>li"

@@ -80,9 +80,8 @@ function mine_node (node, count, prefix) {
 }
 
 function genPattern (node) {
-    var selector = node.nodeName.toLowerCase();
+    var selector = '';
     while (true) {
-        var node = node.parentNode;
         if (node == null) break;
         if (node != null) {
             var tagId = node.getAttribute('id');
@@ -94,14 +93,18 @@ function genPattern (node) {
                 tagClass = "";
             }
             var locator = tagName;
-            if (tagId && /^[-\w]+$/.test(tagId))
+            if (selector != '' && tagId && /^[-\w]+$/.test(tagId))
                 locator += "#" + tagId;
             else if (tagClass && /^[-\w]+$/.test(tagClass))
             locator += "." + tagClass;
 
-            selector = locator + ">" + selector;
+            if (selector != '')
+                selector = locator + ">" + selector;
+            else
+                selector = locator;
         }
         if (node.tagName == 'BODY') break;
+        node = node.parentNode;
     }
     return selector;
 }
