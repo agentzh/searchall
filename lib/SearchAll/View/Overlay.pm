@@ -45,6 +45,16 @@ template main => sub {
                     onmousedown => 'this.firstChild.focus()',
                 }
                 # ...
+                toolbarbutton {
+                    attr {
+                        id => "tb-searchall-button2",
+                        image => "chrome://$XUL::App::APP_NAME/content/logo-small.png",
+                        oncommand => "toOpenWindowByType('searchall:win', '$URI2')",
+                        #label => "SearchAll",
+                        tooltiptext => "SearchAll",
+                    }
+                }
+
                 textbox {
                     attr {
                         id => "searchall-searchbox",
@@ -83,7 +93,7 @@ template main => sub {
                     id => "searchall-toolbar",
                     iconsize => 'small',
                     #customindex => 1,
-                    defaultset => 'tb-searchall-new,tb-searchall-box',
+                    defaultset => 'tb-searchall-box',
                     customizable => 'true',
                     context => 'toolbar-context-menu',
                     toolbarname => 'SearchAll Toolbar',
