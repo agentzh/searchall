@@ -22,9 +22,18 @@ function gotoNext (i) {
         links = $("a:contains('下一页')", doc);
         if (links.length == 0) {
             links = $("a[@id*=next]", doc);
-        } else {
-            error("Next button not found for " + i);
+            if (links.length == 0) {
+                links = $("img[@alt*='下一页']", doc).parent('a');
+                if (links.length == 0) {
+                    links = $("img[@alt*='Next']", doc).parent('a');
+                }
+            }
         }
+    }
+    if (links.length == 0) {
+        myProgress.setDone(browsers[i].hostname(), 'N/A');
+        error("No next button found for browser " + i);
+        return;
     }
 
     var link = links[links.length-1];
@@ -68,9 +77,19 @@ function gotoPrev (i) {
         links = $("a:contains('上一页')", doc);
         if (links.length == 0) {
             links = $("a[@id*=prev]", doc);
-        } else {
-            error("Previous button not found for " + i);
+            if (links.length == 0) {
+                links = $("img[@alt*='上一页']", doc).parent('a');
+                if (links.length == 0) {
+                    links = $("img[@alt*='Prev']", doc).parent('a');
+                }
+            }
         }
+    }
+    if (links.length == 0) {
+        error("No prev button found for browser " + i);
+        Done[i] = true;
+        myProgress.setDone(browsers[i].hostname(), 'N/A');
+        return;
     }
 
     var link = links[links.length-1];

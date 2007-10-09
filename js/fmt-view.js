@@ -11,6 +11,9 @@ var Patterns = {
     'search.yahoo.com': "div#yschweb>ol>li",
     'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
 
+    'www.taobao.com'  : "div#Content>div#MainContainer>form>div#ItemList>div#ListView>div.Item",
+    'search1.taobao.com'  : "div#Content>div#MainContainer>form>div#ItemList>div#ListView>div.Item",
+    'search.taobao.com'  : "div#Content>div#MainContainer>form>div#ItemList>div#ListView>div.Item",
     'addons.mozilla.org' : 'div#container>div#content>div.addon-listitem',
     'search.cpan.org' : "body>p[small]",
 
