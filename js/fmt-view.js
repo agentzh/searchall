@@ -11,7 +11,7 @@ var Patterns = {
     'so.163.com'      : 'body>div>div.r',
     'addons.mozilla.org' : 'div#container>div#content>div.addon-listitem',
     'search.yahoo.com': "div#yschweb>ol>li",
-    //'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
+    'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
     'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
     'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
     'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td'
