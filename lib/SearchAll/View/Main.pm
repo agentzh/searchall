@@ -9,10 +9,11 @@ my @URLs = qw(
     www.google.cn
     www.yahoo.cn
     www.baidu.com
-    image.baidu.com
     www.yisou.com
     www.sogou.com
     so.163.com
+    images.search.yahoo.com
+    image.baidu.com
     search.yahoo.com
     www.google.com/en
     www.ask.com

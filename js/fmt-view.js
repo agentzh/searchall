@@ -1,8 +1,6 @@
 var Patterns = {
     'www.baidu.cn'    : "tbody>tr>td.f",
     'www.baidu.com'   : "tbody>tr>td.f",
-    'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
-    'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
     'www.google.cn'   : "div.g[h2]",
     'www.google.com'  : "div.g[h2]",
     'www.yisou.com'   : "div.web>ol>li",
@@ -13,7 +11,10 @@ var Patterns = {
     'so.163.com'      : 'body>div>div.r',
     'addons.mozilla.org' : 'div#container>div#content>div.addon-listitem',
     'search.yahoo.com': "div#yschweb>ol>li",
-    'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div"
+    'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
+    'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
+    'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
+    'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td'
 };
 
 function isEmpty (html) {
