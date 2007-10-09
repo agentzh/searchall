@@ -1,6 +1,8 @@
 var Patterns = {
     'www.baidu.cn'    : "tbody>tr>td.f",
-    'www.baidu.com'    : "tbody>tr>td.f",
+    'www.baidu.com'   : "tbody>tr>td.f",
+    'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
+    'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
     'www.google.cn'   : "div.g[h2]",
     'www.google.com'  : "div.g[h2]",
     'www.yisou.com'   : "div.web>ol>li",
