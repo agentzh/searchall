@@ -59,13 +59,17 @@ Later...
 * Add "Next" and "Previous" buttons.  [done]
 * Add a splash window before the main window shows up (splash.js and splash.xul).  [canceled]
 * Move the local repos from yuting++'s loki/agentz/ to hack/.  [done]
+* Eliminate potential errors in page loading timers.  [done]
 
-* Eliminate potential errors in page loading timers.
+* Add a "Try mining the original page" link to force mining the patterns.
+* Add a button for testing the speed of the sites in the results via the AJAX head request.
+* Add a SearchAll button to FF's context menu so as to searchall the selected words in arbitrary web pages.
 * Fix the checkbox + splitter toggling bug.
 * Add the Merged View to merge the search results from different sites.
 * Use the getter/setter feature to reimplement our own JS classes.
 * Add test-timer.js to test the Timer class in timer.js.
 * Implement features as in http://www.langreiter.com/exec/yahoo-vs-google.html?q=Perl using SVG.
+* Implement an XPCOM component for desktop searching.
 
 XUL::App's TODO:
 * Add support for the --profile option, like this:
