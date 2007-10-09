@@ -46,6 +46,9 @@ Browser.fn = Browser.prototype = {
             nodes = $("button", this._form);
         //if (nodes.length == 0)
             //error("button not found!");
+        if (nodes.length == 0) {
+            nodes = $(this._form);
+        }
         return nodes;
     },
     homePage: function () {
@@ -74,13 +77,23 @@ Browser.fn = Browser.prototype = {
     doSearch: function (query) {
         //showDOM(this.document());
         //this.goHome();
-        this.textbox().val(query);
-        this.textbox().blur();
+        var textboxes = this.textbox();
+        textboxes.val(query);
+        textboxes.blur();
         myTimer.start(this.hostname());
         //delete top.location;
         top.watch("location", watchAssignment);
         top.location.watch("href", watchAssignment);
-        this.button()[0].click();
+        //var buttons = this.button();
+        /*
+        try {
+            buttons[0].click();
+        } catch (e) {
+            buttons.click();
+        }
+        */
+        var textbox = textboxes[0];
+        info("Sent the enter key: " + sendKey('enter', textbox));
     },
 };
 

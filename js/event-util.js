@@ -1,5 +1,5 @@
 /**
- * Send a mouse event to the node with id aTarget. The "event" passed in to
+ * Send a mouse event to the node aTarget. The "event" passed in to
  * aEvent is just a JavaScript object with the properties set that the real
  * mouse event object should have. This includes the type of the mouse event.
  * E.g. to send an click event to the node with id 'node' you might do this:
@@ -40,5 +40,67 @@ function sendMouseEvent(aEvent, aTarget) {
                        buttonArg, relatedTargetArg);
 
   aTarget.dispatchEvent(event);
+}
+
+/**
+ * Send the non-character key aKey to the node aTarget.
+ * The name of the key should be a lowercase
+ * version of the part that comes after "DOM_VK_" in the KeyEvent constant
+ * name for this key.  No modifiers are handled at this point.
+ *
+ * Returns true if the keypress event was accepted (no calls to preventDefault
+ * or anything like that), false otherwise.
+ */
+function sendKey(aKey, aTarget) {
+  keyName = "DOM_VK_" + aKey.toUpperCase();
+
+  if (!KeyEvent[keyName]) {
+    throw "Unknown key: " + keyName;
+  }
+
+  return __doEventDispatch(aTarget, 0, KeyEvent[keyName], false);
+}
+
+/**
+ * Actually perform event dispatch given a charCode, keyCode, and boolean for
+ * whether "shift" was pressed.  Send the event to the node with id aTarget.  If
+ * aTarget is not provided, use "target".
+ *
+ * Returns true if the keypress event was accepted (no calls to preventDefault
+ * or anything like that), false otherwise.
+ */
+function __doEventDispatch(aTarget, aCharCode, aKeyCode, aHasShift) {
+
+  // Make our events trusted
+  netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+
+  var event = document.createEvent("KeyEvents");
+  event.initKeyEvent("keydown", true, true, document.defaultView,
+                     false, false, aHasShift, false,
+                     aKeyCode, 0);
+  var accepted = aTarget.dispatchEvent(event);
+
+  // Cancelling keydown cancels keypress too
+  if (accepted) {
+    event = document.createEvent("KeyEvents");
+    if (aCharCode) {
+      event.initKeyEvent("keypress", true, true, document.defaultView,
+                         false, false, aHasShift, false,
+                         0, aCharCode);
+    } else {
+      event.initKeyEvent("keypress", true, true, document.defaultView,
+                         false, false, aHasShift, false,
+                         aKeyCode, 0);
+    }
+    accepted = aTarget.dispatchEvent(event);
+  }
+
+  // Always send keyup
+  var event = document.createEvent("KeyEvents");
+  event.initKeyEvent("keyup", true, true, document.defaultView,
+                     false, false, aHasShift, false,
+                     aKeyCode, 0);
+  aTarget.dispatchEvent(event);
+  return accepted;
 }
 

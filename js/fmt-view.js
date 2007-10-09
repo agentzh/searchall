@@ -16,6 +16,7 @@ var Patterns = {
     'search.taobao.com'  : "div#Content>div#MainContainer>form>div#ItemList>div#ListView>div.Item",
     'addons.mozilla.org' : 'div#container>div#content>div.addon-listitem',
     'search.cpan.org' : "body>p[small]",
+    'www.amazon.com'  : 'table.searchresults>tbody>tr',
 
     'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
     'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
@@ -28,6 +29,19 @@ var fmtViewHistory = ['0', '0', '0'];
 function isEmpty (html) {
     var res = html.replace(/<[^>]+>|\s+/g, '');
     return /^$/.test(res);
+}
+
+function findShortest (list) {
+    var shortest;
+    for (var i = 0; i < list.length; i++) {
+        var s = list[i];
+        if (shortest == undefined) {
+            shortest = s;
+        } else if (s.length < shortest.length) {
+            shortest = s;
+        }
+    }
+    return shortest;
 }
 
 function gen_fmt_view (index, hostname, doc, forceMining) {
@@ -43,7 +57,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             while (count >= 2) {
                 var patterns = mine_pattern(doc, count, hostname);
                 if (patterns.length > 0) {
-                    pattern = patterns[0];
+                    pattern = findShortest(patterns);
                     //pattern = pattern.replace(/.*>([^>]+>[^>]+>[^>]+)$/, "$1");
 
                     info("Selected: " + hostname + ": pattern: " + pattern);
