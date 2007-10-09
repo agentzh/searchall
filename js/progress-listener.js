@@ -1,6 +1,9 @@
 const WPL = Components.interfaces.nsIWebProgressListener;
 
-function registerMyListener (browser) {
+function registerMyListener (i) {
+    //var myListener = genListener();
+    var browser = browsers[i].browser;
+    var myListener = myListeners[i];
     browser.addProgressListener(myListener, WPL.NOTIFY_STATE_DOCUMENT);
 }
 
@@ -8,7 +11,7 @@ function unregisterMyListener (browser) {
     browser.removeProgressListener(myListener);
 }
 
-function gen_status_msg (data) {
+function genStatusMsg (data) {
     list = [];
     for (var key in data) {
         var pair = [key, data[key]];
@@ -47,7 +50,13 @@ function handleSearchButton (id) {
     return false;
 }
 
-var myListener = {
+var myListeners = [];
+myListeners[0] = genListener(0);
+myListeners[1] = genListener(1);
+myListeners[2] = genListener(2);
+
+function genListener (ind) {
+    return {
     QueryInterface: function (iid) {
         if (iid.equals(Components.interfaces.nsIWebProgressListener) ||
             iid.equals(Components.interfaces.nsISupportsWeakReference) ||
@@ -83,7 +92,7 @@ var myListener = {
                 //hostname = '';
             }
             var doc = progress.DOMWindow.document;
-            var ind = host2ind[hostname];
+            //var ind = host2ind[hostname];
             //if ((flag & STATE_DONE) == STATE_DONE)
             if (!Replies[hostname]) Replies[hostname] = 0;
             num = ++Replies[hostname];
@@ -121,7 +130,7 @@ var myListener = {
                     info(msg);
                     myProgress.setDone(hostname, elapsed);
                     $("#statusbar-display")[0].label =
-                        gen_status_msg(myProgress.tasks);
+                        genStatusMsg(myProgress.tasks);
                 }
             }
             //alert("Hi (0)");
@@ -151,7 +160,7 @@ var myListener = {
                         info(msg);
                         myProgress.setDone(hostname, elapsed);
                         $("#statusbar-display")[0].label =
-                            gen_status_msg(myProgress.tasks);
+                            genStatusMsg(myProgress.tasks);
                     }
                 } catch (e) {
                     info(e);
@@ -218,5 +227,7 @@ var myListener = {
     onStatusChange:function(a,b,c,d){},
     onSecurityChange: function(a,b,c){},
     onLinkIconAvailable: function(a){},
-};
+    };
+}
+
 

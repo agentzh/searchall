@@ -232,9 +232,9 @@ $(window).ready( function () {
     var margin = document.getElementById('prev-button').boxObject.x;
     $("#navigator").css('margin-left', margin + 'px');
 
-    registerMyListener(browser0.browser);
-    registerMyListener(browser1.browser);
-    registerMyListener(browser2.browser);
+    registerMyListener(0);
+    registerMyListener(1);
+    registerMyListener(2);
 
     progressmeters = $("#status-progress");
     for (var i = 0; i < 3; i++)
