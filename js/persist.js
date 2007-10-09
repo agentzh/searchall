@@ -98,7 +98,8 @@ function set_home (i, home) {
     //info("Setting host2ind " + hostname + " => " + i);
     //host2ind[hostname] = i;
 
-    setTimeout(function () { 
+    setTimeout(function () {
+        noMining[i] = true;
         browsers[i].goHome(home);
         $("#search-box").focus();
     }, 500);

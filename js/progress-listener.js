@@ -139,7 +139,7 @@ function genListener (ind) {
                 //browsers[i].browser.contentWindow.blur();
             //info("focusing search box... (2)");
             // Ensure we get the focus...
-            if (flag & WPL.STATE_IS_WINDOW) {
+            if (flag & WPL.STATE_IS_NETWORK) {
                 try {
                     var val = 100 * myProgress.percent();
                     var progressmeter = $("#status-progress");
@@ -182,6 +182,7 @@ function genListener (ind) {
                     var query = $("#search-box").val();
                     //ind = host2ind[hostname];
                     info("Clicking " + ind + " for host " + hostname);
+                    noMining[ind] = false;
                     browsers[ind].doSearch(query);
                     //$("#search-button")[0].click();
                     //$("#search-box").focus();
@@ -191,9 +192,19 @@ function genListener (ind) {
                 info(hostname + " loaded.");
                 var doc = progress.DOMWindow.document;
                 Done[ind] = true;
-                if ($("#search-box").val() != '' && browsers[ind].uri != browsers[ind].homePage) {
-                    showDOM(doc, hostname);
-                    gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
+                if (noMining[ind]) { info("No mining!!!"); }
+                if ($("#search-box").val() != '') {
+                    if (noMining[ind]) {
+                        alert("No mining!!!");
+                    } else {
+                    //info("XXX: currentURI: " + browsers[ind].uri().prePath);
+                    //info("XXX: homePage: " + browsers[ind].homePage());
+                    //if (browsers[ind].uri() == browsers[ind].homePage()) {
+                        //alert("Hiya! " + browsers[ind].uri());
+                    //}
+                        showDOM(doc, hostname);
+                        gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
+                    }
                 }
                 for (var i = 0; i < browsers.length; i++) {
                     if (browsers[i].document() == doc) {

@@ -1,3 +1,5 @@
+var noMining = [false, false, false];
+
 var browser0 = new Browser("#browser-0");
 var browser1 = new Browser("#browser-1");
 var browser2 = new Browser("#browser-2");
@@ -47,8 +49,10 @@ $("#search-button").click( function () {
     //JJJ(progressmeters[0]);
 
     progressmeters[0].value = 0;
-    for (var i = 0; i < 3; i++)
+    for (var i = 0; i < 3; i++) {
+        noMining[i] = false;
         browsers[i].doSearch(query);
+    }
 } );
 
 // auto-submit if the user presses the Enter key

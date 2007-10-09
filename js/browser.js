@@ -1,3 +1,4 @@
+
 var Browser = function (a) {
     return this.init(a);
 };

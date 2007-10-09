@@ -53,6 +53,7 @@ function gotoNext (i) {
 
     setTimeout (function () {
         if (! Done[i]) {
+            noMining[i] = false;
             gen_fmt_view(i, browsers[i].hostname(), doc, false/* don't force mining */);
         }
     }, 1000);
