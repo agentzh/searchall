@@ -96,7 +96,7 @@ function genListener (ind) {
             //if ((flag & STATE_DONE) == STATE_DONE)
             if (!Replies[hostname]) Replies[hostname] = 0;
             num = ++Replies[hostname];
-            if (ind == undefined) {
+            if (hostname == undefined) {
                 //alert("ind undefined!");
                 if (num == 4) {
                     var progressmeter = $("#status-progress");
@@ -181,6 +181,7 @@ function genListener (ind) {
                     //host2ind[hostname] = ind;
                     var query = $("#search-box").val();
                     //ind = host2ind[hostname];
+                    info("Autosubmitting...");
                     info("Clicking " + ind + " for host " + hostname);
                     noMining[ind] = false;
                     browsers[ind].doSearch(query);

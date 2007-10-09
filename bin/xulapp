@@ -110,10 +110,7 @@ $op_table = {
     setup => sub {
         gen_manifest($app_name);
         shell("cp js/*.js tmp/content/");
-        shell("cp icons/*.png tmp/content/");
-        shell("cp icons/*.gif tmp/content/");
-        shell("cp icons/*.jpg tmp/content/");
-        shell("cp icons/*.jpeg tmp/content/");
+        shell("cp icons/*.* tmp/content/");
         shell("cp js/*.html tmp/content/");
         shell("cp css/*.css tmp/content/");
         shell("cp -r js/thirdparty/* tmp/content/");
