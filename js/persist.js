@@ -102,6 +102,6 @@ function set_home (i, home) {
         noMining[i] = true;
         browsers[i].goHome(home);
         $("#search-box").focus();
-    }, 500);
+    }, 0);
 }
 
