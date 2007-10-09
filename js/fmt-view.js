@@ -89,6 +89,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         Debug.log("WARNING: fmt_view_doc not found.");
         return;
     }
+    $("h1#default", fmt_view_doc).hide();
 
     var html = $("body", doc).html();
     //info("XXX WWW" + html);
@@ -99,7 +100,6 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
     }
     fmtViewHistory[index] = html;
 
-    $("h1#default", fmt_view_doc).hide();
     $("span#loading", fmt_view_doc).hide();
 
     Debug.log(hostname + ": " + list.length);

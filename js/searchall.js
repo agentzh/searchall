@@ -30,13 +30,11 @@ $(window).unload( function () {
 $("#search-button").click( function () {
     //browser.url = 'about:blank';
     //$("#fmt-view")[0];
-    var browser = $("#fmt-view")[0];
-    if (!browser) return;
-    var fmt_view_doc = browser.contentDocument;
-    if (!fmt_view_doc) {
-        Debug.log("WARNING: fmt_view_doc not found.");
-    } else {
-        $("table#content>tbody", fmt_view_doc)[0].innerHTML = '';
+
+    var doc = getFmtViewDoc();
+    if (doc) {
+        $("h1#default", doc).hide();
+        $("table#content>tbody", doc)[0].innerHTML = '';
     }
 
     var query = $("#search-box").val();

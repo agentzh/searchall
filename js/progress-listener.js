@@ -80,7 +80,7 @@ function genListener (ind) {
             // can't tell the *first* request.
             //myTimer.start(hostname);
             //alert("Wait a moment!\n" + request.URI);
-            $("#search-box").focus();
+            //$("#search-box").focus();
         }
         if (flag & WPL.STATE_STOP) {
             var hostname;
@@ -171,6 +171,9 @@ function genListener (ind) {
                     if (!browser) return;
                     var fmt_view_doc = browser.contentDocument;
                     $("span#loading", fmt_view_doc).hide();
+                    if (AutoSearch[ind]) {
+                        $("h1#default", fmt_view_doc).hide();
+                    }
                 } catch (e) {
                     info(e);
                 }

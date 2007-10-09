@@ -5,6 +5,12 @@ var Replies = {};
 var myProgress = new Progress(3);
 var prefs;
 
+function getFmtViewDoc () {
+    var browser = $("#fmt-view")[0];
+    if (!browser) return;
+    return browser.contentDocument;
+}
+
 $(document).ready( function () {
     prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
     prefs = prefs.getBranch("extensions.searchall.");
@@ -16,6 +22,7 @@ $(document).ready( function () {
         info("No query found!");
     }
     if (query) {
+        //alert("Found query!");
         //alert("Found query: " + query);
         $("#search-box")[0].value = query;
         prefs.setCharPref('query', '');
@@ -76,13 +83,16 @@ $(document).ready( function () {
         //alert("Received from web page: " +
             //evt.target.getAttribute("query"));
         var query = evt.target.getAttribute('query');
+        //alert("HERE 0 0");
         if (query != undefined && query != '') {
+            //alert("HERE 1 0");
+            //var fmt_view_doc = getFmtViewDoc();
+            //if (fmt_view_doc) $("h1#default", fmt_view_doc).hide();
             $("#search-box")[0].value = query;
             $("#search-button")[0].click();
         }
     };
     document.addEventListener("SearchAllEvent", listener, false, true);
-
 
 } );
 
