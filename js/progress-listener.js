@@ -192,19 +192,15 @@ function genListener (ind) {
                 info(hostname + " loaded.");
                 var doc = progress.DOMWindow.document;
                 Done[ind] = true;
-                if (noMining[ind]) { info("No mining!!!"); }
-                if ($("#search-box").val() != '') {
-                    if (noMining[ind]) {
-                        alert("No mining!!!");
-                    } else {
+                //if (noMining[ind]) { info("No mining!!!"); }
+                if ($("#search-box").val() != '' && ! noMining[ind]) {
                     //info("XXX: currentURI: " + browsers[ind].uri().prePath);
                     //info("XXX: homePage: " + browsers[ind].homePage());
                     //if (browsers[ind].uri() == browsers[ind].homePage()) {
                         //alert("Hiya! " + browsers[ind].uri());
                     //}
-                        showDOM(doc, hostname);
-                        gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
-                    }
+                    showDOM(doc, hostname);
+                    gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
                 }
                 for (var i = 0; i < browsers.length; i++) {
                     if (browsers[i].document() == doc) {

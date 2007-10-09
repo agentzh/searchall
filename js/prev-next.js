@@ -53,8 +53,10 @@ function gotoNext (i) {
 
     setTimeout (function () {
         if (! Done[i]) {
+            var hostname = browsers[i].hostname();
+            info("Last resort for paging is running: " + hostname);
             noMining[i] = false;
-            gen_fmt_view(i, browsers[i].hostname(), doc, false/* don't force mining */);
+            gen_fmt_view(i, hostname, doc, false/* don't force mining */);
         }
     }, 1000);
 }

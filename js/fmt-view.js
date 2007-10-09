@@ -4,8 +4,8 @@ var Patterns = {
     'www.google.cn'   : "div.g[h2]",
     'www.google.com'  : "div.g[h2]",
     'www.yisou.com'   : "div.web>ol>li",
-    'so.sohu.com'     : "div#content>div",
-    'www.sogou.com'   : "div#content>div",
+    'so.sohu.com'     : "body>div#content>div",
+    'www.sogou.com'   : "body>div#content>div",
     'search.cpan.org' : "body>p[small]",
     'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
     'so.163.com'      : 'body>div>div.r',
@@ -16,6 +16,8 @@ var Patterns = {
     'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
     'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td'
 };
+
+var fmtViewHistory = ['0', '0', '0'];
 
 function isEmpty (html) {
     var res = html.replace(/<[^>]+>|\s+/g, '');
@@ -68,6 +70,16 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             Debug.log("WARNING: fmt_view_doc not found.");
             return;
         }
+
+        var html = $("body", doc).html();
+        //info("XXX WWW" + html);
+        //info("XXX QQQ" + fmtViewHistory[index]);
+        if (fmtViewHistory[index] == html) {
+            //alert("No change!");
+            return;
+        }
+        fmtViewHistory[index] = html;
+
         $("h1#default", fmt_view_doc).hide();
         $("span#loading", fmt_view_doc).hide();
 
@@ -147,6 +159,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
                 $(cols[0]).html("Sorry, no results found :(");
             }
         }
+        //fmtViewHistory = snippets;
 
         //showDOM(fmt_view_doc, "DOM");
         //alert(html);
