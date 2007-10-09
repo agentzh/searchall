@@ -6,15 +6,18 @@ var Patterns = {
     'www.yisou.com'   : "div.web>ol>li",
     'so.sohu.com'     : "body>div#content>div",
     'www.sogou.com'   : "body>div#content>div",
-    'search.cpan.org' : "body>p[small]",
     'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
     'so.163.com'      : 'body>div>div.r',
-    'addons.mozilla.org' : 'div#container>div#content>div.addon-listitem',
     'search.yahoo.com': "div#yschweb>ol>li",
     'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
+
+    'addons.mozilla.org' : 'div#container>div#content>div.addon-listitem',
+    'search.cpan.org' : "body>p[small]",
+
     'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
     'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
-    'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td'
+    'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
+    'image.cn.yahoo.com': 'body.y>div#bd>div.yui-g>div.cnt>ul>li'
 };
 
 var fmtViewHistory = ['0', '0', '0'];

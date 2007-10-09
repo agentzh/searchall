@@ -12,13 +12,15 @@ my @URLs = qw(
     www.yisou.com
     www.sogou.com
     so.163.com
-    images.search.yahoo.com
-    image.baidu.com
     search.yahoo.com
     www.google.com/en
     www.ask.com
     addons.mozilla.org/search
     search.cpan.org
+
+    images.search.yahoo.com
+    image.baidu.com
+    image.cn.yahoo.com
 );
 
 template main => sub {
