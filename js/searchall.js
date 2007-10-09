@@ -22,7 +22,7 @@ $(window).unload( function () {
 } );
 */
 
-var host2ind = {};
+//var host2ind = {};
 
 //alert($("#search-box").focus());
 $("#search-button").click( function () {
@@ -47,13 +47,13 @@ $("#search-button").click( function () {
     //JJJ(progressmeters[0]);
 
     progressmeters[0].value = 0;
-    host2ind[browser0.hostname()] = 0;
+    //host2ind[browser0.hostname()] = 0;
     browser0.doSearch(query);
 
-    host2ind[browser1.hostname()] = 1;
+    //host2ind[browser1.hostname()] = 1;
     browser1.doSearch(query);
 
-    host2ind[browser2.hostname()] = 2;
+    //host2ind[browser2.hostname()] = 2;
     browser2.doSearch(query);
 } );
 
@@ -228,13 +228,10 @@ var Toggle = false;
 $(window).ready( function () {
     for (var i = 0; i < 3; i++) {
         handleCheckbox(i);
+        registerMyListener(i);
     }
     var margin = document.getElementById('prev-button').boxObject.x;
     $("#navigator").css('margin-left', margin + 'px');
-
-    registerMyListener(0);
-    registerMyListener(1);
-    registerMyListener(2);
 
     progressmeters = $("#status-progress");
     for (var i = 0; i < 3; i++)

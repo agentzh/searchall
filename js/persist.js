@@ -95,8 +95,8 @@ function set_home (i, home) {
     } else {
         hostname = browsers[i].hostname();
     }
-    info("Setting host2ind " + hostname + " => " + i);
-    host2ind[hostname] = i;
+    //info("Setting host2ind " + hostname + " => " + i);
+    //host2ind[hostname] = i;
 
     setTimeout(function () { 
         browsers[i].goHome(home);

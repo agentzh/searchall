@@ -180,7 +180,7 @@ function genListener (ind) {
                     //alert("Clicking...");
                     //host2ind[hostname] = ind;
                     var query = $("#search-box").val();
-                    ind = host2ind[hostname];
+                    //ind = host2ind[hostname];
                     info("Clicking " + ind + " for host " + hostname);
                     browsers[ind].doSearch(query);
                     //$("#search-button")[0].click();
