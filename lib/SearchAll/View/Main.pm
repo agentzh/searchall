@@ -8,13 +8,14 @@ use Template::Declare::Tags 'XUL';
 my @URLs = qw(
     www.google.cn
     www.yahoo.cn
-    www.baidu.cn
+    www.baidu.com
     www.yisou.com
     www.sogou.com
     so.163.com
+    search.yahoo.com
     www.google.com/en
     www.ask.com
-    search.yahoo.com
+    addons.mozilla.org/search
     search.cpan.org
 );
 
