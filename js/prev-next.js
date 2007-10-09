@@ -30,14 +30,16 @@ function gotoNext (i) {
             }
         }
     }
+    var hostname = browsers[i].hostname();
     if (links.length == 0) {
-        myProgress.setDone(browsers[i].hostname(), 'N/A');
+        myProgress.setDone(hostname, 'N/A');
         error("No next button found for browser " + i);
         return;
     }
 
     var link = links[links.length-1];
     Done[i] = false;
+    myTimer.start(hostname);
     try {
         sendMouseEvent({type:'click'}, link);
     } catch (e) {
@@ -62,7 +64,6 @@ function gotoNext (i) {
 
     setTimeout (function () {
         if (! Done[i]) {
-            var hostname = browsers[i].hostname();
             info("Last resort for paging is running: " + hostname);
             noMining[i] = false;
             gen_fmt_view(i, hostname, doc, false/* don't force mining */);
@@ -85,15 +86,17 @@ function gotoPrev (i) {
             }
         }
     }
+    var hostname = browsers[i].hostname();
     if (links.length == 0) {
         error("No prev button found for browser " + i);
         Done[i] = true;
-        myProgress.setDone(browsers[i].hostname(), 'N/A');
+        myProgress.setDone(hostname, 'N/A');
         return;
     }
 
     var link = links[links.length-1];
     Done[i] = false;
+    myTimer.start(hostname);
     try {
         sendMouseEvent({type:'click'}, link);
     } catch (e) {
