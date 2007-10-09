@@ -47,6 +47,9 @@ Browser.fn = Browser.prototype = {
             //error("button not found!");
         return nodes;
     },
+    homePage: function () {
+        return this.browser.homePage;
+    },
     goHome: function (newHome) {
         Replies = {};
         myProgress.reset(1);

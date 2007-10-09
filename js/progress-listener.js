@@ -191,7 +191,7 @@ function genListener (ind) {
                 info(hostname + " loaded.");
                 var doc = progress.DOMWindow.document;
                 Done[ind] = true;
-                if ($("#search-box").val() != '') {
+                if ($("#search-box").val() != '' && browsers[ind].uri != browsers[ind].homePage) {
                     showDOM(doc, hostname);
                     gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
                 }
