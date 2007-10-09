@@ -204,6 +204,7 @@ function genListener (ind) {
                         //alert("Hiya! " + browsers[ind].uri());
                     //}
                     showDOM(doc, hostname);
+                    //alert("Hiya: " + hostname);
                     gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
                 }
                 for (var i = 0; i < browsers.length; i++) {

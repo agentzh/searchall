@@ -90,6 +90,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         return;
     }
     $("h1#default", fmt_view_doc).hide();
+    //alert("Here!" + index);
 
     var html = $("body", doc).html();
     //info("XXX WWW" + html);
@@ -178,6 +179,11 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             $(cols[0]).html("Sorry, no results found :(");
         }
     }
+    setTimeout(function () {
+        //alert("HEEEE!!!");
+        $(".col-" + index + ">img", fmt_view_doc).hide();
+    }, 500);
+
     //fmtViewHistory = snippets;
 
     //showDOM(fmt_view_doc, "DOM");

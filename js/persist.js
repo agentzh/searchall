@@ -108,10 +108,15 @@ function set_home (i, home) {
     //info("Setting host2ind " + hostname + " => " + i);
     //host2ind[hostname] = i;
 
+    var delay = 0;
+    if ($("page").length == 0) {
+        // such a delay is necessary in 'window mode'
+        delay = 500;
+    }
     setTimeout(function () {
         noMining[i] = true;
         browsers[i].goHome(home);
         $("#search-box").focus();
-    }, 0);
+    }, delay);
 }
 
