@@ -47,14 +47,8 @@ $("#search-button").click( function () {
     //JJJ(progressmeters[0]);
 
     progressmeters[0].value = 0;
-    //host2ind[browser0.hostname()] = 0;
-    browser0.doSearch(query);
-
-    //host2ind[browser1.hostname()] = 1;
-    browser1.doSearch(query);
-
-    //host2ind[browser2.hostname()] = 2;
-    browser2.doSearch(query);
+    for (var i = 0; i < 3; i++)
+        browsers[i].doSearch(query);
 } );
 
 // auto-submit if the user presses the Enter key
