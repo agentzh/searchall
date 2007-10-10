@@ -25,7 +25,7 @@ $(document).ready( function () {
         //alert("Found query!");
         //alert("Found query: " + query);
         $("#search-box")[0].value = query;
-        prefs.setCharPref('query', '');
+        //prefs.setCharPref('query', '');
         AutoSearch = [true, true, true];
     }
 

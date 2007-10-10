@@ -1,3 +1,4 @@
+var FailureCount = 0;
 
 var Browser = function (a) {
     return this.init(a);
@@ -91,7 +92,17 @@ Browser.fn = Browser.prototype = {
         }
         */
         var textbox = textboxes[0];
-        info("Sent the enter key: " + sendKey('enter', textbox));
+        var obj = this;
+        if (!textbox && FailureCount <= 3) {
+            FailureCount++;
+            setTimeout(function () {
+                info("Retrying doSearch..." + FailureCount);
+                obj.doSearch(query);
+            }, 500);
+        } else {
+            FailureCount = 0;
+            info("Sent the enter key: " + sendKey('enter', textbox));
+        }
     },
 };
 
