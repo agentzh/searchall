@@ -173,6 +173,20 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         snippets.push(snippet);
     }
 
+    if (hostname.match('images.google')) {
+        var tmp = [];
+        for (var i = 0; i < snippets.length; i++) {
+            var snip = snippets[i];
+            if (snip == undefined) continue;
+            if (snip.match(/<img/i)) {
+                snip += '<br />' + snippets[i+3];
+                snippets[i+3] = undefined;
+            }
+            tmp.push(snip);
+        }
+        snippets = tmp;
+    }
+
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
         var rows = $(".row", fmt_view_doc);
