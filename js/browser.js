@@ -98,7 +98,7 @@ Browser.fn = Browser.prototype = {
             setTimeout(function () {
                 info("Retrying doSearch..." + FailureCount);
                 obj.doSearch(query);
-            }, 500);
+            }, 1000);
         } else {
             try {
                 info("Sent the enter key: " + sendKey('enter', textbox));
@@ -108,7 +108,7 @@ Browser.fn = Browser.prototype = {
                 setTimeout(function () {
                     info("Retrying doSearch..." + FailureCount);
                     obj.doSearch(query);
-                }, 500);
+                }, 1000);
             }
         }
     },
