@@ -82,8 +82,6 @@ Browser.fn = Browser.prototype = {
         textboxes.blur();
         myTimer.start(this.hostname());
         //delete top.location;
-        top.watch("location", watchAssignment);
-        top.location.watch("href", watchAssignment);
         //var buttons = this.button();
         /*
         try {

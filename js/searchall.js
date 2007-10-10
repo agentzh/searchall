@@ -222,6 +222,10 @@ function handleCheckbox (i) {
 var Toggle = false;
 
 $(window).ready( function () {
+
+    top.watch("location", watchAssignment);
+    top.location.watch("href", watchAssignment);
+
     for (var i = 0; i < 3; i++) {
         handleCheckbox(i);
         registerMyListener(i);

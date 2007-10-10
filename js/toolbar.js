@@ -1,4 +1,15 @@
+function getAnonElem (node, path) {
+    var elems = path.split(/>/);
+    alert("Found elems: " + elems.length);
+    var nodes = document.getAnonymousNodes(gBrowser);
+    if (nodes == 0) return null;
+
+}
+
 function toSearchAll (uri, query, event) {
+    //alert("Anonymouse Nodes: " + node);
+    //var node = document.getAnonymousElementByAttribute(gBrowser, 'class', 'tabs-stack');
+    //alert("Anonymouse Nodes: " + node);
     if (query == undefined)
         query = "";
     //alert("query: " + query);
@@ -6,6 +17,8 @@ function toSearchAll (uri, query, event) {
     //var win = window.open(uri, "_blank", winopts);
     var doc = gBrowser.contentDocument;
     if (doc.location == uri) {
+        //alert("Got tabbrowser: " + gBrowser.nodeName);
+        //alert("Length: " + $(".tab-icon-image", ).length);
         //alert("Hit shortcut! " + query);
         if (query != '') {
             // XXX need to use event to pass data...
