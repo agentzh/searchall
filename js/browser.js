@@ -100,8 +100,16 @@ Browser.fn = Browser.prototype = {
                 obj.doSearch(query);
             }, 500);
         } else {
-            FailureCount = 0;
-            info("Sent the enter key: " + sendKey('enter', textbox));
+            try {
+                info("Sent the enter key: " + sendKey('enter', textbox));
+                FailureCount = 0;
+            } catch (e) {
+                FailureCount++;
+                setTimeout(function () {
+                    info("Retrying doSearch..." + FailureCount);
+                    obj.doSearch(query);
+                }, 500);
+            }
         }
     },
 };
