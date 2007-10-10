@@ -140,6 +140,7 @@ function genListener (ind) {
             //info("focusing search box... (2)");
             // Ensure we get the focus...
             if (flag & WPL.STATE_IS_NETWORK) {
+                //if (hostname.match(/taobao/)) alert("processing " + hostname);
                 try {
                     var val = 100 * myProgress.percent();
                     var progressmeter = $("#status-progress");
