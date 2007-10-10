@@ -22,7 +22,7 @@ template main => sub {
             attr { id => "BrowserToolbarPalette" }
             toolbaritem {
                 attr {
-                    id => "tb-searchall-new",
+                    id => "sa-toolbar-new",
                     align => "center",
                     persist => "width",
                     crop => 'end',
