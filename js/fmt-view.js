@@ -1,3 +1,6 @@
+var RootPath;
+var CurPath;
+
 var Patterns = {
     'www.baidu.cn'    : "tbody>tr>td.f",
     'www.baidu.com'   : "tbody>tr>td.f",
@@ -18,16 +21,24 @@ var Patterns = {
     'search.cpan.org' : "body>p[small]",
     'www.amazon.com'  : 'table.searchresults>tbody>tr',
 
+    'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
+    'images.google.com' : 'div#ImgContent>table>tbody>tr>td',
+    'images.google.cn' : 'div#ImgContent>table>tbody>tr>td',
     'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
     'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
-    'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
     'image.cn.yahoo.com': 'body.y>div#bd>div.yui-g>div.cnt>ul>li'
 };
 
 var fmtViewHistory = ['0', '0', '0'];
 
 function isEmpty (html) {
-    var res = html.replace(/<[^>]+>|\s+/g, '');
+    var res = html.replace(/<(\w+)[^>]+>|\s+/g, function (s, tag) {
+        if (tag.toLowerCase() == 'img') {
+            return s;
+        } else {
+            return '';
+        }
+    });
     return /^$/.test(res);
 }
 
@@ -42,6 +53,28 @@ function findShortest (list) {
         }
     }
     return shortest;
+}
+
+function replacer (s, prefix, url) {
+    //info("Found str: " + s);
+    //info("Found prefix: " + prefix);
+    //info("Found url: " + url);
+    if ( /^\w+:\/\//.test(url) ) return s;
+    if (url[0] == '/') {
+        //alert("Hey!" + url);
+        return prefix + RootPath + url;
+    }
+    return prefix + CurPath + url;
+}
+
+function rel2abs (html, loc) {
+    RootPath = loc.protocol + "//" + loc.host;
+    CurPath =  RootPath + loc.pathname.replace(/\/([^\/]*)$/, '/');
+    //info("CurPath: " + CurPath);
+    //info("RootPath: " + RootPath);
+    html = html.replace(/(<[^>]+href\s*=\s*")([^"]+)/ig, replacer);
+    //if (RootPath.match(/google/)) alert(html);
+    return html;
 }
 
 function gen_fmt_view (index, hostname, doc, forceMining) {
@@ -104,6 +137,8 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
     $("span#loading", fmt_view_doc).hide();
 
     Debug.log(hostname + ": " + list.length);
+    //info("Path name: " + path);
+    //alert(path);
     var snippets = [];
     for (var i = 0; i < list.length; i++) {
         //Debug.log(hostname + ": " + $(list[i]).text());
@@ -128,7 +163,8 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             .replace(/<\/?tr[^>]*>/ig, '')
             .replace(/<\/?td[^>]*>/ig, '')
             .replace(/<a /ig, '<a target="_blank" ');
-        //Debug.log(hostname + snippet);
+        snippet = rel2abs(snippet, doc.location);
+        //info(hostname + snippet);
         //snippet = snippet.replace(/[\w.?=&\/]{45,45}/g, "$1<wbr/>");
         if (isEmpty(snippet)) {
             //alert("It's empty!");

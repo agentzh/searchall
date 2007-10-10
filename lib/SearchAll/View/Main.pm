@@ -21,9 +21,11 @@ my @URLs = qw(
     www.amazon.com
     search.cpan.org
 
+    images.google.com
+    images.google.cn
+    image.cn.yahoo.com
     images.search.yahoo.com
     image.baidu.com
-    image.cn.yahoo.com
 );
 
 template main => sub {
