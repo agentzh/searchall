@@ -20,6 +20,9 @@ template main => sub {
         }
         toolbarpalette {
             attr { id => "BrowserToolbarPalette" }
+
+=start comment
+
             toolbaritem {
                 attr {
                     id => "sa-toolbar-new",
@@ -37,6 +40,9 @@ template main => sub {
                     }
                 }
             }
+
+=cut
+
             toolbaritem {
                 attr {
                     id => "tb-searchall-box",
