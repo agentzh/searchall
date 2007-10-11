@@ -33,6 +33,9 @@ $(document).ready( function () {
         selectedTabIndex = prefs.getIntPref('tab.lastSelected');
         //$("#view-tabs").attr("lastSelected");
     } catch (e) { error(e); }
+    if ($("page").length == 0 && selectedTabIndex == 0) {
+        selectedTabIndex = 1;
+    }
     if (selectedTabIndex == undefined) {
         if ($("page").length == 0)
             selectedTabIndex = 0;
