@@ -1,0 +1,18 @@
+SearchAll is a handy side-by-side search engine comparison tool which allows you to search at most 3 different search engines simultaneously and benchmark their performance in the status bar.
+
+With this extension, you can compare 2 to 3 search engines at a time. There's a long list of default search engines that you can choose from (including search.cpan.org!).
+
+In fact, SearchAll allows you to enter your own site's URL in those editable drop-down lists and there's a general-purpose data extracting algorithm in SearchAll for extracting items from unknown site's results pages. Unfortunately, the pattern mining algorithm is a bit slow on ordinary machines and it does not work for 100% of the sites over the web. Well, we're improving it :)
+
+Currently only the sites' raw HTML pages and a simple "Formatted View" are shown to the user. We'll add more comprehensive and more intuitive views and graphics for the search results in the near future. Please stay tuned!
+
+This project was initiated and has been sponsored by the Yahoo! China (http://cn.yahoo.com) company and opensourced under the MIT license.
+
+One of our buzzwords (for extension developers) is that there's 0 line of XUL/RDF/XML in our project's source tree. The UI stuff is totally scripted in Perl. Thanks to Jesse Vincent's Template::Declare module on CPAN.
+
+You can always get the latest source code of this project from the following SVN repository:
+
+    http://svn.openfoundry.org/searchall/
+
+If you like to help, please let us know. We're very willing to deliver the commit bit like the Pugs team ;)
+
