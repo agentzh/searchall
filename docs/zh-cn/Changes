@@ -1,0 +1,29 @@
+=Changes for release 0.1.8
+* Added the folowing new US search engines to the default URI list:
+   www.amazon.com 
+   www.ask.com
+   addons.mozilla.org/search
+* Added the following new Chinese search engines to the default URI list: 
+   taobao.com
+   so.163.com
+   www.sogou.com
+* Added the following new image search engines to the default URI list:
+   image.cn.yahoo.com
+   images.google.com
+   images.google.cn
+   image.baidu.com
+* Fixed yisou.com so that SearchAll can work with it in 'page mode'.
+* Fixed the timer for next/prev page button actions.
+* Fixed the hostname hash bug. Now 2 identical SE's (such as 2 yahoo.cn) can work at the same time.
+* Now we use '<<Prev' and 'Next>>' labels instead of arrow icons in the navigation buttons.
+* Set clickSelectsAll for the toolbar's textbox (just like the Google toolbar :)).
+* Fixed a bug for Mac Firefox. Unlike linux and win32, Mac centers the tabs which breaks the UI. thanks cnhackTNT++ for reporting this.
+* Refreshing the .xul page in 'page mode' now (mostly) works.
+* Fixed a bug that baidu.com will show loading animation forever when there's no results at all.
+* Hides 'please enter your queries above' as early as possilbe in 'page mode'.
+* Removed several setTimeout calls in the JS code so as to make things a bit faster.
+* Cached the html so that next/prev page switching is now much more smoothly.
+* Use WPL.STATE_IS_NETWORK instead of STATE_IS_WINDOW to eliminate bogus progressing actions.
+* Improved and optimzied the pattern mining algorithm and implementation.
+* Made the auto-form-submitting code much smarter.
+
