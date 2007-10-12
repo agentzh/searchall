@@ -22,6 +22,7 @@ var Patterns = {
     'search.taobao.com'   : "div#ItemList>div#ListView>div.Item",
     'addons.mozilla.org' : 'div#container>div#content>div.addon-listitem',
     'search.cpan.org' : "body>p[small]",
+    'search.ebay.com' : "form#find>div.ebContainer>div#ebContent>div.ebFrame>table.adTest>tbody>tr>td>table.ebItemlist>tbody>tr.ebHlOdd",
     'www.amazon.com'  : 'table.searchresults>tbody>tr',
 
     'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
@@ -168,7 +169,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             .replace(/<(\/?)th[^>]*>/ig, '<$1h3>')
             .replace(/<a /ig, '<a target="_blank" ');
         snippet = rel2abs(snippet, doc.location);
-        if (hostname.match(/answers/)) info(hostname + snippet);
+        //if (hostname.match(/answers/)) info(hostname + snippet);
         //snippet = snippet.replace(/[\w.?=&\/]{45,45}/g, "$1<wbr/>");
         if (isEmpty(snippet)) {
             //alert("It's empty!");
