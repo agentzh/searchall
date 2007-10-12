@@ -11,6 +11,7 @@ var Patterns = {
     'www.sogou.com'   : "body>div#content>div",
     'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
     'so.163.com'      : 'body>div>div.r',
+    'www.answers.com' : 'div#outline>div#hmiddle>div#new_left>div#Wikipedia>div.content>div#wpcontent>p',
 
     'search.yahoo.com': "div#yschweb>ol>li",
     'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
@@ -34,7 +35,7 @@ var Patterns = {
 var fmtViewHistory = ['0', '0', '0'];
 
 function isEmpty (html) {
-    var res = html.replace(/<(\w+)[^>]+>|\s+/g, function (s, tag) {
+    var res = html.replace(/<\s*\/?\s*(\w+)[^>]*>|\s+/g, function (s, tag) {
         if (tag.toLowerCase() == 'img') {
             return s;
         } else {
@@ -166,7 +167,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             .replace(/<\/?td[^>]*>/ig, '')
             .replace(/<a /ig, '<a target="_blank" ');
         snippet = rel2abs(snippet, doc.location);
-        //info(hostname + snippet);
+        //if (hostname.match(/answers/)) info(hostname + snippet);
         //snippet = snippet.replace(/[\w.?=&\/]{45,45}/g, "$1<wbr/>");
         if (isEmpty(snippet)) {
             //alert("It's empty!");
