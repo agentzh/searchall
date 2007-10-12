@@ -25,6 +25,7 @@ my @URLs = qw(
     www.amazon.com
     search.cpan.org
 
+    www.flickr.com/search
     image.cn.yahoo.com
     images.google.cn
     image.baidu.com

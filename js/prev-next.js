@@ -114,10 +114,15 @@ function gotoPrev (i) {
         }
     } catch (e) { info(e); }
 
-    setTimeout (function () {
+    var guard;
+    guard = function () {
         if (! Done[i]) {
-            gen_fmt_view(i, browsers[i].hostname(), doc, false/* don't force mining */);
+            var success = gen_fmt_view(i, browsers[i].hostname(), doc, false/* don't force mining */);
+            if (!success) {
+                guard();
+            }
         }
-    }, 1000);
+    };
+    setTimeout(guard, 1000);
 }
 

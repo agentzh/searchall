@@ -30,7 +30,8 @@ var Patterns = {
     'images.google.cn' : 'div#ImgContent>table>tbody>tr>td',
     'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
     'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
-    'image.cn.yahoo.com': 'body.y>div#bd>div.yui-g>div.cnt>ul>li'
+    'image.cn.yahoo.com': 'body.y>div#bd>div.yui-g>div.cnt>ul>li',
+    'www.flickr.com' : 'table.DetailResults>tbody>tr'
 };
 
 var fmtViewHistory = ['0', '0', '0'];
@@ -106,7 +107,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         }
         if (!pattern) {
             info("Failed to mine for " + hostname);
-            return;
+            return false;
         }
     }
     //alert("list len: " + list.length);
@@ -120,11 +121,11 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
     */
 
     var browser = $("#fmt-view")[0];
-    if (!browser) return;
+    if (!browser) return false;
     var fmt_view_doc = browser.contentDocument;
     if (!fmt_view_doc) {
         Debug.log("WARNING: fmt_view_doc not found.");
-        return;
+        return false;
     }
     $("h1#default", fmt_view_doc).hide();
     //alert("Here!" + index);
@@ -134,7 +135,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
     //info("XXX QQQ" + fmtViewHistory[index]);
     if (fmtViewHistory[index] == html) {
         //alert("No change!");
-        return;
+        return false;
     }
     fmtViewHistory[index] = html;
 
@@ -253,8 +254,9 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
 
     //fmt_view_col.innerHTML = html;
     //Debug.log(fmt_view_doc.innerHTML);
-    if (!fmt_view_doc.location) { return; }
+    if (!fmt_view_doc.location) { return true; }
     fmt_view_doc.location.hash = '#__top';
+    return true;
 }
 
 
