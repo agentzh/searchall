@@ -11,7 +11,7 @@ var Patterns = {
     'www.sogou.com'   : "body>div#content>div",
     'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
     'so.163.com'      : 'body>div>div.r',
-    'www.answers.com' : 'div#outline>div#hmiddle>div#new_left>div#Wikipedia>div.content>div#wpcontent>p',
+    'www.answers.com' : 'div.content',
 
     'search.yahoo.com': "div#yschweb>ol>li",
     'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
@@ -163,11 +163,12 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             .replace(/<h\d+[^>]*>/ig, '')
             .replace(/<\/?table[^>]*>/ig, '')
             .replace(/<\/?tbody[^>]*>/ig, '')
-            .replace(/<\/?tr[^>]*>/ig, '')
-            .replace(/<\/?td[^>]*>/ig, '')
+            .replace(/<(\/?)tr[^>]*>/ig, '<$1p>')
+            .replace(/<\/?td[^>]*>/ig, '&nbsp;')
+            .replace(/<(\/?)th[^>]*>/ig, '<$1h3>')
             .replace(/<a /ig, '<a target="_blank" ');
         snippet = rel2abs(snippet, doc.location);
-        //if (hostname.match(/answers/)) info(hostname + snippet);
+        if (hostname.match(/answers/)) info(hostname + snippet);
         //snippet = snippet.replace(/[\w.?=&\/]{45,45}/g, "$1<wbr/>");
         if (isEmpty(snippet)) {
             //alert("It's empty!");

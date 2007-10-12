@@ -6,17 +6,14 @@ body {
 
 div { word-wrap: break-word }
 
-table { table-layout:fixed;}
+body>table { table-layout:fixed;}
 
-td {
+body>table>tbody>tr>td {
     /* overflow: auto; */
     overflow: hidden;
     word-break: break-all;
     word-wrap: break-word;
     white-space: normal;
-}
-
-td {
     border: 2px solid #ccc;width:33%;
     vertical-align: top;
     padding: 0.6em;
