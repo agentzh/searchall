@@ -45,6 +45,7 @@ function toSearchAll (uri, query, event) {
         }
 
         openUILink(uri, event, false, true);
+        gBrowser.selectedTab.id = 'searchall';
     }
 }
 

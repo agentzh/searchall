@@ -3,3 +3,7 @@ button {
     font-size: 14px;
 }
 
+.tabbrowser-tab#searchall > .tab-image-middle > .tab-icon > .tab-icon-image {
+    list-style-image: url("chrome://searchall_debug/content/logo-small.png") !important;
+}
+
