@@ -12,9 +12,11 @@ my @URLs = qw(
     www.yisou.com
     www.sogou.com
     so.163.com
+
     search.yahoo.com
     www.google.com/en
     www.ask.com
+    www.a9.com
 
     search1.taobao.com
     addons.mozilla.org/search

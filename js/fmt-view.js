@@ -11,8 +11,10 @@ var Patterns = {
     'www.sogou.com'   : "body>div#content>div",
     'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
     'so.163.com'      : 'body>div>div.r',
+
     'search.yahoo.com': "div#yschweb>ol>li",
     'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
+    'www.a9.com'      : 'td#tdweb>div#bxweb>div#cweb>div.cscrollInfo>div.resBlock',
 
     'www.taobao.com'  : "div#ItemList>div#ListView>div.Item",
     'search1.taobao.com'  : "div#ItemList>div#ListView>div.Item",
