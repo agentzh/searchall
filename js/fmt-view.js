@@ -31,7 +31,8 @@ var Patterns = {
     'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
     'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
     'image.cn.yahoo.com': 'body.y>div#bd>div.yui-g>div.cnt>ul>li',
-    'www.flickr.com' : 'table.DetailResults>tbody>tr'
+    'www.flickr.com' : 'table.DetailResults>tbody>tr',
+    'www.youtube.com' : 'div#mainContent>div>div.vEntry'
 };
 
 var fmtViewHistory = ['0', '0', '0'];
