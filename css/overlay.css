@@ -4,6 +4,6 @@ button {
 }
 
 .tabbrowser-tab#searchall > .tab-image-middle > .tab-icon > .tab-icon-image {
-    list-style-image: url("chrome://searchall_debug/content/logo-small.png");
+    list-style-image: url("chrome://searchall/content/logo-small.png");
 }
 

@@ -17,9 +17,9 @@ BEGIN {
     if (!$operation) {
         die "No operation specified. See -h\n";
     }
-    if ($operation =~ /overlay|debug/) {
-        $XUL::App::APP_NAME .= '_debug';
-    }
+    #if ($operation =~ /overlay|debug/) {
+        #$XUL::App::APP_NAME .= '_debug';
+    #}
 }
 
 use XUL::App;
@@ -29,9 +29,9 @@ if ($@) {
     die "Can't load $file: $!";
 }
 
-if ($operation =~ /overlay|debug/) {
-    $XUL::App::APP_NAME .= '_debug';
-}
+#if ($operation =~ /overlay|debug/) {
+    #$XUL::App::APP_NAME .= '_debug';
+#}
 
 
 if ($operation =~ /debug|bundle|overlay/i) {
