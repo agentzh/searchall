@@ -86,6 +86,19 @@ template main => sub {
             }
         }
 
+        popup {
+            attr { id => "contentAreaContextMenu" }
+            menuitem {
+                attr {
+                    id => "right-click-sa",
+                    label => "SearchAll",
+                    accesskey => "S",
+                    insertafter => "context-selectAll",
+                    oncommand => "contextSearchAll('$URI');",
+                }
+            }
+        }
+
         menupopup {
             attr { id => "menu_ToolsPopup" }
             menuitem {

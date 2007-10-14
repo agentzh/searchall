@@ -61,6 +61,10 @@ Later...
 * Move the local repos from yuting++'s loki/agentz/ to hack/.  [done]
 * Eliminate potential errors in page loading timers.  [done]
 
+* Use blog.agentzh.org as SearchAll's homepage for now.
+* Check if some searchall.* domain is still available.
+* Work with Yedan++ to build a real SaerchAll homepage.
+* Work with Yuanyin++ to do zh-CN localization for AMO.
 * Add a "Try mining the original page" link to force mining the patterns.
 * Add a button for testing the speed of the sites in the results via the AJAX head request.
 * Add a SearchAll button to FF's context menu so as to searchall the selected words in arbitrary web pages.

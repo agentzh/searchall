@@ -1,9 +1,57 @@
+$(document).ready(init);
+
 function getAnonElem (node, path) {
     var elems = path.split(/>/);
     alert("Found elems: " + elems.length);
     var nodes = document.getAnonymousNodes(gBrowser);
     if (nodes == 0) return null;
 
+}
+
+function setQuery (query) {
+    var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+    prefs = prefs.getBranch("extensions.searchall.");
+
+    // we have to use setComplexValue to write UTF-8 strings:
+    try {
+        var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+        str.data = query;
+        prefs.setComplexValue('query', Components.interfaces.nsISupportsString, str);
+    } catch (e) {}
+    //prefs.setCharPref('query', query);
+
+}
+
+function init () {
+    var contextMenu = document.getElementById("contentAreaContextMenu");
+    if (contextMenu)
+        contextMenu.addEventListener("popupshowing", showHideMenu, false);
+}
+
+function showHideMenu (event) {
+    var show = document.getElementById("right-click-sa");
+    show.hidden = !(gContextMenu.isTextSelected);
+}
+
+function contextSearchAll (uri) {
+    var query;
+    if (gContextMenu.onTextInput) {
+        var text = document.popupNode;
+        query = text.value.substring(text.selectionStart, text.selectionEnd);
+        if (query.length > 50) query = query.substr(0, 49);
+    } else {
+        if (gContextMenu.searchSelected)
+            query = gContextMenu.searchSelected();
+        else
+            query = getBrowserSelection();
+        if (query.length > 50)
+            text = text.substr(0, 49);
+    }
+    if (query.length > 0) {
+        setQuery('"' + query + '"');
+        var newTab = gBrowser.addTab(uri);
+        gBrowser.selectedTab = newTab;
+    }
 }
 
 function toSearchAll (uri, query, event) {
@@ -32,16 +80,7 @@ function toSearchAll (uri, query, event) {
         }
     } else {
         if (query != '') {
-            var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
-            prefs = prefs.getBranch("extensions.searchall.");
-
-            // we have to use setComplexValue to write UTF-8 strings:
-            try {
-                var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-                str.data = query;
-                prefs.setComplexValue('query', Components.interfaces.nsISupportsString, str);
-            } catch (e) {}
-            //prefs.setCharPref('query', query);
+            setQuery(query);
         }
 
         openUILink(uri, event, false, true);
