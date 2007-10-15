@@ -74,6 +74,9 @@ function genListener (ind) {
         }
     */
         //alert("hi");
+        try {
+            removeFormTarget(browsers[ind].document());
+        } catch (e) {}
         if (flag & WPL.STATE_START) {
         //aRequest.QueryInterface(Components.interfaces.nsIChannel);
             // we don't start timing here...since we
@@ -105,18 +108,14 @@ function genListener (ind) {
                         progressmeter.hide();
                     }, 100 );
                 }
-                for (var i = 0; i < browsers.length; i++) {
-                    if (browsers[i].document() == doc) {
-                        //alert("browser " + i + " found!");
-                        //alert("HERE: " + i);
-                        var id = i;
-                        browsers[i].button().click(
-                            function () {
-                                return handleSearchButton(id);
-                            }
-                        );
+                //alert("browser " + i + " found!");
+                //alert("HERE: " + i);
+                removeFormTarget(browsers[ind].document());
+                browsers[ind].button().click(
+                    function () {
+                        return handleSearchButton(ind);
                     }
-                }
+                );
                 $("#search-box").focus();
                 return;
             }
@@ -208,18 +207,11 @@ function genListener (ind) {
                     //alert("Hiya: " + hostname);
                     gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
                 }
-                for (var i = 0; i < browsers.length; i++) {
-                    if (browsers[i].document() == doc) {
-                        //alert("browser " + i + " found!");
-                        //alert("HERE: " + i);
-                        var id = i;
-                        browsers[i].button().click(
-                            function () {
-                                return handleSearchButton(id);
-                            }
-                        );
+                browsers[ind].button().click(
+                    function () {
+                        return handleSearchButton(ind);
                     }
-                }
+                );
                 $("#search-box").focus();
                 setTimeout(function () {
                     //info("blurring contentWindow...");
@@ -243,4 +235,15 @@ function genListener (ind) {
     };
 }
 
+function removeFormTarget (doc) {
+    var forms = $("form", doc);
+    if (forms.length == 0) return;
+    forms.each(function () {
+        //alert("hey!");
+        //var target = this.getAttribute('target');
+        //alert("Target: " + target);
+        this.setAttribute('target', '_self');
+    });
+    //alert(forms.length);
+}
 

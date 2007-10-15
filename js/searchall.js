@@ -225,6 +225,15 @@ $(window).ready( function () {
 
     top.watch("location", watchAssignment);
     top.location.watch("href", watchAssignment);
+    top.location.watch("hostname", watchAssignment);
+    top.location.watch("pathname", watchAssignment);
+    top.location.watch("host", watchAssignment);
+    top.location.watch("replace", watchAssignment);
+    //top.location.replace = function () { alert("Hiya, yahoo!"); };
+    //top.location = {};
+    //top.location.replace("Hiya!");
+    //top.location = "abc";
+
 
     for (var i = 0; i < 3; i++) {
         handleCheckbox(i);
