@@ -47,6 +47,8 @@ function contextSearchAll (uri) {
         if (query.length > 50)
             text = text.substr(0, 49);
     }
+    // elimiate double-quotes
+    query = query.replace(/"/g, '');
     if (query.length > 0) {
         setQuery('"' + query + '"');
         var newTab = gBrowser.addTab(uri);
