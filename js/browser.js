@@ -114,10 +114,3 @@ Browser.fn = Browser.prototype = {
     },
 };
 
-function watchAssignment (id, oldval, newval) {
-    //alert("o." + id + " changed from "
-        //+ oldval + " to " + newval);
-    throw("abc");
-    //return '#';
-}
-

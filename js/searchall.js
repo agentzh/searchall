@@ -254,3 +254,10 @@ $(window).ready( function () {
     //animate();
 } );
 
+function watchAssignment (id, oldval, newval) {
+    //alert("o." + id + " changed from "
+        //+ oldval + " to " + newval);
+    throw("Permission denied");
+    //return '#';
+}
+
