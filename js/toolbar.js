@@ -53,6 +53,7 @@ function contextSearchAll (uri) {
         setQuery('"' + query + '"');
         var newTab = gBrowser.addTab(uri);
         gBrowser.selectedTab = newTab;
+        gBrowser.selectedTab.id = 'searchall';
     }
 }
 
