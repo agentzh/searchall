@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SearchAll,全搜王</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="head"><a href="../en-us/index.html"><img src="img/searchAllLogo.gif" alt="search all logo" /></a>
+<p><a href="../en-us/index.html">English</a> | <a href="index.html">中文</a></p>
+</div>
+<ul id="sideNav">
+  <li><a href="index.html">首页</a></li>
+  <li><a href="news.html" class="act">最近更新</a> </li>
+  <li><a href="demo.html">Flash演示</a></li>
+  <li><a href="download.html">下载</a></li>
+  <li><a href="about.html">关于我们</a></li>
+  <li><a href="https://addons.mozilla.org/en-US/firefox/discussions/?AddOnID=5712" target="_blank">讨论</a></li>
+</ul>
+<div id="content">
+<h3>版本 0.1.8 — 2007 年 10 月 11 日 — 76 KB</h3>
+<ul>
+  <li>Added the folowing new US search engines to the default URI list:
+    <br />
+    www.amazon.com
+    <br />
+    www.ask.com
+    <br />
+    addons.mozilla.org/search  </li>
+  <li> Added the following new Chinese search engines to the default URI list:<br />
+    taobao.com<br />
+    so.163.com<br />
+    www.sogou.com </li>
+  <li> Added the following new image search engines to the default URI list:<br />
+    image.cn.yahoo.com<br />
+      images.google.com<br />
+    images.google.cn<br />
+    image.baidu.com</li>
+  <li>Fixed yisou.com so that SearchAll can work with it in 'page mode'.</li>
+  <li>Fixed the timer for next/prev page button actions.</li>
+  <li>Fixed the hostname hash bug. Now 2 identical SE's (such as 2 yahoo.cn) can work at the same time.</li>
+  <li>Now we use '' labels instead of arrow icons in the navigation buttons.</li>
+  <li>Set clickSelectsAll for the toolbar's textbox (just like the Google toolbar :)).    </li>
+  <li>Fixed a bug for Mac Firefox. Unlike linux and win32, Mac centers the tabs which breaks the UI. thanks cnhackTNT++ for reporting this.
+    * Refreshing the .xul page in 'page mode' now (mostly) works.</li>
+  <li>Fixed a bug that baidu.com will show loading animation forever when there's no results at all.</li>
+  <li>Hides 'please enter your queries above' as early as possilbe in 'page mode'.    </li>
+  <li>Removed several setTimeout calls in the JS code so as to make things a bit faster.    </li>
+  <li>Cached the html so that next/prev page switching is now much more smoothly.    </li>
+  <li>Use WPL.STATE_IS_NETWORK instead of STATE_IS_WINDOW to eliminate bogus progressing actions.    </li>
+  <li>Improved and optimzied the pattern mining algorithm and implementation.</li>
+  <li>Made the auto-form-submitting code much smarter. </li>
+</ul>
+</div>
+<div id="foot">copyright &copy; Search All</div>
+</body>
+</html>
