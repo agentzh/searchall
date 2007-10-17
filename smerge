@@ -1,4 +1,4 @@
 #!/bin/sh
 
-svk smerge -I -l //mirror/searchall //mirror/tw/searchall
+svk smerge -I -l //mirror/hack/searchall //mirror/tw/searchall
 
