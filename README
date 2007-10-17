@@ -22,9 +22,14 @@ bin/xulapp debug searchall.xul --profile dev
 # launch a ff window loading searchall-debug.xul :
 bin/xulapp debug searchall-debug.xul --profile dev
 
+# launch a ff window loading searchall-debug.xul but using the zh-tw locale:
+bin/xulapp debug searchall-debug.xul --profile dev --lang zh-tw
 
 # lauch a ff window to test the overlay:
 bin/xulapp overlay --profile dev
+
+# lanch an FF window to test the overlay using the zh-cn locale:
+bin/xulapp overlay -l zh-cn -p dev
 
 # generate tmp/searchall.xpi :
 bin/xulapp bundle
