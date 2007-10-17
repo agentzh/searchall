@@ -1,0 +1,5 @@
+#!/bin/sh
+
+svk smerge -m "merged down from openfoundry" //mirror/tw/searchall //mirror/hack/searchall
+svk pull
+
