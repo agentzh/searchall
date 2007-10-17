@@ -79,7 +79,7 @@ template main => sub {
                     attr {
                         id => 'searchall-button',
                         image => "chrome://$XUL::App::APP_NAME/content/application_lightning.png",
-                        label => ' SearchAll',
+                        label => _(' SearchAll'),
                         oncommand => "toSearchAll('$URI', document.getElementById('searchall-searchbox').value, event);",
                     }
                 }
@@ -91,7 +91,7 @@ template main => sub {
             menuitem {
                 attr {
                     id => "right-click-sa",
-                    label => "SearchAll",
+                    label => _("SearchAll"),
                     accesskey => "S",
                     insertafter => "context-selectAll",
                     oncommand => "contextSearchAll('$URI');",
@@ -106,7 +106,7 @@ template main => sub {
                     id => "tb-searchall-menu",
                     oncommand => "toOpenWindowByType('searchall:win', '$URI2')",
                     insertafter => "javascriptConsole,devToolsSeparator",
-                    label => "SearchAll",
+                    label => _("SearchAll"),
                     accesskey => "",
                 }
             }

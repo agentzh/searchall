@@ -10,6 +10,9 @@ use File::Spec;
 use File::Slurp;
 use Text::Diff;
 use Getopt::Long;
+use XUL::App::I18N;
+
+XUL::App::I18N->new(['en-US']);
 
 my $operation;
 BEGIN {
