@@ -1,3 +1,5 @@
+=Changes for release 0.1.10
+
 =Changes for release 0.1.9
 * Now you can search words in web pages directly by select & right-click. See the following flash demo for details:
     http://agentzh.org/misc/rightclick.swf
@@ -17,7 +19,7 @@
    www.amazon.com
    www.ask.com
    addons.mozilla.org/search
-* Added the following new Chinese search engines to the default URI list: 
+* Added the following new Chinese search engines to the default URI list:
    taobao.com
    so.163.com
    www.sogou.com
