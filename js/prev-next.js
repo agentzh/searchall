@@ -114,13 +114,13 @@ function gotoPrev (i) {
         }
     } catch (e) { info(e); }
 
-    var guard;
+    //var guard;
     guard = function () {
         if (! Done[i]) {
             var success = gen_fmt_view(i, browsers[i].hostname(), doc, false/* don't force mining */);
-            if (!success) {
-                guard();
-            }
+            //if (!success) {
+                //guard();
+            //}
         }
     };
     setTimeout(guard, 1000);

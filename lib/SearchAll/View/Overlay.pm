@@ -57,7 +57,7 @@ template main => sub {
                         image => "chrome://$XUL::App::APP_NAME/content/logo-small.png",
                         oncommand => "toOpenWindowByType('searchall:win', '$URI2')",
                         #label => "SearchAll",
-                        tooltiptext => "SearchAll",
+                        tooltiptext => _("SearchAll"),
                     }
                 }
 
@@ -79,7 +79,7 @@ template main => sub {
                     attr {
                         id => 'searchall-button',
                         image => "chrome://$XUL::App::APP_NAME/content/application_lightning.png",
-                        label => _(' SearchAll'),
+                        label => " " . _('SearchAll'),
                         oncommand => "toSearchAll('$URI', document.getElementById('searchall-searchbox').value, event);",
                     }
                 }

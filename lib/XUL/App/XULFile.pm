@@ -4,6 +4,7 @@ use lib 'lib';
 use strict;
 use warnings;
 use File::Slurp;
+use Encode;
 #use Smart::Comments;
 use XUL::App;
 
@@ -79,6 +80,7 @@ sub go {
     }
     my $path = "tmp/content/$file";
     warn "Writing file $path\n";
+    $xml = encode('UTF-8', $xml);
     write_file(
         $path,
         $xml

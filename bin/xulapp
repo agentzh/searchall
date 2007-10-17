@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 
 use lib 'lib';
+#use lib 'tmplib/lib';
 use strict;
 use warnings;
 #use Smart::Comments;
@@ -10,9 +11,9 @@ use File::Spec;
 use File::Slurp;
 use Text::Diff;
 use Getopt::Long;
+use File::Find;
+use XUL::App;
 use XUL::App::I18N;
-
-XUL::App::I18N->new(['en-US']);
 
 my $operation;
 BEGIN {
@@ -25,7 +26,6 @@ BEGIN {
     #}
 }
 
-use XUL::App;
 my ($file) = glob "lib/*/App.pm";
 require $file;
 if ($@) {
@@ -52,28 +52,19 @@ $app_name = $XUL::App::APP_NAME;
 (my $package = $file) =~ s/.*lib\/|\.pm$//g;
 $package =~ s/\//::/g;
 #warn $package;
-warn $XUL::App::APP_NAME;
+#warn $XUL::App::APP_NAME;
 
 ### files: $package->FILES
-my @overlay;
-my $files = $package->FILES;
-while (my ($file, $obj) = each %$files) {
-    #warn "$file => $obj";
-    if ($obj->can('overlays') &&
-            (my $target = $obj->overlays)) {
-        #die $file;
-        push @overlay, [$file => $target];
-    }
-}
-
 #### @overlay
+my $files;
 
 #$XUL::App::ID = $XUL::App::ID;
 my ($profile, $profile_dir);
 my $op_table;
+my $lang;
+GetOptions("profile|p=s" => \$profile, "lang|l=s" => \$lang);
 $op_table = {
     findprofile => sub {
-        GetOptions("profile|p=s" => \$profile);
         if (!$profile) {
             die "error: No profile specified.\n"
                 ."  Use --profile option to specify one.\n";
@@ -110,13 +101,31 @@ $op_table = {
         unregister_ext($profile_dir, "tmp/");
     },
 
+    po => sub {
+        my @pofiles = $lang ? ("po/$lang.po") : "po/*.po";
+        #die "!!! @pofiles";
+        my @files;
+        find(
+           {
+             wanted =>  sub { if (/(?:\.pm|\.pl)$/) { push @files, $_ }  },
+             no_chdir => 1,
+           },
+           'lib',
+        );
+        shell("xgettext.pl -u @files -o @pofiles");
+        $XUL::App::I18N::Lang = [$lang];
+        XUL::App::I18N->new();
+    },
+
     setup => sub {
+        $op_table->{po}->();
         gen_manifest($app_name);
         shell("cp js/*.js tmp/content/");
         shell("cp icons/*.* tmp/content/");
         shell("cp js/*.html tmp/content/");
         shell("cp css/*.css tmp/content/");
         shell("cp -r js/thirdparty/* tmp/content/");
+        #die "@files";
         while (my ($file, $obj) = each %$files) {
             #warn "$file => $obj";
             $obj->go($file);
@@ -165,6 +174,17 @@ if (my $code = $op_table->{$operation}) {
 }
 
 sub gen_manifest {
+    my @overlay;
+    $files = $package->FILES;
+    while (my ($file, $obj) = each %$files) {
+        #warn "$file => $obj";
+        if ($obj->can('overlays') &&
+                (my $target = $obj->overlays)) {
+            #die $file;
+            push @overlay, [$file => $target];
+        }
+    }
+
     warn "Writing tmp/chrome.manifest\n";
     my $content_dir = File::Spec->rel2abs( 'tmp/content' );
     my $s;

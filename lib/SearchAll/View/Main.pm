@@ -114,7 +114,7 @@ template search_bar => sub {
         button {
             attr {
                 id => 'search-button',
-                label => ' Search',
+                label => ' ' . _('Search'),
                 image => 'application_lightning.png',
             }
         }
@@ -167,14 +167,14 @@ template results => sub {
             tab {
                 attr {
                     id => 'view-tab-0',
-                    label => ' Original',
+                    label => ' ' . _('Original'),
                     image => 'application_tile_horizontal.png',
                 }
             }
             tab {
                 attr {
                     id => 'view-tab-1',
-                    label => ' Formatted',
+                    label => ' ' . _('Formatted'),
                     image => 'application_view_columns.png',
                 }
             }
@@ -196,8 +196,8 @@ template results => sub {
 template navigator => sub {
     hbox {
         attr { id => 'navigator', align => 'start', pack => 'end' }
-        button { attr { id => 'prev-button', class => 'nav-button', label => '<<Prev' } }
-        button { attr { id => 'next-button', class => 'nav-button', label => 'Next>>' } }
+        button { attr { id => 'prev-button', class => 'nav-button', label => _('<<Prev') } }
+        button { attr { id => 'next-button', class => 'nav-button', label => _('Next>>') } }
     }
 };
 
