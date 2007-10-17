@@ -27,7 +27,7 @@
    images.google.com
    images.google.cn
    image.baidu.com
-* 提供了yisou.com，在全搜王的“page mode”模式下可以运行
+* 提供了yisou.com，在"我搜去"的“page mode”模式下可以运行
 * 修复了页面中点击next/prev时的计时功能
 * 修复了主机名杂乱的缺陷，现在可以在同一时间运行两个相同的搜索引擎了（例如两个yahoo.cn）
 * 在导航按钮中用'<<Prev' and 'Next>>' 标签替代箭头图标
