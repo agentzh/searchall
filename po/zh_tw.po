@@ -35,6 +35,10 @@ msgstr "原初檢視"
 msgid "Search"
 msgstr "尋找"
 
-#: lib/SearchAll/View/Overlay.pm:109 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:82 lib/SearchAll/View/Overlay.pm:94
+#: lib/SearchAll/View/Main.pm:44 lib/SearchAll/View/Overlay.pm:109 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:82 lib/SearchAll/View/Overlay.pm:94
 msgid "SearchAll"
 msgstr "我搜去"
+
+#: lib/SearchAll/View/Debug.pm:18
+msgid "SearchAll (Debug)"
+msgstr "我搜去（除錯版）"

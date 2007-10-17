@@ -13,7 +13,7 @@ use Text::Diff;
 use Getopt::Long;
 use File::Find;
 use XUL::App;
-use XUL::App::I18N;
+use XUL::App::I18N ();
 
 my $operation;
 BEGIN {
@@ -62,7 +62,7 @@ my $files;
 my ($profile, $profile_dir);
 my $op_table;
 my $lang;
-my @pofiles;
+my (@pofiles, @xulfiles);
 GetOptions("profile|p=s" => \$profile, "lang|l=s" => \$lang);
 $op_table = {
     findprofile => sub {
@@ -103,6 +103,8 @@ $op_table = {
     },
 
     po => sub {
+        unlink("po/meta.po");
+            unlink("po/foo.po");
         my $pofiles = $lang ? "po/$lang.po" : "po/*.po";
         @pofiles = glob $pofiles;
         #die "!!! @pofiles";
@@ -114,8 +116,17 @@ $op_table = {
            },
            'lib',
         );
-        shell("xgettext.pl -u @files -o $pofiles");
-        $XUL::App::I18N::Lang = [$lang];
+        for my $pofile (@pofiles) {
+            shell("xgettext.pl -u @files -o $pofile");
+        }
+        if (defined $lang) {
+            $XUL::App::I18N::Lang = [$lang];
+        } else {
+            gen_meta_po();
+            shell("cp po/meta.po po/foo.po");
+            #@pofiles = 'po/foo.po';
+            $XUL::App::I18N::Lang = ['foo'];
+        }
         XUL::App::I18N->new();
     },
 
@@ -130,8 +141,17 @@ $op_table = {
         #die "@files";
         while (my ($file, $obj) = each %$files) {
             #warn "$file => $obj";
+            if ($file =~ /\.xul$/) {
+                push @xulfiles, $file;
+            }
             $obj->go($file);
         }
+        if (@pofiles) {
+            for my $xulfile (@xulfiles) {
+                add_doctype("tmp/content/$xulfile");
+            }
+        }
+
         if ($operation ne 'bundle') {
             $op_table->{register}->();
         }
@@ -189,7 +209,7 @@ sub gen_manifest {
         }
     }
 
-    warn "Writing tmp/chrome.manifest\n";
+    warn "Write tmp/chrome.manifest\n";
     my $content_dir = File::Spec->rel2abs( 'tmp/content' );
     my $s;
     if ($operation eq 'bundle') {
@@ -205,9 +225,12 @@ sub gen_manifest {
         (my $lang = $pofile) =~ s/.*?([-\w]+)\.po$/$1/i;
         $lang =~ s/_/-/g;
         $lang =~ s/-(\w+)/'-' . uc($1)/ge;
+        next if $lang eq 'meta' or $lang eq 'foo';
         warn "LANG: $lang\n";
-        $s .= "locale $app_name $lang jar:chrome:/$app_name.jar!/locale/$lang";
-        shell("mkdir -p tmp/locale/$lang");
+        $s .= "locale $app_name $lang jar:chrome/$app_name.jar!/locale/$lang/\n";
+        my $dir = "tmp/locale/$lang";
+        shell("mkdir -p $dir");
+        gen_dtd($dir, $pofile);
     }
     write_file(
         "tmp/chrome.manifest",
@@ -215,6 +238,73 @@ sub gen_manifest {
         #"overlay $target_xul $my_xul\n",
         $s
     );
+}
+
+sub str2ent {
+    my $s = shift;
+    $s =~ s/[^A-Za-z]/'_' . ord($&) . '_'/ge;
+    $s =~ s/_$//g;
+    $s = "QQQ_" . $s;
+    $s =~ s/__/_/g;
+    return $s;
+}
+
+sub gen_dtd {
+    my ($locale_dir, $pofile) = @_;
+    my $outfile = "$locale_dir/$app_name.dtd";
+    warn "Write $outfile using $pofile\n";
+    open my $in, $pofile or die "Can't open $pofile for reading: $!";
+    my ($entity, $old);
+    my $s;
+    while (<$in>) {
+        if (/^\s*msgid "(.+)"\s*$/) {
+            $old = $1;
+            $entity = str2ent($old);
+        } elsif (/^\s*msgstr (".*")\s*$/) {
+            next if !defined $old or $old eq '';
+            my $value  = $1;
+            if ($value eq '""') { $value = qq{"$old"}; }
+            $s .= "<!ENTITY $entity $value>\n";
+        }
+    }
+    #die $s;
+    close $in;
+    #warn "Write $locale_dir/$app_name.dtd\n";
+    write_file($outfile, $s);
+}
+
+sub gen_meta_po {
+    my $pofile = $pofiles[0];
+    next unless $pofile and -f $pofile;
+    open my $in, $pofile or die "Can't open $pofile for reading: $!";
+    my ($s, $key, $entity);
+    while (<$in>) {
+        if (/^\s*msgid "(.+)"\s*$/) {
+            $key = $1;
+            $entity = str2ent($key);
+        } elsif (/^\s*msgstr (".*")\s*$/) {
+            next if !defined $key or $key eq '';
+            $s .= qq{msgstr "\&$entity;"\n};
+            next;
+        }
+        $s .= $_;
+    }
+    #die $s;
+    my $outfile = 'po/meta.po';
+    warn "Write $outfile\n";
+    write_file($outfile, $s);
+}
+
+sub add_doctype {
+    my $xulfile = shift;
+    my $content = read_file($xulfile);
+    my $old_content = $content;
+    $content =~ s{<(window|dialog|page|overlay)}{<!DOCTYPE $1 SYSTEM "chrome://$app_name/locale/$app_name.dtd">\n\n$&};
+    $content =~ s/\&#38;(QQQ_[A-Za-z0-9_]*;)/\&$1/g;
+    if ($content ne $old_content) {
+        warn "Write $xulfile with DOCTYPE\n";
+        write_file($xulfile, $content);
+    }
 }
 
 sub set_prefs {
@@ -227,7 +317,7 @@ sub set_prefs {
     set_pref_var(\$content, 'browser.dom.window.dump.enabled', 'true');
     set_pref_var(\$content, 'browser.sessionstore.resume_from_crash', 'false');
     if ($content ne $old_content) {
-        warn "Writing $prefs\n";
+        warn "Write $prefs\n";
         shell("cp $prefs $prefs.bak");
         write_file($prefs, $content);
     }
@@ -294,7 +384,7 @@ sub register_ext {
     close $in;
     if ($write_back) {
         shell("cp $metafile $metafile.bak");
-        warn "Writing $metafile\n";
+        warn "Write $metafile\n";
         #my $orig = read_file($metafile);
         #warn "Diff: ", diff \$orig, \$buf;
         write_file($metafile, $buf);
@@ -339,12 +429,12 @@ sub unregister_ext {
     }
     close $in;
     if ($found) {
-        warn "Writing $metafile.bak\n";
+        warn "Write $metafile.bak\n";
         shell("cp $metafile $metafile.bak");
 
         #my $orig = read_file($metafile);
         #warn "Diff: ", diff \$orig, \$buf;
-        warn "Writing $metafile\n";
+        warn "Write $metafile\n";
         write_file($metafile, $buf);
     } else {
         warn "No registration found.\n";

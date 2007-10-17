@@ -15,7 +15,7 @@ template main => sub {
     window {
         attr {
             id => "search-all-debug-win",
-            title => "SearchAll (Debug)",
+            title => _("SearchAll (Debug)"),
             xmlns => $::XUL_NAME_SPACE,
             #'xmlns:html' => $::HTML_NAME_SPACE,
         }

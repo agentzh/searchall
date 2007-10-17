@@ -41,7 +41,7 @@ template main => sub {
     window {
         attr {
             id => "searchall",
-            title => "SearchAll",
+            title => _("SearchAll"),
             xmlns => $::XUL_NAME_SPACE,
             #'xmlns:html' => $::HTML_NAME_SPACE,
             width => 800,
