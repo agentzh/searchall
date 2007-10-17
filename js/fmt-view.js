@@ -196,6 +196,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
 
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
+        snippet = '<img src="' + RootPath + '/favicon.ico" alt=" "/>&nbsp;' + snippet;
         var rows = $(".row", fmt_view_doc);
         if (rows[i] == undefined) {
             var tbodies = $("#content>tbody", fmt_view_doc);
@@ -206,9 +207,9 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             if (i == 0) {
                 row_html =
                 '<tr class="row">' +
-                    '<td class="col-0"><img src="loading.gif" /></td>' +
-                    '<td class="col-1"><img src="loading.gif" /></td>' +
-                    '<td class="col-2"><img src="loading.gif" /></td>' +
+                    '<td class="col-0"><img class="loading" src="loading.gif" /></td>' +
+                    '<td class="col-1"><img class="loading" src="loading.gif" /></td>' +
+                    '<td class="col-2"><img class="loading" src="loading.gif" /></td>' +
                 '</tr>';
             } else {
                 row_html =
@@ -238,7 +239,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
     }
     setTimeout(function () {
         //alert("HEEEE!!!");
-        $(".col-" + index + ">img", fmt_view_doc).hide();
+        $(".col-" + index + ">img.loading", fmt_view_doc).hide();
     }, 500);
 
     //fmtViewHistory = snippets;
