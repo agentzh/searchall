@@ -196,8 +196,8 @@ template results => sub {
 template navigator => sub {
     hbox {
         attr { id => 'navigator', align => 'start', pack => 'end' }
-        button { attr { id => 'prev-button', class => 'nav-button', label => _('<<Prev') } }
-        button { attr { id => 'next-button', class => 'nav-button', label => _('Next>>') } }
+        button { attr { id => 'prev-button', class => 'nav-button', label => "<<" . _('Prev') } }
+        button { attr { id => 'next-button', class => 'nav-button', label => _('Next') . ">>" } }
     }
 };
 

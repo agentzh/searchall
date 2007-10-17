@@ -1,4 +1,4 @@
-# OME DESCRIPTIVE TITLE.
+# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -9,36 +9,36 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Agent Zhang <yichun.zhang@alibaba-inc.com>\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: lib/SearchAll/View/Main.pm:199
-msgid "<<Prev"
-msgstr "上一頁"
 
 #: lib/SearchAll/View/Main.pm:177
 msgid "Formatted"
-msgstr "規格化檢視"
+msgstr ""
 
 #: lib/SearchAll/View/Main.pm:200
-msgid "Next>>"
-msgstr "下一頁"
+msgid "Next"
+msgstr ""
 
 #: lib/SearchAll/View/Main.pm:170
 msgid "Original"
-msgstr "原初檢視"
+msgstr ""
+
+#: lib/SearchAll/View/Main.pm:199
+msgid "Prev"
+msgstr ""
 
 #: lib/SearchAll/View/Main.pm:117
 msgid "Search"
-msgstr "尋找"
+msgstr ""
 
 #: lib/SearchAll/View/Main.pm:44 lib/SearchAll/View/Overlay.pm:109 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:82 lib/SearchAll/View/Overlay.pm:94
 msgid "SearchAll"
-msgstr "我搜去"
+msgstr ""
 
 #: lib/SearchAll/View/Debug.pm:18
 msgid "SearchAll (Debug)"
-msgstr "我搜去（除錯版）"
+msgstr ""

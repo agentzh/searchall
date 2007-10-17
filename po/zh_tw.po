@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/SearchAll/View/Main.pm:199
+#:
 msgid "<<Prev"
 msgstr "上一頁"
 
@@ -24,12 +24,20 @@ msgid "Formatted"
 msgstr "規格化檢視"
 
 #: lib/SearchAll/View/Main.pm:200
+msgid "Next"
+msgstr ""
+
+#:
 msgid "Next>>"
 msgstr "下一頁"
 
 #: lib/SearchAll/View/Main.pm:170
 msgid "Original"
 msgstr "原初檢視"
+
+#: lib/SearchAll/View/Main.pm:199
+msgid "Prev"
+msgstr ""
 
 #: lib/SearchAll/View/Main.pm:117
 msgid "Search"

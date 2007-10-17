@@ -264,6 +264,9 @@ sub gen_dtd {
             next if !defined $old or $old eq '';
             my $value  = $1;
             if ($value eq '""') { $value = qq{"$old"}; }
+            #$value =~ s/</\&\#60;/g;
+            #$value =~ s/>/\&\#62;/g;
+            #$value =~ s/\&/\&#38;/g;
             $s .= "<!ENTITY $entity $value>\n";
         }
     }
