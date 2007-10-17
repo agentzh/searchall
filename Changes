@@ -1,4 +1,10 @@
 =Changes for release 0.1.10
+* Fixed a serious bug in 0.1.9 in which the "<<Prev" button's action contains a potential infinite recursion.
+* Prepended the sites's favicon.ico to each block in the Formatted view.
+* Now we have a homesite here:
+    http://searchall.agentzh.org
+  and a Chinese version for this site as well:
+    http://searchall.agentzh.cn
 
 =Changes for release 0.1.9
 * Now you can search words in web pages directly by select & right-click. See the following flash demo for details:
