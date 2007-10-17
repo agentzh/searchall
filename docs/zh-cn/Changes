@@ -1,43 +1,43 @@
---0.1.9°æ±¾µÄ¸Ä½ø¹¦ÄÜ£º
-* ÏÖÔÚ¿ÉÒÔÔÚä¯ÀÀÍøÒ³Ê±Í¨¹ýÑ¡¶¨×Ö·û²¢µã»÷ÓÒ¼üÖ±½ÓËÑË÷£¬Çë²é¿´ÒÔÏÂflashµÄ¾ßÌåÑÝÊ¾¡£
+--0.1.9ç‰ˆæœ¬çš„æ”¹è¿›åŠŸèƒ½ï¼š
+* çŽ°åœ¨å¯ä»¥åœ¨æµè§ˆç½‘é¡µæ—¶é€šè¿‡é€‰å®šå­—ç¬¦å¹¶ç‚¹å‡»å³é”®ç›´æŽ¥æœç´¢ï¼Œè¯·æŸ¥çœ‹ä»¥ä¸‹flashçš„å…·ä½“æ¼”ç¤ºã€‚
     http://agentzh.org/misc/rightclick.swf
-* Ó¦ÓÃmystic++ÔÚ#extdevÖÐµÄ²¹¶¡½«firefoxµÄ±êÇ©Í¼±êÐÞ¸ÄÎªÈ«ËÑÍõµÄlogo
-* ÔÚÈ±Ê¡µÄURLÁÐ±íÖÐÐÂÌíÁËÒÔÏÂÍøÕ¾
+* åº”ç”¨mystic++åœ¨#extdevä¸­çš„è¡¥ä¸å°†firefoxçš„æ ‡ç­¾å›¾æ ‡ä¿®æ”¹ä¸ºå…¨æœçŽ‹çš„logo
+* åœ¨ç¼ºçœçš„URLåˆ—è¡¨ä¸­æ–°æ·»äº†ä»¥ä¸‹ç½‘ç«™
     www.a9.com
     www.answers.com
     search.ebay.com
     flickr.com
     youtube.com
-* ÐÞ¸´ÁËÔÚFormatted viewÖÐµÄÁ½¸öbug£¬ÏÖÔÚ:
-   * ÔÚ½á¹ûÁÐ±íÖÐ²»ÔÙÏÔÊ¾¿ÕµÄ²éÑ¯
-   * ÔÚ½á¹ûÄ£¿éÖÐ¹ýÂË<th>×Ö·û
-* ÏÖÔÚwww.yahoo.comÒ²¿ÉÒÔ¹¤×÷ÁË£¬ÔËÐÐÓÚËüµÄframe-busting¼¼Êõ¡£¸ÐÐ»jingningµÄ°ïÖú£¡
+* ä¿®å¤äº†åœ¨Formatted viewä¸­çš„ä¸¤ä¸ªbugï¼ŒçŽ°åœ¨:
+   * åœ¨ç»“æžœåˆ—è¡¨ä¸­ä¸å†æ˜¾ç¤ºç©ºçš„æŸ¥è¯¢
+   * åœ¨ç»“æžœæ¨¡å—ä¸­è¿‡æ»¤<th>å­—ç¬¦
+* çŽ°åœ¨www.yahoo.comä¹Ÿå¯ä»¥å·¥ä½œäº†ï¼Œè¿è¡ŒäºŽå®ƒçš„frame-bustingæŠ€æœ¯ã€‚æ„Ÿè°¢jingningçš„å¸®åŠ©ï¼
 
---0.1.8°æ±¾µÄ¸Ä½ø¹¦ÄÜ£º
-* ÔÚÈ±Ê¡µÄURLÁÐ±íÖÐÐÂÌíÁËÒÔÏÂÃÀ¹úËÑË÷ÒýÇæ
+--0.1.8ç‰ˆæœ¬çš„æ”¹è¿›åŠŸèƒ½ï¼š
+* åœ¨ç¼ºçœçš„URLåˆ—è¡¨ä¸­æ–°æ·»äº†ä»¥ä¸‹ç¾Žå›½æœç´¢å¼•æ“Ž
    www.amazon.com 
    www.ask.com
    addons.mozilla.org/search
-* ÔÚÈ±Ê¡µÄURLÁÐ±íÖÐÐÂÌíÁËÒÔÏÂÐÂµÄÖÐÎÄËÑË÷ÒýÇæ
+* åœ¨ç¼ºçœçš„URLåˆ—è¡¨ä¸­æ–°æ·»äº†ä»¥ä¸‹æ–°çš„ä¸­æ–‡æœç´¢å¼•æ“Ž
    taobao.com
    so.163.com
    www.sogou.com
-* ÔÚÈ±Ê¡µÄURLÁÐ±íÖÐÐÂÌíÁËÒÔÏÂÐÂµÄÍ¼Æ¬ËÑË÷ÒýÇæ
+* åœ¨ç¼ºçœçš„URLåˆ—è¡¨ä¸­æ–°æ·»äº†ä»¥ä¸‹æ–°çš„å›¾ç‰‡æœç´¢å¼•æ“Ž
    image.cn.yahoo.com
    images.google.com
    images.google.cn
    image.baidu.com
-* Ìá¹©ÁËyisou.com£¬ÔÚÈ«ËÑÍõµÄ¡°page mode¡±Ä£Ê½ÏÂ¿ÉÒÔÔËÐÐ
-* ÐÞ¸´ÁËÒ³ÃæÖÐµã»÷next/prevÊ±µÄ¼ÆÊ±¹¦ÄÜ
-* ÐÞ¸´ÁËÖ÷»úÃûÔÓÂÒµÄÈ±ÏÝ£¬ÏÖÔÚ¿ÉÒÔÔÚÍ¬Ò»Ê±¼äÔËÐÐÁ½¸öÏàÍ¬µÄËÑË÷ÒýÇæÁË£¨ÀýÈçÁ½¸öyahoo.cn£©
-* ÔÚµ¼º½°´Å¥ÖÐÓÃ'<<Prev' and 'Next>>' ±êÇ©Ìæ´ú¼ýÍ·Í¼±ê
-* ÉèÖÃ DlickSelectsAll×÷Îª¹¤¾ßÀ¸µÄÎÄ±¾¿ò£¨ºÍgoogle toolbarÀàËÆ:)£©
-* ÐÞ¸´ÁËÔÚMac firefoxÖÐµÄÒ»¸öÈ±ÏÝ£¬²»ÏñlinuxºÍwin32£¬Mac°Ñ±êÇ©¾ÓÖÐ£¬ÆÆ»µÁËÓÃ»§½çÃæ¡£¸ÐÐ»cnhackTNT++ ·´Ó³ÁËÕâ¸öÎÊÌâ
-* ÕýÔÚ¡°page mode¡±Ä£Ê½ÖÐ¸üÐÂ.xul page£¬ÔÚ´ó¶àÊ±¼äÄÚÊÇ¿ÉÒÔ¹¤×÷µÄ
-* ÐÞ¸´ÁËbaidu.comÔÚÎÞ½á¹ûÊ±ÈÔÈ»Ò»Ö±ÏÔÊ¾×°ÔØ×´Ì¬µÄÈ±ÏÝ
-* ¾¡¿ÉÄÜÔçµÄÔÚ¡°page mode¡±ÖÐÒþ²Ø'please enter your queries above'¡£
-* ÔÚJS´úÂëÖÐÉ¾³ýÁË¼¸¸ösetTimeoutµ÷ÓÃ£¬ÈÃ³ÌÐò¸ü¿ìÔËÐÐ
-* ±£´æhtmlÒ³ÃæµÄ»º´æ£¬ÕâÑùÔÚ´ò¿ªnext/prevÒ³ÃæÊ±¸üÁ÷³©
-* ÓÃWPL.STATE_IS_NETWORK Ìæ´úÁË STATE_IS_WINDOW£¬Çå³ýÁË¼ÙµÄ½øÐÐ¶¯×÷¡£
-* ¸Ä½øºÍÓÅ»¯ÁËÌØÕ÷ÌáÈ¡µÄËã·¨ºÍÖ´ÐÐ
-* Ê¹ auto-form-submitting´úÂë¸üÖÇÄÜ
+* æä¾›äº†yisou.comï¼Œåœ¨å…¨æœçŽ‹çš„â€œpage modeâ€æ¨¡å¼ä¸‹å¯ä»¥è¿è¡Œ
+* ä¿®å¤äº†é¡µé¢ä¸­ç‚¹å‡»next/prevæ—¶çš„è®¡æ—¶åŠŸèƒ½
+* ä¿®å¤äº†ä¸»æœºåæ‚ä¹±çš„ç¼ºé™·ï¼ŒçŽ°åœ¨å¯ä»¥åœ¨åŒä¸€æ—¶é—´è¿è¡Œä¸¤ä¸ªç›¸åŒçš„æœç´¢å¼•æ“Žäº†ï¼ˆä¾‹å¦‚ä¸¤ä¸ªyahoo.cnï¼‰
+* åœ¨å¯¼èˆªæŒ‰é’®ä¸­ç”¨'<<Prev' and 'Next>>' æ ‡ç­¾æ›¿ä»£ç®­å¤´å›¾æ ‡
+* è®¾ç½® DlickSelectsAllä½œä¸ºå·¥å…·æ çš„æ–‡æœ¬æ¡†ï¼ˆå’Œgoogle toolbarç±»ä¼¼:)ï¼‰
+* ä¿®å¤äº†åœ¨Mac firefoxä¸­çš„ä¸€ä¸ªç¼ºé™·ï¼Œä¸åƒlinuxå’Œwin32ï¼ŒMacæŠŠæ ‡ç­¾å±…ä¸­ï¼Œç ´åäº†ç”¨æˆ·ç•Œé¢ã€‚æ„Ÿè°¢cnhackTNT++ åæ˜ äº†è¿™ä¸ªé—®é¢˜
+* æ­£åœ¨â€œpage modeâ€æ¨¡å¼ä¸­æ›´æ–°.xul pageï¼Œåœ¨å¤§å¤šæ—¶é—´å†…æ˜¯å¯ä»¥å·¥ä½œçš„
+* ä¿®å¤äº†baidu.comåœ¨æ— ç»“æžœæ—¶ä»ç„¶ä¸€ç›´æ˜¾ç¤ºè£…è½½çŠ¶æ€çš„ç¼ºé™·
+* å°½å¯èƒ½æ—©çš„åœ¨â€œpage modeâ€ä¸­éšè—'please enter your queries above'ã€‚
+* åœ¨JSä»£ç ä¸­åˆ é™¤äº†å‡ ä¸ªsetTimeoutè°ƒç”¨ï¼Œè®©ç¨‹åºæ›´å¿«è¿è¡Œ
+* ä¿å­˜htmlé¡µé¢çš„ç¼“å­˜ï¼Œè¿™æ ·åœ¨æ‰“å¼€next/prevé¡µé¢æ—¶æ›´æµç•…
+* ç”¨WPL.STATE_IS_NETWORK æ›¿ä»£äº† STATE_IS_WINDOWï¼Œæ¸…é™¤äº†å‡çš„è¿›è¡ŒåŠ¨ä½œã€‚
+* æ”¹è¿›å’Œä¼˜åŒ–äº†ç‰¹å¾æå–çš„ç®—æ³•å’Œæ‰§è¡Œ
+* ä½¿ auto-form-submittingä»£ç æ›´æ™ºèƒ½
