@@ -1,3 +1,17 @@
+=Changes for release 0.1.9
+* Now you can search words in web pages directly by select & right-click. See the following flash demo for details:
+    http://agentzh.org/misc/rightclick.swf
+* Applied mystic++'s patch from #extdev to change FF's tab icon to our own logo.
+* Added the following sites to our default search engine URL lists:
+    www.a9.com
+    www.answers.com
+    search.ebay.com
+    flickr.com
+    youtube.com
+* Fixed a bug in the Formatted view: now we no longer display empty entries in the results list.
+* Fixed a bug in the Formatted view: now we filters <th> in the result snippets.
+* Now www.yahoo.com also works. Worked around its frame-busting technique. Thanks to jianingy++'s help!
+
 =Changes for release 0.1.8
 * Added the folowing new US search engines to the default URI list:
    www.amazon.com
