@@ -43,7 +43,8 @@ bin/xulapp bundle
 # generate ./searchall.xpi :
 bin/xulapp bundle .
 
-# The --profile opton used above can be abbriviated as -p
+# The --profile option used above can be abbriviated as -p
+# The --lang option can be abbriviated as -l as well.
 #
 # Note that bin/xulapp uses the info in lib/*/App.pm
 # (i.e. lib/SearchAll/App.pm in this project)
