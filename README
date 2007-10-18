@@ -31,6 +31,12 @@ bin/xulapp overlay --profile dev
 # lanch an FF window to test the overlay using the zh-cn locale:
 bin/xulapp overlay -l zh-cn -p dev
 
+# create a new the po/fr.po file (or update if it's already there):
+bin/xulapp po --lang fr
+
+# update all the po/*.po files:
+bin/xulapp po
+
 # generate tmp/searchall.xpi :
 bin/xulapp bundle
 
