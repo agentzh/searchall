@@ -8,7 +8,7 @@ perl Makefile.PL
 make
 
 # setup the components
-bin/xulapp setup
+bin/xulapp setup --profile dev
 
 # register the (debuggin) chrome to ~/.mozilla/firefox/*/extensions.ini
 bin/xulapp register --profile dev
