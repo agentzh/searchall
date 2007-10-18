@@ -42,3 +42,7 @@ msgstr "我搜去"
 #: lib/SearchAll/View/Debug.pm:18
 msgid "SearchAll (Debug)"
 msgstr "我搜去（除錯版）"
+
+#: lib/SearchAll/View/Base.pm:27
+msgid "sec"
+msgstr "稍"

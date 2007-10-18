@@ -83,6 +83,7 @@ sub go {
     $xml = encode('UTF-8', $xml);
     write_file(
         $path,
+        {binmode => ':raw'},
         $xml
     );
 }

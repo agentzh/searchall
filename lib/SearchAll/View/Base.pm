@@ -24,6 +24,7 @@ template status_bar => sub {
                 id => 'statusbar-display',
                 flex => 1,
                 label => 'Ready.',
+                _timeunit => _('sec'),
             }
         }
         statusbarpanel {

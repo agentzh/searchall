@@ -14,6 +14,7 @@ use Getopt::Long;
 use File::Find;
 use XUL::App;
 use XUL::App::I18N ();
+use Encode qw(encode decode);
 
 my $operation;
 BEGIN {
@@ -83,7 +84,9 @@ $op_table = {
 
     overlay => sub {
         $op_table->{setup}->();
-        shell("firefox -jsconsole -P $profile");
+        $lang =~ s/_/-/g;
+        $lang =~ s/-(\w+)/'-'.uc($1)/e;
+        shell("LANG=$lang.UTF-8 LC_ALL=$lang.UTF-8 firefox -jsconsole -P $profile");
     },
 
     profile => sub {
@@ -119,14 +122,10 @@ $op_table = {
         for my $pofile (@pofiles) {
             shell("xgettext.pl -u @files -o $pofile");
         }
-        if (defined $lang) {
-            $XUL::App::I18N::Lang = [$lang];
-        } else {
-            gen_meta_po();
-            shell("cp po/meta.po po/foo.po");
-            #@pofiles = 'po/foo.po';
-            $XUL::App::I18N::Lang = ['foo'];
-        }
+        gen_meta_po();
+        shell("cp po/meta.po po/foo.po");
+        #@pofiles = 'po/foo.po';
+        $XUL::App::I18N::Lang = ['foo'];
         XUL::App::I18N->new();
     },
 
@@ -211,6 +210,7 @@ sub gen_manifest {
 
     warn "Write tmp/chrome.manifest\n";
     my $content_dir = File::Spec->rel2abs( 'tmp/content' );
+    my $locale_dir = File::Spec->rel2abs( 'tmp/locale' );
     my $s;
     if ($operation eq 'bundle') {
         #die "HERE!";
@@ -221,13 +221,19 @@ sub gen_manifest {
     for my $item (@overlay) {
         $s .= "overlay $item->[1] chrome://$XUL::App::APP_NAME/content/$item->[0]\n";
     }
+
     for my $pofile (@pofiles) {
         (my $lang = $pofile) =~ s/.*?([-\w]+)\.po$/$1/i;
         $lang =~ s/_/-/g;
         $lang =~ s/-(\w+)/'-' . uc($1)/ge;
         next if $lang eq 'meta' or $lang eq 'foo';
         warn "LANG: $lang\n";
-        $s .= "locale $app_name $lang jar:chrome/$app_name.jar!/locale/$lang/\n";
+
+        if ($operation eq 'bundle') {
+            $s .= "locale $app_name $lang jar:chrome/$app_name.jar!/locale/$lang/\n";
+        } else {
+            $s .= "locale $app_name $lang file://$locale_dir/$lang/\n";
+        }
         my $dir = "tmp/locale/$lang";
         shell("mkdir -p $dir");
         gen_dtd($dir, $pofile);
@@ -236,6 +242,7 @@ sub gen_manifest {
         "tmp/chrome.manifest",
         # XXX more work needed here for overlays...
         #"overlay $target_xul $my_xul\n",
+        {binmode => ':raw'},
         $s
     );
 }
@@ -257,6 +264,7 @@ sub gen_dtd {
     my ($entity, $old);
     my $s;
     while (<$in>) {
+        $_ = decode('UTF-8', $_);
         if (/^\s*msgid "(.+)"\s*$/) {
             $old = $1;
             $entity = str2ent($old);
@@ -273,7 +281,8 @@ sub gen_dtd {
     #die $s;
     close $in;
     #warn "Write $locale_dir/$app_name.dtd\n";
-    write_file($outfile, $s);
+    $s = encode("UTF-8", $s);
+    write_file($outfile, {binmode => ':raw'}, $s);
 }
 
 sub gen_meta_po {
@@ -295,24 +304,26 @@ sub gen_meta_po {
     #die $s;
     my $outfile = 'po/meta.po';
     warn "Write $outfile\n";
-    write_file($outfile, $s);
+    write_file($outfile, {binmode => ':raw'}, $s);
 }
 
 sub add_doctype {
     my $xulfile = shift;
-    my $content = read_file($xulfile);
+    my $content = read_file($xulfile, binmode => ':raw');
+    $content = decode("UTF-8", $content);
     my $old_content = $content;
     $content =~ s{<(window|dialog|page|overlay)}{<!DOCTYPE $1 SYSTEM "chrome://$app_name/locale/$app_name.dtd">\n\n$&};
     $content =~ s/\&#38;(QQQ_[A-Za-z0-9_]*;)/\&$1/g;
     if ($content ne $old_content) {
         warn "Write $xulfile with DOCTYPE\n";
-        write_file($xulfile, $content);
+        $content = encode("UTF-8", $content);
+        write_file($xulfile, {binmode => ':raw'}, $content);
     }
 }
 
 sub set_prefs {
     my $prefs = shift;
-    my $old_content = read_file($prefs);
+    my $old_content = read_file($prefs, binmode => ':raw');
     my $content = $old_content;
     set_pref_var(\$content, 'nglayout.debug.disable_xul_cache', 'true');
     set_pref_var(\$content, 'javascript.options.showInConsole', 'true');
@@ -322,7 +333,7 @@ sub set_prefs {
     if ($content ne $old_content) {
         warn "Write $prefs\n";
         shell("cp $prefs $prefs.bak");
-        write_file($prefs, $content);
+        write_file($prefs, {binmode => ':raw'}, $content);
     }
 }
 
@@ -390,7 +401,7 @@ sub register_ext {
         warn "Write $metafile\n";
         #my $orig = read_file($metafile);
         #warn "Diff: ", diff \$orig, \$buf;
-        write_file($metafile, $buf);
+        write_file($metafile, {binmode => ':raw'}, $buf);
     }
     #shell($cmd);
 }
@@ -438,7 +449,7 @@ sub unregister_ext {
         #my $orig = read_file($metafile);
         #warn "Diff: ", diff \$orig, \$buf;
         warn "Write $metafile\n";
-        write_file($metafile, $buf);
+        write_file($metafile, {binmode => ':raw'}, $buf);
     } else {
         warn "No registration found.\n";
     }

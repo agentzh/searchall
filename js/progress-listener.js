@@ -1,3 +1,4 @@
+var timeUnit;
 const WPL = Components.interfaces.nsIWebProgressListener;
 
 function registerMyListener (i) {
@@ -30,7 +31,11 @@ function genStatusMsg (data) {
         var key = pair[0];
         var val = pair[1];
         var alias = key.replace(/^www\./, '');
-        msg += "[ " + alias + ": " + val/1000 + " sec] ";
+        if (!timeUnit) {
+            timeUnit = $("#statusbar-display").attr("_timeunit");
+            //alert(timeUnit);
+        }
+        msg += "[ " + alias + ": " + val/1000 + " " + timeUnit + "] ";
     }
     return msg;
 }
