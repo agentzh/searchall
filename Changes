@@ -1,3 +1,8 @@
+=Changes for release 0.2.0
+* Added I18N support. The following locales are supported:
+    zh-CN, zh-TW, en-US, and fr
+  The fr locale needs review. Feedback welcome!
+
 =Changes for release 0.1.10
 * Fixed a serious bug in 0.1.9 in which the "<<Prev" button's action contains a potential infinite recursion.
 * Prepended the sites's favicon.ico to each block in the Formatted view.
