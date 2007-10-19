@@ -63,12 +63,11 @@ Later...
 * Use blog.agentzh.org as SearchAll's homepage for now.  [done]
 * Check if some searchall.* domain is still available.  [done]
 * Add a SearchAll button to FF's context menu so as to searchall the selected words in arbitrary web pages.  [done]
+* Work with Yedan++ to build a real SaerchAll homepage.  [done]
+* Test the speed and accessibility of the sites in the results via the AJAX head request.  [done]
 
-
-* Work with Yedan++ to build a real SaerchAll homepage.
 * Work with Yuanyin++ to do zh-CN localization for AMO.
 * Add a "Try mining the original page" link to force mining the patterns.
-* Add a button for testing the speed of the sites in the results via the AJAX head request.
 * Fix the checkbox + splitter toggling bug.
 * Add the Merged View to merge the search results from different sites.
 * Use the getter/setter feature to reimplement our own JS classes.
