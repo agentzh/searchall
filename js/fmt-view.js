@@ -200,14 +200,16 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         var url = extractUrl(snippet);
         //alert(url);
         if (url) {
-            var req = new XMLHttpRequest();
-            req.open('HEAD', url, true);
+            try {
+                var req = new XMLHttpRequest();
+                req.open('HEAD', url, true);
 
-            var timer = handleCheckTimeout(req, i, index, 5*1000);
-            regAjaxHandle(req, i, index, timer, url);
-            req.send(null);
+                var timer = handleCheckTimeout(req, i, index, 5*1000);
+                regAjaxHandle(req, i, index, timer, url);
+                req.send(null);
+            } catch (e) { error("Firebug conflicted with SearchAll's AJAX checking"); }
         }
-        info("[URL] " + hostname + ": URL: " + url);
+        //info("[URL] " + hostname + ": URL: " + url);
         snippet = '<img class="status" src="bullet_yellow.png"/>&nbsp;&nbsp;<img src="' + RootPath + '/favicon.ico" alt=" "/>&nbsp;' + snippet;
         var rows = $(".row", fmt_view_doc);
         if (rows[i] == undefined) {
