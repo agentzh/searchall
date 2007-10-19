@@ -238,7 +238,7 @@ template fmt_view => sub {
                 src => 'fmt-view.html',
                 flex => 1,
                 id => "fmt-view",
-                type => 'content-primary',
+                #type => 'content-primary',
                 homepage => 'chrome://$XUL::App::APP_NAME/content/listing.html',
             }
         }
