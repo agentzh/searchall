@@ -1,5 +1,6 @@
 var RootPath;
 var CurPath;
+var fmt_view_doc;
 
 var Patterns = {
     'www.baidu.cn'    : "tbody>tr>td.f",
@@ -123,7 +124,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
 
     var browser = $("#fmt-view")[0];
     if (!browser) return false;
-    var fmt_view_doc = browser.contentDocument;
+    fmt_view_doc = browser.contentDocument;
     if (!fmt_view_doc) {
         Debug.log("WARNING: fmt_view_doc not found.");
         return false;
@@ -196,7 +197,16 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
 
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
-        snippet = '<img src="' + RootPath + '/favicon.ico" alt=" "/>&nbsp;' + snippet;
+        var url = extractUrl(snippet);
+        //alert(url);
+        if (url) {
+            var req = new XMLHttpRequest();
+            req.open('HEAD', url, true);
+            regAjaxHandle(req, i, index, url);
+            req.send(null);
+        }
+        info("[URL] " + hostname + ": URL: " + url);
+        snippet = '<img class="status" src="chrome://global/skin/throbber/Throbber-small.gif"/>&nbsp;&nbsp;<img src="' + RootPath + '/favicon.ico" alt=" "/>&nbsp;' + snippet;
         var rows = $(".row", fmt_view_doc);
         if (rows[i] == undefined) {
             var tbodies = $("#content>tbody", fmt_view_doc);
@@ -207,16 +217,16 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             if (i == 0) {
                 row_html =
                 '<tr class="row">' +
-                    '<td class="col-0"><img class="loading" src="loading.gif" /></td>' +
-                    '<td class="col-1"><img class="loading" src="loading.gif" /></td>' +
-                    '<td class="col-2"><img class="loading" src="loading.gif" /></td>' +
+                    '<td id="0-0" class="col-0"><img class="loading" src="loading.gif" /></td>' +
+                    '<td id="0-1" class="col-1"><img class="loading" src="loading.gif" /></td>' +
+                    '<td id="0-2" class="col-2"><img class="loading" src="loading.gif" /></td>' +
                 '</tr>';
             } else {
                 row_html =
                 '<tr class="row">' +
-                    '<td class="col-0" />' +
-                    '<td class="col-1" />' +
-                    '<td class="col-2" />' +
+                    '<td id="' + i + '-0" class="col-0" />' +
+                    '<td id="' + i + '-1" class="col-1" />' +
+                    '<td id="' + i + '-2" class="col-2" />'
                 '</tr>';
             }
             $(tbodies[0]).parent().append(row_html);
@@ -261,4 +271,27 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
     return true;
 }
 
+function extractUrl (html) {
+    var match = html.match(/href\s*=\s*"([^"]+)"/i);
+    if (match) {
+        return match[1];
+    }
+    return undefined;
+}
 
+function regAjaxHandle (req, ln, col, url) {
+    req.onreadystatechange = function (aEvt) {
+        if (req.readyState == 4) {
+            var pattern = "#" + ln + "-" + col + ">img.status";
+            if (req.status==200) {
+                //alert("URL Exists! " + url + " " + ln + " : " + col);
+                $(pattern, fmt_view_doc).attr('src', "accept.png");
+            }
+            else {
+                alert("Hiya" + id);
+                $(pattern, fmt_view_doc).attr('src', "cross.png").append('<I>' + req.status + '</I>');
+
+            }
+        }
+    };
+}
