@@ -34,7 +34,7 @@ msgstr "Page Précédente"
 msgid "Search"
 msgstr "Recherche"
 
-#: lib/SearchAll/View/Main.pm:44 lib/SearchAll/View/Overlay.pm:109 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:82 lib/SearchAll/View/Overlay.pm:94
+#: lib/SearchAll/View/Main.pm:44 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
 msgid "SearchAll"
 msgstr ""
 

@@ -86,7 +86,7 @@ $op_table = {
         $op_table->{setup}->();
         $lang =~ s/_/-/g;
         $lang =~ s/-(\w+)/'-'.uc($1)/e;
-        shell("LANG=$lang.UTF-8 LC_ALL=$lang.UTF-8 firefox -jsconsole -P $profile");
+        shell(qq{LANG="$lang.UTF-8" LC_CTYPE="$lang.UTF-8" firefox -jsconsole -P $profile});
     },
 
     profile => sub {
