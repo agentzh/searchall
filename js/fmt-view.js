@@ -208,7 +208,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             req.send(null);
         }
         info("[URL] " + hostname + ": URL: " + url);
-        snippet = '<img class="status" src="chrome://global/skin/throbber/Throbber-small.gif"/>&nbsp;&nbsp;<img src="' + RootPath + '/favicon.ico" alt=" "/>&nbsp;' + snippet;
+        snippet = '<img class="status" src="bullet_yellow.png"/>&nbsp;&nbsp;<img src="' + RootPath + '/favicon.ico" alt=" "/>&nbsp;' + snippet;
         var rows = $(".row", fmt_view_doc);
         if (rows[i] == undefined) {
             var tbodies = $("#content>tbody", fmt_view_doc);
@@ -290,16 +290,22 @@ function regAjaxHandle (req, ln, col, timer, url) {
             try {
                 status = req.status;
             } catch (e) {
+                //$(pattern, fmt_view_doc).attr('src', "cross.png");
+                //alert(e);
                 $(pattern, fmt_view_doc).attr('src', "cross.png");
+                return;
             }
             if (status < 400) {
                 //alert("URL Exists! " + url + " " + ln + " : " + col);
                 $(pattern, fmt_view_doc).attr('src', "accept.png");
-            } else if (status == 405) {
-                //alert("Hiya" + id);
-                $(pattern, fmt_view_doc).attr('src', "about:blank");
-            } else {
+            } else if (status != 402 && status != 403 && status != 405 && status != 500) {
+                error("Bad status code: " + url + ": " + status);
                 $(pattern, fmt_view_doc).attr('src', "cross.png");
+                //alert("Hiya" + id);
+                //alert("405 found! " + pattern);
+                //$(pattern, fmt_view_doc).attr('src', "about:blank");
+            } else {
+                $(pattern, fmt_view_doc).attr('src', "weather_clouds.png");
             }
         }
     };
@@ -310,7 +316,7 @@ function handleCheckTimeout (req, ln, col, timeout) {
         req.abort();
         //alert("Timout!" + ln + ":" + col);
         var pattern = "#" + ln + "-" + col + ">img.status";
-        $(pattern, fmt_view_doc).attr('src', "cross.png");
+        $(pattern, fmt_view_doc).attr('src', "clock_stop.png");
     }, timeout);
 }
 
