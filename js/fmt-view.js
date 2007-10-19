@@ -211,6 +211,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
                 req.send(null);
             } catch (e) {
                 if (!FoundFirebug) {
+                    error(e);
                     $("div.error", fmt_view_doc).show();
                 }
                 //error("Firebug conflicted with SearchAll's AJAX checking");
@@ -283,9 +284,21 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
 }
 
 function extractUrl (html) {
-    var match = html.match(/href\s*=\s*"([^"]+)"/i);
+    var regex = /href\s*=\s*"([^"]+)"/i;
+    var match = regex.exec(html);
     if (match) {
-        return match[1];
+        var url = match[1];
+        if ( url.match(/javascript:void/) ) {
+            html = html.replace(regex, '');
+            match = regex.exec(html);
+            if (match) {
+                var url = match[1];
+                return url;
+            }
+            return undefined;
+            //alert("Here!" + match[2]);
+        }
+        return url;
     }
     return undefined;
 }
