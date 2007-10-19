@@ -202,7 +202,9 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         if (url) {
             var req = new XMLHttpRequest();
             req.open('HEAD', url, true);
-            regAjaxHandle(req, i, index, url);
+
+            var timer = handleCheckTimeout(req, i, index, 5*1000);
+            regAjaxHandle(req, i, index, timer, url);
             req.send(null);
         }
         info("[URL] " + hostname + ": URL: " + url);
@@ -279,19 +281,36 @@ function extractUrl (html) {
     return undefined;
 }
 
-function regAjaxHandle (req, ln, col, url) {
+function regAjaxHandle (req, ln, col, timer, url) {
     req.onreadystatechange = function (aEvt) {
         if (req.readyState == 4) {
+            clearTimeout(timer);
             var pattern = "#" + ln + "-" + col + ">img.status";
-            if (req.status==200) {
+            var status;
+            try {
+                status = req.status;
+            } catch (e) {
+                $(pattern, fmt_view_doc).attr('src', "cross.png");
+            }
+            if (status < 400) {
                 //alert("URL Exists! " + url + " " + ln + " : " + col);
                 $(pattern, fmt_view_doc).attr('src', "accept.png");
-            }
-            else {
-                alert("Hiya" + id);
-                $(pattern, fmt_view_doc).attr('src', "cross.png").append('<I>' + req.status + '</I>');
-
+            } else if (status == 405) {
+                //alert("Hiya" + id);
+                $(pattern, fmt_view_doc).attr('src', "about:blank");
+            } else {
+                $(pattern, fmt_view_doc).attr('src', "cross.png");
             }
         }
     };
 }
+
+function handleCheckTimeout (req, ln, col, timeout) {
+    return setTimeout(function () {
+        req.abort();
+        //alert("Timout!" + ln + ":" + col);
+        var pattern = "#" + ln + "-" + col + ">img.status";
+        $(pattern, fmt_view_doc).attr('src', "cross.png");
+    }, timeout);
+}
+
