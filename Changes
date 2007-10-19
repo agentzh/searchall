@@ -2,6 +2,7 @@
 * Added I18N support. The following locales are supported:
     zh-CN, zh-TW, en-US, and fr
   The fr locale needs review. Feedback welcome!
+* Added SearchAll logo as the icons for the menu items.
 
 =Changes for release 0.1.10
 * Fixed a serious bug in 0.1.9 in which the "<<Prev" button's action contains a potential infinite recursion.
