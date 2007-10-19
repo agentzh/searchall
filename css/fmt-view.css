@@ -19,6 +19,17 @@ body>table>tbody>tr>td {
     padding: 0.6em;
 }
 
+div.error {
+     background-color: rgb(240,234,183);
+     border: 1px solid rgb(230,224,173);
+     margin-top: 10px;
+     margin-bottom: 10px;
+     padding: 5px 20px 5px 5px;
+     font-size: 1.2em;
+     font-color: black;
+     position: relative;
+}
+
 ul{
   list-style-type: square;
 }

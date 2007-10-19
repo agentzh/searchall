@@ -85,6 +85,7 @@ function rel2abs (html, loc) {
 }
 
 function gen_fmt_view (index, hostname, doc, forceMining) {
+    $("div.error", fmt_view_doc).hide();
     var list = [];
     var pattern = Patterns[hostname];
     if (!forceMining && pattern) {
@@ -195,6 +196,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         snippets = tmp;
     }
 
+    var FoundFirebug = false;
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
         var url = extractUrl(snippet);
@@ -207,7 +209,12 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
                 var timer = handleCheckTimeout(req, i, index, 5*1000);
                 regAjaxHandle(req, i, index, timer, url);
                 req.send(null);
-            } catch (e) { error("Firebug conflicted with SearchAll's AJAX checking"); }
+            } catch (e) {
+                if (!FoundFirebug) {
+                    $("div.error", fmt_view_doc).show();
+                }
+                //error("Firebug conflicted with SearchAll's AJAX checking");
+            }
         }
         //info("[URL] " + hostname + ": URL: " + url);
         snippet = '<img class="status" src="bullet_yellow.png"/>&nbsp;&nbsp;<img src="' + RootPath + '/favicon.ico" alt=" "/>&nbsp;' + snippet;
