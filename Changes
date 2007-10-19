@@ -1,4 +1,6 @@
 =Changes for release 0.2.1
+* Now SearchAll tests each result item in the Formatted view by sending AJAX HEAD requests.
+  It now has 5 potential marks: Checking, Bad, Good, Timed out, and Uncertain (clouds).
 * Added I18N support. The following locales are supported:
     zh-CN, zh-TW, en-US, and fr
   The fr locale needs review. Feedback welcome!
