@@ -1,3 +1,9 @@
+const nsIPermissionManager = CI("nsIPermissionManager");
+const PermManager = CC("@mozilla.org/permissionmanager;1");
+const pm = PermManager.getService(nsIPermissionManager);
+const DENY_ACTION = nsIPermissionManager.DENY_ACTION;
+const ALLOW_ACTION = nsIPermissionManager.ALLOW_ACTION;
+
 $(document).ready(init);
 
 function getAnonElem (node, path) {
@@ -23,6 +29,13 @@ function setQuery (query) {
 }
 
 function init () {
+    try {
+        var ioService = CCSV("@mozilla.org/network/io-service;1", "nsIIOService");
+        var host = 'searchall';
+        var uri = ioService.newURI("http://" + host, null, null);
+        pm.add(uri, "firebug", DENY_ACTION);
+    } catch (e) { error("perm.disableFirebug: " + e); }
+
     var contextMenu = document.getElementById("contentAreaContextMenu");
     if (contextMenu)
         contextMenu.addEventListener("popupshowing", showHideMenu, false);

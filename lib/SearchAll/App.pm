@@ -28,6 +28,7 @@ use XUL::App schema {
 
         jsfile 'searchall.js' =>
             requires qw(
+                xpcom.js
                 jquery.js JSAN.js
                 datadumper.js Debug.js
                 timer.js dom.js JSON.js
@@ -39,7 +40,7 @@ use XUL::App schema {
             );
 
         jsfile 'toolbar.js' =>
-            requires qw( jquery.js );
+            requires qw( jquery.js xpcom.js );
 
         jsfile 'test.js' =>
             requires qw( test-browser.js test-progress.js );
