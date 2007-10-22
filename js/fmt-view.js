@@ -169,7 +169,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             .replace(/<\/?table[^>]*>/ig, '')
             .replace(/<\/?tbody[^>]*>/ig, '')
             .replace(/<(\/?)tr[^>]*>/ig, '<$1p>')
-            .replace(/<\/?td[^>]*>/ig, '&nbsp;')
+            .replace(/<\/?td[^>]*>/ig, '&#160;')
             .replace(/<(\/?)th[^>]*>/ig, '<$1h3>')
             .replace(/<a /ig, '<a target="_blank" ');
         snippet = rel2abs(snippet, doc.location);
@@ -218,7 +218,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
             }
         }
         //info("[URL] " + hostname + ": URL: " + url);
-        snippet = '<img class="status" src="bullet_yellow.png"/>&nbsp;&nbsp;<img src="' + RootPath + '/favicon.ico" alt=" "/>&nbsp;' + snippet;
+        snippet = '<img class="status" src="bullet_yellow.png"/>&#160;&#160;<img src="' + RootPath + '/favicon.ico" alt=" "/>&#160;' + snippet;
         var rows = $(".row", fmt_view_doc);
         if (rows[i] == undefined) {
             var tbodies = $("#content>tbody", fmt_view_doc);

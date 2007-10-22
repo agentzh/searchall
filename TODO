@@ -65,11 +65,11 @@ Later...
 * Add a SearchAll button to FF's context menu so as to searchall the selected words in arbitrary web pages.  [done]
 * Work with Yedan++ to build a real SaerchAll homepage.  [done]
 * Test the speed and accessibility of the sites in the results via the AJAX head request.  [done]
+* Do s/is conflicting with/is breaking/ in fmt-view.html.  [done]
+* Update the pref to disable Firebug for 'searchall'.  [done]
 
-* Do s/is conflicting with/is breaking/ in fmt-view.html.
-* Update the pref to disable Firebug for 'searchall'.
-* I18N for fmt-view.html (is XHTML XML?)
 * Default to English search engines if the locale is not zh-* __and__ SearchAll is started for the very first time.
+* I18N for fmt-view.html (is XHTML XML?)
 * Work with Yuanyin++ to do zh-CN localization for AMO.
 * Add a "Try mining the original page" link to force mining the patterns.
 * Fix the checkbox + splitter toggling bug.
