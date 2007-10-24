@@ -143,7 +143,7 @@ function genListener (ind) {
                 //browsers[i].browser.contentWindow.blur();
             //info("focusing search box... (2)");
             // Ensure we get the focus...
-            if (flag & WPL.STATE_IS_NETWORK) {
+            if (flag & WPL.STATE_IS_DOCUMENT) {
                 //if (hostname.match(/taobao/)) alert("processing " + hostname);
                 try {
                     var val = 100 * myProgress.percent();

@@ -14,27 +14,27 @@ msgid ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/SearchAll/View/Main.pm:177
+#: lib/SearchAll/View/Main.pm:176
 msgid "Formatted"
 msgstr "Voir formatée"
 
-#: lib/SearchAll/View/Main.pm:200
+#: lib/SearchAll/View/Main.pm:199
 msgid "Next"
 msgstr "Page suivante"
 
-#: lib/SearchAll/View/Main.pm:170
+#: lib/SearchAll/View/Main.pm:169
 msgid "Original"
 msgstr "Original View"
 
-#: lib/SearchAll/View/Main.pm:199
+#: lib/SearchAll/View/Main.pm:198
 msgid "Prev"
 msgstr "Page Précédente"
 
-#: lib/SearchAll/View/Main.pm:117
+#: lib/SearchAll/View/Main.pm:116
 msgid "Search"
 msgstr "Recherche"
 
-#: lib/SearchAll/View/Main.pm:44 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
+#: lib/SearchAll/View/Main.pm:43 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
 msgid "SearchAll"
 msgstr ""
 

@@ -255,8 +255,9 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         var cols = $(".col-" + index, fmt_view_doc);
         if (cols.length) {
             //alert("Empty doc: " + doc.contentType);
-            cols.empty();
-            $(cols[0]).html("Sorry, no results found :(");
+            $(".col-" + index + ">img.loading", fmt_view_doc).hide();
+            //cols.empty();
+            //$(cols[0]).html("Sorry, no results found :(");
         }
     }
     setTimeout(function () {
