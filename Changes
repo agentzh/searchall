@@ -1,4 +1,4 @@
-=Changes for release 0.2.1
+=Changes for release 0.2.2
 * Now SearchAll tests each result link in the Formatted view by sending AJAX HEAD requests.
   It now has 5 potential marks: Checking, Bad, Good, Timed out, and Uncertain (clouds).
 * Added I18N support. The following locales are supported:
