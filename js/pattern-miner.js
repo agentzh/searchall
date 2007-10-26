@@ -29,7 +29,7 @@ SearchAll.PatternMiner.mineNode = function (node, count, prefix) {
     var locator = '';
     var elems = [];
     var samples = {};
-    var matched_elems = {};
+    var matchedElems = {};
     for (var i = 0; i < list.length; i++) {
         var elem = list[i];
         if (elem.nodeType != Node.ELEMENT_NODE)
@@ -44,7 +44,7 @@ SearchAll.PatternMiner.mineNode = function (node, count, prefix) {
             continue;
         }
         samples[seq] += "[" + seq + "] " + $(elem).text() + "\n\n";
-        matched_elems[seq] = elem;
+        matchedElems[seq] = elem;
         category = categories.filter(
             function (c) { return c[0] == seq; }
         )[0];
@@ -68,7 +68,7 @@ SearchAll.PatternMiner.mineNode = function (node, count, prefix) {
         this.hitCount++;
         var seq = hits[0][0];
         //info(this.hostname + ": hits:\n" + Dumper(hits));
-        var pattern = this.genSelector(matched_elems[seq]);
+        var pattern = this.genSelector(matchedElems[seq]);
         retvals.push(pattern);
         info(this.hostname + ": pattern:\n" + pattern);
         //info(this.hostname + ": sample:\n" + Dumper(samples[seq]));

@@ -212,7 +212,7 @@ function genListener (ind) {
                         SearchAll.App.domLogger.log(doc, hostname);
                     } catch (e) { info(e) }
                     //alert("Hiya: " + hostname);
-                    gen_fmt_view(ind, hostname, doc, true/* don't force mining */);
+                    gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
                 }
                 browsers[ind].button().click(
                     function () {
