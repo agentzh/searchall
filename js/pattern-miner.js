@@ -8,7 +8,7 @@ SearchAll.PatternMiner = {
     hostname: undefined,
 
     mineDoc: function (doc, count, hostname) {
-        var body = $("body", doc)[0];
+        var body = doc.getElementsByTagName("body")[0];
         this.hostname = hostname;
         this.hitCount = 0;
         var patterns = this.mineNode(body, count, 'body>');
