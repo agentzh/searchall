@@ -1,4 +1,4 @@
-// Test the Progress class in progress.js
+// Test the SearchAll.Progress class in progress.js
 
 JSAN.use('Test.More');
 JSAN.use('Debug');
@@ -7,9 +7,9 @@ JSAN.use('datadumper');
 function test_progress () {
     plan({tests: 11});
 
-    var obj = new Progress(3);
+    var obj = new SearchAll.Progress(3);
     ok(obj, 'obj ok');
-    isaOK(obj, 'Progress');
+    isaOK(obj, 'SearchAll.Progress');
     is(obj.count, 3, '.count ok');
 
     obj.setDone('google.cn', 18);

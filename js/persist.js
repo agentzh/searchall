@@ -2,7 +2,7 @@ var AutoSearch = [];
 var selectedURLIndex, selectedTabIndex;
 var myTimer = new SearchAll.Timer();
 var Replies = {};
-var myProgress = new Progress(3);
+var myProgress = new SearchAll.Progress(3);
 var prefs;
 
 function getFmtViewDoc () {
