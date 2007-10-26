@@ -1,16 +1,23 @@
-var HitsCount;
-var Hostname;
+// Class SearchAll.PatternMiner
+// -- agentzh
 
-function mine_pattern (doc, count, hostname) {
-    var body = $("body", doc)[0];
-    Hostname = hostname;
-    HitsCount = 0;
-    var patterns = mine_node(body, count, 'body>');
-    //Debug.JJJ(patterns);
-    return patterns;
-}
+if (typeof SearchAll == 'undefined') SearchAll = {};
 
-function mine_node (node, count, prefix) {
+SearchAll.PatternMiner = {
+    hitCount: 0,
+    hostname: undefined,
+
+    mineDoc: function (doc, count, hostname) {
+        var body = $("body", doc)[0];
+        this.hostname = hostname;
+        this.hitCount = 0;
+        var patterns = this.mineNode(body, count, 'body>');
+        //Debug.JJJ(patterns);
+        return patterns;
+    }
+};
+
+SearchAll.PatternMiner.mineNode = function (node, count, prefix) {
     //alert(node);
     prefix = prefix || '';
     var list = node.childNodes;
@@ -27,10 +34,10 @@ function mine_node (node, count, prefix) {
         var elem = list[i];
         if (elem.nodeType != Node.ELEMENT_NODE)
             continue;
-        //info(Hostname + ": locator: " + locator);
+        //info(this.hostname + ": locator: " + locator);
 
-        var seq = compute_seq(elem);
-        //info(Hostname + ": seq: " + seq);
+        var seq = this.computeSeq(elem);
+        //info(this.hostname + ": seq: " + seq);
 
         if (!seq || ! (/\+.*\+.*\+/.test(seq))) {
             //alert(tagName + ": " + seq);
@@ -50,37 +57,37 @@ function mine_node (node, count, prefix) {
         elems.push(elem);
     }
     //alert("elems: " + elems.length);
-    //if (Hostname == 'www.yisou.com')
-        //info(Hostname + ": Categories:\n" + Dumper(categories));
+    //if (this.hostname == 'www.yisou.com')
+        //info(this.hostname + ": Categories:\n" + Dumper(categories));
     var retvals = [];
 
     var hits = categories.filter(function (e) {
         return e.length >= count;
     });
     if (hits.length > 0) {
-        HitsCount++;
+        this.hitCount++;
         var seq = hits[0][0];
-        //info(Hostname + ": hits:\n" + Dumper(hits));
-        var pattern = genPattern(matched_elems[seq]);
+        //info(this.hostname + ": hits:\n" + Dumper(hits));
+        var pattern = this.genSelector(matched_elems[seq]);
         retvals.push(pattern);
-        info(Hostname + ": pattern:\n" + pattern);
-        //info(Hostname + ": sample:\n" + Dumper(samples[seq]));
+        info(this.hostname + ": pattern:\n" + pattern);
+        //info(this.hostname + ": sample:\n" + Dumper(samples[seq]));
 
     } else {
         for (var i = 0; i < elems.length; i++) {
             var elem = elems[i];
             //alert(i + ": " + elem);
             //alert(i + ": " + elem.nodeType);
-            var more = retvals.concat(mine_node(elem, count, prefix + locator + ">"));
+            var more = retvals.concat(this.mineNode(elem, count, prefix + locator + ">"));
             //if (more.length > 0)
                 //alert("Found more!");
             retvals = retvals.concat(more);
         }
     }
     return retvals;
-}
+};
 
-function genPattern (node) {
+SearchAll.PatternMiner.genSelector = function (node) {
     var selector = '';
     while (true) {
         if (node == null) break;
@@ -108,9 +115,9 @@ function genPattern (node) {
         node = node.parentNode;
     }
     return selector;
-}
+};
 
-function compute_seq (node) {
+SearchAll.PatternMiner.computeSeq = function (node) {
     var html = $(node).html();
     var s = '';
     var tagRe = /<(\/?)\s*(\w+)[^>]*>|<()(\w+)\s*(\/)\s*>/g;
@@ -120,9 +127,9 @@ function compute_seq (node) {
         var after  = matches[3];
         if (/^(?:[biu]|\d+|nobr|wbr|br|span|font|small|big|em|strong|dfn|code|samp|kbd|var|cite|basefont|img|applet|script|noscript|map|area|tt|trike|big|sub|sup)$/.test(tag))
             continue;
-        //info(Hostname + ": tag: " + tag);
-        //info(Hostname + ": before: " + before);
-        //info(Hostname + ": after: " + after);
+        //info(this.hostname + ": tag: " + tag);
+        //info(this.hostname + ": before: " + before);
+        //info(this.hostname + ": after: " + after);
         if (before)
             s += "-" + tag;
         else if (after)
@@ -131,5 +138,5 @@ function compute_seq (node) {
             s += "+" + tag;
     }
     return s;
-}
+};
 

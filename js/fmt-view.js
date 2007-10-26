@@ -95,7 +95,7 @@ function gen_fmt_view (index, hostname, doc, forceMining) {
         //alert("Start to mine!");
         var count = 5;
         while (count >= 2) {
-            var patterns = mine_pattern(doc, count, hostname);
+            var patterns = SearchAll.PatternMiner.mineDoc(doc, count, hostname);
             if (patterns.length > 0) {
                 pattern = findShortest(patterns);
                 //pattern = pattern.replace(/.*>([^>]+>[^>]+>[^>]+)$/, "$1");
