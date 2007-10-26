@@ -1,5 +1,5 @@
-// Timer class for SearchAll
-// -- Agent Zhang
+// Class SearchAll.Timer
+// -- agentzh
 
 if (typeof SearchAll == 'undefined') SearchAll = {};
 

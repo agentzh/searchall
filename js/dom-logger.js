@@ -1,3 +1,6 @@
+// Class SearchAll.DomLogger
+// -- agentzh
+
 if (typeof SearchAll == 'undefined') SearchAll = {};
 
 SearchAll.DomLogger = function (listWidget, textWidget) {

@@ -1,3 +1,6 @@
+// Class SearchAll.Dom
+// -- agentzh
+
 if (typeof SearchAll == 'undefined') SearchAll = {};
 if (typeof SearchAll.Dom == 'undefined') SearchAll.Dom = {};
 
