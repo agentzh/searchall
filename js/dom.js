@@ -53,9 +53,9 @@ SearchAll.Dom.dump = function (node, indent, isLast) {
     for (var i = 0; i < children.length; i++) {
         var child = children[i];
         if (i == children.length - 1)
-            str += SearchAll.Dom.dump(child, indent + "|    ", 1);
+            str += this.dump(child, indent + "|    ", 1);
         else
-            str += SearchAll.Dom.dump(child, indent + "|    ", 0);
+            str += this.dump(child, indent + "|    ", 0);
     }
     return str;
 }
