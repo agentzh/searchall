@@ -21,7 +21,7 @@ use XUL::App schema {
         xulfile 'searchall-debug.xul' =>
             generated from 'SearchAll::View::Debug',
             includes qw(
-                searchall.js persist.js
+                searchall.js
                 Test/More.js Test/Builder.js
                 test.js searchall.css
             );
@@ -31,7 +31,7 @@ use XUL::App schema {
                 xpcom.js
                 jquery.js JSAN.js
                 datadumper.js Debug.js
-                timer.js dom.js JSON.js
+                timer.js dom-logger.js dom.js JSON.js
                 progress.js miner.js fmt-view.js
                 persist.js
                 browser.js progress-listener.js

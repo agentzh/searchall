@@ -208,7 +208,9 @@ function genListener (ind) {
                     //if (browsers[ind].uri() == browsers[ind].homePage()) {
                         //alert("Hiya! " + browsers[ind].uri());
                     //}
-                    showDOM(doc, hostname);
+                    try {
+                        SearchAll.App.domLogger.log(doc, hostname);
+                    } catch (e) { info(e) }
                     //alert("Hiya: " + hostname);
                     gen_fmt_view(ind, hostname, doc, false/* don't force mining */);
                 }
@@ -251,4 +253,11 @@ function removeFormTarget (doc) {
     });
     //alert(forms.length);
 }
+
+$(document).ready(function () {
+    var listWidget = document.getElementById('dom-list');
+    var textWidget = document.getElementById('dom');
+    if (typeof SearchAll.App == 'undefined') SearchAll.App = {};
+    SearchAll.App.domLogger = new SearchAll.DomLogger(listWidget, textWidget);
+});
 

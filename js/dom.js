@@ -1,7 +1,10 @@
-function dumpDOM (node, indent, is_last) {
+if (typeof SearchAll == 'undefined') SearchAll = {};
+if (typeof SearchAll.Dom == 'undefined') SearchAll.Dom = {};
+
+SearchAll.Dom.dump = function (node, indent, isLast) {
     var indent = indent || '';
     var prefix;
-    if (is_last) {
+    if (isLast) {
         prefix = indent.replace(/\|\s+$/, '`-- ');
         indent = indent.replace(/\|\s+$/, '    ');
     } else {
@@ -47,42 +50,10 @@ function dumpDOM (node, indent, is_last) {
     for (var i = 0; i < children.length; i++) {
         var child = children[i];
         if (i == children.length - 1)
-            str += dumpDOM(child, indent + "|    ", 1);
+            str += SearchAll.Dom.dump(child, indent + "|    ", 1);
         else
-            str += dumpDOM(child, indent + "|    ", 0);
+            str += SearchAll.Dom.dump(child, indent + "|    ", 0);
     }
     return str;
 }
-
-var domTable = {};
-
-function showDOM (dom, label) {
-    var textbox = $("#dom")[0];
-    if (!textbox) return;
-    if (!label) {
-        var time = new Date().getTime();
-        label = time;
-    }
-    var new_label = label;
-    var i = 1;
-    while (domTable[new_label]) {
-        i++;
-        new_label = label + "-" + i;
-    }
-    label = new_label;
-    var dom_list = $('#dom-list')[0];
-    dom_list.appendItem(label, label);
-    var str = dumpDOM(dom);
-    domTable[label] = str;
-    textbox.value = str;
-}
-
-$("#dom-list").select(function () {
-    //alert(this);
-    var textbox = $("#dom")[0];
-    label = this.selectedItem.label;
-    //alert(label);
-    textbox.value = domTable[label];
-});
-
 

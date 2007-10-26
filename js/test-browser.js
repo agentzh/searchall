@@ -36,7 +36,7 @@ function test_browser () {
         // Let's wait for a while to let the new
         // page get loaded
         setTimeout(function () {
-            showDOM(browser.document());
+            //showDOM(browser.document());
             is(browser.hostname(), 'www.google.cn', 'url does not change');
             like(browser.textbox().val(), 'Perl', "textbox's value not changed");
             like(browser.document().title, /Perl - Google/, 'title okay');
@@ -48,7 +48,7 @@ function test_browser () {
             browser.button().click();
             // Let's wait for the new page to load:
             setTimeout(function () {
-                showDOM(browser.document());
+                //showDOM(browser.document());
                 like(browser.textbox().val(), 'Howdy', "textbox's value is still 'howdy'");
                 like(browser.document().title, /Howdy - Google/, "title okay, it's 'Howdy - Google ...'");
 

@@ -1,8 +1,13 @@
-var Timer = function () {
+// Timer class for SearchAll
+// -- Agent Zhang
+
+if (typeof SearchAll == 'undefined') SearchAll = {};
+
+SearchAll.Timer = function () {
     return this.reset();
 };
 
-Timer.fn = Timer.prototype = {
+SearchAll.Timer.prototype = {
     now: function (c) {
         return Date.now();
     },
@@ -44,6 +49,9 @@ Timer.fn = Timer.prototype = {
         //Debug.JJJ(this);
         return pair[1] - pair[0];
     },
-    reset: function () { this.tags = {}; return this; }
+    reset: function () {
+        this.tags = {};
+        return this;
+    }
 };
 

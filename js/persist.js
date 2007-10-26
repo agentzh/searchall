@@ -1,6 +1,6 @@
 var AutoSearch = [];
 var selectedURLIndex, selectedTabIndex;
-var myTimer = new Timer();
+var myTimer = new SearchAll.Timer();
 var Replies = {};
 var myProgress = new Progress(3);
 var prefs;
