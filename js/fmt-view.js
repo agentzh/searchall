@@ -10,8 +10,7 @@ SearchAll.FmtView = function (index) {
     this.index = index;
 };
 
-SearchAll.FmtView.prototype = {
-    patterns: {
+SearchAll.patterns = {
         'www.baidu.cn'    : "tbody>tr>td.f",
         'www.baidu.com'   : "tbody>tr>td.f",
         'www.google.cn'   : "div.g[h2]",
@@ -43,91 +42,13 @@ SearchAll.FmtView.prototype = {
         'image.cn.yahoo.com': 'body.y>div#bd>div.yui-g>div.cnt>ul>li',
         'www.flickr.com' : 'table.DetailResults>tbody>tr',
         'www.youtube.com' : 'div#mainContent>div>div.vEntry'
-    },
+};
 
+SearchAll.FmtView.prototype = {
     history: 0,
     document: null,
     curPath: null,  // XXX moved to SearchAll.OrgView.prototype
     rootPath: null, // ditto
-
-    isEmpty: function (html) {
-        var res = html.replace(
-            /<\s*\/?\s*(\w+)[^>]*>|\s+/g,
-            function (s, tag) {
-                if (tag.toLowerCase() == 'img') {
-                    return s;
-                } else {
-                    return '';
-                }
-            }
-        );
-        return /^$/.test(res);
-    },
-
-    findShortest: function (list) {
-        var shortest;
-        for (var i = 0; i < list.length; i++) {
-            var s = list[i];
-            if (shortest == undefined) {
-                shortest = s;
-            } else if (s.length < shortest.length) {
-                shortest = s;
-            }
-        }
-        return shortest;
-    },
-
-    replacer: function (s, prefix, url, curPath, rootPath) {
-        //info("Found str: " + s);
-        //info("Found prefix: " + prefix);
-        //info("Found url: " + url);
-        if ( /^\w+:\/\//.test(url) ) return s;
-        info("curPath (i): " + curPath);
-        info("rootPath (i): " + rootPath);
-        if (url[0] == '/') {
-            //alert("Hey!" + url);
-            return prefix + rootPath + url;
-        }
-        return prefix + curPath + url;
-    },
-
-    rel2abs: function (html, loc) {
-        this.rootPath = loc.protocol + "//" + loc.host;
-        this.curPath =  this.rootPath + loc.pathname.replace(/\/([^\/]*)$/, '/');
-        //var rootPath = this.rootPath;
-        //var curPath = this.curPath;
-        //info("curPath: " + curPath);
-        //info("rootPath: " + rootPath);
-        var obj = this;
-        html = html.replace(
-            /(<[^>]+href\s*=\s*")([^"]+)/ig,
-            function (s, prefix, url) {
-                return obj.replacer(s, prefix, url, obj.curPath, obj.rootPath);
-            }
-        );
-        //if (this.rootPath.match(/google/)) alert(html);
-        return html;
-    },
-
-    extractUrl: function (html) {
-        var regex = /href\s*=\s*"([^"]+)"/i;
-        var match = regex.exec(html);
-        if (match) {
-            var url = match[1];
-            if ( url.match(/javascript:void/) ) {
-                html = html.replace(regex, '');
-                match = regex.exec(html);
-                if (match) {
-                    var url = match[1];
-                    return url;
-                }
-                return undefined;
-                //alert("Here!" + match[2]);
-            }
-            return url;
-        }
-        return undefined;
-    },
 
     regAjaxHandle: function (req, ln, col, timer, url) {
         var fmtDoc = this.document;
@@ -181,10 +102,11 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         return;
     }
 
+    var Util = SearchAll.Util;  // namespace alias
     var index = this.index;
     $("div.error", this.document).hide();
     var list = [];
-    var pattern = this.patterns[hostname];
+    var pattern = SearchAll.patterns[hostname];
     if (!forceMining && pattern) {
         list = $(pattern, origDoc);
     } else {
@@ -194,12 +116,12 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         while (count >= 2) {
             var patterns = SearchAll.PatternMiner.mineDoc(origDoc, count, hostname);
             if (patterns.length > 0) {
-                pattern = this.findShortest(patterns);
+                pattern = Utils.findShortest(patterns);
                 //pattern = pattern.replace(/.*>([^>]+>[^>]+>[^>]+)$/, "$1");
 
                 info("Selected: " + hostname + ": pattern: " + pattern);
                 list = $(pattern, origDoc);
-                this.patterns[hostname] = pattern;
+                SearchAll.patterns[hostname] = pattern;
                 break;
             } else {
                 count--;
@@ -236,6 +158,9 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     $("span#loading", this.document).hide();
 
     Debug.log(hostname + ": " + list.length);
+    var loc = origDoc.location;
+    var rootPath = loc.protocol + "//" + loc.host;
+    var curPath =  rootPath + loc.pathname.replace(/\/([^\/]*)$/, '/');
     //info("Path name: " + path);
     //alert(path);
     var snippets = [];
@@ -263,10 +188,11 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             .replace(/<\/?td[^>]*>/ig, '&#160;')
             .replace(/<(\/?)th[^>]*>/ig, '<$1h3>')
             .replace(/<a /ig, '<a target="_blank" ');
-        snippet = this.rel2abs(snippet, origDoc.location);
+
+        snippet = Util.rel2abs(snippet, rootPath, curPath);
         //if (hostname.match(/answers/)) info(hostname + snippet);
         //snippet = snippet.replace(/[\w.?=&\/]{45,45}/g, "$1<wbr/>");
-        if (this.isEmpty(snippet)) {
+        if (Util.isEmpty(snippet)) {
             //alert("It's empty!");
             continue;
         }
@@ -290,7 +216,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     var FoundFirebug = false;
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
-        var url = this.extractUrl(snippet);
+        var url = Util.extractUrl(snippet);
         //alert(url);
         if (url) {
             try {
@@ -309,7 +235,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             }
         }
         info("[URL] " + hostname + ": URL: " + url);
-        snippet = '<img class="status" src="bullet_yellow.png"/>&#160;&#160;<img src="' + this.rootPath + '/favicon.ico" alt=" "/>&#160;' + snippet;
+        snippet = '<img class="status" src="bullet_yellow.png"/>&#160;&#160;<img src="' + rootPath + '/favicon.ico" alt=" "/>&#160;' + snippet;
         var rows = $(".row", this.document);
         if (rows[i] == undefined) {
             var tbodies = $("#content>tbody", this.document);
