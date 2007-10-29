@@ -5,6 +5,9 @@ if (typeof SearchAll == 'undefined') SearchAll = {};
 
 SearchAll.DomLogger = function (listWidget, textWidget) {
     this.domTable = {};
+    if (listWidget == null) {
+        return this;
+    }
     this.listWidget = listWidget;
     this.textWidget = textWidget;
     var logger = this;

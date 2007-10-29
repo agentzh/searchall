@@ -172,9 +172,7 @@ function genListener (ind) {
                 }
 
                 try {
-                    var browser = $("#fmt-view")[0];
-                    if (!browser) return;
-                    var fmt_view_doc = browser.contentDocument;
+                    var fmt_view_doc = SearchAll.app.fmtViews[ind];
                     $("span#loading", fmt_view_doc).hide();
                     if (AutoSearch[ind]) {
                         $("h1#default", fmt_view_doc).hide();
@@ -209,10 +207,10 @@ function genListener (ind) {
                         //alert("Hiya! " + browsers[ind].uri());
                     //}
                     try {
-                        SearchAll.App.domLogger.log(doc, hostname);
+                        SearchAll.app.domLogger.log(doc, hostname);
                     } catch (e) { info(e) }
                     //alert("Hiya: " + hostname);
-                    gen_fmt_view(ind, hostname, doc, true/* don't force mining */);
+                    SearchAll.app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
                 }
                 browsers[ind].button().click(
                     function () {
@@ -257,7 +255,11 @@ function removeFormTarget (doc) {
 $(document).ready(function () {
     var listWidget = document.getElementById('dom-list');
     var textWidget = document.getElementById('dom');
-    if (typeof SearchAll.App == 'undefined') SearchAll.App = {};
-    SearchAll.App.domLogger = new SearchAll.DomLogger(listWidget, textWidget);
+    if (typeof SearchAll.app == 'undefined') SearchAll.app = {};
+    SearchAll.app.domLogger = new SearchAll.DomLogger(listWidget, textWidget);
+    SearchAll.app.fmtViews = [];
+    for (var i = 0; i < 3; i++) {
+        SearchAll.app.fmtViews[i] = new SearchAll.FmtView(i);
+    }
 });
 

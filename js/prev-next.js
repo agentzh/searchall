@@ -66,7 +66,7 @@ function gotoNext (i) {
         if (! Done[i]) {
             info("Last resort for paging is running: " + hostname);
             noMining[i] = false;
-            gen_fmt_view(i, hostname, doc, false/* don't force mining */);
+            SearchAll.app.fmtViews[i].update(i, hostname, doc, false/* don't force mining */);
         }
     }, 1000);
 }
@@ -117,7 +117,7 @@ function gotoPrev (i) {
     //var guard;
     guard = function () {
         if (! Done[i]) {
-            var success = gen_fmt_view(i, browsers[i].hostname(), doc, false/* don't force mining */);
+            var success = SearchAll.app.fmtViews[i].update(i, browsers[i].hostname(), doc, false/* don't force mining */);
             //if (!success) {
                 //guard();
             //}
