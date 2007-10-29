@@ -234,7 +234,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
                 //error("Firebug conflicted with SearchAll's AJAX checking");
             }
         }
-        info("[URL] " + hostname + ": URL: " + url);
+        //info("[URL] " + hostname + ": URL: " + url);
         snippet = '<img class="status" src="bullet_yellow.png"/>&#160;&#160;<img src="' + rootPath + '/favicon.ico" alt=" "/>&#160;' + snippet;
         var rows = $(".row", this.document);
         if (rows[i] == undefined) {
@@ -242,23 +242,23 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             //alert(tbodies[0]);
             //Debug.log("appending row " + i + " for " + hostname);
             //alert($(rows[0]).parent()[0].tagName);
-            var row_html;
+            var rowHtml;
             if (i == 0) {
-                row_html =
+                rowHtml =
                 '<tr class="row">' +
                     '<td id="0-0" class="col-0"><img class="loading" src="loading.gif" /></td>' +
                     '<td id="0-1" class="col-1"><img class="loading" src="loading.gif" /></td>' +
                     '<td id="0-2" class="col-2"><img class="loading" src="loading.gif" /></td>' +
                 '</tr>';
             } else {
-                row_html =
+                rowHtml =
                 '<tr class="row">' +
                     '<td id="' + i + '-0" class="col-0" />' +
                     '<td id="' + i + '-1" class="col-1" />' +
                     '<td id="' + i + '-2" class="col-2" />'
                 '</tr>';
             }
-            $(tbodies[0]).parent().append(row_html);
+            $(tbodies[0]).parent().append(rowHtml);
             rows = $(".row", this.document);
         }
         var cell = $(".col-" + index, rows[i])[0];
@@ -282,20 +282,6 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         $(".col-" + index + ">img.loading", this.document).hide();
     }, 500);
 
-    //this.history = snippets;
-
-    //showDOM(this.document, "DOM");
-    //alert(html);
-
-    //alert(index);
-    //var fmt_view_col = $(".col-" + index, this.document)[0];
-    //if (!fmt_view_col) {
-        //Debug.log("WARNING: fmt_view_col " + index + " not found.");
-        //return;
-    //}
-
-    //fmt_view_col.innerHTML = html;
-    //Debug.log(this.document.innerHTML);
     if (!this.document.location) { return true; }
     this.document.location.hash = '#__top';
     return true;
