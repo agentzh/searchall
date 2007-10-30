@@ -32,7 +32,7 @@ use XUL::App schema {
                 jquery.js JSAN.js
                 datadumper.js Debug.js
                 timer.js dom-logger.js dom.js JSON.js
-                progress.js pattern-miner.js util.js fmt-view.js
+                progress.js pattern-miner.js util.js link-tester.js fmt-view.js
                 persist.js
                 browser.js progress-listener.js
                 event-util.js

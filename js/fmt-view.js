@@ -49,47 +49,6 @@ SearchAll.FmtView.prototype = {
     document: null,
     curPath: null,  // XXX moved to SearchAll.OrgView.prototype
     rootPath: null, // ditto
-
-    regAjaxHandle: function (req, ln, col, timer, url) {
-        var fmtDoc = this.document;
-        req.onreadystatechange = function (aEvt) {
-            if (req.readyState == 4) {
-                clearTimeout(timer);
-                var pattern = "#" + ln + "-" + col + ">img.status";
-                var status;
-                try {
-                    status = req.status;
-                } catch (e) {
-                    //$(pattern, this.document).attr('src', "cross.png");
-                    //alert(e);
-                    $(pattern, fmtDoc).attr('src', "cross.png");
-                    return;
-                }
-                if (status < 400) {
-                    //alert("URL Exists! " + url + " " + ln + " : " + col);
-                    $(pattern, fmtDoc).attr('src', "accept.png");
-                } else if (status != 402 && status != 403 && status != 405 && status != 500) {
-                    error("Bad status code: " + url + ": " + status);
-                    $(pattern, fmtDoc).attr('src', "cross.png");
-                    //alert("Hiya" + id);
-                    //alert("405 found! " + pattern);
-                    //$(pattern, this.document).attr('src', "about:blank");
-                } else {
-                    $(pattern, fmtDoc).attr('src', "weather_clouds.png");
-                }
-            }
-        };
-    },
-
-    handleCheckTimeout: function (req, ln, col, timeout) {
-        var fmtDoc = this.document;
-        return setTimeout(function () {
-            req.abort();
-            //alert("Timout!" + ln + ":" + col);
-            var pattern = "#" + ln + "-" + col + ">img.status";
-            $(pattern, fmtDoc).attr('src', "clock_stop.png");
-        }, timeout);
-    }
 };
 
 SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
@@ -220,12 +179,8 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         //alert(url);
         if (url) {
             try {
-                var req = new XMLHttpRequest();
-                req.open('HEAD', url, true);
-
-                var timer = this.handleCheckTimeout(req, i, index, 5*1000);
-                this.regAjaxHandle(req, i, index, timer, url);
-                req.send(null);
+                var selector = '#' + i + "-" + index + ">img.status";
+                SearchAll.LinkTester.test(url, this.document, selector, 5*1000);
             } catch (e) {
                 if (!FoundFirebug) {
                     error(e);
