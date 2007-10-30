@@ -49,7 +49,7 @@ $("#search-button").click( function () {
     //timer = timer || new Timer();
     Replies = {};
     //progressmeters = $("#status-progress");
-    myProgress.reset(3);
+    app.progress.reset(3);
     progressmeters.show();
     //JJJ(progressmeters[0]);
 
@@ -90,7 +90,7 @@ function prepareUriList (i) {
         var query = $("#search-box").val();
         //alert(query);
         if (query)
-            AutoSearch[i] = true;
+            SearchAll.threads[i].autoSubmit = true;
         setHome(i, this.value);
     } );
     uriLists[0].addEventListener(
@@ -115,7 +115,7 @@ function prepareUriList (i) {
             var query = $("#search-box").val();
             //alert(query);
             if (query)
-                AutoSearch[i] = true;
+                SearchAll.app.threads[i].autoSubmit = true;
             setHome(i, home);
         },
         true

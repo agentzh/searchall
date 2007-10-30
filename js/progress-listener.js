@@ -70,6 +70,7 @@ function genListener (ind) {
         throw Components.results.NS_NOINTERFACE;
     },
     onStateChange: function (progress, request, flag, status) {
+        var app = SearchAll.app;
     /*
         var myself = 'chrome://searchall/content/searchall.xul';
         if (top.location != myself) {
@@ -86,7 +87,6 @@ function genListener (ind) {
         //aRequest.QueryInterface(Components.interfaces.nsIChannel);
             // we don't start timing here...since we
             // can't tell the *first* request.
-            //myTimer.start(hostname);
             //alert("Wait a moment!\n" + request.URI);
             //$("#search-box").focus();
         }
@@ -125,16 +125,16 @@ function genListener (ind) {
                 return;
             }
 
-            if (num == 1 && myTimer.isTiming(hostname)) {
+            if (num == 1 && app.timer.isTiming(hostname)) {
                 // we start timing in Browser.doSearch
-                myTimer.stop(hostname, { force: true });
-                var elapsed = myTimer.lastResult(hostname);
+                app.timer.stop(hostname, { force: true });
+                var elapsed = app.timer.lastResult(hostname);
                 if (elapsed != undefined) {
                     var msg = hostname + "(" + num + "): " + elapsed + " ms"
                     info(msg);
-                    myProgress.setDone(hostname, elapsed);
+                    app.progress.setDone(hostname, elapsed);
                     $("#statusbar-display")[0].label =
-                        genStatusMsg(myProgress.tasks);
+                        genStatusMsg(app.progress.tasks);
                 }
             }
             //alert("Hi (0)");
@@ -146,7 +146,7 @@ function genListener (ind) {
             if (flag & WPL.STATE_IS_NETWORK) {
                 //if (hostname.match(/taobao/)) alert("processing " + hostname);
                 try {
-                    var val = 100 * myProgress.percent();
+                    var val = 100 * app.progress.percent();
                     var progressmeter = $("#status-progress");
                     //alert(ind);
                     progressmeter[0].value = val;
@@ -158,34 +158,34 @@ function genListener (ind) {
 
                     //alert(hostname);
                     // XXX code duplication...
-                    myTimer.stop(hostname, { force: true });
-                    var elapsed = myTimer.lastResult(hostname);
+                    app.timer.stop(hostname, { force: true });
+                    var elapsed = app.timer.lastResult(hostname);
                     if (elapsed != undefined) {
                         var msg = hostname + "(" + num + "): " + elapsed + " ms"
                         info(msg);
-                        myProgress.setDone(hostname, elapsed);
+                        app.progress.setDone(hostname, elapsed);
                         $("#statusbar-display")[0].label =
-                            genStatusMsg(myProgress.tasks);
+                            genStatusMsg(app.progress.tasks);
                     }
                 } catch (e) {
                     info(e);
                 }
 
+                var thread = app.threads[ind];
                 try {
-                    var fmt_view_doc = SearchAll.app.fmtViews[ind];
-                    $("span#loading", fmt_view_doc).hide();
-                    if (AutoSearch[ind]) {
-                        $("h1#default", fmt_view_doc).hide();
-                    }
+                    var fmtDoc = app.fmtViews[ind].document;
+                    $("span#loading", fmtDoc).hide();
+                    if (thread.autoSubmit)
+                        $("h1#default", fmtDoc).hide();
                 } catch (e) {
                     info(e);
                 }
 
-                if (AutoSearch[ind]) {
-                    AutoSearch[ind] = false;
+                if (thread.autoSubmit) {
+                    thread.autoSubmit = false;
                     //alert("Clicking...");
                     //host2ind[hostname] = ind;
-                    var query = $("#search-box").val();
+                    var query = app.searchBox.value;
                     //ind = host2ind[hostname];
                     info("Autosubmitting...");
                     info("Clicking " + ind + " for host " + hostname);
@@ -207,10 +207,10 @@ function genListener (ind) {
                         //alert("Hiya! " + browsers[ind].uri());
                     //}
                     try {
-                        SearchAll.app.domLogger.log(doc, hostname);
+                        app.domLogger.log(doc, hostname);
                     } catch (e) { info(e) }
                     //alert("Hiya: " + hostname);
-                    SearchAll.app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
+                    app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
                 }
                 browsers[ind].button().click(
                     function () {

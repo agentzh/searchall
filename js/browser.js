@@ -57,9 +57,9 @@ Browser.fn = Browser.prototype = {
     },
     goHome: function (newHome) {
         Replies = {};
-        myProgress.reset(1);
+        SearchAll.app.progress.reset(1);
         if (newHome) this.browser.homePage = newHome;
-        myTimer.start(this.hostname());
+        SearchAll.app.timer.start(this.hostname());
         progressmeters.show();
         progressmeters[0].value = 50;
         return this.browser.goHome();
@@ -81,7 +81,7 @@ Browser.fn = Browser.prototype = {
         var textboxes = this.textbox();
         textboxes.val(query);
         textboxes.blur();
-        myTimer.start(this.hostname());
+        SearchAll.app.timer.start(this.hostname());
         //delete top.location;
         //var buttons = this.button();
         /*

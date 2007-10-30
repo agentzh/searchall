@@ -1,8 +1,5 @@
-var AutoSearch = [];
 var selectedURLIndex, selectedTabIndex;
-var myTimer = new SearchAll.Timer();
 var Replies = {};
-var myProgress = new SearchAll.Progress(3);
 var prefs;
 
 $(document).ready( function () {
@@ -24,7 +21,8 @@ $(document).ready( function () {
         //alert("Found query: " + query);
         app.searchBox.value = query;
         //prefs.setCharPref('query', '');
-        AutoSearch = [true, true, true];
+        for (var i = 0; i < 3; i++)
+            app.threads[i].autoSubmit = true;
     }
 
     try {
@@ -61,7 +59,7 @@ $(document).ready( function () {
     );
 
     Replies = {};
-    myProgress.reset(3);
+    app.progress.reset(3);
     //progressmeters.show();
     //progressmeters[0].value = 0;
     //$("#view-tab-" + selectedTab)[0].selected = true;

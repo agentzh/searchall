@@ -20,5 +20,11 @@ SearchAll.App = function () {
     this.viewTabs      = document.getElementById("view-tabs");
     this.viewTabbox    = document.getElementById("view-tabbox");
 
+    this.progress = new SearchAll.Progress(3);
+    this.timer = new SearchAll.Timer();
+
+    this.threads = [];
+    for (var i = 0; i < 3; i++)
+        this.threads[i] = new SearchAll.Thread(i);
 };
 
