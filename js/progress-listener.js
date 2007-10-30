@@ -253,13 +253,7 @@ function removeFormTarget (doc) {
 }
 
 $(document).ready(function () {
-    var listWidget = document.getElementById('dom-list');
-    var textWidget = document.getElementById('dom');
-    if (typeof SearchAll.app == 'undefined') SearchAll.app = {};
-    SearchAll.app.domLogger = new SearchAll.DomLogger(listWidget, textWidget);
-    SearchAll.app.fmtViews = [];
-    for (var i = 0; i < 3; i++) {
-        SearchAll.app.fmtViews[i] = new SearchAll.FmtView(i);
-    }
+    if (typeof SearchAll.app == 'undefined')
+        SearchAll.app = new SearchAll.App();
 });
 
