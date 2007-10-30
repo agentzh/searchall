@@ -8,6 +8,7 @@ SearchAll.FmtView = function (index) {
         return null;
     }
     this.index = index;
+    this.browser = document.getElementById("fmt-view");
 };
 
 SearchAll.patterns = {
@@ -49,14 +50,12 @@ SearchAll.FmtView.prototype = {
     document: null,
     curPath: null,  // XXX moved to SearchAll.OrgView.prototype
     rootPath: null, // ditto
+    get document () {
+        return this.browser.contentDocument;
+    }
 };
 
 SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
-    if (this.document == null) {
-        var browser = document.getElementById("fmt-view");
-        if (!browser) return false;
-        this.document = browser.contentDocument;
-    }
     if (origDoc == null) {
         return;
     }

@@ -37,13 +37,14 @@ $("#search-button").click( function () {
     //browser.url = 'about:blank';
     //$("#fmt-view")[0];
 
-    var doc = getFmtViewDoc();
+    var app = SearchAll.app;
+    var doc = app.fmtViews[0].document;
     if (doc) {
         $("h1#default", doc).hide();
         $("table#content>tbody", doc)[0].innerHTML = '';
     }
 
-    var query = $("#search-box").val();
+    var query = app.searchBox.value;
 
     //timer = timer || new Timer();
     Replies = {};
@@ -90,7 +91,7 @@ function prepareUriList (i) {
         //alert(query);
         if (query)
             AutoSearch[i] = true;
-        set_home(i, this.value);
+        setHome(i, this.value);
     } );
     uriLists[0].addEventListener(
         'command',
@@ -115,7 +116,7 @@ function prepareUriList (i) {
             //alert(query);
             if (query)
                 AutoSearch[i] = true;
-            set_home(i, home);
+            setHome(i, home);
         },
         true
     );

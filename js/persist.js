@@ -5,15 +5,10 @@ var Replies = {};
 var myProgress = new SearchAll.Progress(3);
 var prefs;
 
-function getFmtViewDoc () {
-    var browser = $("#fmt-view")[0];
-    if (!browser) return;
-    return browser.contentDocument;
-}
-
 $(document).ready( function () {
     if (typeof SearchAll.app == 'undefined')
         SearchAll.app = new SearchAll.App();
+    var app = SearchAll.app;
 
     prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
     prefs = prefs.getBranch("extensions.searchall.");
@@ -27,7 +22,7 @@ $(document).ready( function () {
     if (query) {
         //alert("Found query!");
         //alert("Found query: " + query);
-        $("#search-box")[0].value = query;
+        app.searchBox.value = query;
         //prefs.setCharPref('query', '');
         AutoSearch = [true, true, true];
     }
@@ -36,7 +31,7 @@ $(document).ready( function () {
         selectedTabIndex = prefs.getIntPref('tab.lastSelected');
         //$("#view-tabs").attr("lastSelected");
     } catch (e) { error(e); }
-    if (SearchAll.app.pageMode && selectedTabIndex == 0) {
+    if (app.pageMode && selectedTabIndex == 0) {
         selectedTabIndex = 1;
     }
     if (selectedTabIndex == undefined) {
@@ -47,8 +42,8 @@ $(document).ready( function () {
     }
     Debug.log("Selecting tab " + selectedTabIndex + "...");
     //alert("I got this: " + $("#view-tabbox")[0].selectedIndex);
-    $("#view-tabbox")[0].selectedIndex = selectedTabIndex;
-    $("#view-tabs")[0].addEventListener(
+    app.viewTabbox.selectedIndex = selectedTabIndex;
+    app.viewTabs.addEventListener(
         'command',
         function () {
             selectedTabIndex = this.selectedIndex;
@@ -60,7 +55,7 @@ $(document).ready( function () {
                 error(e);
             }
             //alert(selectedTabIndex);
-            $("#search-box").focus();
+            if (!app.pageMode) app.searchBox.focus();
         },
         false
     );
@@ -78,12 +73,11 @@ $(document).ready( function () {
         if (selectedURLIndex != undefined) {
             var url_list = $("#url-list-" + i)[0];
             url_list.selectedIndex = selectedURLIndex;
-            set_home(i, url_list.value);
+            setHome(i, url_list.value);
         } else {
-            set_home(i);
+            setHome(i);
         }
     }
-
 
     var listener = function (evt) {
         //alert("Received from web page: " +
@@ -92,17 +86,15 @@ $(document).ready( function () {
         //alert("HERE 0 0");
         if (query != undefined && query != '') {
             //alert("HERE 1 0");
-            //var fmt_view_doc = getFmtViewDoc();
-            //if (fmt_view_doc) $("h1#default", fmt_view_doc).hide();
-            $("#search-box")[0].value = query;
-            $("#search-button")[0].click();
+            app.searchBox.value = query;
+            app.searchButton.click();
         }
     };
     document.addEventListener("SearchAllEvent", listener, false, true);
 
 } );
 
-function set_home (i, home) {
+function setHome (i, home) {
     var hostname;
     if (home) {
         hostname = home
@@ -115,14 +107,15 @@ function set_home (i, home) {
     //host2ind[hostname] = i;
 
     var delay = 0;
-    if ($("page").length == 0) {
+    var app = SearchAll.app;
+    if (!app.pageMode) {
         // such a delay is necessary in 'window mode'
         delay = 500;
     }
     setTimeout(function () {
         noMining[i] = true;
         browsers[i].goHome(home);
-        $("#search-box").focus();
+        if (app.pageMode) app.searchBox.focus();
     }, delay);
 }
 

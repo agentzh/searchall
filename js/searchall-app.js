@@ -15,8 +15,10 @@ SearchAll.App = function () {
     for (var i = 0; i < 3; i++)
         this.fmtViews[i] = new SearchAll.FmtView(i);
 
-    this.searchBox  = document.getElementById("search-box");
-    this.viewTabs   = document.getElementById("view-tabs");
-    this.viewTabbox = document.getElementById("view-tabbox");
+    this.searchBox     = document.getElementById("search-box");
+    this.searchButton  = document.getElementById("search-button");
+    this.viewTabs      = document.getElementById("view-tabs");
+    this.viewTabbox    = document.getElementById("view-tabbox");
+
 };
 
