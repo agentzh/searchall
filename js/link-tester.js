@@ -1,4 +1,4 @@
-// Class SearchAll.FmtView
+// Class SearchAll.LinkTester
 // -- agentzh
 
 if (typeof SearchAll == 'undefined') SearchAll = {};
