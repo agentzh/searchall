@@ -252,8 +252,3 @@ function removeFormTarget (doc) {
     //alert(forms.length);
 }
 
-$(document).ready(function () {
-    if (typeof SearchAll.app == 'undefined')
-        SearchAll.app = new SearchAll.App();
-});
-

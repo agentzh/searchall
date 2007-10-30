@@ -12,6 +12,9 @@ function getFmtViewDoc () {
 }
 
 $(document).ready( function () {
+    if (typeof SearchAll.app == 'undefined')
+        SearchAll.app = new SearchAll.App();
+
     prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
     prefs = prefs.getBranch("extensions.searchall.");
     var query;
