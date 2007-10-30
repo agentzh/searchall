@@ -51,7 +51,7 @@ function handleSearchButton (id) {
     //alert("Clicked me!");
     searchboxes[0].value = local_val;
     //alert("Value set!");
-    $("#search-button").click();
+    SearchAll.app.searchButton.click();
     return false;
 }
 
