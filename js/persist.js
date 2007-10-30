@@ -33,14 +33,14 @@ $(document).ready( function () {
         selectedTabIndex = prefs.getIntPref('tab.lastSelected');
         //$("#view-tabs").attr("lastSelected");
     } catch (e) { error(e); }
-    if ($("page").length > 0 && selectedTabIndex == 0) {
+    if (SearchAll.app.pageMode && selectedTabIndex == 0) {
         selectedTabIndex = 1;
     }
     if (selectedTabIndex == undefined) {
-        if ($("page").length == 0)
-            selectedTabIndex = 0;
-        else
+        if (SearchAll.app.pageMode)
             selectedTabIndex = 1;
+        else
+            selectedTabIndex = 0;
     }
     Debug.log("Selecting tab " + selectedTabIndex + "...");
     //alert("I got this: " + $("#view-tabbox")[0].selectedIndex);
