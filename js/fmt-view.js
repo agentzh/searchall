@@ -9,6 +9,8 @@ SearchAll.FmtView = function (index) {
     }
     this.index = index;
     this.browser = document.getElementById("fmt-view");
+    this.prevHtmlLen = 0;
+    this.prevResults = [];
 };
 
 SearchAll.patterns = {
@@ -46,16 +48,23 @@ SearchAll.patterns = {
 };
 
 SearchAll.FmtView.prototype = {
-    history: 0,
     document: null,
     curPath: null,  // XXX moved to SearchAll.OrgView.prototype
     rootPath: null, // ditto
     get document () {
         return this.browser.contentDocument;
+    },
+    reset: function () {
+        this.prevHtmlLen = 0;
+        this.prevResults = [];
     }
 };
 
 SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
+    //var origView = app.origViews[this.index];
+    //origDoc = origView.document();
+    //hostname = origView.hostname();
+
     if (origDoc == null) {
         return;
     }
@@ -106,12 +115,17 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     var html = $("body", origDoc).html();
     //info("XXX WWW" + html);
     //info("XXX QQQ" + this.history[index]);
-    var len = html.length;
-    if (this.history.length == len) {
-        //alert("No change!");
-        return false;
+    var len;
+    try {
+        len = html.length;
+    } catch (e) {
     }
-    this.history.length = len;
+    if (this.prevHtmlLen == len) {
+        //alert("No change!");
+        info("fmt view gen: No change for " + index);
+        //return false;
+    }
+    this.prevHtmlLen = html.length;
 
     $("span#loading", this.document).hide();
 
@@ -170,6 +184,13 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         }
         snippets = tmp;
     }
+
+    if (this.prevResults.length >= snippets.length) {
+        info("Rejected bogus results");
+        return false;
+    }
+    var prevResultsLen = this.prevResults.length;
+    this.prevResults = snippets;
 
     var FoundFirebug = false;
     for (var i = 0; i < snippets.length; i++) {
@@ -237,7 +258,9 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     }, 500);
 
     if (!this.document.location) { return true; }
-    this.document.location.hash = '#__top';
+    //alert(prevResultsLen);
+    if (prevResultsLen == 0)
+        this.document.location.hash = '#__top';
     return true;
 };
 

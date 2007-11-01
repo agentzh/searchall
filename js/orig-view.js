@@ -32,11 +32,14 @@ SearchAll.OrigView.prototype = {
         this._form = forms[0];
         return this._form;
     },
+    stop: function () {
+        this.browser.stop();
+    },
     textbox: function () {
         this.form();
         var nodes = $("input[@type=text]", this._form);
-        if (nodes.length == 0)
-            error("textbox not found!");
+        //if (nodes.length == 0)
+            //error("textbox not found!");
         return nodes;
     },
     button: function () {
@@ -55,14 +58,14 @@ SearchAll.OrigView.prototype = {
         return this.browser.homePage;
     },
     goHome: function (newHome) {
-        Replies = {};
         var app = SearchAll.app;
         app.progress.reset(1);
         if (newHome) this.browser.homePage = newHome;
         SearchAll.app.timer.start(this.hostname());
         $(app.progressmeter).show();
         app.progressmeter.value = 50;
-        return this.browser.goHome();
+        this.browser.stop();
+        return this.browser.goHome(home);
     },
     document: function () {
         return this.browser.contentDocument;
@@ -71,9 +74,7 @@ SearchAll.OrigView.prototype = {
         return this.browser.contentWindow;
     },
     hostname: function () {
-        return this.browser.homePage
-            .replace(/^http:\/\//, '')
-            .replace(/\/.*/, '');
+        return SearchAll.Util.url2hostname(this.browser.homePage);
     },
     doSearch: function (query) {
         //showDOM(this.document());
@@ -92,6 +93,7 @@ SearchAll.OrigView.prototype = {
         }
         */
         var textbox = textboxes[0];
+        this.browser.stop();
         var obj = this;
         if (!textbox && FailureCount <= 3) {
             FailureCount++;

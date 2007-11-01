@@ -1,22 +1,23 @@
-var Done = [false, false, false];
+// Class SearchAll.PrevNext
+// -- agentzh
 
-$(document).ready(function () {
-    $("#prev-button").click(function () {
-        //alert("Previous!");
-        for (var i = 0; i < 3; i++) {
-            gotoPrev(i);
-        }
-    });
-    $("#next-button").click(function () {
-        //alert("Next!");
-        for (var i = 0; i < 3; i++) {
-            gotoNext(i);
-        }
-    });
-});
+if (typeof SearchAll == 'undefined') SearchAll = {};
 
-function gotoNext (i) {
-    var app = SearchAll.app;
+SearchAll.PrevNext = {
+    prevGuard: null,
+    done: [false, false, false],
+    setDone: function (index) {
+        this.done[index] = true;
+    },
+    isDone: function (index) {
+        return this.done[index];
+    },
+    reset: function () {
+        this.done = [false, false, false];
+    }
+}
+
+SearchAll.PrevNext.gotoNext = function (i) {
     var doc = app.origViews[i].document();
     var links = $("a:contains('Next')", doc);
     if (links.length == 0) {
@@ -39,8 +40,9 @@ function gotoNext (i) {
     }
 
     var link = links[links.length-1];
-    Done[i] = false;
+    this.setDone(i, false);
     app.timer.start(hostname);
+    app.threads[i].startDaemon();
     try {
         sendMouseEvent({type:'click'}, link);
     } catch (e) {
@@ -63,16 +65,17 @@ function gotoNext (i) {
         }
     } catch (e) { info(e); }
 
+    // handle out of date calls?
+    var self = this;
     setTimeout (function () {
-        if (! Done[i]) {
+        if (! self.done[i]) {
             info("Last resort for paging is running: " + hostname);
-            app.threads[i].mineResults = true;
             app.fmtViews[i].update(hostname, doc, false/* don't force mining */);
         }
     }, 1000);
-}
+};
 
-function gotoPrev (i) {
+SearchAll.PrevNext.gotoPrev = function (i) {
     var app = SearchAll.app;
     var doc = app.origViews[i].document();
     var links = $("a:contains('Prev')", doc);
@@ -91,14 +94,14 @@ function gotoPrev (i) {
     var hostname = app.origViews[i].hostname();
     if (links.length == 0) {
         error("No prev button found for browser " + i);
-        Done[i] = true;
+        this.setDone(i);
         app.progress.setDone(hostname, 'N/A');
         return;
     }
 
     var link = links[links.length-1];
-    Done[i] = false;
     app.timer.start(hostname);
+    app.threads[i].startDaemon();
     try {
         sendMouseEvent({type:'click'}, link);
     } catch (e) {
@@ -117,8 +120,9 @@ function gotoPrev (i) {
     } catch (e) { info(e); }
 
     //var guard;
+    var self = this;
     guard = function () {
-        if (! Done[i]) {
+        if (! this.isDone(i)) {
             var success = app.fmtViews[i].update(i, app.origViews[i].hostname(), doc, false/* don't force mining */);
             //if (!success) {
                 //guard();
@@ -126,5 +130,27 @@ function gotoPrev (i) {
         }
     };
     setTimeout(guard, 1000);
-}
+};
+
+$(document).ready(function () {
+    $("#prev-button").click(function () {
+        //alert("Previous!");
+        for (var i = 0; i < 3; i++) {
+            app.threads[i].reset();
+            app.threads[i].mineResults = true;
+            SearchAll.PrevNext.reset();
+            SearchAll.PrevNext.gotoPrev(i);
+        }
+    });
+    $("#next-button").click(function () {
+        //alert("Next!");
+        for (var i = 0; i < 3; i++) {
+            app.threads[i].reset();
+            app.threads[i].mineResults = true;
+            SearchAll.PrevNext.reset();
+            SearchAll.PrevNext.gotoNext(i);
+        }
+    });
+});
+
 

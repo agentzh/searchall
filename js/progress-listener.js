@@ -79,18 +79,17 @@ function genListener (ind) {
         }
     */
         //alert("hi");
-        try {
-            removeFormTarget(app.origViews[ind].document());
-        } catch (e) {}
         if (flag & WPL.STATE_START) {
-        //aRequest.QueryInterface(Components.interfaces.nsIChannel);
-            // we don't start timing here...since we
-            // can't tell the *first* request.
-            //alert("Wait a moment!\n" + request.URI);
-            //$("#search-box").focus();
+            return;
         }
-        if (flag & WPL.STATE_STOP) {
-            var hostname;
+
+        var thread = app.threads[ind];
+        var hostname, doc;
+        if (flag & WPL.STATE_IS_WINDOW) {
+            try {
+                removeFormTarget(app.origViews[ind].document());
+            } catch (e) {}
+
             try {
                 hostname = progress.DOMWindow.window.location.hostname;
             } catch (e) {
@@ -98,87 +97,61 @@ function genListener (ind) {
                 //alert(progress.DOMWindow.window.parent.getAttribute(homePage));
                 //hostname = '';
             }
-            var doc = progress.DOMWindow.document;
-            //var ind = host2ind[hostname];
-            //if ((flag & STATE_DONE) == STATE_DONE)
-            if (!Replies[hostname]) Replies[hostname] = 0;
-            num = ++Replies[hostname];
+            doc = progress.DOMWindow.document;
             if (hostname == undefined) {
+                // initial loading
                 //alert("ind undefined!");
-                if (num == 4) {
-                    var progressmeter = $("#status-progress");
-                    progressmeter[0].value = 100;
-                    setTimeout( function () {
-                        progressmeter.hide();
-                    }, 100 );
-                }
+                app.progressmeter.value = 100;
+                setTimeout( function () {
+                    $(app.progressmeter).hide();
+                }, 100 );
                 //alert("browser " + i + " found!");
                 //alert("HERE: " + i);
-                removeFormTarget(app.origViews[ind].document());
+
+                // work around yahoo.com's frame-busting logic:
+                //removeFormTarget(app.origViews[ind].document());
+
+                // plant hooks into third-party pages:
                 app.origViews[ind].button().click(
                     function () {
                         return handleSearchButton(ind);
                     }
                 );
-                $("#search-box").focus();
+                app.searchBox.focus();
                 return;
             }
+            /*
+            else {
+                if (thread.hostname != hostname) {
+                    alert("Unmatched hosts: " + thread.hostname + " <=> " + hostname);
+                    info("thread state: autoSubmit: " + thread.autoSubmit);
+                    info("thread state: mineResults: " + thread.mineResults);
+                    return;
+                }
+            }
+            */
 
-            if (num == 1 && app.timer.isTiming(hostname)) {
+            // we refresh benchmark results at every stop:
+            if (app.timer.isTiming(hostname)) {
                 // we start timing in Browser.doSearch
                 app.timer.stop(hostname, { force: true });
                 var elapsed = app.timer.lastResult(hostname);
                 if (elapsed != undefined) {
-                    var msg = hostname + "(" + num + "): " + elapsed + " ms"
-                    info(msg);
+                    //var msg = hostname + "(" + num + "): " + elapsed + " ms"
+                    //info(msg);
                     app.progress.setDone(hostname, elapsed);
+
+                    // XXX use app.statusbar.label instead:
                     $("#statusbar-display")[0].label =
                         genStatusMsg(app.progress.tasks);
                 }
             }
-            //alert("Hi (0)");
-            //info("blurring contentWindow...");
-            //info("focusing search box... (2)");
-            // Ensure we get the focus...
-            if (flag & WPL.STATE_IS_NETWORK) {
-                //if (hostname.match(/taobao/)) alert("processing " + hostname);
-                try {
-                    var val = 100 * app.progress.percent();
-                    var progressmeter = $("#status-progress");
-                    //alert(ind);
-                    progressmeter[0].value = val;
-                    if (val >= 100) {
-                        setTimeout( function () {
-                            progressmeter.hide();
-                        }, 100 );
-                    }
 
-                    //alert(hostname);
-                    // XXX code duplication...
-                    app.timer.stop(hostname, { force: true });
-                    var elapsed = app.timer.lastResult(hostname);
-                    if (elapsed != undefined) {
-                        var msg = hostname + "(" + num + "): " + elapsed + " ms"
-                        info(msg);
-                        app.progress.setDone(hostname, elapsed);
-                        $("#statusbar-display")[0].label =
-                            genStatusMsg(app.progress.tasks);
-                    }
-                } catch (e) {
-                    info(e);
-                }
-
-                var thread = app.threads[ind];
-                try {
-                    var fmtDoc = app.fmtViews[ind].document;
-                    $("span#loading", fmtDoc).hide();
-                    if (thread.autoSubmit)
-                        $("h1#default", fmtDoc).hide();
-                } catch (e) {
-                    info(e);
-                }
-
-                if (thread.autoSubmit) {
+            // auto-submit here...
+            if (thread.autoSubmit) {
+                var textboxes = app.origViews[ind].textbox();
+                if (textboxes.length) {
+                    info("autoSubmit: hit the shortcut! " + hostname);
                     thread.autoSubmit = false;
                     //alert("Clicking...");
                     //host2ind[hostname] = ind;
@@ -186,35 +159,79 @@ function genListener (ind) {
                     //ind = host2ind[hostname];
                     info("Autosubmitting...");
                     info("Clicking " + ind + " for host " + hostname);
-                    thread.mineResults = true;
-                    app.origViews[ind].doSearch(query);
+                    thread.doSearch(query);
                     //$("#search-button")[0].click();
                     //$("#search-box").focus();
                     return;
                 }
-
-                info(hostname + " loaded.");
-                var doc = progress.DOMWindow.document;
-                Done[ind] = true;
-                if ($("#search-box").val() != '' && thread.mineResults) {
-                    try {
-                        app.domLogger.log(doc, hostname);
-                    } catch (e) { info(e) }
-                    //alert("Hiya: " + hostname);
-                    app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
-                }
-                app.origViews[ind].button().click(
-                    function () {
-                        return handleSearchButton(ind);
-                    }
-                );
-                $("#search-box").focus();
-                setTimeout(function () {
-                    //info("blurring contentWindow...");
-                    //info("focusing search box... (3)");
-                    $("#search-box").focus();
-                }, 10);
             }
+        }
+
+        if (flag & WPL.STATE_IS_NETWORK) {
+            //if (hostname.match(/taobao/)) alert("processing " + hostname);
+            try {
+                var val = 100 * app.progress.percent();
+                var progressmeter = $("#status-progress");
+                //alert(ind);
+                progressmeter[0].value = val;
+                if (val >= 100) {
+                    setTimeout( function () {
+                        progressmeter.hide();
+                    }, 100 );
+                }
+
+                //alert(hostname);
+                // XXX code duplication...
+                app.timer.stop(hostname, { force: true });
+                var elapsed = app.timer.lastResult(hostname);
+                if (elapsed != undefined) {
+                    //var msg = hostname + "(" + num + "): " + elapsed + " ms"
+                    //info(msg);
+                    app.progress.setDone(hostname, elapsed);
+                    $("#statusbar-display")[0].label =
+                        genStatusMsg(app.progress.tasks);
+                }
+            } catch (e) {
+                info(e);
+            }
+
+            try {
+                var fmtDoc = app.fmtViews[ind].document;
+                $("span#loading", fmtDoc).hide();
+                if (thread.autoSubmit)
+                    $("h1#default", fmtDoc).hide();
+            } catch (e) {
+                info(e);
+            }
+
+            info(hostname + " loaded.");
+            var doc = progress.DOMWindow.document;
+            SearchAll.PrevNext.setDone(ind);
+            if (app.searchBox.value != '' && thread.mineResults) {
+                try {
+                    app.domLogger.log(doc, hostname);
+                    app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
+                } catch (e) { info(e) }
+                //alert("Hiya: " + hostname);
+
+                // stop daemon
+                // XXX right thing?
+                if (app.fmtViews[ind].prevResults.length > 0)
+                    thread.mineResults = false;
+            }
+
+            // plant hooks into third-party SE's:
+            app.origViews[ind].button().click(
+                function () {
+                    return handleSearchButton(ind);
+                }
+            );
+            app.searchBox.focus();
+            setTimeout(function () {
+                //info("blurring contentWindow...");
+                //info("focusing search box... (3)");
+                app.searchBox.focus();
+            }, 10);
         }
         //$("#search-box").focus();
     },

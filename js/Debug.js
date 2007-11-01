@@ -2,12 +2,16 @@ JSAN.use('JSON');
 
 if (Debug == undefined) {
     var Debug = {
+        _console: null,
         get console() {
-            return Components.classes[
-                "@mozilla.org/consoleservice;1"
-            ].getService(
-                Components.interfaces.nsIConsoleService
-            );
+            if (this._console == null) {
+                this._console =  Components.classes[
+                    "@mozilla.org/consoleservice;1"
+                ].getService(
+                    Components.interfaces.nsIConsoleService
+                );
+            }
+            return this._console;
         }
     };
 }

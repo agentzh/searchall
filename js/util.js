@@ -4,6 +4,10 @@
 if (typeof SearchAll == 'undefined') SearchAll = {};
 
 SearchAll.Util = {
+    url2hostname: function (url) {
+        return url.replace(/^http:\/\//, '')
+           .replace(/\/.*/, '');
+    },
     isEmpty: function (html) {
         var res = html.replace(
             /<\s*\/?\s*(\w+)[^>]*>|\s+/g,

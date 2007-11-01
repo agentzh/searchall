@@ -4,10 +4,22 @@
 if (typeof SearchAll == 'undefined') SearchAll = {};
 
 SearchAll.LinkTester = {
+    testers: {},
     regAjaxHandle: function (req, doc, selector, timer, url) {
+        this.testers[selector] = url;
+        var self = this;
         req.onreadystatechange = function (aEvt) {
             if (req.readyState == 4) {
+                if (self.testers[selector] != url) {
+                    // out-dated tester:
+                    //alert("Out-dated tester found in ready state!");
+                    clearTimeout(timer);
+                    return;
+                }
+
                 clearTimeout(timer);
+                self.testers[selector] = null;
+
                 var status;
                 try {
                     status = req.status;
@@ -30,8 +42,16 @@ SearchAll.LinkTester = {
         };
     },
 
-    handleCheckTimeout: function (req, doc, selector, timeout) {
+    handleCheckTimeout: function (req, doc, selector, timeout, url) {
+        var self = this;
         return setTimeout(function () {
+            if (self.testers[selector] != url) {
+                // out-dated tester:
+                //alert("Out-dated tester found in timeout state!");
+                return;
+            }
+
+            self.testers[selector] = null;
             req.abort();
             //alert("Timout!" + ln + ":" + col);
             $(selector, doc).attr('src', "clock_stop.png");
@@ -42,7 +62,7 @@ SearchAll.LinkTester = {
         var req = new XMLHttpRequest();
         req.open('HEAD', url, true);
 
-        var timer = this.handleCheckTimeout(req, doc, selector, timeout);
+        var timer = this.handleCheckTimeout(req, doc, selector, timeout, url);
         this.regAjaxHandle(req, doc, selector, timer, url);
         req.send(null);
     }

@@ -12,61 +12,27 @@ function info (msg) {
     Debug.log("[INFO] " + msg);
 }
 
-$("#search-button").click( function () {
-    var app = SearchAll.app;
-    var doc = app.fmtViews[0].document;
-    if (doc) {
-        $("h1#default", doc).hide();
-        $("table#content>tbody", doc)[0].innerHTML = '';
-    }
-
-    var query = app.searchBox.value;
-
-    //timer = timer || new Timer();
-    Replies = {};
-    app.progress.reset(3);
-    $(app.progressmeter).show();
-
-    app.progressmeter.value = 0;
-    for (var i = 0; i < 3; i++) {
-        app.threads[i].mineResults = true;
-        app.origViews[i].doSearch(query);
-    }
-} );
-
-// auto-submit if the user presses the Enter key
-// in the search box:
-$("#search-box").keydown( function (e) {
-    if (e.keyCode == 13) {
-        //alert("Found enter key!");
-        $("#search-button")[0].click();
-        return false;
-    } else {
-        //info("Got key: " + e.keyCode);
-    }
-    //alert(e.keyCode + " pressed!");
-    //return false;
-} );
-
 function prepareUriList (i) {
     var uriLists = $("#url-list-" + i);
     uriLists.change( function (e) {
         // XXX add user-entered URL to the URL list
-        var app = SearchAll.app;
-        var fmt_view_doc = $("#fmt-view")[0].contentDocument;
-        if (fmt_view_doc) {
-            var cols = $(".col-" + i, fmt_view_doc);
+        var fmtDoc = app.fmtViews[0].document;
+        if (fmtDoc) {
+            var cols = $(".col-" + i, fmtDoc);
             if (cols.length) {
                 cols.empty();
                 $(cols[0]).html('<img src="loading.gif" />');
             }
         }
+        var home = this.value.replace(/^http:\/\//, '');
+        info("Change to new home: " + home);
 
-        var query = $("#search-box").val();
+        var query = app.searchBox.value;
         //alert(query);
+        var thread = app.threads[i];
         if (query)
-            app.threads[i].autoSubmit = true;
-        app.threads[i].goHome(this.value);
+            thread.autoSubmit = true;
+        thread.goHome(home);
     } );
     uriLists[0].addEventListener(
         'command',
@@ -74,24 +40,24 @@ function prepareUriList (i) {
             try {
                 prefs.setIntPref('url.lastSelected.' + i, this.selectedIndex);
             } catch (e) { error(e); }
-            var home = this.value.replace(/^http:\/\//, '');
             //this.label = this.value = home;
-
-            // clear the fmt view's corresponding col
-            var fmt_view_doc = $("#fmt-view")[0].contentDocument;
-            if (fmt_view_doc) {
-                var cols = $(".col-" + i, fmt_view_doc);
+            var fmtDoc = app.fmtViews[0].document;
+            if (fmtDoc) {
+                var cols = $(".col-" + i, fmtDoc);
                 if (cols.length) {
                     cols.empty();
                     $(cols[0]).html('<img src="loading.gif" />');
                 }
             }
+            var home = this.value.replace(/^http:\/\//, '');
+            info("command to new home: " + home);
 
-            var query = $("#search-box").val();
+            var query = app.searchBox.value;
             //alert(query);
+            var thread = app.threads[i];
             if (query)
-                SearchAll.app.threads[i].autoSubmit = true;
-            SearchAll.app.threads[i].goHome(home);
+                thread.autoSubmit = true;
+            thread.goHome(home);
         },
         true
     );
@@ -220,6 +186,37 @@ $(window).ready( function () {
     //top.location = {};
     //top.location.replace("Hiya!");
     //top.location = "abc";
+
+    // auto-submit if the user presses the Enter key
+    // in the search box:
+    $(app.searchBox).keydown( function (e) {
+        if (e.keyCode == 13) {
+            //alert("Found enter key!");
+            app.searchButton.click();
+            return false;
+        } else {
+            //info("Got key: " + e.keyCode);
+        }
+        //alert(e.keyCode + " pressed!");
+        //return false;
+    } );
+
+    $(app.searchButton).click( function () {
+        var app = SearchAll.app;
+        var doc = app.fmtViews[0].document;
+        if (doc) {
+            $("h1#default", doc).hide();
+            $("table#content>tbody", doc)[0].innerHTML = '';
+        }
+
+        var query = app.searchBox.value;
+        app.progress.reset(3);
+        $(app.progressmeter).show();
+        //timer = timer || new Timer();
+        app.progressmeter.value = 0;
+        for (var i = 0; i < 3; i++)
+            app.threads[i].doSearch(query);
+    } );
 
 
     for (var i = 0; i < 3; i++) {

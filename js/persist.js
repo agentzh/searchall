@@ -1,11 +1,12 @@
 var selectedURLIndex, selectedTabIndex;
 var Replies = {};
 var prefs;
+var app;
 
 $(document).ready( function () {
     if (typeof SearchAll.app == 'undefined')
         SearchAll.app = new SearchAll.App();
-    var app = SearchAll.app;
+    app = SearchAll.app;
 
     prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
     prefs = prefs.getBranch("extensions.searchall.");
