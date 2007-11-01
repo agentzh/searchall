@@ -4,8 +4,6 @@ const pm = PermManager.getService(nsIPermissionManager);
 const DENY_ACTION = nsIPermissionManager.DENY_ACTION;
 const ALLOW_ACTION = nsIPermissionManager.ALLOW_ACTION;
 
-var noMining = [false, false, false];
-
 function error (msg) {
     Debug.err("[ERROR] " + msg);
 }
@@ -31,7 +29,7 @@ $("#search-button").click( function () {
 
     app.progressmeter.value = 0;
     for (var i = 0; i < 3; i++) {
-        noMining[i] = false;
+        app.threads[i].mineResults = true;
         app.origViews[i].doSearch(query);
     }
 } );

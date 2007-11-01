@@ -66,8 +66,8 @@ function gotoNext (i) {
     setTimeout (function () {
         if (! Done[i]) {
             info("Last resort for paging is running: " + hostname);
-            noMining[i] = false;
-            app.fmtViews[i].update(i, hostname, doc, false/* don't force mining */);
+            app.threads[i].mineResults = true;
+            app.fmtViews[i].update(hostname, doc, false/* don't force mining */);
         }
     }, 1000);
 }

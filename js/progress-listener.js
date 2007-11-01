@@ -186,7 +186,7 @@ function genListener (ind) {
                     //ind = host2ind[hostname];
                     info("Autosubmitting...");
                     info("Clicking " + ind + " for host " + hostname);
-                    noMining[ind] = false;
+                    thread.mineResults = true;
                     app.origViews[ind].doSearch(query);
                     //$("#search-button")[0].click();
                     //$("#search-box").focus();
@@ -196,8 +196,7 @@ function genListener (ind) {
                 info(hostname + " loaded.");
                 var doc = progress.DOMWindow.document;
                 Done[ind] = true;
-                //if (noMining[ind]) { info("No mining!!!"); }
-                if ($("#search-box").val() != '' && ! noMining[ind]) {
+                if ($("#search-box").val() != '' && thread.mineResults) {
                     try {
                         app.domLogger.log(doc, hostname);
                     } catch (e) { info(e) }
