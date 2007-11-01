@@ -11,20 +11,22 @@ SearchAll.App = function () {
     var textWidget = document.getElementById('dom');
     this.domLogger = new SearchAll.DomLogger(listWidget, textWidget);
 
-    this.fmtViews = [];
-    for (var i = 0; i < 3; i++)
-        this.fmtViews[i] = new SearchAll.FmtView(i);
-
     this.searchBox     = document.getElementById("search-box");
     this.searchButton  = document.getElementById("search-button");
     this.viewTabs      = document.getElementById("view-tabs");
     this.viewTabbox    = document.getElementById("view-tabbox");
 
     this.progress = new SearchAll.Progress(3);
+    this.progressmeter = document.getElementById("status-progress");
     this.timer = new SearchAll.Timer();
 
+    this.fmtViews = [];
     this.threads = [];
-    for (var i = 0; i < 3; i++)
+    this.origViews = [];
+    for (var i = 0; i < 3; i++) {
         this.threads[i] = new SearchAll.Thread(i);
+        this.origViews[i] = new SearchAll.OrigView(i);
+        this.fmtViews[i] = new SearchAll.FmtView(i);
+    }
 };
 

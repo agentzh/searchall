@@ -6,13 +6,6 @@ const ALLOW_ACTION = nsIPermissionManager.ALLOW_ACTION;
 
 var noMining = [false, false, false];
 
-var browser0 = new Browser("#browser-0");
-var browser1 = new Browser("#browser-1");
-var browser2 = new Browser("#browser-2");
-browsers = [browser0, browser1, browser2];
-
-var progressmeters;
-
 function error (msg) {
     Debug.err("[ERROR] " + msg);
 }
@@ -21,22 +14,7 @@ function info (msg) {
     Debug.log("[INFO] " + msg);
 }
 
-/*
-// unload the listener to avoid FF memory leaking:
-$(window).unload( function () {
-    unregisterMyListener(browser0);
-    unregisterMyListener(browser1);
-    unregisterMyListener(browser2);
-} );
-*/
-
-//var host2ind = {};
-
-//alert($("#search-box").focus());
 $("#search-button").click( function () {
-    //browser.url = 'about:blank';
-    //$("#fmt-view")[0];
-
     var app = SearchAll.app;
     var doc = app.fmtViews[0].document;
     if (doc) {
@@ -48,15 +26,13 @@ $("#search-button").click( function () {
 
     //timer = timer || new Timer();
     Replies = {};
-    //progressmeters = $("#status-progress");
     app.progress.reset(3);
-    progressmeters.show();
-    //JJJ(progressmeters[0]);
+    $(app.progressmeter).show();
 
-    progressmeters[0].value = 0;
+    app.progressmeter.value = 0;
     for (var i = 0; i < 3; i++) {
         noMining[i] = false;
-        browsers[i].doSearch(query);
+        app.origViews[i].doSearch(query);
     }
 } );
 
@@ -78,6 +54,7 @@ function prepareUriList (i) {
     var uriLists = $("#url-list-" + i);
     uriLists.change( function (e) {
         // XXX add user-entered URL to the URL list
+        var app = SearchAll.app;
         var fmt_view_doc = $("#fmt-view")[0].contentDocument;
         if (fmt_view_doc) {
             var cols = $(".col-" + i, fmt_view_doc);
@@ -90,8 +67,8 @@ function prepareUriList (i) {
         var query = $("#search-box").val();
         //alert(query);
         if (query)
-            SearchAll.threads[i].autoSubmit = true;
-        setHome(i, this.value);
+            app.threads[i].autoSubmit = true;
+        app.threads[i].goHome(this.value);
     } );
     uriLists[0].addEventListener(
         'command',
@@ -116,7 +93,7 @@ function prepareUriList (i) {
             //alert(query);
             if (query)
                 SearchAll.app.threads[i].autoSubmit = true;
-            setHome(i, home);
+            SearchAll.app.threads[i].goHome(home);
         },
         true
     );
@@ -176,7 +153,6 @@ function handleCheckbox (i) {
                     $("#enable-view-" + j)[0].disabled = false;
                 }
 
-                //$("#browser-" + i).show();
                 if (i == 2) {
                     //alert("hi!");
                     id = 1;
@@ -213,7 +189,6 @@ function handleCheckbox (i) {
                 }
 
                 this.nextSibling.disabled = true;
-                //$("#browser-" + i).hide();
                 $("#splitter-" + id)[0].setAttribute('state', 'collapsed');
                 var fmt_view_doc = $("#fmt-view")[0].contentDocument;
                 if (fmt_view_doc) {
@@ -229,6 +204,7 @@ function handleCheckbox (i) {
 var Toggle = false;
 
 $(window).ready( function () {
+    var app = SearchAll.app;
     try {
         var ioService = CCSV("@mozilla.org/network/io-service;1", "nsIIOService");
         var host = 'searchall';
@@ -255,17 +231,13 @@ $(window).ready( function () {
     var margin = document.getElementById('prev-button').boxObject.x;
     $("#navigator").css('margin-left', margin + 'px');
 
-    progressmeters = $("#status-progress");
     for (var i = 0; i < 3; i++)
         prepareUriList(i);
     //alert("ther!!");
     //info("focusing search box... (1)");
     //info("blurring contentWindow...");
     // we need the following syntax error to retain the focus
-    //browser0.browser.contentDocument.blur();
-    //browser1.browser.contentDocument.blur();
-    //browser2.browser.contentDocument.blur();
-    $("#search-box").focus();
+    app.searchBox.focus();
 
     /*
     for (var i = 0; i < 2; i++) {

@@ -3,7 +3,7 @@ const WPL = Components.interfaces.nsIWebProgressListener;
 
 function registerMyListener (i) {
     //var myListener = genListener();
-    var browser = browsers[i].browser;
+    var browser = SearchAll.app.origViews[i].browser;
     var myListener = myListeners[i];
     browser.addProgressListener(myListener, WPL.NOTIFY_STATE_DOCUMENT);
 }
@@ -42,16 +42,15 @@ function genStatusMsg (data) {
 
 function handleSearchButton (id) {
     //alert(id);
-    var browser = new Browser("#browser-" + id);
-    var searchboxes = $("#search-box");
-    var local_val = browser.textbox().val();
-    var global_val = searchboxes.val();
+    var app = SearchAll.app;
+    var local_val = app.origViews[id].textbox().val();
+    var global_val = app.searchBox.value;
     if (local_val == global_val)
         return true;
     //alert("Clicked me!");
-    searchboxes[0].value = local_val;
+    app.searchBox.value = local_val;
     //alert("Value set!");
-    SearchAll.app.searchButton.click();
+    app.searchButton.click();
     return false;
 }
 
@@ -81,7 +80,7 @@ function genListener (ind) {
     */
         //alert("hi");
         try {
-            removeFormTarget(browsers[ind].document());
+            removeFormTarget(app.origViews[ind].document());
         } catch (e) {}
         if (flag & WPL.STATE_START) {
         //aRequest.QueryInterface(Components.interfaces.nsIChannel);
@@ -115,8 +114,8 @@ function genListener (ind) {
                 }
                 //alert("browser " + i + " found!");
                 //alert("HERE: " + i);
-                removeFormTarget(browsers[ind].document());
-                browsers[ind].button().click(
+                removeFormTarget(app.origViews[ind].document());
+                app.origViews[ind].button().click(
                     function () {
                         return handleSearchButton(ind);
                     }
@@ -139,8 +138,6 @@ function genListener (ind) {
             }
             //alert("Hi (0)");
             //info("blurring contentWindow...");
-            //for (var i = 0; i < 3; i++)
-                //browsers[i].browser.contentWindow.blur();
             //info("focusing search box... (2)");
             // Ensure we get the focus...
             if (flag & WPL.STATE_IS_NETWORK) {
@@ -190,7 +187,7 @@ function genListener (ind) {
                     info("Autosubmitting...");
                     info("Clicking " + ind + " for host " + hostname);
                     noMining[ind] = false;
-                    browsers[ind].doSearch(query);
+                    app.origViews[ind].doSearch(query);
                     //$("#search-button")[0].click();
                     //$("#search-box").focus();
                     return;
@@ -201,18 +198,13 @@ function genListener (ind) {
                 Done[ind] = true;
                 //if (noMining[ind]) { info("No mining!!!"); }
                 if ($("#search-box").val() != '' && ! noMining[ind]) {
-                    //info("XXX: currentURI: " + browsers[ind].uri().prePath);
-                    //info("XXX: homePage: " + browsers[ind].homePage());
-                    //if (browsers[ind].uri() == browsers[ind].homePage()) {
-                        //alert("Hiya! " + browsers[ind].uri());
-                    //}
                     try {
                         app.domLogger.log(doc, hostname);
                     } catch (e) { info(e) }
                     //alert("Hiya: " + hostname);
                     app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
                 }
-                browsers[ind].button().click(
+                app.origViews[ind].button().click(
                     function () {
                         return handleSearchButton(ind);
                     }
@@ -220,8 +212,6 @@ function genListener (ind) {
                 $("#search-box").focus();
                 setTimeout(function () {
                     //info("blurring contentWindow...");
-                    //for (var i = 0; i < 3; i++)
-                        //browsers[i].browser.contentDocument.blur();
                     //info("focusing search box... (3)");
                     $("#search-box").focus();
                 }, 10);

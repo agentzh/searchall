@@ -1,22 +1,21 @@
+// Class SearchAll.App
+// -- agentzh
+
+if (typeof SearchAll == 'undefined') SearchAll = {};
+
 var FailureCount = 0;
 
-var Browser = function (a) {
-    return this.init(a);
+SearchAll.OrigView = function (index) {
+    return this.init(index);
 };
 
-Browser.fn = Browser.prototype = {
-    init: function (a) {
-        var browser;
-        if (typeof a == "string")
-            browser = $(a)[0];
-        else
-            browser = a;
-        if (!browser) {
-            error("browser not found");
-            return;
-        }
+SearchAll.OrigView.prototype = {
+    init: function (index) {
+        var browser = document.getElementById("browser-" + index);
+        if (!browser) return null;
         this.browser = browser;
         this.id = browser.getAttribute('id');
+        this.index = index;
         //this.browser = $("#browser-1");
         //error(typeof browser);
         return this;
@@ -57,11 +56,12 @@ Browser.fn = Browser.prototype = {
     },
     goHome: function (newHome) {
         Replies = {};
-        SearchAll.app.progress.reset(1);
+        var app = SearchAll.app;
+        app.progress.reset(1);
         if (newHome) this.browser.homePage = newHome;
         SearchAll.app.timer.start(this.hostname());
-        progressmeters.show();
-        progressmeters[0].value = 50;
+        $(app.progressmeter).show();
+        app.progressmeter.value = 50;
         return this.browser.goHome();
     },
     document: function () {
@@ -111,6 +111,6 @@ Browser.fn = Browser.prototype = {
                 }, 1000);
             }
         }
-    },
+    }
 };
 

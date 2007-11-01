@@ -17,7 +17,7 @@ $(document).ready(function () {
 
 function gotoNext (i) {
     var app = SearchAll.app;
-    var doc = browsers[i].document();
+    var doc = app.origViews[i].document();
     var links = $("a:contains('Next')", doc);
     if (links.length == 0) {
         links = $("a:contains('下一页')", doc);
@@ -31,7 +31,7 @@ function gotoNext (i) {
             }
         }
     }
-    var hostname = browsers[i].hostname();
+    var hostname = app.origViews[i].hostname();
     if (links.length == 0) {
         app.progress.setDone(hostname, 'N/A');
         error("No next button found for browser " + i);
@@ -74,7 +74,7 @@ function gotoNext (i) {
 
 function gotoPrev (i) {
     var app = SearchAll.app;
-    var doc = browsers[i].document();
+    var doc = app.origViews[i].document();
     var links = $("a:contains('Prev')", doc);
     if (links.length == 0) {
         links = $("a:contains('上一页')", doc);
@@ -88,7 +88,7 @@ function gotoPrev (i) {
             }
         }
     }
-    var hostname = browsers[i].hostname();
+    var hostname = app.origViews[i].hostname();
     if (links.length == 0) {
         error("No prev button found for browser " + i);
         Done[i] = true;
@@ -119,7 +119,7 @@ function gotoPrev (i) {
     //var guard;
     guard = function () {
         if (! Done[i]) {
-            var success = app.fmtViews[i].update(i, browsers[i].hostname(), doc, false/* don't force mining */);
+            var success = app.fmtViews[i].update(i, app.origViews[i].hostname(), doc, false/* don't force mining */);
             //if (!success) {
                 //guard();
             //}

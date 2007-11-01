@@ -58,10 +58,7 @@ $(document).ready( function () {
         false
     );
 
-    Replies = {};
     app.progress.reset(3);
-    //progressmeters.show();
-    //progressmeters[0].value = 0;
     //$("#view-tab-" + selectedTab)[0].selected = true;
     //alert($("#url-list-0").attr('lastSelected'));
     for (var i = 0; i < 3; i++) {
@@ -71,12 +68,13 @@ $(document).ready( function () {
         if (selectedURLIndex != undefined) {
             var url_list = $("#url-list-" + i)[0];
             url_list.selectedIndex = selectedURLIndex;
-            setHome(i, url_list.value);
+            app.threads[i].goHome(url_list.value);
         } else {
-            setHome(i);
+            app.threads[i].goHome();
         }
     }
 
+    // for responding request from the SearchAll toolbar.
     var listener = function (evt) {
         //alert("Received from web page: " +
             //evt.target.getAttribute("query"));
@@ -92,28 +90,4 @@ $(document).ready( function () {
 
 } );
 
-function setHome (i, home) {
-    var hostname;
-    if (home) {
-        hostname = home
-            .replace(/^http:\/\//, '')
-            .replace(/\/.*/, '');
-    } else {
-        hostname = browsers[i].hostname();
-    }
-    //info("Setting host2ind " + hostname + " => " + i);
-    //host2ind[hostname] = i;
-
-    var delay = 0;
-    var app = SearchAll.app;
-    if (!app.pageMode) {
-        // such a delay is necessary in 'window mode'
-        delay = 500;
-    }
-    setTimeout(function () {
-        noMining[i] = true;
-        browsers[i].goHome(home);
-        if (app.pageMode) app.searchBox.focus();
-    }, delay);
-}
 
