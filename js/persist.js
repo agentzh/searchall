@@ -1,3 +1,5 @@
+const Ci = Components.interfaces;
+const Cc = Components.classes;
 var selectedURLIndex, selectedTabIndex;
 var Replies = {};
 var prefs;
@@ -8,7 +10,28 @@ $(document).ready( function () {
         SearchAll.app = new SearchAll.App();
     app = SearchAll.app;
 
-    prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+    // XXX import search engines from FF's OpenSource service
+
+    /*
+    var searchService = Cc["@mozilla.org/browser/search-service;1"].
+                        getService(Ci.nsIBrowserSearchService);
+    for each (engine in searchService.getEngines({})) {
+        engine = engine.wrappedJSObject;
+        var url = engine._urls[0];
+        alert(url.method + ": " + engine._urls[0].template + ": " + engine._urls[0].params.join(","));
+        //url = engine._urls[1];
+        //alert(url.method + ": " + engine._urls[0].template);
+        for (var key in engine) {
+            //if (key[0] == '_') continue;
+            alert("engine: key: " + key + ": " + engine[key]);
+        }
+        alert("engine " + engine.name + ": " + engine.searchForm);
+
+    }
+    alert("Stop!");
+    */
+
+    prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
     prefs = prefs.getBranch("extensions.searchall.");
     var query;
     // we have to use getComplexValue to read UTF-8 strings:
