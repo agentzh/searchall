@@ -1,4 +1,4 @@
-// Class SearchAll.App
+// Class SearchAll.OrigView
 // -- agentzh
 
 if (typeof SearchAll == 'undefined') SearchAll = {};

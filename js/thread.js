@@ -8,21 +8,22 @@ SearchAll.Thread = function (index) {
     this.index = index;
     this.autoSubmit = false;
     this.mineResults = false;
-    return this;
+    this.firstTime = true;
 }
 
 SearchAll.Thread.prototype = {
     goHome: function (home) {
         var delay = 0;
         var app = SearchAll.app;
-        if (!app.pageMode) {
+        if (!app.pageMode && this.firstTime) {
             // such a delay is necessary in 'window mode'
             delay = 500;
+            this.firstTime = false;
         }
-        var index = this.index;
+        var self = this;
         setTimeout(function () {
-            this.mineResults = false;
-            app.origViews[index].goHome(home);
+            self.mineResults = false;
+            app.origViews[self.index].goHome(home);
             if (app.pageMode) app.searchBox.focus();
         }, delay);
     }
