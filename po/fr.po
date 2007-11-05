@@ -16,7 +16,7 @@ msgid ""
 
 #: lib/SearchAll/View/Main.pm:200
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: lib/SearchAll/View/Main.pm:176
 msgid "Formatted"
