@@ -39,6 +39,7 @@ SearchAll.App = function () {
         'www.yahoo.cn': ['http://www.yahoo.cn/s?p={searchTerms}'],
         'www.baidu.com': ['http://www.baidu.com/s?wd={searchTerms}', 'GBK'],
         'www.baidu.cn': ['http://www.baidu.com/s?wd={searchTerms}', 'GBK'],
+        'www.a9.com': ['http://www.a9.com/{searchTerms}'],
     };
 };
 

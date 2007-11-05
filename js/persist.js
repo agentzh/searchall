@@ -45,12 +45,9 @@ $(document).ready( function () {
         //alert("Found query: " + query);
         app.searchBox.value = query;
         //prefs.setCharPref('query', '');
-        for (var i = 0; i < 3; i++) {
-            var thread = app.threads[i];
-            thread.autoSubmit = true;
-            thread.query = query;
-        } 
     }
+        for (var i = 0; i < 3; i++) {
+        } 
 
     try {
         selectedTabIndex = prefs.getIntPref('tab.lastSelected');
@@ -89,16 +86,21 @@ $(document).ready( function () {
     //$("#view-tab-" + selectedTab)[0].selected = true;
     //alert($("#url-list-0").attr('lastSelected'));
     for (var i = 0; i < 3; i++) {
+        var thread = app.threads[i];
+        var home;
         try {
             selectedURLIndex = prefs.getIntPref('url.lastSelected.' + i);
         } catch (e) { error(e); }
         if (selectedURLIndex != undefined) {
             var url_list = $("#url-list-" + i)[0];
             url_list.selectedIndex = selectedURLIndex;
-            app.threads[i].goHome(url_list.value);
+            home = url_list.value;
         } else {
-            app.threads[i].goHome();
+            home = app.origViews[i].homePage();
         }
+        //alert(home + " " + query);
+        thread.query = query;
+        thread.switchEngine(home);
     }
 
     // for responding request from the SearchAll toolbar.

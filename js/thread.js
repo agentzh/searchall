@@ -41,8 +41,10 @@ SearchAll.Thread.prototype = {
             clearTimeout(this.prevDaemon);
     },
     switchEngine: function (home) {
+        info("Switching engine to: " + home);
         var query = this.query;
-        var shortcut = app.shortcuts[home];
+        var key = home.replace(/^https?:\/\//, '');
+        var shortcut = app.shortcuts[key];
         var origView = app.origViews[this.index];
         if (shortcut && shortcut.length && query != '') {
             var charset = shortcut[1] || 'UTF-8';
