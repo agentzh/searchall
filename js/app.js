@@ -31,5 +31,14 @@ SearchAll.App = function () {
         this.origViews[i] = new SearchAll.OrigView(i);
         this.fmtViews[i] = new SearchAll.FmtView(i);
     }
+
+    this.shortcuts = {
+        'www.google.com': ["http://www.google.com/search?q={searchTerms}"],
+        'www.google.com/en': ["http://www.google.com/search?q={searchTerms}"],
+        'www.google.cn': ["http://www.google.cn/search?q={searchTerms}"],
+        'www.yahoo.cn': ['http://www.yahoo.cn/s?p={searchTerms}'],
+        'www.baidu.com': ['http://www.baidu.com/s?wd={searchTerms}', 'GBK'],
+        'www.baidu.cn': ['http://www.baidu.com/s?wd={searchTerms}', 'GBK'],
+    };
 };
 

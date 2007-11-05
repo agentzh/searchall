@@ -40,6 +40,37 @@ SearchAll.Thread.prototype = {
         if (this.prevDaemon != null)
             clearTimeout(this.prevDaemon);
     },
+    switchEngine: function (home) {
+        var query = this.query;
+        var shortcut = app.shortcuts[home];
+        var origView = app.origViews[this.index];
+        if (shortcut && shortcut.length && query != '') {
+            var charset = shortcut[1] || 'UTF-8';
+            var template = shortcut[0];
+            var encodedQuery = SearchAll.Util.encodeQuery(query, charset);
+            info("encodedQuery: " + encodedQuery);
+            var url = template.replace(/\{searchTerms\}/g, encodedQuery);
+            //url = encodeURIComponent(url);
+            info("opensearch URL: " + url);
+            // XXX refactor the following out?
+            this.autoSubmit = false;
+            this.mineResults = true;
+            this.reset();
+            this.startDaemon();
+            origView.goHome(url);
+            return;
+        }
+        if (query != '') {
+            this.autoSubmit = true;
+            this.mineResults = true;
+            this.reset();
+            this.startDaemon();
+            origView.goHome(home);
+        } else {
+            this.autoSubmit = false;
+            this.goHome(home);
+        }
+    },
     doSearch: function (query) {
         this.mineResults = true;
         this.reset();

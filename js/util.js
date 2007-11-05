@@ -4,6 +4,19 @@
 if (typeof SearchAll == 'undefined') SearchAll = {};
 
 SearchAll.Util = {
+    encodeQuery: function (query, charset) {
+        const DEFAULT_QUERY_CHARSET = 'UTF-8';
+        var textToSubURI = Cc["@mozilla.org/intl/texttosuburi;1"].
+                        getService(Ci.nsITextToSubURI);
+        var data = "";
+        try {
+            data = textToSubURI.ConvertAndEscape(charset, query);
+        } catch (ex) {
+            error("getSubmission: Falling back to default queryCharset!");
+            data = textToSubURI.ConvertAndEscape(DEFAULT_QUERY_CHARSET, query);
+        }
+        return data;
+    },
     url2hostname: function (url) {
         return url.replace(/^http:\/\//, '')
            .replace(/\/.*/, '');

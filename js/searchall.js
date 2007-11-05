@@ -31,8 +31,7 @@ function prepareUriList (i) {
         //alert(query);
         var thread = app.threads[i];
         thread.query = query;
-        thread.autoSubmit = true;
-        thread.goHome(home);
+        thread.switchEngine(home);
     } );
     uriLists[0].addEventListener(
         'command',
@@ -56,8 +55,7 @@ function prepareUriList (i) {
             //alert(query);
             var thread = app.threads[i];
             thread.query = query;
-            thread.autoSubmit = true;
-            thread.goHome(home);
+            thread.switchEngine(home);
         },
         true
     );

@@ -202,12 +202,18 @@ function genListener (ind) {
                 info(e);
             }
 
-            info(hostname + " loaded.");
+            info("pl: " + hostname + " loaded.");
+            //info("HERE! after loaded");
             var doc = progress.DOMWindow.document;
             SearchAll.PrevNext.setDone(ind);
-            if (app.searchBox.value != '' && thread.mineResults) {
+            //info("HERE 2! after loaded");
+            if (thread.query != '' && thread.mineResults) {
+                //info("HERE 3! after loaded");
                 try {
                     app.domLogger.log(doc, hostname);
+                    //info("updating fmt view in progress listener");
+                } catch (e) { info(e) }
+                try {
                     app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
                 } catch (e) { info(e) }
                 //alert("Hiya: " + hostname);
