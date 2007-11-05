@@ -43,8 +43,8 @@ template main => sub {
             title => _("SearchAll"),
             xmlns => $::XUL_NAME_SPACE,
             #'xmlns:html' => $::HTML_NAME_SPACE,
-            width => 800,
-            height => 600,
+            width => 1000,
+            height => 800,
             persist => "sizemode screenX screenY width height",
         }
 
