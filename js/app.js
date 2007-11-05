@@ -16,6 +16,9 @@ SearchAll.App = function () {
     this.viewTabs      = document.getElementById("view-tabs");
     this.viewTabbox    = document.getElementById("view-tabbox");
 
+    this.prevButton = document.getElementById("prev-button");
+    this.nextButton = document.getElementById("next-button");
+
     this.progress = new SearchAll.Progress(3);
     this.progressmeter = document.getElementById("status-progress");
     this.timer = new SearchAll.Timer();

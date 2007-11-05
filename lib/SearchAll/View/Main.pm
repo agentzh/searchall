@@ -197,7 +197,7 @@ template navigator => sub {
         attr { id => 'navigator', align => 'start', pack => 'end' }
         button { attr { id => 'prev-button', class => 'nav-button', label => "<<" . _('Prev') } }
         button { attr { id => 'next-button', class => 'nav-button', label => _('Next') . ">>" } }
-        button { attr { id => 'stop-button', class => 'nav-button', image => 'cancel.png', label => _('Cancel') } }
+        #button { attr { id => 'stop-button', class => 'nav-button', image => 'cancel.png', label => _('Cancel') } }
     }
 };
 

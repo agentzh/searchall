@@ -132,7 +132,7 @@ SearchAll.PrevNext.gotoPrev = function (i) {
 };
 
 $(document).ready(function () {
-    $("#prev-button").click(function () {
+    $(app.prevButton).click(function () {
         //alert("Previous!");
         for (var i = 0; i < 3; i++) {
             app.threads[i].reset();
@@ -141,7 +141,7 @@ $(document).ready(function () {
             SearchAll.PrevNext.gotoPrev(i);
         }
     });
-    $("#next-button").click(function () {
+    $(app.nextButton).click(function () {
         //alert("Next!");
         for (var i = 0; i < 3; i++) {
             app.threads[i].reset();
