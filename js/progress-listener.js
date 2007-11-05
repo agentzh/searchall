@@ -42,7 +42,6 @@ function genStatusMsg (data) {
 
 function handleSearchButton (id) {
     //alert(id);
-    var app = SearchAll.app;
     var local_val = app.origViews[id].textbox().val();
     var global_val = app.searchBox.value;
     if (local_val == global_val)
@@ -69,7 +68,6 @@ function genListener (ind) {
         throw Components.results.NS_NOINTERFACE;
     },
     onStateChange: function (progress, request, flag, status) {
-        var app = SearchAll.app;
     /*
         var myself = 'chrome://searchall/content/searchall.xul';
         if (top.location != myself) {
@@ -117,7 +115,7 @@ function genListener (ind) {
                         return handleSearchButton(ind);
                     }
                 );
-                app.searchBox.focus();
+                if (!app.pageMode) app.searchBox.focus();
                 return;
             }
             /*
@@ -155,7 +153,7 @@ function genListener (ind) {
                     thread.autoSubmit = false;
                     //alert("Clicking...");
                     //host2ind[hostname] = ind;
-                    var query = app.searchBox.value;
+                    var query = thread.query;
                     //ind = host2ind[hostname];
                     info("Autosubmitting...");
                     info("Clicking " + ind + " for host " + hostname);

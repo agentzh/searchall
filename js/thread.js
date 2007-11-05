@@ -11,6 +11,7 @@ SearchAll.Thread = function (index) {
     this.firstTime = true;
     this.interval = 2000;  /* 2 sec */
     this.prevDaemon = null;
+    this.query = '';
 }
 
 SearchAll.Thread.prototype = {
@@ -26,11 +27,11 @@ SearchAll.Thread.prototype = {
         if (delay) {
             setTimeout(function () {
                 app.origViews[thread.index].goHome(home);
-                if (app.pageMode) app.searchBox.focus();
+                if (!app.pageMode) app.searchBox.focus();
             }, delay);
         } else {
             app.origViews[thread.index].goHome(home);
-            if (app.pageMode) app.searchBox.focus();
+            if (!app.pageMode) app.searchBox.focus();
         }
     },
     reset: function () {

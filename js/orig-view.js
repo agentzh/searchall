@@ -58,7 +58,6 @@ SearchAll.OrigView.prototype = {
         return this.browser.homePage;
     },
     goHome: function (newHome) {
-        var app = SearchAll.app;
         app.progress.reset(1);
         if (newHome) this.browser.homePage = newHome;
         SearchAll.app.timer.start(this.hostname());

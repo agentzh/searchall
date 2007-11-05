@@ -30,8 +30,8 @@ function prepareUriList (i) {
         var query = app.searchBox.value;
         //alert(query);
         var thread = app.threads[i];
-        if (query)
-            thread.autoSubmit = true;
+        thread.query = query;
+        thread.autoSubmit = true;
         thread.goHome(home);
     } );
     uriLists[0].addEventListener(
@@ -55,8 +55,8 @@ function prepareUriList (i) {
             var query = app.searchBox.value;
             //alert(query);
             var thread = app.threads[i];
-            if (query)
-                thread.autoSubmit = true;
+            thread.query = query;
+            thread.autoSubmit = true;
             thread.goHome(home);
         },
         true
@@ -168,7 +168,6 @@ function handleCheckbox (i) {
 var Toggle = false;
 
 $(window).ready( function () {
-    var app = SearchAll.app;
     try {
         var ioService = CCSV("@mozilla.org/network/io-service;1", "nsIIOService");
         var host = 'searchall';
@@ -202,7 +201,6 @@ $(window).ready( function () {
     } );
 
     $(app.searchButton).click( function () {
-        var app = SearchAll.app;
         var doc = app.fmtViews[0].document;
         if (doc) {
             $("h1#default", doc).hide();

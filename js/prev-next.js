@@ -76,7 +76,6 @@ SearchAll.PrevNext.gotoNext = function (i) {
 };
 
 SearchAll.PrevNext.gotoPrev = function (i) {
-    var app = SearchAll.app;
     var doc = app.origViews[i].document();
     var links = $("a:contains('Prev')", doc);
     if (links.length == 0) {

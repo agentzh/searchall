@@ -45,8 +45,11 @@ $(document).ready( function () {
         //alert("Found query: " + query);
         app.searchBox.value = query;
         //prefs.setCharPref('query', '');
-        for (var i = 0; i < 3; i++)
-            app.threads[i].autoSubmit = true;
+        for (var i = 0; i < 3; i++) {
+            var thread = app.threads[i];
+            thread.autoSubmit = true;
+            thread.query = query;
+        } 
     }
 
     try {
