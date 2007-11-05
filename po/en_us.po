@@ -15,6 +15,10 @@ msgstr ""
 "Content-Type: text/plain; charset=ASCII\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: lib/SearchAll/View/Main.pm:200
+msgid "Cancel"
+msgstr ""
+
 #: lib/SearchAll/View/Main.pm:176
 msgid "Formatted"
 msgstr ""

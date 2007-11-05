@@ -15,6 +15,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: lib/SearchAll/View/Main.pm:200
+msgid "Cancel"
+msgstr "取消"
+
 #: lib/SearchAll/View/Main.pm:176
 msgid "Formatted"
 msgstr "規格化檢視"

@@ -36,6 +36,7 @@ SearchAll.Thread.prototype = {
     },
     reset: function () {
         app.fmtViews[this.index].reset();
+        app.origViews[this.index].stop();
         if (this.prevDaemon != null)
             clearTimeout(this.prevDaemon);
     },
