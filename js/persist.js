@@ -40,14 +40,12 @@ $(document).ready( function () {
     } catch(e) {
         info("No query found!");
     }
-    if (query) {
+    if (query && app.pageMode) {
         //alert("Found query!");
         //alert("Found query: " + query);
         app.searchBox.value = query;
         //prefs.setCharPref('query', '');
     }
-        for (var i = 0; i < 3; i++) {
-        } 
 
     try {
         selectedTabIndex = prefs.getIntPref('tab.lastSelected');
@@ -99,8 +97,12 @@ $(document).ready( function () {
             home = app.origViews[i].homePage();
         }
         //alert(home + " " + query);
-        thread.query = query;
-        thread.switchEngine(home);
+        if (app.pageMode) {
+            thread.query = query;
+            thread.switchEngine(home);
+        } else {
+            thread.goHome(home);
+        }
     }
 
     // for responding request from the SearchAll toolbar.

@@ -5,6 +5,7 @@ use warnings;
 use base 'SearchAll::View::Base';
 use Template::Declare::Tags 'XUL';
 
+# no search.cpan.org any more
 my @URLs = qw(
     www.google.cn
     www.yahoo.cn
@@ -22,7 +23,6 @@ my @URLs = qw(
     search1.taobao.com
     addons.mozilla.org/search
     search.ebay.com
-    search.cpan.org
 
     www.youtube.com
 

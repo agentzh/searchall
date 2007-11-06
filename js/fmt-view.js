@@ -33,7 +33,7 @@ SearchAll.patterns = {
         'search1.taobao.com'  : "div#ItemList>div#ListView>div.Item",
         'search.taobao.com'   : "div#ItemList>div#ListView>div.Item",
         'addons.mozilla.org' : 'div#container>div#content>div.addon-listitem',
-        'search.cpan.org' : "body>p[small]",
+        //'search.cpan.org' : "body>p[small]",
         'search.ebay.com' : "form#find>div.ebContainer>div#ebContent>div.ebFrame>table.adTest>tbody>tr>td>table.ebItemlist>tbody>tr.ebHlOdd",
         'www.amazon.com'  : 'table.searchresults>tbody>tr',
 
