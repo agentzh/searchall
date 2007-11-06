@@ -83,19 +83,24 @@ $(document).ready( function () {
     app.progress.reset(3);
     //$("#view-tab-" + selectedTab)[0].selected = true;
     //alert($("#url-list-0").attr('lastSelected'));
+    info("Locale: " + app.locale);
+    var isZhLocale = (app.locale.substr(0, 2) == 'zh');
+    info("isZhLocale: " + isZhLocale);
+
     for (var i = 0; i < 3; i++) {
         var thread = app.threads[i];
         var home;
         try {
             selectedURLIndex = prefs.getIntPref('url.lastSelected.' + i);
         } catch (e) { error(e); }
+        var url_list = $("#url-list-" + i)[0];
         if (selectedURLIndex != undefined) {
-            var url_list = $("#url-list-" + i)[0];
             url_list.selectedIndex = selectedURLIndex;
             home = url_list.value;
+        } else if (!isZhLocale) {
+            url_list.selectedIndex = 6 + i;
+            home = url_list.value;
         } else {
-            // XXX choose en sites for non zh locales
-            info("Locale: " + app.locale);
             home = app.origViews[i].homePage();
         }
         //alert(home + " " + query);

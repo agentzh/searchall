@@ -14,8 +14,8 @@ my @URLs = qw(
     www.sogou.com
     so.163.com
 
-    search.yahoo.com
     www.google.com/en
+    search.yahoo.com
     www.ask.com
     www.a9.com
 
