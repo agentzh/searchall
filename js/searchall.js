@@ -45,7 +45,7 @@ function prepareUriList (i) {
                 var cols = $(".col-" + i, fmtDoc);
                 if (cols.length) {
                     cols.empty();
-                    $(cols[0]).html('<img src="loading.gif" />');
+                    $(cols[0]).html('<img class="loading" src="loading.gif" />');
                 }
             }
             var home = this.value.replace(/^http:\/\//, '');

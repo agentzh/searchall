@@ -48,7 +48,6 @@ SearchAll.patterns = {
 };
 
 SearchAll.FmtView.prototype = {
-    document: null,
     curPath: null,  // XXX moved to SearchAll.OrgView.prototype
     rootPath: null, // ditto
     get document () {

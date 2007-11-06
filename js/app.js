@@ -58,6 +58,8 @@ SearchAll.App = function () {
         'www.youtube.com': ['http://www.youtube.com/results?search_query={searchTerms}&search=Search'],
         'www.flickr.com': ['http://www.flickr.com/search/?q={searchTerms}'],
         'www.flickr.com/search': ['http://www.flickr.com/search/?q={searchTerms}'],
+        'search1.taobao.com': ['http://search1.taobao.com/browse/search_auction.htm?sort=&at_topsearch=1&f=D9_5_1&spercent=95&commend=all&user_action=initiative&search_type=auction&q={searchTerms}', 'GBK'],
+        'www.taobao.com': ['http://search1.taobao.com/browse/search_auction.htm?sort=&at_topsearch=1&f=D9_5_1&spercent=95&commend=all&user_action=initiative&search_type=auction&q={searchTerms}', 'GBK'],
     };
 };
 

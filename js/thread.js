@@ -88,6 +88,7 @@ SearchAll.Thread.prototype = {
             if (thread.mineResults) {
                 info("daemon " + index + ": " + "Mining results.");
                 var origView = app.origViews[index];
+                var fmtView = app.fmtViews[index];
                 var doc = origView.document();
                 var hostname = origView.hostname();
                 try {
@@ -101,8 +102,18 @@ SearchAll.Thread.prototype = {
                 } else {
                     if (origView.browser.webProgress.isLoadingDocument)
                         thread.startDaemon(count + 1);
-                    else
+                    else {
                         info("daemon " + index + ": Stopped due to completed documents.");
+                        //info('fmt view document: ' + fmtView.document);
+                        var imgs = $(".col-" + index + ">img.loading", fmtView.document);
+                        //info("loading image count: " + imgs.length);
+                        var status = imgs.css('display');
+                        if (status != 'none') {
+                            imgs.hide();
+                            imgs.parent().html("Sorry, no results found :(");
+                        }
+                        //info("state: " + status);
+                    }
                 }
             }
         }, this.interval);
