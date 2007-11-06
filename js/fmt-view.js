@@ -184,7 +184,10 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         snippets = tmp;
     }
 
-    if (this.prevResults.length >= snippets.length) {
+    var imgs = $(".col-" + index + ">img.loading", this.document);
+    var status = imgs.css('display');
+
+    if (status == 'none' && this.prevResults.length >= snippets.length) {
         info("Rejected bogus results");
         return false;
     }
