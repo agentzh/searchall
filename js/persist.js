@@ -94,6 +94,8 @@ $(document).ready( function () {
             url_list.selectedIndex = selectedURLIndex;
             home = url_list.value;
         } else {
+            // XXX choose en sites for non zh locales
+            info("Locale: " + app.locale);
             home = app.origViews[i].homePage();
         }
         //alert(home + " " + query);

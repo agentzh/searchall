@@ -46,6 +46,10 @@ msgstr ""
 msgid "SearchAll (Debug)"
 msgstr ""
 
+#: lib/SearchAll/View/Main.pm:59
+msgid "en-US"
+msgstr "fr"
+
 #: lib/SearchAll/View/Base.pm:27
 msgid "sec"
 msgstr "secondes"

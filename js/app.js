@@ -22,6 +22,7 @@ SearchAll.App = function () {
     this.progress = new SearchAll.Progress(3);
     this.progressmeter = document.getElementById("status-progress");
     this.timer = new SearchAll.Timer();
+    this.locale = document.getElementById('searchall-panel').getAttribute('_locale');
 
     this.fmtViews = [];
     this.threads = [];

@@ -56,7 +56,7 @@ template main => sub {
 
 template searchall => sub {
     vbox {
-        attr { id => 'panel', flex => 1 };
+        attr { id => 'searchall-panel', flex => 1, _locale => _('en-US') };
         vbox {
             attr { id => 'my-bar' };
             show 'engine_bar';
