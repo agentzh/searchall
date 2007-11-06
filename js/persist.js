@@ -50,7 +50,9 @@ $(document).ready( function () {
     try {
         selectedTabIndex = prefs.getIntPref('tab.lastSelected');
         //$("#view-tabs").attr("lastSelected");
-    } catch (e) { error(e); }
+    } catch (e) {
+        info("Failed to get tab.lastSelected in prefs.");
+    }
     if (app.pageMode && selectedTabIndex == 0) {
         selectedTabIndex = 1;
     }
@@ -85,14 +87,17 @@ $(document).ready( function () {
     //alert($("#url-list-0").attr('lastSelected'));
     info("Locale: " + app.locale);
     var isZhLocale = (app.locale.substr(0, 2) == 'zh');
-    info("isZhLocale: " + isZhLocale);
+    //info("isZhLocale: " + isZhLocale);
 
     for (var i = 0; i < 3; i++) {
         var thread = app.threads[i];
         var home;
+        selectedURLIndex = undefined;
         try {
             selectedURLIndex = prefs.getIntPref('url.lastSelected.' + i);
-        } catch (e) { error(e); }
+        } catch (e) {
+            info("Failed to get url.lastSelected." + i + " in prefs.");
+        }
         var url_list = $("#url-list-" + i)[0];
         if (selectedURLIndex != undefined) {
             url_list.selectedIndex = selectedURLIndex;
