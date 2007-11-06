@@ -185,9 +185,10 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     }
 
     var imgs = $(".col-" + index + ">img.loading", this.document);
-    var status = imgs.css('display');
+    //var status = imgs.css('display');
+    //info("My status: " + status + " " + imgs.length);
 
-    if (status == 'none' && this.prevResults.length >= snippets.length) {
+    if (imgs.length == 0  && this.prevResults.length >= snippets.length) {
         info("Rejected bogus results");
         return false;
     }

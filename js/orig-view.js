@@ -106,10 +106,11 @@ SearchAll.OrigView.prototype = {
                 FailureCount = 0;
             } catch (e) {
                 FailureCount++;
+                if (FailureCount > 3) { return; }
                 setTimeout(function () {
                     info("Retrying doSearch..." + FailureCount);
                     obj.doSearch(query);
-                }, 1000);
+                }, 2000);
             }
         }
     }

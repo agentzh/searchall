@@ -100,20 +100,26 @@ SearchAll.Thread.prototype = {
                     // XXX error handling
                     //info("daemon " + index + ": Stopped due to mined resuts.");
                 //} else {
-                    if (origView.browser.webProgress.isLoadingDocument)
-                        thread.startDaemon(count + 1);
-                    else {
-                        info("daemon " + index + ": Stopped due to completed documents.");
-                        //info('fmt view document: ' + fmtView.document);
-                        var imgs = $(".col-" + index + ">img.loading", fmtView.document);
-                        //info("loading image count: " + imgs.length);
-                        var status = imgs.css('display');
-                        if (status != 'none') {
-                            imgs.hide();
-                            imgs.parent().html("Sorry, no results found :(");
-                        }
-                        //info("state: " + status);
+                if (origView.browser.webProgress.isLoadingDocument)
+                    thread.startDaemon(count + 1);
+                else if (fmtView.prevResults.length > 0) {
+                    // XXX error handling
+                    info("daemon " + index + ": Stopped due to mined resuts.");
+                } else {
+                    info("daemon " + index + ": Stopped due to completed documents.");
+                    //info('fmt view document: ' + fmtView.document);
+                    var imgs = $(".col-" + index + ">img.loading", fmtView.document);
+                    //if (imgs.length == 0) {
+                        //alert("Found 0 leng imgs!");
+                    //}
+                    //info("loading image count: " + imgs.length);
+                    var status = imgs.css('display');
+                    if (status != 'none') {
+                        imgs.hide();
+                        //imgs.parent().html("Sorry, no results found :(");
                     }
+                    //info("state: " + status);
+                }
                 //}
             }
         }, this.interval);

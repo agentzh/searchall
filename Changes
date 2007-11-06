@@ -2,6 +2,7 @@
 * Fixed a long-standing bug regarding URL menu selection persistence.
   No duplicate search engines will appear at the same time now (unless the user forces it to).
 * Now defaulting to English search engines (yahoo.com, google.com/en, and ask.com) when the user's locale is not zh-*.
+* Fixed a regression regarding auto-hidden menulists introduced in 0.3.0.
 
 =Changes for release 0.3.0
 * Rewrote the JS internals by using the OO style.
