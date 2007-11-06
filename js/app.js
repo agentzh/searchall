@@ -41,6 +41,11 @@ SearchAll.App = function () {
         'www.baidu.cn': ['http://www.baidu.com/s?wd={searchTerms}', 'GBK'],
         'www.a9.com': ['http://www.a9.com/{searchTerms}'],
         'search.cpan.org': ['http://search.cpan.org/search?query=Perl&mode=all'],
+        'www.ask.com': ['http://www.ask.com/web?q={searchTerms}'],
+        'www.sogou.com': ['http://www.sogou.com/web?query={searchTerms}', 'GBK'],
+        'www.yisou.com': ['http://www.yisou.com/search:{searchTerms}'],
+        'so.163.com': ['http://so.163.com/search.php?q={searchTerms}', 'GBK'],
+        'search.yahoo.com': ['http://search.yahoo.com/search?p={searchTerms}'],
     };
 };
 
