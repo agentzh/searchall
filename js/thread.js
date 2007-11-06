@@ -94,16 +94,15 @@ SearchAll.Thread.prototype = {
                     app.fmtViews[index].update(
                         hostname, doc, false /* don't force mining */
                     );
-                } catch (e) { info("fmt view update failed."); }
+                } catch (e) { info("fmt view update failed: " + e); }
                 if (app.fmtViews[index].prevResults.length > 0) {
                     // XXX error handling
-                    info("daemon " + index + ": " + "Run out of limit.");
+                    info("daemon " + index + ": Stopped due to mined resuts.");
                 } else {
-                    if (origView.webProgress.isLoadingDocument) {
+                    if (origView.browser.webProgress.isLoadingDocument)
                         thread.startDaemon(count + 1);
-                    } else {
-                        info("daemon " + index + ": Stopped.");
-                    }
+                    else
+                        info("daemon " + index + ": Stopped due to completed documents.");
                 }
             }
         }, this.interval);

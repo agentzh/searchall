@@ -48,6 +48,7 @@ SearchAll.App = function () {
         'www.answers.com': ['http://www.answers.com/{searchTerms}'],
         'search.yahoo.com': ['http://search.yahoo.com/search?p={searchTerms}'],
         'search.ebay.com': ['http://search.ebay.com/{searchTerms}'],
+        'addons.mozilla.org/search': ['https://addons.mozilla.org/search?q={searchTerms}'],
     };
 };
 

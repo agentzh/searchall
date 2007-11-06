@@ -55,7 +55,7 @@ SearchAll.FmtView.prototype = {
         return this.browser.contentDocument;
     },
     reset: function () {
-        this.prevHtmlLen = 0;
+        //this.prevHtmlLen = 0;
         this.prevResults = [];
     }
 };
@@ -123,7 +123,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     if (this.prevHtmlLen == len) {
         //alert("No change!");
         info("fmt view gen: No change for " + index);
-        //return false;
+        return false;
     }
     this.prevHtmlLen = html.length;
 

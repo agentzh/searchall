@@ -18,7 +18,7 @@ SearchAll.Util = {
         return data;
     },
     url2hostname: function (url) {
-        return url.replace(/^http:\/\//, '')
+        return url.replace(/^https?:\/\//, '')
            .replace(/\/.*/, '');
     },
     isEmpty: function (html) {
