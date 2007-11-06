@@ -49,6 +49,7 @@ SearchAll.App = function () {
         'search.yahoo.com': ['http://search.yahoo.com/search?p={searchTerms}'],
         'search.ebay.com': ['http://search.ebay.com/{searchTerms}'],
         'addons.mozilla.org/search': ['https://addons.mozilla.org/search?q={searchTerms}'],
+        'image.cn.yahoo.com': ['http://image.cn.yahoo.com/search?p={searchTerms}', 'GBK'],
     };
 };
 
