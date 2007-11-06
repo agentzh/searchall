@@ -77,7 +77,8 @@ function showHideToolbar () {
 
 $(document).ready(function () {
     //$("#my-bar").hide();
-    if ($("page").length) {
+    if (app.pageMode) {
+        //alert("Hey!");
         toolbar = $("#my-bar")[0];
         toolbarHeight   = $("#engine-bar")[0].boxObject.height;
         isToolbarHidden = true;
@@ -86,7 +87,7 @@ $(document).ready(function () {
             'margin-top:' + (0-toolbarHeight) + 'px; margin-bottom:0px;'
         );
 
-        $("#panel").mouseover(onMouseOver);
+        $("#searchall-panel").mouseover(onMouseOver);
         $("#search-bar").hide();
         var tabs = $("#view-tabs")[0];
         firstTab = tabs.firstChild;
