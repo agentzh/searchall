@@ -32,6 +32,8 @@ SearchAll.App = function () {
         this.fmtViews[i] = new SearchAll.FmtView(i);
     }
 
+    // The following SE's need POST for shortcuts:
+    // taobao, image.baidu.com, amazon
     this.shortcuts = {
         'www.google.com': ["http://www.google.com/search?q={searchTerms}"],
         'www.google.com/en': ["http://www.google.com/search?q={searchTerms}"],
@@ -53,6 +55,7 @@ SearchAll.App = function () {
         'images.google.cn': ['http://images.google.cn/images?q={searchTerms}'],
         'images.google.com': ['http://images.google.com/images?q={searchTerms}'],
         'images.search.yahoo.com': ['http://images.search.yahoo.com/search/images?p={searchTerms}&ei=UTF-8'],
+        'www.youtube.com': ['http://www.youtube.com/results?search_query={searchTerms}&search=Search'],
     };
 };
 

@@ -20,7 +20,7 @@ my @URLs = qw(
     www.a9.com
 
     www.answers.com
-    search1.taobao.com
+    www.taobao.com
     addons.mozilla.org/search
     search.ebay.com
     www.amazon.com
