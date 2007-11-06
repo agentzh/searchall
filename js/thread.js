@@ -77,6 +77,7 @@ SearchAll.Thread.prototype = {
         this.mineResults = true;
         this.reset();
         this.startDaemon();
+        this.query = query;
         app.origViews[this.index].doSearch(query);
     },
     startDaemon: function (count) {
