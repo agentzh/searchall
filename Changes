@@ -1,3 +1,8 @@
+=Changes for release 0.3.1
+* Fixed a long-standing bug regarding URL menu selection persistence.
+  No duplicate search engines will appear at the same time now (unless the user forces it to).
+* Now defaulting to English search engines (yahoo.com, google.com/en, and ask.com) when the user's locale is not zh-*.
+
 =Changes for release 0.3.0
 * Rewrote the JS internals by using the OO style.
 * Added amazon.com back to the default search engine list.
@@ -6,6 +11,7 @@
 * Added OpenSearch shortcuts for most of the sites in the default list.
   So it should be now 50% faster at startup as well as when switching search engines.
 * Removed search.cpan.org from the default SE list since it's new page template is troublesome for data extracting.
+* Added support for the Spanish locale es-ES, thanks Gregorio Villarrubia for contributing the transcript.
 
 =Changes for release 0.2.2
 * Now SearchAll tests each result link in the Formatted view by sending AJAX HEAD requests.
