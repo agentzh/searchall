@@ -99,7 +99,11 @@ SearchAll.Thread.prototype = {
                     // XXX error handling
                     info("daemon " + index + ": " + "Run out of limit.");
                 } else {
-                    thread.startDaemon(count + 1);
+                    if (origView.webProgress.isLoadingDocument) {
+                        thread.startDaemon(count + 1);
+                    } else {
+                        info("daemon " + index + ": Stopped.");
+                    }
                 }
             }
         }, this.interval);
