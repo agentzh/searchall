@@ -15,31 +15,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/SearchAll/View/Main.pm:200
+#: lib/SearchAll/View/Main.pm:201
 msgid "Cancel"
 msgstr "取消"
 
-#: lib/SearchAll/View/Main.pm:176
+#: lib/SearchAll/View/Main.pm:177
 msgid "Formatted"
 msgstr "规格化视图"
 
-#: lib/SearchAll/View/Main.pm:199
+#: lib/SearchAll/View/Main.pm:200
 msgid "Next"
 msgstr "下一页"
 
-#: lib/SearchAll/View/Main.pm:169
+#: lib/SearchAll/View/Main.pm:170
 msgid "Original"
 msgstr "原初视图"
 
-#: lib/SearchAll/View/Main.pm:198
+#: lib/SearchAll/View/Main.pm:199
 msgid "Prev"
 msgstr "上一页"
 
-#: lib/SearchAll/View/Main.pm:116
+#: lib/SearchAll/View/Main.pm:117
 msgid "Search"
 msgstr "查找"
 
-#: lib/SearchAll/View/Main.pm:43 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
+#: lib/SearchAll/View/Main.pm:44 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
 msgid "SearchAll"
 msgstr "我搜去"
 
