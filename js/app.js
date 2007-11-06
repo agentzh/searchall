@@ -52,6 +52,7 @@ SearchAll.App = function () {
         'image.cn.yahoo.com': ['http://image.cn.yahoo.com/search?p={searchTerms}', 'GBK'],
         'images.google.cn': ['http://images.google.cn/images?q={searchTerms}'],
         'images.google.com': ['http://images.google.com/images?q={searchTerms}'],
+        'images.search.yahoo.com': ['http://images.search.yahoo.com/search/images?p={searchTerms}&ei=UTF-8'],
     };
 };
 
