@@ -45,6 +45,7 @@ SearchAll.App = function () {
         'www.sogou.com': ['http://www.sogou.com/web?query={searchTerms}', 'GBK'],
         'www.yisou.com': ['http://www.yisou.com/search:{searchTerms}'],
         'so.163.com': ['http://so.163.com/search.php?q={searchTerms}', 'GBK'],
+        'www.answers.com': ['http://www.answers.com/{searchTerms}'],
         'search.yahoo.com': ['http://search.yahoo.com/search?p={searchTerms}'],
     };
 };
