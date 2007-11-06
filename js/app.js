@@ -56,6 +56,8 @@ SearchAll.App = function () {
         'images.google.com': ['http://images.google.com/images?q={searchTerms}'],
         'images.search.yahoo.com': ['http://images.search.yahoo.com/search/images?p={searchTerms}&ei=UTF-8'],
         'www.youtube.com': ['http://www.youtube.com/results?search_query={searchTerms}&search=Search'],
+        'www.flickr.com': ['http://www.flickr.com/search/?q={searchTerms}'],
+        'www.flickr.com/search': ['http://www.flickr.com/search/?q={searchTerms}'],
     };
 };
 
