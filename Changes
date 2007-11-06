@@ -1,3 +1,10 @@
+=Changes for release 0.3.0
+* Rewrote the JS internals by using the OO style.
+* Added amazon.com back to the default search engine list.
+* Implemented daemon threads which incrementally render the Formatted views while the Original views are loading. So SearchAll should be much faster in relatively bad web conditions.
+* Added OpenSearch shortcuts for most of the sites in the default list. So it should be now 50% faster at startup as well as when switching search engines.
+* Removed search.cpan.org from the default SE list since it's new page template is troublesome for data extracting.
+
 =Changes for release 0.2.2
 * Now SearchAll tests each result link in the Formatted view by sending AJAX HEAD requests.
   It now has 5 potential marks: Checking, Bad, Good, Timed out, and Uncertain (clouds).
