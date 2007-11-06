@@ -47,6 +47,7 @@ SearchAll.App = function () {
         'so.163.com': ['http://so.163.com/search.php?q={searchTerms}', 'GBK'],
         'www.answers.com': ['http://www.answers.com/{searchTerms}'],
         'search.yahoo.com': ['http://search.yahoo.com/search?p={searchTerms}'],
+        'search.ebay.com': ['http://search.ebay.com/{searchTerms}'],
     };
 };
 
