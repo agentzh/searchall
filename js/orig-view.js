@@ -80,7 +80,7 @@ SearchAll.OrigView.prototype = {
         //this.goHome();
         var textboxes = this.textbox();
         textboxes.val(query);
-        textboxes.blur();
+        //textboxes.blur();
         SearchAll.app.timer.start(this.hostname());
         //delete top.location;
         //var buttons = this.button();
@@ -96,7 +96,7 @@ SearchAll.OrigView.prototype = {
         var obj = this;
         if (!textbox && FailureCount <= 3) {
             FailureCount++;
-            setTimeout(function () {
+            app.setTimeout(function () {
                 info("Retrying doSearch..." + FailureCount);
                 obj.doSearch(query);
             }, 1000);
@@ -107,7 +107,7 @@ SearchAll.OrigView.prototype = {
             } catch (e) {
                 FailureCount++;
                 if (FailureCount > 3) { return; }
-                setTimeout(function () {
+                app.setTimeout(function () {
                     info("Retrying doSearch..." + FailureCount);
                     obj.doSearch(query);
                 }, 2000);

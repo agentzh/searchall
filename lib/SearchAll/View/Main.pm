@@ -103,11 +103,11 @@ template search_bar => sub {
         }
         textbox {
             attr {
-                type => "autocomplete",
-                autocompletesearch => "form-history history",
+                #type => "autocomplete",
+                #autocompletesearch => "form-history history",
                 id => 'search-box',
                 flex => 1,
-                autocompletesearchparam => "search-box-history",
+                #autocompletesearchparam => "search-box-history",
                 #maxlength => 256,
             }
         }

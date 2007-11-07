@@ -25,7 +25,7 @@ SearchAll.Thread.prototype = {
         }
         var thread = this;
         if (delay) {
-            setTimeout(function () {
+            app.setTimeout(function () {
                 app.origViews[thread.index].goHome(home);
                 if (!app.pageMode) app.searchBox.focus();
             }, delay);
@@ -84,7 +84,7 @@ SearchAll.Thread.prototype = {
         if (!count) count = 0;
         var thread = this;
         var index = thread.index;
-        this.prevDaemon  = setTimeout(function () {
+        this.prevDaemon  = app.setTimeout(function () {
             if (thread.mineResults) {
                 info("daemon " + index + ": " + "Mining results.");
                 var origView = app.origViews[index];

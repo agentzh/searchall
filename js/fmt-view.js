@@ -255,7 +255,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             $(cols[0]).html("Sorry, no results found :(");
         }
     }
-    setTimeout(function () {
+    app.setTimeout(function () {
         //alert("HEEEE!!!");
         $(".col-" + index + ">img.loading", this.document).hide();
     }, 500);

@@ -63,16 +63,16 @@ template main => sub {
 
                 textbox {
                     attr {
-                        type => "autocomplete",
-                        autocompletesearch => "form-history",
+                        #type => "autocomplete",
+                        #autocompletesearch => "form-history",
 
                         id => "searchall-searchbox",
                         clickSelectsAll => 'true',
                         onkeydown => "handleKeydown('$URI', event, this);",
-                        autocompletepopup => "PopupAutoComplete",
-                        completeselectedindex => "true",
-                        tabscrolling => "true",
-                        disablehistory => 'false',
+                        #autocompletepopup => "PopupAutoComplete",
+                        #completeselectedindex => "true",
+                        #tabscrolling => "true",
+                        #disablehistory => 'false',
                     }
                 }
                 button {

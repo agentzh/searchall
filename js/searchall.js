@@ -188,7 +188,6 @@ $(window).ready( function () {
     // in the search box:
     $(app.searchBox).keydown( function (e) {
         if (e.keyCode == 13) {
-            //alert("Found enter key!");
             app.searchButton.click();
             return false;
         } else {
@@ -198,7 +197,19 @@ $(window).ready( function () {
         //return false;
     } );
 
+    $(window).unload( function (e) {
+        for (var i = 0; i < 3; i++) {
+            app.threads[i].reset();
+            unregisterMyListener(i);
+        }
+        app = {};
+        $('*').unbind();
+        //alert("Hey!");
+        info("searchall window unloaded.");
+    } );
+
     $(app.searchButton).click( function () {
+        //alert("Howdy!");
         var doc = app.fmtViews[0].document;
         if (doc) {
             $("h1#default", doc).hide();
@@ -228,7 +239,7 @@ $(window).ready( function () {
     //info("focusing search box... (1)");
     //info("blurring contentWindow...");
     // we need the following syntax error to retain the focus
-    app.searchBox.focus();
+    if (!app.pageMode) app.searchBox.focus();
 
     /*
     for (var i = 0; i < 2; i++) {

@@ -67,7 +67,7 @@ SearchAll.PrevNext.gotoNext = function (i) {
 
     // handle out of date calls?
     var self = this;
-    setTimeout (function () {
+    app.setTimeout (function () {
         if (! self.done[i]) {
             info("Last resort for paging is running: " + hostname);
             app.fmtViews[i].update(hostname, doc, false/* don't force mining */);
@@ -128,7 +128,7 @@ SearchAll.PrevNext.gotoPrev = function (i) {
             //}
         }
     };
-    setTimeout(guard, 1000);
+    app.setTimeout(guard, 1000);
 };
 
 $(document).ready(function () {

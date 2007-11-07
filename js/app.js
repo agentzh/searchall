@@ -64,3 +64,12 @@ SearchAll.App = function () {
     };
 };
 
+SearchAll.App.prototype = {
+    setTimeout: function (handle, delay) {
+        return window.setTimeout(function () {
+            if (typeof app == 'undefined' || app == null) return;
+            handle();
+        }, delay);
+    },
+};
+

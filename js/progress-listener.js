@@ -3,13 +3,16 @@ const WPL = Components.interfaces.nsIWebProgressListener;
 
 function registerMyListener (i) {
     //var myListener = genListener();
-    var browser = SearchAll.app.origViews[i].browser;
+    var browser = app.origViews[i].browser;
     var myListener = myListeners[i];
     browser.addProgressListener(myListener, WPL.NOTIFY_STATE_DOCUMENT);
 }
 
-function unregisterMyListener (browser) {
+function unregisterMyListener (i) {
+    var browser = app.origViews[i].browser;
+    var myListener = myListeners[i];
     browser.removeProgressListener(myListener);
+    myListeners[i] = null;
 }
 
 function genStatusMsg (data) {
@@ -100,7 +103,7 @@ function genListener (ind) {
                 // initial loading
                 //alert("ind undefined!");
                 app.progressmeter.value = 100;
-                setTimeout( function () {
+                app.setTimeout( function () {
                     $(app.progressmeter).hide();
                 }, 100 );
                 //alert("browser " + i + " found!");
@@ -115,7 +118,7 @@ function genListener (ind) {
                         return handleSearchButton(ind);
                     }
                 );
-                if (!app.pageMode) app.searchBox.focus();
+                //if (!app.pageMode) app.searchBox.focus();
                 return;
             }
             /*
@@ -159,7 +162,7 @@ function genListener (ind) {
                     info("Clicking " + ind + " for host " + hostname);
                     thread.doSearch(query);
                     //$("#search-button")[0].click();
-                    //$("#search-box").focus();
+                    $("#search-box").focus();
                     return;
                 }
             }
@@ -173,7 +176,7 @@ function genListener (ind) {
                 //alert(ind);
                 progressmeter[0].value = val;
                 if (val >= 100) {
-                    setTimeout( function () {
+                    app.setTimeout( function () {
                         progressmeter.hide();
                     }, 100 );
                 }
@@ -230,12 +233,15 @@ function genListener (ind) {
                     return handleSearchButton(ind);
                 }
             );
+            //info("I know!");
             app.searchBox.focus();
-            setTimeout(function () {
+            /*
+            app.setTimeout(function () {
                 //info("blurring contentWindow...");
                 //info("focusing search box... (3)");
                 app.searchBox.focus();
             }, 10);
+            */
         }
         //$("#search-box").focus();
     },

@@ -15,7 +15,7 @@ function test_browser () {
     browser.homePage = 'http://www.google.cn';
     browser.goHome();
 
-    setTimeout( function () {
+    app.setTimeout( function () {
         browser = new Browser(browser);
         ok(browser, 'instance ok');
         isaOK(browser, 'Browser');
@@ -35,7 +35,7 @@ function test_browser () {
 
         // Let's wait for a while to let the new
         // page get loaded
-        setTimeout(function () {
+        app.setTimeout(function () {
             //showDOM(browser.document());
             is(browser.hostname(), 'www.google.cn', 'url does not change');
             like(browser.textbox().val(), 'Perl', "textbox's value not changed");
@@ -47,7 +47,7 @@ function test_browser () {
             browser.textbox().val("Howdy");
             browser.button().click();
             // Let's wait for the new page to load:
-            setTimeout(function () {
+            app.setTimeout(function () {
                 //showDOM(browser.document());
                 like(browser.textbox().val(), 'Howdy', "textbox's value is still 'howdy'");
                 like(browser.document().title, /Howdy - Google/, "title okay, it's 'Howdy - Google ...'");

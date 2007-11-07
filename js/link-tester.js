@@ -9,6 +9,7 @@ SearchAll.LinkTester = {
         this.testers[selector] = url;
         var self = this;
         req.onreadystatechange = function (aEvt) {
+            if (typeof app == 'undefined' || app == null) return;
             if (req.readyState == 4) {
                 if (self.testers[selector] != url) {
                     // out-dated tester:
@@ -44,7 +45,7 @@ SearchAll.LinkTester = {
 
     handleCheckTimeout: function (req, doc, selector, timeout, url) {
         var self = this;
-        return setTimeout(function () {
+        return app.setTimeout(function () {
             if (self.testers[selector] != url) {
                 // out-dated tester:
                 //alert("Out-dated tester found in timeout state!");
