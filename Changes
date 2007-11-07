@@ -1,3 +1,9 @@
+=Changes for release 0.3.2
+* Fixed various memory leaks caused by non-unregistered progress listeners, non-unbound event listerners, and orphaned setTimeout handlers.
+  Thanks my new AMO editor Archaeopteryx++ for reporting this :)
+* Fixed the rightclick & paste/copy/... bug in SearchAll toolbar's textbox. thanks erdi++ for tracing the issue down
+* Fixed a bug in thread.js which prevents unnecessary refreshes of the Formatted view.
+
 =Changes for release 0.3.1
 * Fixed a long-standing bug regarding URL menu selection persistence.
   No duplicate search engines will appear at the same time now (unless the user forces it to).
