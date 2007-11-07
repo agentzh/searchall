@@ -48,7 +48,7 @@ template main => sub {
                     id => "tb-searchall-box",
                     align => "center",
                     persist => "width",
-                    onmousedown => 'this.firstChild.focus()',
+                    #onmousedown => 'this.firstChild.focus()',
                 }
                 # ...
                 toolbarbutton {
