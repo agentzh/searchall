@@ -3,16 +3,11 @@ use inc::Module::Install;
 
 name                ('SearchAll');
 license             ('perl');
-author              ('Agent Zhang');
+author              ('Agent Zhang <agentzh@yahoo.cn>');
 perl_version        ('5.006001');
 all_from            ('lib/SearchAll/App.pm');
 
-requires            ('Template::Declare' => '0.27');
-requires            ('File::Slurp');
-requires            ('Class::Accessor::Fast' => '0.30');
-requires            ('Class::Data::Inheritable' => '0.06');
-
-install_script      ('bin/xulapp');
+requires            ('XUL::App' => '0.01');
 
 auto_install();
 WriteAll();
