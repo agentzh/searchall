@@ -1,51 +1,51 @@
 sudo cpan Module::Install
 
-# We need Template::Declare 0.27 which is not on CPAN yet,
+# We need XUL::App 0.01 which is not on CPAN yet,
 # please checkout the latest source from its SVN repos:
-#    http://svn.jifty.org/svn/jifty.org/Template-Declare
+#    http://svn.openfoundry.org/xulapp/trunk
 # Sorry for the inconvenience.
 perl Makefile.PL
 make
 
 # setup the components
-bin/xulapp setup --profile dev
+xulapp setup --profile dev
 
 # register the (debuggin) chrome to ~/.mozilla/firefox/*/extensions.ini
-bin/xulapp register --profile dev
+xulapp register --profile dev
 
 # unregister the (debuggin) chrome from ~/.mozilla/firefox/*/extensions.ini
-bin/xulapp unregister  --profile dev
+xulapp unregister  --profile dev
 
 # launch a ff window loading searchall.xul :
-bin/xulapp debug searchall.xul --profile dev
+xulapp debug searchall.xul --profile dev
 
 # launch a ff window loading searchall-debug.xul :
-bin/xulapp debug searchall-debug.xul --profile dev
+xulapp debug searchall-debug.xul --profile dev
 
 # launch a ff window loading searchall-debug.xul but using the zh-tw locale:
-bin/xulapp debug searchall-debug.xul --profile dev --lang zh-tw
+xulapp debug searchall-debug.xul --profile dev --lang zh-tw
 
 # lauch a ff window to test the overlay:
-bin/xulapp overlay --profile dev
+xulapp overlay --profile dev
 
 # lanch an FF window to test the overlay using the zh-cn locale:
-bin/xulapp overlay -l zh-cn -p dev
+xulapp overlay -l zh-cn -p dev
 
 # create a new the po/fr.po file (or update if it's already there):
-bin/xulapp po --lang fr
+xulapp po --lang fr
 
 # update all the po/*.po files:
-bin/xulapp po
+xulapp po
 
 # generate tmp/searchall.xpi :
-bin/xulapp bundle
+xulapp bundle
 
 # generate ./searchall.xpi :
-bin/xulapp bundle .
+xulapp bundle .
 
 # The --profile option used above can be abbriviated as -p
 # The --lang option can be abbriviated as -l as well.
 #
-# Note that bin/xulapp uses the info in lib/*/App.pm
+# Note that xulapp uses the info in lib/*/App.pm
 # (i.e. lib/SearchAll/App.pm in this project)
 
