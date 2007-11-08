@@ -51,6 +51,6 @@ msgstr ""
 msgid "en-US"
 msgstr "es-ES"
 
-#: lib/SearchAll/View/Base.pm:27
+#: lib/SearchAll/View/Base.pm:16
 msgid "sec"
 msgstr "segundos"

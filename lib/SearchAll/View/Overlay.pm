@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package SearchAll::View::Overlay;
-use base 'SearchAll::View::Base';
+use base 'XUL::App::View::Base';
 use Template::Declare::Tags 'XUL';
 
 # This is the overlay that adds a "SearchAll"

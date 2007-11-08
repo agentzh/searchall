@@ -2,6 +2,7 @@ package SearchAll::View::Page;
 
 use strict;
 use warnings;
+
 use base 'SearchAll::View::Main';
 use Template::Declare::Tags 'XUL';
 
