@@ -13,7 +13,7 @@ template status_bar => sub {
             attr {
                 id => 'statusbar-display',
                 flex => 1,
-                label => 'Ready.',
+                label => 'Loading...',
                 _timeunit => _('sec'),
             }
         }
