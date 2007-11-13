@@ -51,6 +51,6 @@ msgstr "我搜去（调试版）"
 msgid "en-US"
 msgstr "zh-CN"
 
-#: lib/SearchAll/View/Base.pm:16
+#: lib/SearchAll/View/Base.pm:17
 msgid "sec"
 msgstr "秒"
