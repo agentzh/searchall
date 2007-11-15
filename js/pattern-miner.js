@@ -8,7 +8,8 @@ SearchAll.PatternMiner = {
     hostname: undefined,
 
     mineDoc: function (doc, count, hostname) {
-        if (typeof doc.getElementByTagName == 'undefined') {
+        if (typeof doc.getElementsByTagName == 'undefined') {
+            //alert("HERE!");
             return [];
         }
         var body = doc.getElementsByTagName("body")[0];

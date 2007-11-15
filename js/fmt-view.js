@@ -83,7 +83,8 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         while (count >= 2) {
             var patterns = SearchAll.PatternMiner.mineDoc(origDoc, count, hostname);
             if (patterns.length > 0) {
-                pattern = Utils.findShortest(patterns);
+                //alert("Got patterns!");
+                pattern = Util.findShortest(patterns);
                 //pattern = pattern.replace(/.*>([^>]+>[^>]+>[^>]+)$/, "$1");
 
                 info("Selected: " + hostname + ": pattern: " + pattern);
@@ -242,9 +243,9 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
                 "Try mining the original view" +
                 '</a><p>');
             $("a.force-mining", cols[0]).click( function () {
-                alert("Hey!");
-                this.className = '';
+                //alert("Hey!");
                 app.fmtViews[index].update(hostname, origDoc, true);
+                this.className = '';
                 return false;
             } );
         }
