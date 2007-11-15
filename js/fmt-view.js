@@ -22,7 +22,8 @@ SearchAll.patterns = {
         'so.sohu.com'     : "body>div#content>div",
         'www.sogou.com'   : "body>div#content>div",
         'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
-        'so.163.com'      : 'body>div>div.r',
+        //'so.163.com'      : 'body>div>div.r',
+        'so.163.com'        : 'body>div#container>table[td.wss]',
         'www.answers.com' : 'div.content',
 
         //'search.yahoo.com': "div#yschweb>ol>li",
