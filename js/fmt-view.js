@@ -70,6 +70,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
 
     var Util = SearchAll.Util;  // namespace alias
     var index = this.index;
+    var thread = app.threads[index];
     $("div.error", this.document).hide();
     var list = [];
     var pattern = SearchAll.patterns[hostname];
@@ -119,7 +120,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         len = html.length;
     } catch (e) {
     }
-    if (this.prevHtmlLen == len) {
+    if (!forceMining && this.prevHtmlLen == len) {
         //alert("No change!");
         info("fmt view gen: No change for " + index);
         return false;
@@ -188,7 +189,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     //var status = imgs.css('display');
     //info("My status: " + status + " " + imgs.length);
 
-    if (imgs.length == 0  && this.prevResults.length >= snippets.length) {
+    if (!forceMining && !thread.final && imgs.length == 0  && this.prevResults.length >= snippets.length) {
         info("Rejected bogus results");
         return false;
     }
@@ -216,27 +217,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         snippet = '<img class="status" src="bullet_yellow.png"/>&#160;&#160;<img src="' + rootPath + '/favicon.ico" alt=" "/>&#160;' + snippet;
         var rows = $(".row", this.document);
         if (rows[i] == undefined) {
-            var tbodies = $("#content>tbody", this.document);
-            //alert(tbodies[0]);
-            //Debug.log("appending row " + i + " for " + hostname);
-            //alert($(rows[0]).parent()[0].tagName);
-            var rowHtml;
-            if (i == 0) {
-                rowHtml =
-                '<tr class="row">' +
-                    '<td id="0-0" class="col-0"><img class="loading" src="loading.gif" /></td>' +
-                    '<td id="0-1" class="col-1"><img class="loading" src="loading.gif" /></td>' +
-                    '<td id="0-2" class="col-2"><img class="loading" src="loading.gif" /></td>' +
-                '</tr>';
-            } else {
-                rowHtml =
-                '<tr class="row">' +
-                    '<td id="' + i + '-0" class="col-0" />' +
-                    '<td id="' + i + '-1" class="col-1" />' +
-                    '<td id="' + i + '-2" class="col-2" />'
-                '</tr>';
-            }
-            $(tbodies[0]).parent().append(rowHtml);
+            this.createRow(i);
             rows = $(".row", this.document);
         }
         var cell = $(".col-" + index, rows[i])[0];
@@ -248,11 +229,24 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     if (snippets.length == 0) {
         //alert("Hey, here!");
         var cols = $(".col-" + index, this.document);
-        if (cols.length) {
+        if (cols.length == 0) {
+            this.createRow(0);
+            cols = $(".col-" + index, this.document);
+        }
+        if (cols.length && thread.final) {
             //alert("Empty doc: " + origDoc.contentType);
             //$(".col-" + index + ">img.loading", this.document).hide();
             cols.empty();
-            $(cols[0]).html("Sorry, no results found :(");
+            $(cols[0]).html("<p>Sorry, no results found :(</p>" +
+                '<p><a class="force-mining" href="javascript:void();">' +
+                "Try mining the original view" +
+                '</a><p>');
+            $("a.force-mining", cols[0]).click( function () {
+                alert("Hey!");
+                this.className = '';
+                app.fmtViews[index].update(hostname, origDoc, true);
+                return false;
+            } );
         }
     }
     app.setTimeout(function () {
@@ -265,5 +259,29 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     if (prevResultsLen == 0)
         this.document.location.hash = '#__top';
     return true;
+};
+
+SearchAll.FmtView.prototype.createRow = function (i) {
+    var tbodies = $("#content>tbody", this.document);
+    //alert(tbodies[0]);
+    //Debug.log("appending row " + i);
+    //alert($(rows[0]).parent()[0].tagName);
+    var rowHtml;
+    if (i == 0) {
+        rowHtml =
+        '<tr class="row">' +
+            '<td id="0-0" class="col-0"><img class="loading" src="loading.gif" /></td>' +
+            '<td id="0-1" class="col-1"><img class="loading" src="loading.gif" /></td>' +
+            '<td id="0-2" class="col-2"><img class="loading" src="loading.gif" /></td>' +
+        '</tr>';
+    } else {
+        rowHtml =
+        '<tr class="row">' +
+            '<td id="' + i + '-0" class="col-0" />' +
+            '<td id="' + i + '-1" class="col-1" />' +
+            '<td id="' + i + '-2" class="col-2" />'
+        '</tr>';
+    }
+    $(tbodies[0]).parent().append(rowHtml);
 };
 

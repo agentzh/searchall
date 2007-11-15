@@ -12,6 +12,7 @@ SearchAll.Thread = function (index) {
     this.interval = 2000;  /* 2 sec */
     this.prevDaemon = null;
     this.query = '';
+    this.final = false;
 }
 
 SearchAll.Thread.prototype = {
@@ -58,6 +59,7 @@ SearchAll.Thread.prototype = {
             this.autoSubmit = false;
             this.mineResults = true;
             this.reset();
+            this.final = false;
             this.startDaemon();
             origView.goHome(url);
             return;
@@ -66,6 +68,7 @@ SearchAll.Thread.prototype = {
             this.autoSubmit = true;
             this.mineResults = true;
             this.reset();
+            this.final = false;
             this.startDaemon();
             origView.goHome(home);
         } else {
@@ -76,6 +79,7 @@ SearchAll.Thread.prototype = {
     doSearch: function (query) {
         this.mineResults = true;
         this.reset();
+        this.final = false;
         this.startDaemon();
         this.query = query;
         app.origViews[this.index].doSearch(query);
@@ -105,6 +109,7 @@ SearchAll.Thread.prototype = {
                 else if (fmtView.prevResults.length > 0) {
                     // XXX error handling
                     info("daemon " + index + ": Stopped due to mined resuts.");
+                    //thread.prevDaemon = null;
                 } else {
                     info("daemon " + index + ": Stopped due to completed documents.");
                     //info('fmt view document: ' + fmtView.document);
@@ -118,6 +123,7 @@ SearchAll.Thread.prototype = {
                         imgs.hide();
                         //imgs.parent().html("Sorry, no results found :(");
                     }
+                    //thread.prevDaemon = null;
                     //info("state: " + status);
                 }
                 //}

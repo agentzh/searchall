@@ -216,6 +216,7 @@ function genListener (ind) {
                     app.domLogger.log(doc, hostname);
                     //info("updating fmt view in progress listener");
                 } catch (e) { info(e) }
+                thread.final = true;
                 try {
                     app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
                 } catch (e) { info(e) }
