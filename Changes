@@ -1,3 +1,9 @@
+=Changes for release 0.3.3
+* Fixed the page selector patterns for so.163.com and search.yahoo.com, since these two sites changed their page templates recently.
+* Added 'Trying mining the original view' link when no results were found, so that we won't be too panic when sites change their page templates.
+* Fixed the pattern miner which broke in the previous few versions.
+* Always display 'Sorry, no results found' in the Formatted View at the *right* time.
+
 =Changes for release 0.3.2
 * Fixed various memory leaks caused by non-unregistered progress listeners, non-unbound event listerners, and orphaned setTimeout handlers.
   Thanks my new AMO editor Archaeopteryx++ for reporting this :)
