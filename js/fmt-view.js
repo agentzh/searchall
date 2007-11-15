@@ -56,7 +56,7 @@ SearchAll.FmtView.prototype = {
         return this.browser.contentDocument;
     },
     reset: function () {
-        this.prevHtmlLen = 0;
+        //this.prevHtmlLen = 0;
         this.prevResults = [];
     }
 };

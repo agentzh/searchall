@@ -79,6 +79,7 @@ SearchAll.Thread.prototype = {
     doSearch: function (query) {
         this.mineResults = true;
         this.reset();
+        app.fmtViews[this.index].prevHtmlLen = 0;
         this.final = false;
         this.startDaemon();
         this.query = query;
