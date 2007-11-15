@@ -25,7 +25,8 @@ SearchAll.patterns = {
         'so.163.com'      : 'body>div>div.r',
         'www.answers.com' : 'div.content',
 
-        'search.yahoo.com': "div#yschweb>ol>li",
+        //'search.yahoo.com': "div#yschweb>ol>li",
+        'search.yahoo.com': "div#pri>div#web>ol>li",
         'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
         'www.a9.com'      : 'td#tdweb>div#bxweb>div#cweb>div.cscrollInfo>div.resBlock',
 
