@@ -50,7 +50,7 @@ use XUL::App schema {
             name is 'SearchAll',
             version is '0.3.5',
             targets {
-                Firefox => ['2.0' => '3.0a10'],
+                Firefox => ['2.0' => '3.0b1'],
                 Mozilla => ['1.5' => '1.8'],
             },
             creator is 'The Yahoo! China EEEE team',
