@@ -233,8 +233,12 @@ $(window).ready( function () {
     var margin = document.getElementById('prev-button').boxObject.x;
     $("#navigator").css('margin-left', margin + 'px');
 
-    for (var i = 0; i < 3; i++)
+    for (var i = 0; i < 3; i++) {
+        //app.origViews[i].browser.docShell.allowMetaRedirects = false;
+        //app.origViews[i].browser.docShell.allowJavascript = false;
+        //app.origViews[i].docShell.allowMetaRedirects = false;
         prepareUriList(i);
+    }
     //alert("ther!!");
     //info("focusing search box... (1)");
     //info("blurring contentWindow...");
