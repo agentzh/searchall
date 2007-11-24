@@ -48,6 +48,7 @@ use XUL::App schema {
         xpifile 'searchall.xpi' =>
             id is 'searchall@yahoo.cn',
             name is 'SearchAll',
+            description is 'A handy side-by-side parallel searching tool',
             version is '0.3.5',
             targets {
                 Firefox => ['2.0' => '3.0b1'],
