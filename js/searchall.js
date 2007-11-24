@@ -173,14 +173,12 @@ $(window).ready( function () {
         pm.add(uri, "firebug", DENY_ACTION);
     } catch (e) { error("perm.disableFirebug: " + e); }
 
-    /*
     top.watch("location", watchAssignment);
     top.location.watch("href", watchAssignment);
     top.location.watch("hostname", watchAssignment);
     top.location.watch("pathname", watchAssignment);
     top.location.watch("host", watchAssignment);
     top.location.watch("replace", watchAssignment);
-    */
     //top.location.replace = function () { alert("Hiya, yahoo!"); };
     //top.location = {};
     //top.location.replace("Hiya!");
@@ -199,32 +197,7 @@ $(window).ready( function () {
         //return false;
     } );
 
-    window.onbeforeunload = function (e) {
-        //e.cancelable = false;
-        //e.preventDefault();
-        //e.stopPropagation();
-        //e.preventBubble();
-        //e.preventCatpure();
-        info("before unload...");
-        info("return val: " + e.returnValue);
-        info("target: " + e.originalTarget);
-        info("target: " + e.target);
-        e.returnValue = "This action might be caused by a frame-busting site.\nPlease click 'Cancel' if you're not meant to quit SearchAll.";
-        /*
-        var key;
-        for (key in e) {
-            info("Key " + key);
-        }
-        */
-        return false;
-    };
-
     $(window).unload( function (e) {
-        //e.preventDefault();
-        //e.stopPropagation();
-        //info("before unload...");
-        //return false;
-
         for (var i = 0; i < 3; i++) {
             app.threads[i].reset();
             unregisterMyListener(i);

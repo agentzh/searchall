@@ -66,7 +66,6 @@ function contextSearchAll (uri) {
         setQuery('"' + query + '"');
         var newTab = gBrowser.addTab(uri);
         gBrowser.selectedTab = newTab;
-        //gBrowser.selectedBrowser.removeAttribute("type");
         gBrowser.selectedTab.id = 'searchall';
     }
 }
@@ -82,7 +81,6 @@ function toSearchAll (uri, query, event) {
     //var win = window.open(uri, "_blank", winopts);
     var doc = gBrowser.contentDocument;
     if (doc.location == uri) {
-        //gBrowser.selectedBrowser.removeAttribute("type");
         //alert("Got tabbrowser: " + gBrowser.nodeName);
         //alert("Length: " + $(".tab-icon-image", ).length);
         //alert("Hit shortcut! " + query);
@@ -101,10 +99,7 @@ function toSearchAll (uri, query, event) {
             setQuery(query);
         }
 
-        //gBrowser.selectedBrowser.removeAttribute("type");
         openUILink(uri, event, false, true);
-        //gBrowser.selectedBrowser.docShell.allowMetaRedirects = false;
-        //gBrowser.selectedBrowser.docShell.allowJavascript = false;
         gBrowser.selectedTab.id = 'searchall';
     }
 }
@@ -131,59 +126,3 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
                    .getInterface(Components.interfaces.nsIDOMWindow) 
 
 */
-
-/*
-var Counter = {};
-
-var httpRequestObserver =
-{
-  observe: function(subject, topic, data)
-  {
-        if (topic == "http-on-modify-request") {
-            var httpChannel = subject.QueryInterface(Components.interfaces.nsIHttpChannel);
-            //httpChannel.setRequestHeader("X-Hello", "World", false);
-            var url = httpChannel.documentURI;
-            var str = '';
-            if (url) {
-                //alert(referrer.host);
-                str += url.host;
-                if (! str.match(/google/)) {
-                    Counter[str] = Counter[str] || 0;
-                    var c = Counter[str]++;
-                    if (c == 1 || c == 2) {
-                        alert("Cancel " + c);
-                        subject.cancel(2152398850);
-                    }
-                    alert(str + url.path);
-                }
-            }
-            //str += httpChannel.originalURI.host;
-            //alert(str);
-        }
-  },
-
-  get observerService() {
-    return Components.classes["@mozilla.org/observer-service;1"]
-                     .getService(Components.interfaces.nsIObserverService);
-  },
-
-  register: function()
-  {
-    this.observerService.addObserver(this, "http-on-modify-request", false);
-  },
-
-  unregister: function()
-  {
-    this.observerService.removeObserver(this, "http-on-modify-request");
-  }
-};
-
-$(window).ready( function () {
-    httpRequestObserver.register();
-} );
-
-$(window).unload( function () {
-    httpRequestObserver.unregister();
-} );
-*/
-
