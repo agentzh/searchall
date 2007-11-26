@@ -12,11 +12,13 @@ SearchAll.MapView.prototype = {
     prevHtmlLens: [0, 0, 0],
     _document: null,
     _canvas: null,
+    prevUrlHash: {},
     reset: function () {
         for (var i = 0; i < this.timeouts.length; i++) {
             clearTimeout(this.timeouts[i]);
         }
         this.timeouts = [];
+        this.prevUrlHash = {};
     },
     get document () {
         if (!this._document)
@@ -88,8 +90,10 @@ SearchAll.MapView.prototype = {
         for (var i = 0; i < urls.length; i++) {
             var url = urls[i];
             y +=  radius * 2 + yStep;
+            var hit = false;
             if (prevSeq) {
-                for (var j = 0; j < prevSeq.length; j++) {
+                var j = this.prevUrlHash[url];
+                if (j != null) {
                     var prevURI = prevSeq[j];
                     if (util.trimURI(prevURI) == util.trimURI(url)) {
                         info("Found equivalent URLs: " + prevURI + " <=> "
@@ -97,19 +101,25 @@ SearchAll.MapView.prototype = {
                         var y2 = 40 + (radius * 2 + yStep) * (j + 1);
                         this.drawLine(ctx, x, y, x2, y2);
                         ctx.beginPath();
-                        ctx.fillStyle = "rgb(230,25,25)";
+                        ctx.fillStyle = "rgb(230,53,53)";
                         ctx.arc(x2, y2, radius, 0, Math.PI*2, true); // Outer circle
                         ctx.fill();
                         ctx.closePath();
+                        hit = true;
                        //ctx.moveTo(x2, y2);
                     }
                 }
             }
             ctx.beginPath();
-            ctx.fillStyle = "rgb(230,25,25)";
+            if (hit) {
+                ctx.fillStyle = "rgb(230,53,53)";
+            } else {
+                ctx.fillStyle = "rgb(53,200,53)";
+            }
             ctx.arc(x, y, radius, 0, Math.PI*2, true); // Outer circle
             ctx.fill();
             ctx.closePath();
+            this.prevUrlHash[url] = i;
         }
     },
 
