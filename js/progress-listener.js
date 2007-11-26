@@ -217,9 +217,11 @@ function genListener (ind) {
                     //info("updating fmt view in progress listener");
                 } catch (e) { info(e) }
                 thread.final = true;
-                try {
-                    app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
-                } catch (e) { info(e) }
+                app.setTimeout( function () {
+                    try {
+                        app.fmtViews[ind].update(hostname, doc, false /* don't force mining */);
+                    } catch (e) { info(e) }
+                }, 0 );
                 //alert("Hiya: " + hostname);
 
                 // stop daemon
