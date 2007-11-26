@@ -88,11 +88,6 @@ SearchAll.MapView.prototype = {
         for (var i = 0; i < urls.length; i++) {
             var url = urls[i];
             y +=  radius * 2 + yStep;
-            ctx.beginPath();
-            ctx.fillStyle = "pink";
-            ctx.arc(x, y, radius, 0, Math.PI*2, true); // Outer circle
-            ctx.fill();
-            ctx.closePath();
             if (prevSeq) {
                 for (var j = 0; j < prevSeq.length; j++) {
                     var prevURI = prevSeq[j];
@@ -101,15 +96,25 @@ SearchAll.MapView.prototype = {
                             + url);
                         var y2 = 40 + (radius * 2 + yStep) * (j + 1);
                         this.drawLine(ctx, x, y, x2, y2);
-                        //ctx.moveTo(x2, y2);
+                        ctx.beginPath();
+                        ctx.fillStyle = "rgb(230,25,25)";
+                        ctx.arc(x2, y2, radius, 0, Math.PI*2, true); // Outer circle
+                        ctx.fill();
+                        ctx.closePath();
+                       //ctx.moveTo(x2, y2);
                     }
                 }
             }
+            ctx.beginPath();
+            ctx.fillStyle = "rgb(230,25,25)";
+            ctx.arc(x, y, radius, 0, Math.PI*2, true); // Outer circle
+            ctx.fill();
+            ctx.closePath();
         }
     },
 
     drawLine: function (ctx, x1, y1, x2, y2) {
-        ctx.fillStyle = 'black';
+        ctx.strokeStyle = 'grey';
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
