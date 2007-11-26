@@ -182,7 +182,7 @@ template results => sub {
                 attr {
                     id => 'view-tab-2',
                     label => ' ' . _('Mapping'),
-                    image => '',
+                    image => 'table_relationship.png',
                 }
             }
         }
