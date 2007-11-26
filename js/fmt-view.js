@@ -43,7 +43,8 @@ SearchAll.patterns = {
         'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
         'images.google.com' : 'div#ImgContent>table>tbody>tr>td',
         'images.google.cn' : 'div#ImgContent>table>tbody>tr>td',
-        'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
+        //'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
+        'image.baidu.com' : 'body>div#imgid>dl',
         'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
         'image.cn.yahoo.com': 'body.y>div#bd>div.yui-g>div.cnt>ul>li',
         'www.flickr.com' : 'table.DetailResults>tbody>tr',
@@ -154,9 +155,9 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             snippet = $(elem).html();
         }
         snippet = snippet
-            .replace(/<(\/?)wbr>/ig, '')
-            .replace(/<(\/?)nobr>/ig, '')
-            .replace(/<(\/?)span>/ig, '')
+            .replace(/<\s*(\/?)\s*wbr>/ig, '')
+            .replace(/<\s*(\/?)\s*nobr>/ig, '')
+            //.replace(/<(\/?)span>/ig, '')
             .replace(/<\/h\d+[^>]*>/ig, '<br/>')
             .replace(/<h\d+[^>]*>/ig, '')
             .replace(/<\/?table[^>]*>/ig, '')
@@ -165,6 +166,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             .replace(/<\/?td[^>]*>/ig, '&#160;')
             .replace(/<(\/?)th[^>]*>/ig, '<$1h3>')
             .replace(/<a /ig, '<a target="_blank" ');
+            //.replace(/^[\s\n]+/g, '');
 
         snippet = Util.rel2abs(snippet, rootPath, curPath);
         //if (hostname.match(/answers/)) info(hostname + snippet);
@@ -205,7 +207,24 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     var FoundFirebug = false;
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
-        var url = Util.extractUrl(snippet);
+        var lastOnly = false;
+        if (hostname.match(/ask\.com$/)) {
+            //snippet = snippet.replace(/[\n\s]{5,}/g, '');
+            lastOnly = true;
+        }
+        var url = Util.extractUrl(snippet, lastOnly);
+        if (hostname.match(/yahoo\.com$/)) {
+            var match = url.match(/\*\*(http\S+)/);
+            if (match) {
+               url = decodeURIComponent(match[1]);
+            }
+        } else if (hostname.match(/ask\.com$/)) {
+            var match = url.match(/url=([^&]+)/);
+            //info("ASK snippet:\n" + snippet);
+            if (match) {
+                url = decodeURIComponent(match[1]);
+            }
+        }
         //alert(url);
         if (url) {
             try {

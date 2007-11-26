@@ -84,11 +84,21 @@ SearchAll.Util = {
         return html;
     },
 
-    extractUrl: function (html) {
-        var regex = /href\s*=\s*"([^"]+)"/i;
+    extractUrl: function (html, lastOnly) {
+        var regex;
+        //info("lastOnly: " + lastOnly);
+        if (lastOnly) {
+            //info("ask.com HTML: " + html);
+            regex = /[\s\S]+href\s*=\s*"([^"]+)"/i;
+        } else {
+            regex = /href\s*=\s*"([^"]+)"/i;
+        }
         var match = regex.exec(html);
         if (match) {
             var url = match[1];
+            if (lastOnly) {
+                return url;
+            }
             if ( url.match(/javascript:void/) ) {
                 html = html.replace(regex, '');
                 match = regex.exec(html);

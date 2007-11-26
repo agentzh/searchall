@@ -101,8 +101,8 @@ SearchAll.MapView.prototype = {
                 if (j != null) {
                     var prevURI = prevSeq[j];
                     if (util.trimURI(prevURI) == util.trimURI(url)) {
-                        info("Found equivalent URLs: " + prevURI + " <=> "
-                            + url);
+                        //info("Found equivalent URLs: " + prevURI + " <=> "
+                            //+ url);
                         var y2 = 40 + (radius * 2 + yStep) * (j + 1);
                         this.drawLine(ctx, x, y, x2, y2);
                         ctx.fillStyle = this.matchedNodeColor;
