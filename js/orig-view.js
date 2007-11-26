@@ -102,7 +102,7 @@ SearchAll.OrigView.prototype = {
             }, 1000);
         } else {
             try {
-                //info("Sent the enter key: " + sendKey('enter', textbox));
+                info("Sent the enter key: " + sendKey('enter', textbox));
                 FailureCount = 0;
             } catch (e) {
                 FailureCount++;

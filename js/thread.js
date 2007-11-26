@@ -51,10 +51,10 @@ SearchAll.Thread.prototype = {
             var charset = shortcut[1] || 'UTF-8';
             var template = shortcut[0];
             var encodedQuery = SearchAll.Util.encodeQuery(query, charset);
-            //info("encodedQuery: " + encodedQuery);
+            info("encodedQuery: " + encodedQuery);
             var url = template.replace(/\{searchTerms\}/g, encodedQuery);
             //url = encodeURIComponent(url);
-            //info("opensearch URL: " + url);
+            info("opensearch URL: " + url);
             // XXX refactor the following out?
             this.autoSubmit = false;
             this.mineResults = true;
