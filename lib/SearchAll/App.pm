@@ -48,7 +48,7 @@ use XUL::App schema {
         xpifile 'searchall.xpi' =>
             id is 'searchall@yahoo.cn',
             name is 'SearchAll',
-            description is 'A handy side-by-side parallel searching tool',
+            description is 'A side-by-side search engine comparison tool',
             version is '0.4.2',
             targets {
                 Firefox => ['2.0' => '3.0b1'],
@@ -56,7 +56,7 @@ use XUL::App schema {
             },
             creator is 'The Yahoo! China EEEE team',
             developers are ['Agent Zhang (章亦春)'],
-            contributors are ['Ye Dan', 'Jianingy Yang', 'Laser Henry', 'Chuanwen Cheng', 'cnhackTNT'];
+            contributors are ['Agent Zhang (章亦春)', 'Ye Dan', 'Jianingy Yang', 'Laser Henry', 'Chuanwen Cheng', 'cnhackTNT'];
             homepageURL is 'http://blog.agentzh.org',
             iconURL is 'chrome://searchall/content/logo.png';
             # XXX should disable it for the final release

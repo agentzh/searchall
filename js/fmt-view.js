@@ -204,14 +204,15 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     this.prevResults = snippets;
 
     this.URIs = [];
+    var lastOnly = false;
+    if (hostname.match(/ask\.com$/)) {
+        //snippet = snippet.replace(/[\n\s]{5,}/g, '');
+        lastOnly = true;
+    }
+
     var FoundFirebug = false;
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
-        var lastOnly = false;
-        if (hostname.match(/ask\.com$/)) {
-            //snippet = snippet.replace(/[\n\s]{5,}/g, '');
-            lastOnly = true;
-        }
         var url = Util.extractUrl(snippet, lastOnly);
         if (hostname.match(/yahoo\.com$/)) {
             var match = url.match(/\*\*(http\S+)/);
