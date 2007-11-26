@@ -10,9 +10,14 @@ SearchAll.MapView = function () {
 SearchAll.MapView.prototype = {
     timeouts: [],
     prevHtmlLens: [0, 0, 0],
+    prevUrlHash: {},
+
     _document: null,
     _canvas: null,
-    prevUrlHash: {},
+
+    matchedNodeColor: '#FD0',
+    normalNodeColor: '#6C0',
+
     reset: function () {
         for (var i = 0; i < this.timeouts.length; i++) {
             clearTimeout(this.timeouts[i]);
@@ -100,27 +105,44 @@ SearchAll.MapView.prototype = {
                             + url);
                         var y2 = 40 + (radius * 2 + yStep) * (j + 1);
                         this.drawLine(ctx, x, y, x2, y2);
-                        ctx.beginPath();
-                        ctx.fillStyle = "rgb(230,53,53)";
-                        ctx.arc(x2, y2, radius, 0, Math.PI*2, true); // Outer circle
-                        ctx.fill();
-                        ctx.closePath();
+                        ctx.fillStyle = this.matchedNodeColor;
+                        this.drawBall(ctx, x2, y2);
                         hit = true;
                        //ctx.moveTo(x2, y2);
                     }
                 }
             }
-            ctx.beginPath();
             if (hit) {
-                ctx.fillStyle = "rgb(230,53,53)";
+                ctx.fillStyle = this.matchedNodeColor;
             } else {
-                ctx.fillStyle = "rgb(53,200,53)";
+                ctx.fillStyle = this.normalNodeColor;
             }
-            ctx.arc(x, y, radius, 0, Math.PI*2, true); // Outer circle
-            ctx.fill();
-            ctx.closePath();
+            this.drawBall(ctx, x, y);
             this.prevUrlHash[url] = i;
         }
+    },
+
+    drawBall: function (ctx, x, y) {
+        var radius = 10;
+        var old = ctx.globalAlpha;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI*2, true);
+        ctx.fill();
+
+        //ctx.globalAlpha = 0.3;
+
+        var r = radius;
+        for (var i = 0; i < 4; i++) {
+            r -= r * 0.2;
+            ctx.beginPath();
+            ctx.fillStyle = 'rgba(255,255,255,' + ((i+1)/10) + ')';
+            //ctx.fillStyle = 'black';
+            //
+            ctx.arc(x, y, r, 0, Math.PI*2, true);
+            ctx.fill();
+            ctx.closePath();
+        }
+        //ctx.globalAlpha = 1;
     },
 
     drawLine: function (ctx, x1, y1, x2, y2) {
