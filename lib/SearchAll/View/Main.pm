@@ -178,7 +178,13 @@ template results => sub {
                     image => 'application_view_columns.png',
                 }
             }
-            #tab { attr { label => 'Merged View' } }
+            tab {
+                attr {
+                    id => 'view-tab-2',
+                    label => ' ' . _('Mapping'),
+                    image => '',
+                }
+            }
         }
         tabpanels {
             attr {
@@ -187,6 +193,7 @@ template results => sub {
             }
             tabpanel { show('raw_view'); }
             tabpanel { show('fmt_view'); }
+            tabpanel { show('map_view'); }
             #tabpanel { show('merged_view'); }
         }
     }
@@ -240,7 +247,22 @@ template fmt_view => sub {
                 flex => 1,
                 id => "fmt-view",
                 type => 'content-primary',
-                homepage => 'chrome://$XUL::App::APP_NAME/content/listing.html',
+                #homepage => 'chrome://$XUL::App::APP_NAME/content/listing.html',
+            }
+        }
+    }
+};
+
+template map_view => sub {
+    groupbox {
+        attr { flex => 1, orient => 'horizontal' };
+        browser {
+            attr {
+                src => 'map-view.html',
+                flex => 1,
+                id => "map-view",
+                type => 'content-primary',
+                #homepage => 'chrome://$XUL::App::APP_NAME/content/listing.html',
             }
         }
     }

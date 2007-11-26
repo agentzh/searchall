@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/SearchAll/View/Main.pm:201
+#: lib/SearchAll/View/Main.pm:208
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -23,7 +23,11 @@ msgstr "Cancelar"
 msgid "Formatted"
 msgstr "Vista Organizada"
 
-#: lib/SearchAll/View/Main.pm:200
+#: lib/SearchAll/View/Main.pm:184
+msgid "Mapping"
+msgstr ""
+
+#: lib/SearchAll/View/Main.pm:207
 msgid "Next"
 msgstr "Página siguiente"
 
@@ -31,7 +35,7 @@ msgstr "Página siguiente"
 msgid "Original"
 msgstr "Vista Original"
 
-#: lib/SearchAll/View/Main.pm:199
+#: lib/SearchAll/View/Main.pm:206
 msgid "Prev"
 msgstr "Página anterior"
 

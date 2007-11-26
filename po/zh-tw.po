@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/SearchAll/View/Main.pm:201
+#: lib/SearchAll/View/Main.pm:208
 msgid "Cancel"
 msgstr "取消"
 
@@ -23,7 +23,11 @@ msgstr "取消"
 msgid "Formatted"
 msgstr "規格化檢視"
 
-#: lib/SearchAll/View/Main.pm:200
+#: lib/SearchAll/View/Main.pm:184
+msgid "Mapping"
+msgstr ""
+
+#: lib/SearchAll/View/Main.pm:207
 msgid "Next"
 msgstr "下一頁"
 
@@ -31,7 +35,7 @@ msgstr "下一頁"
 msgid "Original"
 msgstr "原初檢視"
 
-#: lib/SearchAll/View/Main.pm:199
+#: lib/SearchAll/View/Main.pm:206
 msgid "Prev"
 msgstr "上一頁"
 

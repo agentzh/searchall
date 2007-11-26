@@ -11,6 +11,8 @@ SearchAll.FmtView = function (index) {
     this.browser = document.getElementById("fmt-view");
     this.prevHtmlLen = 0;
     this.prevResults = [];
+    this.URIs = [];
+    this.favicon = null;
 };
 
 SearchAll.patterns = {
@@ -58,6 +60,8 @@ SearchAll.FmtView.prototype = {
     reset: function () {
         //this.prevHtmlLen = 0;
         this.prevResults = [];
+        this.URIs = [];
+        this.favicon = null;
     }
 };
 
@@ -216,8 +220,13 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
                 //error("Firebug conflicted with SearchAll's AJAX checking");
             }
         }
+        this.URIs.push(url);
+        if (!this.favicon) this.favicon = rootPath + '/favicon.ico';
         //info("[URL] " + hostname + ": URL: " + url);
-        snippet = '<img class="status" src="bullet_yellow.png"/>&#160;&#160;<img src="' + rootPath + '/favicon.ico" alt=" "/>&#160;' + snippet;
+        snippet = '<img class="status" src="bullet_yellow.png" title="Link status icon"/>' +
+            '&#160;&#160;<img src="' +
+            this.favicon + '" title="' +
+            rootPath + '" />&#160;' + snippet;
         var rows = $(".row", this.document);
         if (rows[i] == undefined) {
             this.createRow(i);

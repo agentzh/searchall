@@ -26,18 +26,26 @@ SearchAll.LinkTester = {
                     status = req.status;
                 } catch (e) {
                     //alert(e);
-                    $(selector, doc).attr('src', "cross.png");
+                    $(selector, doc)
+                        .attr('src', "cross.png")
+                        .attr('title', 'Bad link');
                     return;
                 }
                 if (status < 400) {
                     //alert("URL Exists! " + url + " " + ln + " : " + col);
-                    $(selector, doc).attr('src', "accept.png");
+                    $(selector, doc)
+                        .attr('src', "accept.png")
+                        .attr('title', 'Good link');
                 } else if (status != 402 && status != 403 && status != 405 && status != 500) {
                     //error("Bad status code: " + url + ": " + status);
-                    $(selector, doc).attr('src', "cross.png");
+                    $(selector, doc)
+                        .attr('src', "cross.png")
+                        .attr('title', 'Bad link');
                     //alert("Hiya" + id);
                 } else {
-                    $(selector, doc).attr('src', "weather_clouds.png");
+                    $(selector, doc)
+                        .attr('src', "weather_clouds.png")
+                        .attr('title', "Possibly good link");
                 }
             }
         };
@@ -55,7 +63,9 @@ SearchAll.LinkTester = {
             self.testers[selector] = null;
             req.abort();
             //alert("Timout!" + ln + ":" + col);
-            $(selector, doc).attr('src', "clock_stop.png");
+            $(selector, doc)
+                .attr('src', "clock_stop.png")
+                .attr('title', "Slow link");
         }, timeout);
     },
 
