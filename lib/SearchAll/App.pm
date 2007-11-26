@@ -49,7 +49,7 @@ use XUL::App schema {
             id is 'searchall@yahoo.cn',
             name is 'SearchAll',
             description is 'A handy side-by-side parallel searching tool',
-            version is '0.4.0',
+            version is '0.4.1',
             targets {
                 Firefox => ['2.0' => '3.0b1'],
                 Mozilla => ['1.5' => '1.8'],
