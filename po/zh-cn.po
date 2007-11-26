@@ -25,7 +25,7 @@ msgstr "规格化视图"
 
 #: lib/SearchAll/View/Main.pm:184
 msgid "Mapping"
-msgstr ""
+msgstr "映射视图"
 
 #: lib/SearchAll/View/Main.pm:207
 msgid "Next"
