@@ -46,10 +46,24 @@ SearchAll.MapView.prototype = {
         var ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.reset();
+        for (var i = 0; i < 3; i++)
+            this.drawIcon(ctx, i);
 
         for (var i = 0; i < 3; i++)
             this.timeouts.push(this.asyncUpdateThread(ctx, i));
         return true;
+    },
+
+    drawIcon: function (ctx, index) {
+        var path = app.fmtViews[index].favicon;
+        var img = new Image();
+        var xStep = 200;
+        var x = 10 + index * xStep;
+        img.onload = function(){
+            ctx.drawImage(img, x - 7, 20);
+        }
+        //alert(path);
+        img.src = path;
     },
 
     asyncUpdateThread: function (ctx, index) {
@@ -67,10 +81,10 @@ SearchAll.MapView.prototype = {
         var prevSeq = null;
         if (index - 1 >= 0)
             prevSeq = app.fmtViews[index - 1].URIs;
-        var x = 30 + index * xStep;
+        var x = 10 + index * xStep;
         var y = 40;;
         var util = SearchAll.Util;
-        var x2 = 30 + (index-1) * xStep;
+        var x2 = 10 + (index-1) * xStep;
         for (var i = 0; i < urls.length; i++) {
             var url = urls[i];
             y +=  radius * 2 + yStep;
