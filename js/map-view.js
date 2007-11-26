@@ -24,6 +24,7 @@ SearchAll.MapView.prototype = {
         }
         this.timeouts = [];
         this.prevUrlHash = {};
+        $("a#temp", this.document).remove();
     },
     get document () {
         if (!this._document)
@@ -105,44 +106,32 @@ SearchAll.MapView.prototype = {
                             //+ url);
                         var y2 = 40 + (radius * 2 + yStep) * (j + 1);
                         this.drawLine(ctx, x, y, x2, y2);
-                        ctx.fillStyle = this.matchedNodeColor;
-                        this.drawBall(ctx, x2, y2);
+                        //ctx.fillStyle = this.matchedNodeColor;
+                        this.drawBall(ctx, x2, y2, 'matched', prevURI);
                         hit = true;
                        //ctx.moveTo(x2, y2);
                     }
                 }
             }
-            if (hit) {
-                ctx.fillStyle = this.matchedNodeColor;
-            } else {
-                ctx.fillStyle = this.normalNodeColor;
-            }
-            this.drawBall(ctx, x, y);
+            this.drawBall(ctx, x, y, hit ? 'matched' : 'normal', url);
             this.prevUrlHash[url] = i;
         }
     },
 
-    drawBall: function (ctx, x, y) {
-        var radius = 10;
-        var old = ctx.globalAlpha;
-        ctx.beginPath();
-        ctx.arc(x, y, radius, 0, Math.PI*2, true);
-        ctx.fill();
-
-        //ctx.globalAlpha = 0.3;
-
-        var r = radius;
-        for (var i = 0; i < 4; i++) {
-            r -= r * 0.2;
-            ctx.beginPath();
-            ctx.fillStyle = 'rgba(255,255,255,' + ((i+1)/10) + ')';
-            //ctx.fillStyle = 'black';
-            //
-            ctx.arc(x, y, r, 0, Math.PI*2, true);
-            ctx.fill();
-            ctx.closePath();
-        }
-        //ctx.globalAlpha = 1;
+    drawBall: function (ctx, x, y, type, url) {
+        var doc = this.document;
+        var ball = $("a#ball", doc);
+        var body = $("body", doc);
+        var myBall = ball.clone().appendTo(body)
+            .find("img").attr('src', type + '-ball.png').show().css(
+                { position: 'absolute',
+                  top: y + 'px',
+                  left: 50 + x + 'px',
+                  'border-style': 'none'
+                }
+            ).attr( { title: url, tooltip: url } ).parent().attr(
+                { id: 'temp', 'href': url, target: '_blank' });
+        return;
     },
 
     drawLine: function (ctx, x1, y1, x2, y2) {
