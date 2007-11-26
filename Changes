@@ -1,3 +1,10 @@
+=Changes for release 0.4.0
+* Added a third view to SearchAll's UI, which is called Mapping View.
+  It provides a visual way to show the corelationship among the 3 search engines in effect.
+* Added tooltips to icons used in fmt view.
+  (Thanks Liu Jianqiang for this suggestion.)
+* Added <description> to install.rdf as per the AMO editor's advise.
+
 =Changes for release 0.3.5
 * Fixed the page selector patterns for so.163.com and search.yahoo.com, since these two sites changed their page templates recently.
 * Added 'Trying mining the original view' link when no results were found, so that we won't be too panic when sites change their page templates.
