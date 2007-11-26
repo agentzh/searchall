@@ -31,7 +31,7 @@ use XUL::App schema {
                 xpcom.js
                 jquery.js JSAN.js
                 datadumper.js Debug.js
-                timer.js dom-logger.js dom.js JSON.js thread.js
+                timer.js dom-logger.js dom.js JSON.js map-view.js thread.js
                 progress.js pattern-miner.js util.js link-tester.js fmt-view.js
                 persist.js app.js
                 orig-view.js progress-listener.js

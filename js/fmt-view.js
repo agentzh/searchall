@@ -11,7 +11,6 @@ SearchAll.FmtView = function (index) {
     this.browser = document.getElementById("fmt-view");
     this.prevHtmlLen = 0;
     this.prevResults = [];
-    this.URIs = [];
     this.favicon = null;
 };
 
@@ -60,7 +59,6 @@ SearchAll.FmtView.prototype = {
     reset: function () {
         //this.prevHtmlLen = 0;
         this.prevResults = [];
-        this.URIs = [];
         this.favicon = null;
     }
 };
@@ -203,6 +201,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     var prevResultsLen = this.prevResults.length;
     this.prevResults = snippets;
 
+    this.URIs = [];
     var FoundFirebug = false;
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
@@ -238,6 +237,14 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     if (! $("#enable-view-" + index)[0].checked) {
         $(".col-" + index, this.document).hide();
     }
+
+    if (app.viewTabbox.selectedIndex == app.mapViewTabIndex) {
+        //alert("Hey!");
+        app.setTimeout( function () {
+            app.mapView.update();
+        }, 0 );
+    }
+
     if (snippets.length == 0) {
         //alert("Hey, here!");
         var cols = $(".col-" + index, this.document);
@@ -261,10 +268,11 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             } );
         }
     }
+
     app.setTimeout(function () {
         //alert("HEEEE!!!");
         $(".col-" + index + ">img.loading", this.document).hide();
-    }, 500);
+    }, 50);
 
     if (!this.document.location) { return true; }
     //alert(prevResultsLen);

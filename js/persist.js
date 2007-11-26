@@ -53,14 +53,14 @@ $(document).ready( function () {
     } catch (e) {
         info("Failed to get tab.lastSelected in prefs.");
     }
-    if (app.pageMode && selectedTabIndex == 0) {
-        selectedTabIndex = 1;
+    if (app.pageMode && selectedTabIndex == app.origViewTabIndex) {
+        selectedTabIndex = app.fmtViewTabIndex;
     }
     if (selectedTabIndex == undefined) {
         if (SearchAll.app.pageMode)
-            selectedTabIndex = 1;
+            selectedTabIndex = app.fmtViewTabIndex;
         else
-            selectedTabIndex = 0;
+            selectedTabIndex = app.origViewTabIndex;
     }
     Debug.log("Selecting tab " + selectedTabIndex + "...");
     //alert("I got this: " + $("#view-tabbox")[0].selectedIndex);
@@ -69,13 +69,22 @@ $(document).ready( function () {
         'command',
         function () {
             selectedTabIndex = this.selectedIndex;
+
+            if (selectedTabIndex == app.mapViewTabIndex) {
+                //alert("Hey!");
+                app.setTimeout( function () {
+                    app.mapView.update();
+                }, 0 );
+            }
+
             //this.setAttribute("lastSelected", this.selectedIndex);
-            info("Setting tab.lastSelected to " + selectedTabIndex);
+            //info("Setting tab.lastSelected to " + selectedTabIndex);
             try {
                 prefs.setIntPref('tab.lastSelected', selectedTabIndex);
             } catch (e) {
                 error(e);
             }
+
             //alert(selectedTabIndex);
             if (!app.pageMode) app.searchBox.focus();
         },

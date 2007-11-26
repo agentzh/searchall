@@ -4,6 +4,12 @@
 if (typeof SearchAll == 'undefined') SearchAll = {};
 
 SearchAll.Util = {
+    trimURI: function (url) {
+        //url.replace(/\bindex\.\w+$/, '');
+        //url.replace(/^https?:\/\//, '');
+        url.replace(/\/+$/g, '');
+        return url;
+    },
     encodeQuery: function (query, charset) {
         const DEFAULT_QUERY_CHARSET = 'UTF-8';
         var textToSubURI = Cc["@mozilla.org/intl/texttosuburi;1"].

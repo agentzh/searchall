@@ -16,6 +16,10 @@ SearchAll.App = function () {
     this.viewTabs      = document.getElementById("view-tabs");
     this.viewTabbox    = document.getElementById("view-tabbox");
 
+    this.origViewTabIndex = 0;
+    this.fmtViewTabIndex = 1;
+    this.mapViewTabIndex = 2;
+
     this.prevButton = document.getElementById("prev-button");
     this.nextButton = document.getElementById("next-button");
 
@@ -32,6 +36,8 @@ SearchAll.App = function () {
         this.origViews[i] = new SearchAll.OrigView(i);
         this.fmtViews[i] = new SearchAll.FmtView(i);
     }
+
+    this.mapView = new SearchAll.MapView();
 
     // The following SE's need POST for shortcuts:
     // taobao, image.baidu.com, amazon
