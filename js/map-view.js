@@ -70,11 +70,15 @@ SearchAll.MapView.prototype = {
         var img = new Image();
         var xStep = 200;
         var x = 10 + index * xStep;
-        img.onload = function(){
-            ctx.drawImage(img, x - 7, 20);
+        img.onload = function () {
+            try {
+                ctx.drawImage(img, x - 7, 20);
+            } catch (e) {
+                info("Mapping View: Failed to load image from " + path);
+            }
         }
-        //alert(path);
         img.src = path;
+        //alert(path);
     },
 
     asyncUpdateThread: function (ctx, index) {
