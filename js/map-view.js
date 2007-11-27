@@ -24,7 +24,7 @@ SearchAll.MapView.prototype = {
         }
         this.timeouts = [];
         this.prevUrlHash = {};
-        $("a#temp", this.document).remove();
+        $("a", this.document).remove(".temp");
     },
     get document () {
         if (!this._document)
@@ -120,7 +120,7 @@ SearchAll.MapView.prototype = {
 
     drawBall: function (ctx, x, y, type, url) {
         var doc = this.document;
-        var ball = $("a#ball", doc);
+        var ball = $("a.ball", doc);
         var body = $("body", doc);
         var myBall = ball.clone().appendTo(body)
             .find("img").attr('src', type + '-ball.png').show().css(
@@ -130,7 +130,7 @@ SearchAll.MapView.prototype = {
                   'border-style': 'none'
                 }
             ).attr( { title: url, tooltip: url } ).parent().attr(
-                { id: 'temp', 'href': url, target: '_blank' });
+                { class: 'temp', 'href': url, target: '_blank' });
         return;
     },
 
