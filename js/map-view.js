@@ -15,8 +15,8 @@ SearchAll.MapView.prototype = {
     _document: null,
     _canvas: null,
 
-    matchedNodeColor: '#FD0',
-    normalNodeColor: '#6C0',
+    //matchedNodeColor: '#FD0',
+    //normalNodeColor: '#6C0',
 
     reset: function () {
         for (var i = 0; i < this.timeouts.length; i++) {
@@ -26,16 +26,19 @@ SearchAll.MapView.prototype = {
         this.prevUrlHash = {};
         $("a", this.document).remove(".temp");
     },
+
     get document () {
         if (!this._document)
             this._document = this.browser.contentDocument;
         return this._document;
     },
+
     get canvas () {
         if (!this._canvas)
             this._canvas = this.document.getElementById('mapping');
         return this._canvas;
     },
+
     update: function () {
         var shouldUpdate = false;
         for (var i = 0; i < 3; i++) {
