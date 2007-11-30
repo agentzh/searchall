@@ -68,6 +68,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     //var origView = app.origViews[this.index];
     //origDoc = origView.document();
     //hostname = origView.hostname();
+    this.hostname = hostname;
 
     if (origDoc == null) {
         return;

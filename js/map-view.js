@@ -67,17 +67,11 @@ SearchAll.MapView.prototype = {
 
     drawIcon: function (ctx, index) {
         var path = app.fmtViews[index].favicon;
-        var img = new Image();
-        var xStep = 200;
-        var x = 10 + index * xStep;
-        img.onload = function () {
-            try {
-                ctx.drawImage(img, x - 7, 20);
-            } catch (e) {
-                info("Mapping View: Failed to load image from " + path);
-            }
-        }
-        img.src = path;
+        var hostname = app.fmtViews[index].hostname;
+        //var img = new Image();
+        //var xStep = 200;
+        //var x = 10 + index * xStep;
+        $("#favicon-" + index, this.document).attr("src", path).attr("title", hostname);
         //alert(path);
     },
 
