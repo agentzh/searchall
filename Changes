@@ -1,6 +1,7 @@
-=Changes for release 0.4.4
+=Changes for release 0.4.5
 * The balls in the mapping view are now clickable and they've got pretty tooltips as well. Thanks db48x++ on #extdev for helping with it.
 * Fixed the favicons in the Mapping View (we now use ordinary <img> with tooltips :))
+* Always sticking to the formatted view per cnhackTNT++'s suggestion.
 
 =Changes for release 0.4.2
 * Added a third view to SearchAll's UI, which is called Mapping View.
