@@ -53,7 +53,7 @@ $(document).ready( function () {
     } catch (e) {
         info("Failed to get tab.lastSelected in prefs.");
     }
-    if (app.pageMode && selectedTabIndex == app.origViewTabIndex) {
+    if (app.pageMode && selectedTabIndex != app.fmtViewTabIndex) {
         selectedTabIndex = app.fmtViewTabIndex;
     }
     if (selectedTabIndex == undefined) {
