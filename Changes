@@ -1,3 +1,6 @@
+=Changes for release 0.4.6
+* Found a theme that can break SearchAll: Scribblies Kids 2.3
+
 =Changes for release 0.4.5
 * The balls in the mapping view are now clickable and they've got pretty tooltips as well. Thanks db48x++ on #extdev for helping with it.
 * Fixed the favicons in the Mapping View (we now use ordinary <img> with tooltips :))
