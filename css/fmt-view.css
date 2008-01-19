@@ -1,5 +1,5 @@
 body {
-  font: .9em/1.5em "微软雅黑", "宋体", consolas, verdana, arial, sans-serif;
+  font: 1.2em/1.8em "微软雅黑", "宋体", consolas, verdana, arial, sans-serif;
   background-color: #FFF;
   color: black;
 }
@@ -19,6 +19,10 @@ body>table>tbody>tr>td {
     padding: 0.6em;
 }
 
+a.title {
+    font-size: 12pt;
+}
+
 div.error {
      background-color: rgb(240,234,183);
      border: 1px solid rgb(230,224,173);
@@ -27,6 +31,11 @@ div.error {
      padding: 5px 20px 5px 5px;
      font-size: 1.2em;
      position: relative;
+}
+
+b {
+    color: #cc0033;
+    font-weight: normal;
 }
 
 ul{

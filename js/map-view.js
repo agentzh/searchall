@@ -57,6 +57,7 @@ SearchAll.MapView.prototype = {
         var canvas = this.canvas;
         var ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        $("img#loading", this.document).show();
         for (var i = 0; i < 3; i++)
             this.drawIcon(ctx, i);
 
@@ -116,6 +117,7 @@ SearchAll.MapView.prototype = {
             }
             this.drawBall(ctx, x, y, hit ? 'matched' : 'normal', url);
             this.prevUrlHash[url] = i;
+            $("img#loading", this.document).hide();
         }
     },
 

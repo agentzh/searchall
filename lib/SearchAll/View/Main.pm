@@ -8,11 +8,12 @@ use Template::Declare::Tags 'XUL';
 # no search.cpan.org any more
 my @URLs = qw(
     www.google.cn
-    www.yahoo.cn
-    www.baidu.com
     www.yisou.com
+    www.baidu.com
+
+    www.yahoo.cn
     www.sogou.com
-    so.163.com
+    www.yodao.com
 
     www.google.com/en
     search.yahoo.com

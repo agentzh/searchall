@@ -17,16 +17,23 @@ SearchAll.FmtView = function (index) {
 SearchAll.patterns = {
         'www.baidu.cn'    : "tbody>tr>td.f",
         'www.baidu.com'   : "tbody>tr>td.f",
-        'www.google.cn'   : "div.g[h2]",
+
+        //'www.google.cn'   : "div.g[h2]",
         //'www.google.com'  : "div.g[h2]",
+
         'www.google.cn'   : "div#res>div>div.g",
         'www.google.com'  : "div#res>div>div.g",
+
         'www.yisou.com'   : "div.web>ol>li",
         'so.sohu.com'     : "body>div#content>div",
         'www.sogou.com'   : "body>div#content>div",
-        'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
+
+        //'www.yahoo.cn'    : ".yst-web>ul>li[h3]",
+        'www.yahoo.cn'    : "div#ystcon>div.yst-web>ul>li",
+
         //'so.163.com'      : 'body>div>div.r',
-        'so.163.com'        : 'body>div#container>table[td.wss]',
+        'so.163.com'        : 'td.wss',
+        'www.yodao.com'     : 'td.wss',
         'www.answers.com' : 'div.content',
 
         //'search.yahoo.com': "div#yschweb>ol>li",
@@ -49,7 +56,7 @@ SearchAll.patterns = {
         //'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
         'image.baidu.com' : 'body>div#imgid>dl',
         'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
-        'image.cn.yahoo.com': 'body.y>div#bd>div.yui-g>div.cnt>ul>li',
+        'image.cn.yahoo.com': 'ul.imgsearchres>li.item',
         'www.flickr.com' : 'table.DetailResults>tbody>tr',
         'www.youtube.com' : 'div#mainContent>div>div.vEntry'
 };
@@ -162,8 +169,8 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             .replace(/<\s*(\/?)\s*wbr>/ig, '')
             .replace(/<\s*(\/?)\s*nobr>/ig, '')
             //.replace(/<(\/?)span>/ig, '')
-            .replace(/<\/h\d+[^>]*>/ig, '<br/>')
-            .replace(/<h\d+[^>]*>/ig, '')
+            .replace(/<(\/)h\d+[^>]*>/ig, '</span><br/>')
+            .replace(/<h\d+[^>]*>/ig, '<span style="font-size: 12pt;">')
             .replace(/<\/?table[^>]*>/ig, '')
             .replace(/<\/?tbody[^>]*>/ig, '')
             .replace(/<(\/?)tr[^>]*>/ig, '<$1p>')
@@ -218,6 +225,9 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
         var url = Util.extractUrl(snippet, lastOnly);
+        if (hostname.match(/(yahoo\.cn|yisou\.com)$/)) {
+            snippet = "<font size=\"-1\">" + snippet + "</font>";
+        }
         if (hostname.match(/yahoo\.com$/)) {
             var match = url.match(/\*\*(http\S+)/);
             if (match) {
