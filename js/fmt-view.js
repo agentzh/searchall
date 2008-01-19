@@ -18,7 +18,9 @@ SearchAll.patterns = {
         'www.baidu.cn'    : "tbody>tr>td.f",
         'www.baidu.com'   : "tbody>tr>td.f",
         'www.google.cn'   : "div.g[h2]",
-        'www.google.com'  : "div.g[h2]",
+        //'www.google.com'  : "div.g[h2]",
+        'www.google.cn'   : "div#res>div>div.g",
+        'www.google.com'  : "div#res>div>div.g",
         'www.yisou.com'   : "div.web>ol>li",
         'so.sohu.com'     : "body>div#content>div",
         'www.sogou.com'   : "body>div#content>div",
@@ -28,7 +30,8 @@ SearchAll.patterns = {
         'www.answers.com' : 'div.content',
 
         //'search.yahoo.com': "div#yschweb>ol>li",
-        'search.yahoo.com': "div#pri>div#web>ol>li",
+        //'search.yahoo.com': "div#pri>div#web>ol>li",
+        'search.yahoo.com': "div#results>div#main>div#web>ol>li",
         'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
         'www.a9.com'      : 'td#tdweb>div#bxweb>div#cweb>div.cscrollInfo>div.resBlock',
 
