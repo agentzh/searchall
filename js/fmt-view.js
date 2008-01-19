@@ -56,6 +56,7 @@ SearchAll.patterns = {
         //'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
         'image.baidu.com' : 'body>div#imgid>dl',
         'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
+        // image.cn.yahoo.com' : '...'
         'image.cn.yahoo.com': 'ul.imgsearchres>li.item',
         'www.flickr.com' : 'table.DetailResults>tbody>tr',
         'www.youtube.com' : 'div#mainContent>div>div.vEntry'
