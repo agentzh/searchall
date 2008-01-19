@@ -1,4 +1,9 @@
 =Changes for release 0.4.6
+* Fixed the default selector patterns for various default search engines due to their recent changes in page tempaltes.
+* Fixed the font size of www.yahoo.cn and www.yisou.com.
+* Added a loading icon to the mapping view since its loading is slow.
+* Updated jquery.js to the latest release, 1.2.2.
+* Made yisou.com one of the default search engines instead of www.yahoo.cn which is a bit slow.
 * Found a theme that can break SearchAll: Scribblies Kids 2.3
 
 =Changes for release 0.4.5
