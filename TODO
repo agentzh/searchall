@@ -68,15 +68,15 @@ Later...
 * Do s/is conflicting with/is breaking/ in fmt-view.html.  [done]
 * Update the pref to disable Firebug for 'searchall'.  [done]
 
-* Default to English search engines if the locale is not zh-* __and__ SearchAll is started for the very first time.
-* I18N for fmt-view.html (is XHTML XML?)
+* Default to English search engines if the locale is not zh-* __and__ SearchAll is started for the very first time. [done]
+* I18N for fmt-view.html (is XHTML XML?)  [cancelled]
 * Work with Yuanyin++ to do zh-CN localization for AMO.
-* Add a "Try mining the original page" link to force mining the patterns.
-* Fix the checkbox + splitter toggling bug.
-* Add the Merged View to merge the search results from different sites.
-* Use the getter/setter feature to reimplement our own JS classes.
+* Add a "Try mining the original page" link to force mining the patterns.  [done]
+* Fix the checkbox + splitter toggling bug.  [done]
+* Add the Merged View to merge the search results from different sites.  [cancelled]
+* Use the getter/setter feature to reimplement our own JS classes.  [done]
+* Implement features as in http://www.langreiter.com/exec/google-vs-google.html?q=Perl using SVG.  [done]
 * Add test-timer.js to test the Timer class in timer.js.
-* Implement features as in http://www.langreiter.com/exec/google-vs-google.html?q=Perl using SVG.
 * Implement an XPCOM component for desktop searching.
 
 XUL::App's TODO:
