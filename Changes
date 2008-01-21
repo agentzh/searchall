@@ -2,7 +2,7 @@
 * Fixed the default selector patterns for the following sites due to their recent changes in page tempaltes:
 ** www.google.com
 ** www.google.cn
-** ww.yahoo.cn
+** www.yahoo.cn
 ** so.163.com
 ** search.yahoo.com
 ** image.cn.yahoo.com
@@ -11,6 +11,7 @@
 * Added a loading icon to the mapping view since its loading is not that fast.
 * Updated jquery.js to the latest release, 1.2.2.
 * Made yisou.com one of the default search engines instead of www.yahoo.cn which is a bit slow.
+* Renamed so.163.com to www.yodao.com due to 163's changes.
 * Found a theme that can break SearchAll: Scribblies Kids 2.3 (thanks to Liu Jianqiang).
 
 =Changes for release 0.4.5
