@@ -6,7 +6,7 @@
 ** so.163.com
 ** search.yahoo.com
 ** image.cn.yahoo.com
-* Fixed the font size of www.yahoo.cn and www.yisou.com
+* Fixed the font size of www.yahoo.cn, www.yahoo.com, and www.yisou.com
 * Also make the keyword lightlights in these two sites' formatted view red rather than bold and black.
 * Added a loading icon to the mapping view since its loading is not that fast.
 * Updated jquery.js to the latest release, 1.2.2.
