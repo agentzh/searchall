@@ -140,10 +140,6 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     }
     if (!forceMining && this.prevHtmlLen == len) {
         //alert("No change!");
-        if (!app.done && index == 2) {
-            info(html);
-            app.done = true;
-        }
         info("fmt view gen: No change for " + index);
         return false;
     }
