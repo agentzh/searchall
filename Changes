@@ -1,4 +1,4 @@
-=Changes for release 0.4.9
+=Changes for release 0.4.10
 * Fixed the font for search.yahoo.com in the Formatted View.
 * Fixed a refreshing issue regarding www.ask.com in the Formatted View when web is slow.
 * Fixed the opensearch shortcut for www.yodao.com
