@@ -1,6 +1,7 @@
-=Changes for release 0.4.8
+=Changes for release 0.4.9
 * Fixed the font for search.yahoo.com in the Formatted View.
 * Fixed a refreshing issue regarding www.ask.com in the Formatted View when web is slow.
+* Fixed the opensearch shortcut for www.yodao.com
 
 =Changes for release 0.4.6
 * Fixed the default selector patterns for the following sites due to their recent changes in page tempaltes:
