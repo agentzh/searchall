@@ -1,3 +1,6 @@
+=Changes for release 0.4.11
+* Fixed the displaying bug when working with Scribblies Kids 2.3. (Thanks this theme's author for bringing me a fix.)
+
 =Changes for release 0.4.10
 * Fixed the font for search.yahoo.com in the Formatted View.
 * Fixed a refreshing issue regarding www.ask.com in the Formatted View when web is slow.

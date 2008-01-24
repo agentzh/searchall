@@ -1,3 +1,5 @@
+button {  max-height: none !important }
+
 .engine-box {
     min-width: 15em;
     padding: 0 2em 0 2em;
