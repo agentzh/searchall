@@ -255,7 +255,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             }
         }
         this.URIs.push(url);
-        if (!this.favicon) this.favicon = rootPath + '/favicon.ico';
+        this.favicon = rootPath + '/favicon.ico';
         //info("[URL] " + hostname + ": URL: " + url);
         snippet = '<img class="status" src="bullet_yellow.png" title="Link status icon"/>' +
             '&#160;&#160;<img src="' +

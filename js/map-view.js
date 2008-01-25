@@ -11,6 +11,7 @@ SearchAll.MapView.prototype = {
     timeouts: [],
     prevHtmlLens: [0, 0, 0],
     prevUrlHash: {},
+    favicons: [],
 
     _document: null,
     _canvas: null,
@@ -72,8 +73,13 @@ SearchAll.MapView.prototype = {
         //var img = new Image();
         //var xStep = 200;
         //var x = 10 + index * xStep;
+        if (!path) return;
+        if (this.favicons[index] == path)
+            return;
+        this.favicons[index] = path;
+        //info("favicon: " + path);
         $("#favicon-" + index, this.document).attr("src", path).attr("title", hostname);
-        //alert(path);
+        //if (index == 1) alert(path);
     },
 
     asyncUpdateThread: function (ctx, index) {
