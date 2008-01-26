@@ -1,3 +1,7 @@
+=Changes for release 0.4.12
+* Added en.wikipedia.org to the default search engine list.
+* Made wikipedia one of the default 3 search engines for non-zh locales (taking the position of ask.com which is damn slow).
+
 =Changes for release 0.4.11
 * Fixed the displaying bug when working with Scribblies Kids 2.3. (Thanks this theme's author for bringing me a fix.)
 
