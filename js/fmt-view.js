@@ -42,6 +42,7 @@ SearchAll.patterns = {
         'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
         'www.a9.com'      : 'td#tdweb>div#bxweb>div#cweb>div.cscrollInfo>div.resBlock',
 
+        'en.wikipedia.org' : "li:contains('Relevance')",
         'www.taobao.com'  : "div#ItemList>div#ListView>div.Item",
         'search1.taobao.com'  : "div#ItemList>div#ListView>div.Item",
         'search.taobao.com'   : "div#ItemList>div#ListView>div.Item",

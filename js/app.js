@@ -52,6 +52,7 @@ SearchAll.App = function () {
         'search.cpan.org': ['http://search.cpan.org/search?query=Perl&mode=all'],
         'www.ask.com': ['http://www.ask.com/web?q={searchTerms}'],
         'www.sogou.com': ['http://www.sogou.com/web?query={searchTerms}', 'GBK'],
+        'en.wikipedia.org': ['http://en.wikipedia.org/wiki/Special:Search?search={searchTerms}&fulltext=Search'],
         'www.yisou.com': ['http://www.yisou.com/search:{searchTerms}'],
         'so.163.com': ['http://so.163.com/search.php?q={searchTerms}', 'GBK'],
         'www.yodao.com': ['http://www.yodao.com/search?q={searchTerms}', 'GBK'],
