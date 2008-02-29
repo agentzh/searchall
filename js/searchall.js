@@ -179,6 +179,7 @@ $(window).ready( function () {
     top.location.watch("pathname", watchAssignment);
     top.location.watch("host", watchAssignment);
     top.location.watch("replace", watchAssignment);
+
     //top.location.replace = function () { alert("Hiya, yahoo!"); };
     //top.location = {};
     //top.location.replace("Hiya!");

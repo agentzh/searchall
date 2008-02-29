@@ -52,11 +52,11 @@ SearchAll.patterns = {
         'www.amazon.com'  : 'table.searchresults>tbody>tr',
 
         'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
-        'images.google.com' : 'div#ImgContent>table>tbody>tr>td',
-        'images.google.cn' : 'div#ImgContent>table>tbody>tr>td',
+        'images.google.com' : 'div#ImgContent>table>tbody>tr',
+        'images.google.cn' : 'div#ImgContent>table>tbody>tr',
         //'image.baidu.com' : "div#imgid>table.r1>tbody>tr>td",
-        'image.baidu.com' : 'body>div#imgid>dl',
-        'image.baidu.cn'  : "div#imgid>table.r1>tbody>tr>td",
+        'image.baidu.com' : "body>table#r>tbody>tr>td",
+        'image.baidu.cn'  : "body>table#r>tbody>tr>td",
         // image.cn.yahoo.com' : '...'
         'image.cn.yahoo.com': 'ul.imgsearchres>li.item',
         'www.flickr.com' : 'table.DetailResults>tbody>tr',
@@ -191,14 +191,14 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
         snippets.push(snippet);
     }
 
-    if (hostname.match('images.google')) {
+    if (hostname.match(/images\.google/)) {
         var tmp = [];
         for (var i = 0; i < snippets.length; i++) {
             var snip = snippets[i];
             if (snip == undefined) continue;
             if (snip.match(/<img/i)) {
-                snip += '<br />' + snippets[i+3];
-                snippets[i+3] = undefined;
+                snip += '<br />' + snippets[i+4];
+                snippets[i+4] = undefined;
             }
             tmp.push(snip);
         }

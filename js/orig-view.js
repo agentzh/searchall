@@ -64,6 +64,10 @@ SearchAll.OrigView.prototype = {
         $(app.progressmeter).show();
         app.progressmeter.value = 50;
         this.browser.stop();
+        if (/baidu/.test(newHome))
+            this.browser.docShell.allowJavascript = false;
+        else
+            this.browser.docShell.allowJavascript = true;
         return this.browser.goHome(home);
     },
     document: function () {

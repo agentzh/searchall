@@ -25,13 +25,14 @@ SearchAll.Thread.prototype = {
             this.firstTime = false;
         }
         var thread = this;
+        var origView = app.origViews[thread.index];
         if (delay) {
             app.setTimeout(function () {
-                app.origViews[thread.index].goHome(home);
+                origView.goHome(home);
                 if (!app.pageMode) app.searchBox.focus();
             }, delay);
         } else {
-            app.origViews[thread.index].goHome(home);
+            origView.goHome(home);
             if (!app.pageMode) app.searchBox.focus();
         }
     },
