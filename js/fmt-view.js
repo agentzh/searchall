@@ -60,7 +60,7 @@ SearchAll.patterns = {
         // image.cn.yahoo.com' : '...'
         'image.cn.yahoo.com': 'ul.imgsearchres>li.item',
         'www.flickr.com' : 'table.DetailResults>tbody>tr',
-        'www.youtube.com' : 'div#mainContent>div>div.vEntry'
+        'www.youtube.com' : 'td>div.vlcell'
 };
 
 SearchAll.FmtView.prototype = {
