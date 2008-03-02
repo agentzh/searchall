@@ -227,21 +227,26 @@ $(window).ready( function () {
     } );
 
 
-    for (var i = 0; i < 3; i++) {
-        handleCheckbox(i);
-        registerMyListener(i);
-    }
-    var margin = document.getElementById('prev-button').boxObject.x;
-    $("#navigator").css('margin-left', margin + 'px');
+    for (var i = 0; i < 3; i++) { handleCheckbox(i); registerMyListener(i); } 
+    var button = document.getElementById('prev-button');
+    var viewTabbox = document.getElementById('view-tabbox');
+    var navigator = document.getElementById('navigator');
+    var handle = function () {
+        //alert("Hey!");
+        $(navigator).css('margin-bottom', viewTabbox.boxObject.height - button.boxObject.height) - 20;
+    };
+    handle();
+    addEventListener("resize", handle, false);
+
+        //$(navigator).css('height', 34);
+    //navigator._height = button.height + 20;
+    //alert(navigator.boxObject.height);
 
     for (var i = 0; i < 3; i++) {
         //app.origViews[i].browser.docShell.allowMetaRedirects = false;
         //app.origViews[i].browser.docShell.allowJavascript = false;
         //app.origViews[i].docShell.allowMetaRedirects = false;
-        prepareUriList(i);
-    }
-    //alert("ther!!");
-    //info("focusing search box... (1)");
+        prepareUriList(i); } //alert("ther!!"); //info("focusing search box... (1)");
     //info("blurring contentWindow...");
     // we need the following syntax error to retain the focus
     if (!app.pageMode) app.searchBox.focus();

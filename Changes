@@ -1,3 +1,9 @@
+=Changes for release 0.4.17
+* Fixed the vertical scrollbar problem in Firefox 3.0.
+* Fixed the youtube template.
+* Fixed Firefox 3.0 compatibility issues for baidu.com and yisou.com and now we can work with at least 3.0b3.
+* Fixed the default templates for those image search engines.
+
 =Changes for release 0.4.12
 * Added en.wikipedia.org to the default search engine list.
 * Made wikipedia one of the default 3 search engines for non-zh locales (taking the position of ask.com which is damn slow).
