@@ -44,7 +44,7 @@ SearchAll.patterns = {
 
         'www.live.com'    : 'div#content>div#results_area>div#results>ul>li',
         'search.live.com' : 'div#content>div#results_area>div#results>ul>li',
-        'en.wikipedia.org' : "li:contains('Relevance')",
+        'en.wikipedia.org' : "ul.mw-search-results>li",
         'www.taobao.com'  : "div#ItemList>div#ListView>div.Item",
         'search1.taobao.com'  : "div#ItemList>div#ListView>div.Item",
         'search.taobao.com'   : "div#ItemList>div#ListView>div.Item",

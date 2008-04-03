@@ -17,9 +17,9 @@ my @URLs = qw(
 
     www.google.com/en
     search.yahoo.com
-    www.live.com
-
     en.wikipedia.org/wiki/Special:Search
+
+    www.live.com
     www.ask.com
     www.a9.com
 
