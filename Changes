@@ -1,3 +1,8 @@
+=Changes for release 0.4.19
+* Added live.com to the default search engine list per a user's request.
+* Fixed the page template for wikipedia.
+* Declares that we can work with Firefox 3.0 beta5.
+
 =Changes for release 0.4.17
 * Fixed the vertical scrollbar problem in Firefox 3.0.
 * Fixed the youtube template.
