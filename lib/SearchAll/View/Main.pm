@@ -24,7 +24,7 @@ my @URLs = qw(
     www.a9.com
 
     video.google.com
-    video.ask.jp
+    video.baidu.jp
 
     www.answers.com
     www.taobao.com

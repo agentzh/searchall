@@ -28,6 +28,9 @@ SearchAll.PrevNext.gotoNext = function (i) {
                 links = $("img[@alt*='下一页']", doc).parent('a');
                 if (links.length == 0) {
                     links = $("img[@alt*='Next']", doc).parent('a');
+                    if (links.length == 0) {
+                        links = $("a:contains('次へ')", doc);
+                    }
                 }
             }
         }
@@ -86,6 +89,9 @@ SearchAll.PrevNext.gotoPrev = function (i) {
                 links = $("img[@alt*='上一页']", doc).parent('a');
                 if (links.length == 0) {
                     links = $("img[@alt*='Prev']", doc).parent('a');
+                    if (links.length == 0) {
+                        links = $("a:contains('前へ')", doc);
+                    }
                 }
             }
         }
