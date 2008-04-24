@@ -64,6 +64,7 @@ SearchAll.App = function () {
         'images.google.cn': ['http://images.google.cn/images?q={searchTerms}'],
         'images.google.com': ['http://images.google.com/images?q={searchTerms}'],
         'images.search.yahoo.com': ['http://images.search.yahoo.com/search/images?p={searchTerms}&ei=UTF-8'],
+        'video.google.com': ['http://video.google.com/videosearch?q={searchTerms}'],
         'www.youtube.com': ['http://www.youtube.com/results?search_query={searchTerms}&search=Search'],
         'www.flickr.com': ['http://www.flickr.com/search/?q={searchTerms}'],
         'www.flickr.com/search': ['http://www.flickr.com/search/?q={searchTerms}'],

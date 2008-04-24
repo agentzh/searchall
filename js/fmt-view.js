@@ -53,6 +53,8 @@ SearchAll.patterns = {
         'search.ebay.com' : "form#find>div.ebContainer>div#ebContent>div.ebFrame>table.adTest>tbody>tr>td>table.ebItemlist>tbody>tr.ebHlOdd",
         'www.amazon.com'  : 'table.searchresults>tbody>tr',
 
+        'video.google.com' : 'div#search_results>div.SearchResultItem',
+
         'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
         'images.google.com' : 'div#ImgContent>table>tbody>tr',
         'images.google.cn' : 'div#ImgContent>table>tbody>tr',

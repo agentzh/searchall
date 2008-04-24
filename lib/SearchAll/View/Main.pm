@@ -23,6 +23,9 @@ my @URLs = qw(
     www.ask.com
     www.a9.com
 
+    video.google.com
+    video.ask.jp
+
     www.answers.com
     www.taobao.com
     addons.mozilla.org/search
