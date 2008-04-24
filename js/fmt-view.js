@@ -58,6 +58,7 @@ SearchAll.patterns = {
         'sagool.jp': 'div.hits>div.hit',
         'www.fooooo.com': 'div#search_contents>table>tbody>tr',
         'www.woopie.com': "body>table>tbody>tr>td>table>tbody>tr>td>table>tbody>tr>td>table>tbody>tr>td[@width='100%']",
+        'www.woopie.jp': "div#search-video>div.results>div.video-results-area",
 
         'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
         'images.google.com' : 'div#ImgContent>table>tbody>tr',

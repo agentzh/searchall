@@ -64,7 +64,7 @@ SearchAll.OrigView.prototype = {
         $(app.progressmeter).show();
         app.progressmeter.value = 50;
         this.browser.stop();
-        if (/baidu/.test(newHome))
+        if (/baidu|woopie\.jp/.test(newHome))
             this.browser.docShell.allowJavascript = false;
         else
             this.browser.docShell.allowJavascript = true;

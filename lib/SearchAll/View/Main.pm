@@ -28,6 +28,7 @@ my @URLs = qw(
     sagool.jp/movie
     www.fooooo.com
     www.woopie.com
+    www.woopie.jp
 
     www.answers.com
 
