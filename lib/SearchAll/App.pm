@@ -49,9 +49,9 @@ use XUL::App schema {
             id is 'searchall@yahoo.cn',
             name is 'SearchAll',
             description is 'A side-by-side search engine comparison tool',
-            version is '0.4.20',
+            version is '0.4.21',
             targets {
-                Firefox => ['2.0' => '3.0b5'],
+                Firefox => ['2.0' => '3.0pre'],
                 Mozilla => ['1.5' => '1.8'],
             },
             creator is 'The Yahoo! China EEEE team',

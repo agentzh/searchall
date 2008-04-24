@@ -15,35 +15,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/SearchAll/View/Main.pm:219
+#: lib/SearchAll/View/Main.pm:220
 msgid "Cancel"
 msgstr "取消"
 
-#: lib/SearchAll/View/Main.pm:188
+#: lib/SearchAll/View/Main.pm:189
 msgid "Formatted"
 msgstr "規格化檢視"
 
-#: lib/SearchAll/View/Main.pm:195
+#: lib/SearchAll/View/Main.pm:196
 msgid "Mapping"
 msgstr "對映檢視"
 
-#: lib/SearchAll/View/Main.pm:218
+#: lib/SearchAll/View/Main.pm:219
 msgid "Next"
 msgstr "下一頁"
 
-#: lib/SearchAll/View/Main.pm:181
+#: lib/SearchAll/View/Main.pm:182
 msgid "Original"
 msgstr "原初檢視"
 
-#: lib/SearchAll/View/Main.pm:217
+#: lib/SearchAll/View/Main.pm:218
 msgid "Prev"
 msgstr "上一頁"
 
-#: lib/SearchAll/View/Main.pm:128
+#: lib/SearchAll/View/Main.pm:129
 msgid "Search"
 msgstr "尋找"
 
-#: lib/SearchAll/View/Main.pm:55 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
+#: lib/SearchAll/View/Main.pm:56 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
 msgid "SearchAll"
 msgstr "我搜去"
 
@@ -51,7 +51,7 @@ msgstr "我搜去"
 msgid "SearchAll (Debug)"
 msgstr "我搜去（除錯版）"
 
-#: lib/SearchAll/View/Main.pm:70
+#: lib/SearchAll/View/Main.pm:71
 msgid "en-US"
 msgstr "zh-TW"
 
