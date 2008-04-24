@@ -55,6 +55,7 @@ SearchAll.patterns = {
 
         'video.google.com' : 'div#search_results>div.SearchResultItem',
         'video.baidu.jp' : 'div#c>div#result>li',
+        'sagool.jp': 'div.hits>div.hit',
 
         'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
         'images.google.com' : 'div#ImgContent>table>tbody>tr',
