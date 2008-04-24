@@ -25,9 +25,12 @@ my @URLs = qw(
 
     video.google.com
     video.baidu.jp
-    sagool.jp/movie/
+    sagool.jp/movie
+    www.fooooo.com
+    www.woopie.com
 
     www.answers.com
+
     www.taobao.com
     addons.mozilla.org/search
     search.ebay.com

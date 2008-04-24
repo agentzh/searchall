@@ -56,6 +56,8 @@ SearchAll.patterns = {
         'video.google.com' : 'div#search_results>div.SearchResultItem',
         'video.baidu.jp' : 'div#c>div#result>li',
         'sagool.jp': 'div.hits>div.hit',
+        'www.fooooo.com': 'div#search_contents>table>tbody>tr',
+        'www.woopie.com': "body>table>tbody>tr>td>table>tbody>tr>td>table>tbody>tr>td>table>tbody>tr>td[@width='100%']",
 
         'images.search.yahoo.com':  'div#yschbody>div#yschres>table#yschimg>tbody>tr>td',
         'images.google.com' : 'div#ImgContent>table>tbody>tr',
@@ -184,7 +186,8 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             .replace(/<(\/?)tr[^>]*>/ig, '<$1p>')
             .replace(/<\/?td[^>]*>/ig, '&#160;')
             .replace(/<(\/?)th[^>]*>/ig, '<$1h3>')
-            .replace(/<a /ig, '<a target="_blank" ');
+            .replace(/<a /ig, '<a target="_blank" ')
+            .replace(/<\s*\/?\s*hr[^<>]*>/ig, '');
             //.replace(/^[\s\n]+/g, '');
 
         snippet = Util.rel2abs(snippet, rootPath, curPath);

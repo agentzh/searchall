@@ -71,6 +71,7 @@ SearchAll.App = function () {
         'search1.taobao.com': ['http://search1.taobao.com/browse/search_auction.htm?sort=&at_topsearch=1&f=D9_5_1&spercent=95&commend=all&user_action=initiative&search_type=auction&q={searchTerms}', 'GBK'],
         'www.taobao.com': ['http://search1.taobao.com/browse/search_auction.htm?sort=&at_topsearch=1&f=D9_5_1&spercent=95&commend=all&user_action=initiative&search_type=auction&q={searchTerms}', 'GBK'],
         'sagool.jp': ['http://sagool.jp/movie/s?q={searchTerms}&x=0&y=0'],
+        'www.fooooo.com': ['http://www.fooooo.com/search.php?ranking=0&q={searchTerms}'],
 
         'www.live.com': ['http://search.live.com/results.aspx?q={searchTerms}'],
         'search.live.com': ['http://search.live.com/results.aspx?q={searchTerms}']
