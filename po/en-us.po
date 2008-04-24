@@ -15,35 +15,35 @@ msgstr ""
 "Content-Type: text/plain; charset=ASCII\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/SearchAll/View/Main.pm:212
+#: lib/SearchAll/View/Main.pm:219
 msgid "Cancel"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:181
+#: lib/SearchAll/View/Main.pm:188
 msgid "Formatted"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:188
+#: lib/SearchAll/View/Main.pm:195
 msgid "Mapping"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:211
+#: lib/SearchAll/View/Main.pm:218
 msgid "Next"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:174
+#: lib/SearchAll/View/Main.pm:181
 msgid "Original"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:210
+#: lib/SearchAll/View/Main.pm:217
 msgid "Prev"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:121
+#: lib/SearchAll/View/Main.pm:128
 msgid "Search"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:48 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
+#: lib/SearchAll/View/Main.pm:55 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
 msgid "SearchAll"
 msgstr ""
 
@@ -51,7 +51,7 @@ msgstr ""
 msgid "SearchAll (Debug)"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:63
+#: lib/SearchAll/View/Main.pm:70
 msgid "en-US"
 msgstr ""
 
