@@ -159,6 +159,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
 
     Debug.log(hostname + ": " + list.length);
     var loc = origDoc.location;
+    if (!loc) return;
     var rootPath = loc.protocol + "//" + loc.host;
     var curPath =  rootPath + loc.pathname.replace(/\/([^\/]*)$/, '/');
     //info("Path name: " + path);

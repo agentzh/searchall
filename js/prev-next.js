@@ -38,7 +38,7 @@ SearchAll.PrevNext.gotoNext = function (i) {
     var hostname = app.origViews[i].hostname();
     if (links.length == 0) {
         app.progress.setDone(hostname, 'N/A');
-        error("No next button found for browser " + i);
+        info("[WARNING] No next button found for browser " + i);
         return;
     }
 
