@@ -1,3 +1,16 @@
+=Changes for release 0.4.23
+* Updated the default template for live.com
+* Added the following new engines:
+  www.live.com
+  video.google.com
+  video.baidu.com
+  sagool.jp/movie
+  www.woopie.com
+  www.woopie.jp
+* Changed www.google.com/en to www.google.com/ncr (English version)
+* Removed the next button not found error reported by the AMO editor.
+* Bypassed the mining process when the browser's location is null.
+
 =Changes for release 0.4.19
 * Added live.com to the default search engine list per a user's request.
 * Fixed the page template for wikipedia.
