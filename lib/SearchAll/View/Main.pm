@@ -15,7 +15,7 @@ my @URLs = qw(
     www.sogou.com
     www.yodao.com
 
-    www.google.com/en
+    www.google.com/ncr
     search.yahoo.com
     en.wikipedia.org/wiki/Special:Search
 

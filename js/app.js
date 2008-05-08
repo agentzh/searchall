@@ -43,7 +43,7 @@ SearchAll.App = function () {
     // taobao, image.baidu.com, amazon
     this.shortcuts = {
         'www.google.com': ["http://www.google.com/search?q={searchTerms}"],
-        'www.google.com/en': ["http://www.google.com/search?q={searchTerms}"],
+        'www.google.com/ncr': ["http://www.google.com/search?q={searchTerms}"],
         'www.google.cn': ["http://www.google.cn/search?q={searchTerms}"],
         'www.yahoo.cn': ['http://www.yahoo.cn/s?p={searchTerms}'],
         'www.baidu.com': ['http://www.baidu.com/s?wd={searchTerms}', 'GBK'],
