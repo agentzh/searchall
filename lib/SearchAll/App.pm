@@ -31,7 +31,7 @@ use XUL::App schema {
                 xpcom.js
                 jquery.js JSAN.js
                 datadumper.js Debug.js
-                timer.js dom-logger.js dom.js JSON.js map-view.js thread.js
+                timer.js dom-logger.js dom.js map-view.js thread.js
                 progress.js pattern-miner.js util.js link-tester.js fmt-view.js
                 persist.js app.js
                 orig-view.js progress-listener.js
@@ -49,7 +49,7 @@ use XUL::App schema {
             id is 'searchall@yahoo.cn',
             name is 'SearchAll',
             description is 'A side-by-side search engine comparison tool',
-            version is '0.4.23',
+            version is '0.4.25',
             targets {
                 Firefox => ['2.0' => '3.0.*'],
                 Mozilla => ['1.5' => '1.8'],
@@ -57,7 +57,7 @@ use XUL::App schema {
             creator is 'The Yahoo! China EEEE team',
             developers are ['Agent Zhang (章亦春)'],
             contributors are ['Agent Zhang (章亦春)', 'Ye Dan', 'Jianingy Yang', 'Laser Henry', 'Chuanwen Cheng', 'cnhackTNT'];
-            homepageURL is 'http://blog.agentzh.org',
+            homepageURL is 'http://searchall.agentzh.org',
             iconURL is 'chrome://searchall/content/logo.png';
             # XXX should disable it for the final release
             #updateURL is 'http://10.62.136.17/repos/loki/agentz/searchall/branches/xulapp/searchall.xpi';

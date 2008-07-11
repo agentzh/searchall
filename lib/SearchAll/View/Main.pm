@@ -30,8 +30,6 @@ my @URLs = qw(
     www.woopie.com
     www.woopie.jp
 
-    www.answers.com
-
     www.taobao.com
     addons.mozilla.org/search
     search.ebay.com
@@ -40,7 +38,6 @@ my @URLs = qw(
     www.youtube.com
 
     www.flickr.com/search
-    image.cn.yahoo.com
     images.google.cn
     image.baidu.com
 

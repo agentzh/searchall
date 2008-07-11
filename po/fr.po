@@ -14,35 +14,35 @@ msgid ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/SearchAll/View/Main.pm:220
+#: lib/SearchAll/View/Main.pm:217
 msgid "Cancel"
 msgstr "Annuler"
 
-#: lib/SearchAll/View/Main.pm:189
+#: lib/SearchAll/View/Main.pm:186
 msgid "Formatted"
 msgstr "Voir formatée"
 
-#: lib/SearchAll/View/Main.pm:196
+#: lib/SearchAll/View/Main.pm:193
 msgid "Mapping"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:219
+#: lib/SearchAll/View/Main.pm:216
 msgid "Next"
 msgstr "Page suivante"
 
-#: lib/SearchAll/View/Main.pm:182
+#: lib/SearchAll/View/Main.pm:179
 msgid "Original"
 msgstr "Original View"
 
-#: lib/SearchAll/View/Main.pm:218
+#: lib/SearchAll/View/Main.pm:215
 msgid "Prev"
 msgstr "Page Précédente"
 
-#: lib/SearchAll/View/Main.pm:129
+#: lib/SearchAll/View/Main.pm:126
 msgid "Search"
 msgstr "Recherche"
 
-#: lib/SearchAll/View/Main.pm:56 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
+#: lib/SearchAll/View/Main.pm:53 lib/SearchAll/View/Overlay.pm:114 lib/SearchAll/View/Overlay.pm:60 lib/SearchAll/View/Overlay.pm:83 lib/SearchAll/View/Overlay.pm:96
 msgid "SearchAll"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 msgid "SearchAll (Debug)"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:71
+#: lib/SearchAll/View/Main.pm:68
 msgid "en-US"
 msgstr "fr"
 
