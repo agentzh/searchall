@@ -33,9 +33,10 @@ div.error {
      position: relative;
 }
 
-b {
+b, em {
     color: #cc0033;
     font-weight: normal;
+    font-style: normal;
 }
 
 ul{
