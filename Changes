@@ -1,3 +1,6 @@
+=Changes for release 0.4.26
+* fixed the page templates for www.google.com and search.yahoo.com.
+
 =Changes for release 0.4.25
 * Render <em></em> as red normal font since Google has changed its result page template (switching from <font color="red"> to <em>.
 * Removed image.cn.yahoo.com from the default engine list since it now has frame-busting protection.
