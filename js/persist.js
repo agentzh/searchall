@@ -3,6 +3,7 @@ const Cc = Components.classes;
 var selectedURLIndex, selectedTabIndex;
 var Replies = {};
 var prefs;
+var isZhLocal;
 var app;
 
 $(document).ready( function () {
@@ -45,6 +46,21 @@ $(document).ready( function () {
         //alert("Found query: " + query);
         app.searchBox.value = query;
         //prefs.setCharPref('query', '');
+    }
+
+    for (var key in SearchAll.patterns) {
+        SearchAll.savedPatterns[key] = SearchAll.patterns[key];
+    }
+
+    try {
+        prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
+        var branch = prefs.getBranch("extensions.searchall.patterns.");
+        var children = branch.getChildList("", {});
+        for (var i =0; i< children.length; i++) {
+            SearchAll.patterns[children[i]] = branch.getCharPref(children[i]);
+        }
+    } catch (e) {
+        info("Failed to get pattern list in prefs.");
     }
 
     try {
@@ -95,7 +111,7 @@ $(document).ready( function () {
     //$("#view-tab-" + selectedTab)[0].selected = true;
     //alert($("#url-list-0").attr('lastSelected'));
     info("Locale: " + app.locale);
-    var isZhLocale = (app.locale.substr(0, 2) == 'zh');
+    isZhLocale = (app.locale.substr(0, 2) == 'zh');
     //info("isZhLocale: " + isZhLocale);
 
     for (var i = 0; i < 3; i++) {
@@ -125,6 +141,7 @@ $(document).ready( function () {
             thread.goHome(home);
         }
     }
+
 
     // for responding request from the SearchAll toolbar.
     var listener = function (evt) {

@@ -201,6 +201,13 @@ function genListener (ind) {
                 $("span#loading", fmtDoc).hide();
                 if (thread.autoSubmit)
                     $("h1#default", fmtDoc).hide();
+                else {
+                    if (isZhLocale) {
+                        try {
+                            $("h1#default", fmtDoc).html('请在上面的搜索框输入查询');
+                        } catch (e) { alert(e); }
+                    }
+                }
             } catch (e) {
                 info(e);
             }

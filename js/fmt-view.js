@@ -14,6 +14,8 @@ SearchAll.FmtView = function (index) {
     this.favicon = null;
 };
 
+SearchAll.savedPatterns = {};
+
 SearchAll.patterns = {
         'www.baidu.cn'    : "tbody>tr>td.f",
         'www.baidu.com'   : "tbody>tr>td.f",
@@ -21,10 +23,10 @@ SearchAll.patterns = {
         //'www.google.cn'   : "div.g[h2]",
         //'www.google.com'  : "div.g[h2]",
 
-        //'www.google.cn'   : "div#res>div>div.g",
-        'www.google.cn'  : "div#res>div>ol>li",
-        //'www.google.com'  : "div#res>div>div.g",
-        'www.google.com'  : "div#res>div>ol>li",
+        'www.google.cn'   : "div#res>div>div.g",
+        //'www.google.cn'  : "div#res>div>ol>li",
+        'www.google.com'  : "div#res>div>div.g",
+        //'www.google.com'  : "div#res>div>ol>li",
 
         'www.yisou.com'   : "div.web>ol>li",
         'so.sohu.com'     : "body>div#content>div",
@@ -122,6 +124,15 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
                 info("Selected: " + hostname + ": pattern: " + pattern);
                 list = $(pattern, origDoc);
                 SearchAll.patterns[hostname] = pattern;
+                try {
+                    var prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                    . getService(Components.interfaces.nsIPrefService);
+                    var branch = prefs.getBranch("extensions.searchall.patterns.");
+                    branch.setCharPref(hostname, pattern);
+                    prefs.savePrefFile(null);
+                } catch (e) {
+                    info("Failed to save the newly-mined pattern to the prefs.");
+                }
                 break;
             } else {
                 count--;
@@ -161,6 +172,11 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     this.prevHtmlLen = html.length;
 
     $("span#loading", this.document).hide();
+    if (isZhLocale) {
+        try {
+            $("h1#default", this.document).html('请在上面的搜索框输入查询');
+        } catch (e) { info(e); }
+    }
 
     Debug.log(hostname + ": " + list.length);
     var loc = origDoc.location;
@@ -308,10 +324,37 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
             //alert("Empty doc: " + origDoc.contentType);
             //$(".col-" + index + ">img.loading", this.document).hide();
             cols.empty();
-            $(cols[0]).html("<p>Sorry, no results found :(</p>" +
-                '<p><a class="force-mining" href="javascript:void();">' +
-                "Try mining the original view" +
-                '</a><p>');
+            if (isZhLocale) {
+                $(cols[0]).html('<p>对不起，没有找到结果。<br/><br/>' +
+                    '<ul>' +
+                    '<li><a class="force-mining" href="javascript:void();"><b>自动学习当前页面的抽取模板</b></a></li>' +
+                    '<li><a class="revert-mining" href="javascript:void();"><b>恢复默认的页面抽取模板</b></a></li>' +
+                    '</ul>');
+            } else {
+                $(cols[0]).html('<p>Sorry, no results found.</p>' +
+                    '<ul>' +
+                    '<li><a class="force-mining" href="javascript:void();"><b>Try studying the current template</b></a></li>' +
+                    '<li><a class="revert-mining" href="javascript:void();"><b>Restore the default template</b></a></li>' +
+                    '</ul>');
+            }
+
+            $("a.revert-mining", cols[0]).click( function () {
+                try {
+                    var prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                        .getService(Components.interfaces.nsIPrefService);
+                    var branch = prefs.getBranch("extensions.searchall.patterns.");
+                    branch.clearUserPref(hostname);
+                    prefs.savePrefFile(null);
+                } catch (e) {
+                    info("Failed to clear the pattern for host " + hostname + " in the prefs.");
+                }
+                SearchAll.patterns[hostname] = SearchAll.savedPatterns[hostname];
+                app.fmtViews[index].prevHtmlLen = 0;
+                app.fmtViews[index].update(hostname, origDoc, false);
+                //alert("Restored the default template");
+                return false;
+            } );
+
             $("a.force-mining", cols[0]).click( function () {
                 //alert("Hey!");
                 app.fmtViews[index].update(hostname, origDoc, true);
@@ -319,6 +362,50 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
                 return false;
             } );
         }
+    } else {
+        var rows = $(".row", this.document);
+        if (rows[snippets.length] == undefined) {
+            this.createRow(snippets.length);
+            rows = $(".row", this.document);
+        }
+
+        var cell = $(".col-" + index, rows[snippets.length])[0];
+        //alert("isZhLocal: " + isZhLocale);
+        if (isZhLocale) {
+            cell.innerHTML = '<ul>' +
+                '<li><a class="revert-mining" href="javascript:void();"><b>恢复默认的页面抽取模板</b></a></li>' +
+                '<li><a class="force-mining" href="javascript:void();"><b>自动学习当前的页面模板</b></a></li>' +
+                '</ul>';
+        } else {
+            cell.innerHTML = '<ul><li><a class="revert-mining" href="javascript:void();"><b>Restore the default page template</b></a></li>'
+                + '<li><a class="force-mining" href="javascript:void();"><b>Try studying the current page template</b></a></li></ul>';
+        }
+
+        $("a.revert-mining", cell).click( function () {
+            try {
+                var prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                    .getService(Components.interfaces.nsIPrefService);
+                var branch = prefs.getBranch("extensions.searchall.patterns.");
+                branch.clearUserPref(hostname);
+                prefs.savePrefFile(null);
+            } catch (e) {
+                info("Failed to clear the pattern for " + hostname + " in the prefs.");
+            }
+            SearchAll.patterns[hostname] = SearchAll.savedPatterns[hostname];
+
+            app.fmtViews[index].prevHtmlLen = 0;
+            app.fmtViews[index].update(hostname, origDoc, false);
+            //this.className = '';
+
+            //alert("Restored the default template.");
+            return false;
+        } );
+
+        $("a.force-mining", cell).click( function () {
+            app.fmtViews[index].update(hostname, origDoc, true);
+            this.className = '';
+            return false;
+        } );
     }
 
     app.setTimeout(function () {

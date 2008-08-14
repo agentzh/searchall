@@ -1,3 +1,7 @@
+=Changes for release 0.4.28
+* Now save the page templates obtained by machine learning to the preference file permanently (unless being restored explicitly by the user).
+* Added two links to the Formatted View: "Try mining the current page template" and "Restore the default page template".
+
 =Changes for release 0.4.26
 * fixed the page templates for www.google.com and search.yahoo.com.
 
