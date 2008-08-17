@@ -23,10 +23,10 @@ SearchAll.patterns = {
         //'www.google.cn'   : "div.g[h2]",
         //'www.google.com'  : "div.g[h2]",
 
-        'www.google.cn'   : "div#res>div>div.g",
-        //'www.google.cn'  : "div#res>div>ol>li",
-        'www.google.com'  : "div#res>div>div.g",
-        //'www.google.com'  : "div#res>div>ol>li",
+        //'www.google.cn'   : "div#res>div>div.g",
+        'www.google.cn'  : "div#res>div>ol>li",
+        //'www.google.com'  : "div#res>div>div.g",
+        'www.google.com'  : "div#res>div>ol>li",
 
         'www.yisou.com'   : "div.web>ol>li",
         'so.sohu.com'     : "body>div#content>div",

@@ -30,6 +30,9 @@ SearchAll.PrevNext.gotoNext = function (i) {
                     links = $("img[@alt*='Next']", doc).parent('a');
                     if (links.length == 0) {
                         links = $("a:contains('次へ')", doc);
+                        if (links.length == 0) {
+                            links = $("a:contains('next')", doc);
+                        }
                     }
                 }
             }
@@ -91,6 +94,9 @@ SearchAll.PrevNext.gotoPrev = function (i) {
                     links = $("img[@alt*='Prev']", doc).parent('a');
                     if (links.length == 0) {
                         links = $("a:contains('前へ')", doc);
+                        if (links.length == 0) {
+                            links = $("a:contains('previous')", doc);
+                        }
                     }
                 }
             }
