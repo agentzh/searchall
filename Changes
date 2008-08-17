@@ -1,3 +1,9 @@
+=Changes for release 0.4.30
+* Fixed the previous/next buttons for wikipedia.
+
+=Changes for release 0.4.29
+* Fixed the default page template for Google again.
+
 =Changes for release 0.4.28
 * Now save the page templates obtained by machine learning to the preference file permanently (unless being restored explicitly by the user).
 * Added two links to the Formatted View: "Try mining the current page template" and "Restore the default page template".
