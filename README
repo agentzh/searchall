@@ -1,9 +1,8 @@
-sudo cpan Module::Install
+To build this Firefox extension, we need the XUL::App module
+on CPAN:
 
-# We need XUL::App 0.01 which is not on CPAN yet,
-# please checkout the latest source from its SVN repos:
-#    http://svn.openfoundry.org/xulapp/trunk
-# Sorry for the inconvenience.
+    cpan XUL::App
+
 perl Makefile.PL
 make
 
