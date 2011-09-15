@@ -4,7 +4,7 @@
  * mouse event object should have. This includes the type of the mouse event.
  * E.g. to send an click event to the node with id 'node' you might do this:
  *
- * sendMouseEvent({type:'click'}, 'node');
+ * sendMouseEvent({type:'click'}, node);
  */
 function sendMouseEvent(aEvent, aTarget) {
   if (['click', 'mousedown', 'mouseup', 'mouseover', 'mouseout'].indexOf(aEvent.type) == -1) {
