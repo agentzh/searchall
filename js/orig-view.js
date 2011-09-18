@@ -64,10 +64,13 @@ SearchAll.OrigView.prototype = {
         //$(app.progressmeter).show();
         //app.progressmeter.value = 50;
         this.browser.stop();
-        if (/yahoo|google|baidu|woopie\.jp/.test(newHome))
+
+        if (/yahoo|google|baidu|woopie\.jp/.test(newHome)) {
             this.browser.docShell.allowJavascript = false;
-        else
+        } else {
             this.browser.docShell.allowJavascript = true;
+        }
+
         return this.browser.goHome(home);
     },
     document: function () {

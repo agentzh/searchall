@@ -133,7 +133,7 @@ SearchAll.PrevNext.gotoPrev = function (i) {
     //var guard;
     var self = this;
     guard = function () {
-        if (! this.isDone(i)) {
+        if (! self.isDone(i)) {
             var success = app.fmtViews[i].update(i, app.origViews[i].hostname(), doc, false/* don't force mining */);
             //if (!success) {
                 //guard();

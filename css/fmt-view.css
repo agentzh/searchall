@@ -6,15 +6,15 @@ body {
 
 div { word-wrap: break-word }
 
-body>table { table-layout:fixed;}
+table#content { table-layout:fixed;}
 
-body>table>tbody>tr>td {
-    /* overflow: auto; */
-    overflow: hidden;
+table#content td {
+    overflow: auto;
+    /* overflow: hidden; */
     word-break: break-all;
     word-wrap: break-word;
     white-space: normal;
-    border: 2px solid #ccc;width:33%;
+    border: 2px solid #ccc;width:33.3%;
     vertical-align: top;
     padding: 0.6em;
 }

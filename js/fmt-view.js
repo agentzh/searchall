@@ -24,9 +24,9 @@ SearchAll.patterns = {
         //'www.google.com'  : "div.g[h2]",
 
         //'www.google.cn'   : "div#res>div>div.g",
-        'www.google.cn'  : "div#res>div>ol>li",
+        'www.google.cn'  : "body#gsr>div#main>div>div#cnt>div#rcnt>div#center_col>div#res>div#search>div#ires>ol#rso>li.g",
         //'www.google.com'  : "div#res>div>div.g",
-        'www.google.com'  : "div#res>div>ol>li",
+        'www.google.com'  : "body#gsr>div#main>div>div#cnt>div#rcnt>div#center_col>div#res>div#search>div#ires>ol#rso>li.g",
 
         'www.yisou.com'   : "div.web>ol>li",
         'so.sohu.com'     : "body>div#content>div",
@@ -43,7 +43,7 @@ SearchAll.patterns = {
         //'search.yahoo.com': "div#yschweb>ol>li",
         //'search.yahoo.com': "div#pri>div#web>ol>li",
         //'search.yahoo.com': "div#results>div#main>div#web>ol>li",
-        'search.yahoo.com': "div#results>div#left>div#main>div#web>ol>li",
+        'search.yahoo.com': "body#ysch>div#doc>div#bd-wrap>div#bd>div#results>div#cols>div#left>div#main>div#web>ol>li",
         'www.ask.com'     : "div#main>div#content>div#midRail>div#rpane>div#teoma-results>div",
         'www.a9.com'      : 'td#tdweb>div#bxweb>div#cweb>div.cscrollInfo>div.resBlock',
 
