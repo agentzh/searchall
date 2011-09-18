@@ -52,9 +52,9 @@ use XUL::App schema {
             id is 'searchall@yahoo.cn',
             name is 'SearchAll',
             description is 'A side-by-side search engine comparison tool',
-            version is '0.4.32',
+            version is '0.5.1',
             targets {
-                Firefox => ['2.0' => '6.0.*'],
+                Firefox => ['2.0' => '6.*'],
                 Mozilla => ['1.5' => '1.8'],
             },
             creator is 'The Yahoo! China EEEE team',
