@@ -3,6 +3,8 @@ const WPL = Components.interfaces.nsIWebProgressListener;
 
 function registerMyListener (i) {
     //var myListener = genListener();
+    //alert("HERE");
+    info("register listener " + i);
     var browser = app.origViews[i].browser;
     var myListener = myListeners[i];
     browser.addProgressListener(myListener, WPL.NOTIFY_STATE_DOCUMENT);
@@ -81,12 +83,15 @@ function genListener (ind) {
     */
         //alert("hi");
         if (flag & WPL.STATE_START) {
+            info("state start event: " + ind);
             return;
         }
 
         var thread = app.threads[ind];
         var hostname, doc;
         if (flag & WPL.STATE_IS_WINDOW) {
+            info("state is window event: " + ind);
+
             try {
                 removeFormTarget(app.origViews[ind].document());
             } catch (e) {}
@@ -102,10 +107,12 @@ function genListener (ind) {
             if (hostname == undefined) {
                 // initial loading
                 //alert("ind undefined!");
-                app.progressmeter.value = 100;
+                //app.progressmeter.value = 100;
+                /*
                 app.setTimeout( function () {
-                    $(app.progressmeter).hide();
+                    //$(app.progressmeter).hide();
                 }, 100 );
+                */
                 //alert("browser " + i + " found!");
                 //alert("HERE: " + i);
 
@@ -169,6 +176,7 @@ function genListener (ind) {
         }
 
         if (flag & WPL.STATE_IS_NETWORK) {
+            info("state is network event: " + ind);
             //if (hostname.match(/taobao/)) alert("processing " + hostname);
             try {
                 var val = 100 * app.progress.percent();
@@ -219,10 +227,10 @@ function genListener (ind) {
             //info("HERE 2! after loaded");
             if (thread.query != '' && thread.mineResults) {
                 //info("HERE 3! after loaded");
-                try {
-                    app.domLogger.log(doc, hostname);
+                //try {
+                    //app.domLogger.log(doc, hostname);
                     //info("updating fmt view in progress listener");
-                } catch (e) { info(e) }
+                //} catch (e) { info(e) }
                 thread.final = true;
                 app.setTimeout( function () {
                     try {

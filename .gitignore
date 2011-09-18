@@ -1,0 +1,12 @@
+*.js.html
+*.swp
+*.swo
+*~
+tmp/
+*.mobi
+po/foo.po
+po/meta.po
+genmobi.sh
+pm_to_blib
+blib/
+Makefile

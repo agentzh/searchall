@@ -15,31 +15,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/SearchAll/View/Main.pm:217
+#: lib/SearchAll/View/Main.pm:236
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: lib/SearchAll/View/Main.pm:186
+#: lib/SearchAll/View/Main.pm:185
 msgid "Formatted"
 msgstr "Vista Organizada"
 
-#: lib/SearchAll/View/Main.pm:193
+#: lib/SearchAll/View/Main.pm:192
 msgid "Mapping"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:216
+#: lib/SearchAll/View/Main.pm:235
 msgid "Next"
 msgstr "Página siguiente"
 
-#: lib/SearchAll/View/Main.pm:179
+#: lib/SearchAll/View/Main.pm:178
 msgid "Original"
 msgstr "Vista Original"
 
-#: lib/SearchAll/View/Main.pm:215
+#: lib/SearchAll/View/Main.pm:234
 msgid "Prev"
 msgstr "Página anterior"
 
-#: lib/SearchAll/View/Main.pm:126
+#: lib/SearchAll/View/Main.pm:125
 msgid "Search"
 msgstr "Buscar"
 
@@ -51,10 +51,10 @@ msgstr ""
 msgid "SearchAll (Debug)"
 msgstr ""
 
-#: lib/SearchAll/View/Main.pm:68
+#: lib/SearchAll/View/Main.pm:67
 msgid "en-US"
 msgstr "es-ES"
 
-#: lib/SearchAll/View/Base.pm:17
+#: lib/SearchAll/View/Main.pm:218
 msgid "sec"
 msgstr "segundos"

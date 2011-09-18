@@ -18,13 +18,13 @@ use XUL::App schema {
             includes qw( toolbar.js overlay.css ),
             overlays 'chrome://browser/content/browser.xul';
 
-        xulfile 'searchall-debug.xul' =>
-            generated from 'SearchAll::View::Debug',
-            includes qw(
-                searchall.js
-                Test/More.js Test/Builder.js
-                test.js searchall.css
-            );
+        #xulfile 'searchall-debug.xul' =>
+            #generated from 'SearchAll::View::Debug',
+            #includes qw(
+                #searchall.js
+                #Test/More.js Test/Builder.js
+                #test.js searchall.css
+            #);
 
         jsfile 'searchall.js' =>
             requires qw(
@@ -39,11 +39,14 @@ use XUL::App schema {
                 prev-next.js toggle-bar.js
             );
 
+        jsfile 'Debug.js' =>
+            requires qw( io.js );
+
         jsfile 'toolbar.js' =>
             requires qw( jquery.js xpcom.js );
 
-        jsfile 'test.js' =>
-            requires qw( test-browser.js test-progress.js );
+        #jsfile 'test.js' =>
+            #requires qw( test-browser.js test-progress.js );
 
         xpifile 'searchall.xpi' =>
             id is 'searchall@yahoo.cn',
@@ -51,12 +54,12 @@ use XUL::App schema {
             description is 'A side-by-side search engine comparison tool',
             version is '0.4.32',
             targets {
-                Firefox => ['2.0' => '3.6.*'],
+                Firefox => ['2.0' => '6.0.*'],
                 Mozilla => ['1.5' => '1.8'],
             },
             creator is 'The Yahoo! China EEEE team',
-            developers are ['Agent Zhang (章亦春)'],
-            contributors are ['Agent Zhang (章亦春)', 'Ye Dan', 'Jianingy Yang', 'Laser Henry', 'Chuanwen Cheng', 'cnhackTNT'];
+            developers are ['Zhang "agentzh" Yichun (章亦春)'],
+            contributors are ['Zhang "agetnzh" Yichun (章亦春)', 'Ye Dan', 'Jianing Yang', 'Laser Henry', 'Chuanwen Cheng', 'cnhackTNT'];
             homepageURL is 'http://searchall.agentzh.org',
             iconURL is 'chrome://searchall/content/logo.png';
             # XXX should disable it for the final release

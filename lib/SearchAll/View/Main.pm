@@ -9,7 +9,7 @@ use Template::Declare::Tags 'XUL';
 my @URLs = qw(
     www.google.cn
     www.yisou.com
-    www.baidu.com
+    www.baidu.cn
 
     www.yahoo.cn
     www.sogou.com
@@ -17,7 +17,7 @@ my @URLs = qw(
 
     www.google.com/ncr
     search.yahoo.com
-    en.wikipedia.org/wiki/Special:Search
+    www.baidu.com
 
     www.live.com
     www.ask.com
@@ -59,7 +59,6 @@ template main => sub {
         }
 
 	show 'searchall';
-        show 'status_bar';
     }
 };
 
@@ -71,10 +70,10 @@ template searchall => sub {
             show 'engine_bar';
             show 'search_bar';
         }
-        stack {
+        vbox {
             attr { flex => 1 };
             show 'results';
-            show 'navigator';
+            show 'status_bar';
         }
     };
 };
@@ -209,9 +208,29 @@ template results => sub {
 
 };
 
+template status_bar => sub {
+    statusbar {
+        statusbarpanel {
+            attr {
+                id => 'statusbar-display',
+                flex => 1,
+                label => 'Loading...',
+                _timeunit => _('sec'),
+            }
+        }
+        statusbarpanel {
+            attr {
+                # XXX should set to true for production
+                collapsed => 'false',
+            }
+            show 'navigator';
+        }
+    }
+};
+
 template navigator => sub {
     hbox {
-        attr { id => 'navigator', align => 'start', pack => 'end' }
+        attr { id => 'navigator' };
         button { attr { id => 'prev-button', class => 'nav-button', label => "<<" . _('Prev') } }
         button { attr { id => 'next-button', class => 'nav-button', label => _('Next') . ">>" } }
         #button { attr { id => 'stop-button', class => 'nav-button', image => 'cancel.png', label => _('Cancel') } }

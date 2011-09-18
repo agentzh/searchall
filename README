@@ -9,10 +9,10 @@ make
 # setup the components
 xulapp setup --profile dev
 
-# register the (debuggin) chrome to ~/.mozilla/firefox/*/extensions.ini
+# register the (debugging) chrome to ~/.mozilla/firefox/*/extensions.ini
 xulapp register --profile dev
 
-# unregister the (debuggin) chrome from ~/.mozilla/firefox/*/extensions.ini
+# unregister the (debugging) chrome from ~/.mozilla/firefox/*/extensions.ini
 xulapp unregister  --profile dev
 
 # launch a ff window loading searchall.xul :

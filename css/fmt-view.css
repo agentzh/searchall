@@ -1,5 +1,5 @@
 body {
-  font: 1.2em/1.8em "微软雅黑", "宋体", consolas, verdana, arial, sans-serif;
+  font-family: 1.2em/1.8em "微软雅黑", "宋体", consolas, verdana, arial, sans-serif;
   background-color: #FFF;
   color: black;
 }
@@ -62,5 +62,4 @@ a:visited:hover {
   text-decoration: underline;
   color: #8B0000; /* dark red */
 }
-
 

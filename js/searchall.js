@@ -165,20 +165,29 @@ function handleCheckbox (i) {
 
 var Toggle = false;
 
-$(window).ready( function () {
+window.addEventListener("load", function() {
+    info("window loaded");
+
     try {
         var ioService = CCSV("@mozilla.org/network/io-service;1", "nsIIOService");
         var host = 'searchall';
         var uri = ioService.newURI("http://" + host, null, null);
         pm.add(uri, "firebug", DENY_ACTION);
-    } catch (e) { error("perm.disableFirebug: " + e); }
 
+    } catch (e) {
+        error("perm.disableFirebug: " + e);
+    }
+
+    info("setting hooks to prevent frame explosion");
+
+    /*
     top.watch("location", watchAssignment);
     top.location.watch("href", watchAssignment);
     top.location.watch("hostname", watchAssignment);
     top.location.watch("pathname", watchAssignment);
     top.location.watch("host", watchAssignment);
     top.location.watch("replace", watchAssignment);
+    */
 
     //top.location.replace = function () { alert("Hiya, yahoo!"); };
     //top.location = {};
@@ -187,6 +196,9 @@ $(window).ready( function () {
 
     // auto-submit if the user presses the Enter key
     // in the search box:
+
+    //alert("register keydown event for search box");
+
     $(app.searchBox).keydown( function (e) {
         if (e.keyCode == 13) {
             app.searchButton.click();
@@ -197,6 +209,8 @@ $(window).ready( function () {
         //alert(e.keyCode + " pressed!");
         //return false;
     } );
+
+    info("register window unload event");
 
     $(window).unload( function (e) {
         for (var i = 0; i < 3; i++) {
@@ -209,6 +223,8 @@ $(window).ready( function () {
         info("searchall window unloaded.");
     } );
 
+    info("register search button click event");
+
     $(app.searchButton).click( function () {
         //alert("Howdy!");
         var doc = app.fmtViews[0].document;
@@ -219,46 +235,40 @@ $(window).ready( function () {
 
         var query = app.searchBox.value;
         app.progress.reset(3);
-        $(app.progressmeter).show();
+        //$(app.progressmeter).show();
         //timer = timer || new Timer();
-        app.progressmeter.value = 0;
-        for (var i = 0; i < 3; i++)
+        //app.progressmeter.value = 0;
+        for (var i = 0; i < 3; i++) {
             app.threads[i].doSearch(query);
+        }
     } );
 
+    //alert("register browser listeners");
 
-    for (var i = 0; i < 3; i++) { handleCheckbox(i); registerMyListener(i); } 
+    for (var i = 0; i < 3; i++) {
+        handleCheckbox(i);
+        registerMyListener(i);
+    }
+
     var button = document.getElementById('prev-button');
     var viewTabbox = document.getElementById('view-tabbox');
     var navigator = document.getElementById('navigator');
-    var handle = function () {
-        //alert("Hey!");
-        $(navigator).css('margin-bottom', viewTabbox.boxObject.height - button.boxObject.height) - 20;
-    };
-    handle();
-    addEventListener("resize", handle, false);
-
-        //$(navigator).css('height', 34);
-    //navigator._height = button.height + 20;
-    //alert(navigator.boxObject.height);
 
     for (var i = 0; i < 3; i++) {
         //app.origViews[i].browser.docShell.allowMetaRedirects = false;
         //app.origViews[i].browser.docShell.allowJavascript = false;
         //app.origViews[i].docShell.allowMetaRedirects = false;
-        prepareUriList(i); } //alert("ther!!"); //info("focusing search box... (1)");
-    //info("blurring contentWindow...");
-    // we need the following syntax error to retain the focus
-    if (!app.pageMode) app.searchBox.focus();
-
-    /*
-    for (var i = 0; i < 2; i++) {
-        $("#splitter-" + i)[0].disabled = true;
+        prepareUriList(i);
     }
-    */
 
-    //animate();
-} );
+    info("blurring contentWindow...");
+    // we need the following syntax error to retain the focus
+    if (!app.pageMode) {
+        app.searchBox.focus();
+    }
+
+    info("init done");
+}, false);
 
 function watchAssignment (id, oldval, newval) {
     //alert("o." + id + " changed from "

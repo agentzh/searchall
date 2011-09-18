@@ -1,17 +1,21 @@
 JSAN.use('JSON');
 
-if (Debug == undefined) {
+if (typeof Debug == "undefined") {
     var Debug = {
-        _console: null,
-        get console() {
-            if (this._console == null) {
-                this._console =  Components.classes[
-                    "@mozilla.org/consoleservice;1"
-                ].getService(
-                    Components.interfaces.nsIConsoleService
-                );
+        _info: null,
+        _infoFileName: '/tmp/searchall.info.log',
+        get info() {
+            if (this._info == null) {
+                var fileName = this._infoFileName;
+                this._info = FileIO.open(fileName)
+                if (!this._info) {
+                    Components.utils.reportError("failed to open " +
+                            fileName + " for writing");
+                    return null;
+                }
+                FileIO.write(Debug.info, (new Date()).toString() + "\n", "", "utf-8");
             }
-            return this._console;
+            return this._info;
         }
     };
 }
@@ -19,7 +23,10 @@ if (Debug == undefined) {
 Debug.EXPORT = [ 'log', 'XXX', 'JJJ' ];
 
 Debug.log = function (msg) {
-    Debug.console.logStringMessage(msg);
+    if (!FileIO.write(Debug.info, msg + "\n", "a", "utf-8")) {
+        Components.utils.reportError("failed to write to  " +
+                this._infoFileName);
+    }
 }
 
 Debug.err = function (msg) {

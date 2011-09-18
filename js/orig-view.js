@@ -61,10 +61,10 @@ SearchAll.OrigView.prototype = {
         app.progress.reset(1);
         if (newHome) this.browser.homePage = newHome;
         SearchAll.app.timer.start(this.hostname());
-        $(app.progressmeter).show();
-        app.progressmeter.value = 50;
+        //$(app.progressmeter).show();
+        //app.progressmeter.value = 50;
         this.browser.stop();
-        if (/baidu|woopie\.jp/.test(newHome))
+        if (/yahoo|google|baidu|woopie\.jp/.test(newHome))
             this.browser.docShell.allowJavascript = false;
         else
             this.browser.docShell.allowJavascript = true;

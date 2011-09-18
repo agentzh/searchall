@@ -7,9 +7,9 @@ SearchAll.App = function () {
     var page = $("page#searchall-page")[0];
     this.pageMode = (page != undefined);
 
-    var listWidget = document.getElementById('dom-list');
-    var textWidget = document.getElementById('dom');
-    this.domLogger = new SearchAll.DomLogger(listWidget, textWidget);
+    //var listWidget = document.getElementById('dom-list');
+    //var textWidget = document.getElementById('dom');
+    //this.domLogger = new SearchAll.DomLogger(listWidget, textWidget);
 
     this.searchBox     = document.getElementById("search-box");
     this.searchButton  = document.getElementById("search-button");
@@ -24,7 +24,6 @@ SearchAll.App = function () {
     this.nextButton = document.getElementById("next-button");
 
     this.progress = new SearchAll.Progress(3);
-    this.progressmeter = document.getElementById("status-progress");
     this.timer = new SearchAll.Timer();
     this.locale = document.getElementById('searchall-panel').getAttribute('_locale');
 
