@@ -10,3 +10,4 @@ genmobi.sh
 pm_to_blib
 blib/
 Makefile
+*.xpi
