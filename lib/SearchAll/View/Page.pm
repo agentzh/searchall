@@ -19,7 +19,6 @@ template main => sub {
         }
 
 	show 'searchall';
-        show 'status_bar';
     }
 };
 

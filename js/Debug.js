@@ -1,5 +1,7 @@
 JSAN.use('JSON');
 
+var DebugSearchAll = false;
+
 if (typeof Debug == "undefined") {
     var Debug = {
         _info: null,
@@ -22,11 +24,15 @@ if (typeof Debug == "undefined") {
 
 Debug.EXPORT = [ 'log', 'XXX', 'JJJ' ];
 
-Debug.log = function (msg) {
-    if (!FileIO.write(Debug.info, msg + "\n", "a", "utf-8")) {
-        Components.utils.reportError("failed to write to  " +
-                this._infoFileName);
+if (DebugSearchAll) {
+    Debug.log = function (msg) {
+        if (!FileIO.write(Debug.info, msg + "\n", "a", "utf-8")) {
+            Components.utils.reportError("failed to write to  " +
+                    this._infoFileName);
+        }
     }
+} else {
+    Debug.log = function () {}
 }
 
 Debug.err = function (msg) {

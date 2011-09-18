@@ -259,7 +259,6 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
     for (var i = 0; i < snippets.length; i++) {
         var snippet = snippets[i];
         var url = Util.extractUrl(snippet, lastOnly);
-        /*
         if (hostname.match(/(yahoo\.cn|yahoo\.com|yisou\.com)$/)) {
             snippet = "<font size=\"-1\">" + snippet + "</font>";
         }
@@ -275,7 +274,7 @@ SearchAll.FmtView.prototype.update = function (hostname, origDoc, forceMining) {
                 url = decodeURIComponent(match[1]);
             }
         }
-        */
+
         //alert(url);
         if (url) {
             try {

@@ -102,20 +102,12 @@ function genListener (ind) {
                 //error(e);
                 //alert(progress.DOMWindow.window.parent.getAttribute(homePage));
                 //hostname = '';
+                info("error: " + e);
             }
             doc = progress.DOMWindow.document;
             if (hostname == undefined) {
                 // initial loading
                 //alert("ind undefined!");
-                //app.progressmeter.value = 100;
-                /*
-                app.setTimeout( function () {
-                    //$(app.progressmeter).hide();
-                }, 100 );
-                */
-                //alert("browser " + i + " found!");
-                //alert("HERE: " + i);
-
                 // work around yahoo.com's frame-busting logic:
                 //removeFormTarget(app.origViews[ind].document());
 
@@ -179,16 +171,6 @@ function genListener (ind) {
             info("state is network event: " + ind);
             //if (hostname.match(/taobao/)) alert("processing " + hostname);
             try {
-                var val = 100 * app.progress.percent();
-                var progressmeter = $("#status-progress");
-                //alert(ind);
-                progressmeter[0].value = val;
-                if (val >= 100) {
-                    app.setTimeout( function () {
-                        progressmeter.hide();
-                    }, 100 );
-                }
-
                 //alert(hostname);
                 // XXX code duplication...
                 app.timer.stop(hostname, { force: true });
