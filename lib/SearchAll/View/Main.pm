@@ -17,7 +17,7 @@ my @URLs = qw(
 
     www.google.com/ncr
     search.yahoo.com
-    www.baidu.com
+    www.bing.com
 
     www.live.com
     www.ask.com
